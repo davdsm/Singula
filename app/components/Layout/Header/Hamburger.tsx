@@ -1,6 +1,6 @@
-export const Hamburger = () => {
+export const Hamburger = (props: { open: Function; close: Function }) => {
   return (
-    <div className="md:hidden flex">
+    <div className="md:hidden flex" onClick={() => props.open()} onBlur={() => props.close()}>
       <button className="relative group">
         <div className="relative flex overflow-hidden items-center justify-center w-[30px] h-[20px] transform transition-all duration-200">
           <div className="flex flex-col justify-between w-[15px] h-[13px] transform transition-all duration-300 origin-center overflow-hidden">

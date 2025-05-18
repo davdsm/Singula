@@ -1,47 +1,29 @@
 import { Link } from "@remix-run/react";
-import { useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
 
-export const Menu = () => {
-  const menu: {
+export const Menu = ({
+  list,
+}: {
+  list: {
     key: string;
     link: string;
-  }[] = [
-    {
-      key: "Sobre Nós",
-      link: "/about",
-    },
-    {
-      key: "Produtos",
-      link: "/products",
-    },
-    {
-      key: "Materiais",
-      link: "/materials",
-    },
-    {
-      key: "Catálogo",
-      link: "/catalog",
-    },
-    {
-      key: "Contactos",
-      link: "/contacts",
-    },
-  ];
-
+  }[];
+}) => {
+  const { t } = useTranslation();
   return (
-    <>
-      <ul className="ml-40 justify-between items-center w-half hidden md:flex">
-        {menu.map((item) => (
+    <nav className="hidden md:flex">
+      <ul className="ml-40 justify-between items-center w-half flex">
+        {list.map((item) => (
           <li key={item.key} className="text-white text-lg mx-2">
             <Link
               to={item.link}
               className="hover:text-gray-400 transition duration-300 uppercase"
             >
-              {item.key}
+              {t(item.key)}
             </Link>
           </li>
         ))}
       </ul>
-    </>
+    </nav>
   );
 };
