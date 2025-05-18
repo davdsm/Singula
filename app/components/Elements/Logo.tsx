@@ -1,5 +1,5 @@
-import { Link } from "@remix-run/react";
 import { Image } from "~/components/Elements/Image";
+import { DelayedLink } from "./Link";
 
 export type LogoProps = {
   width: number;
@@ -9,10 +9,10 @@ export type LogoProps = {
 
 export const Logo = ({ width, height, className }: LogoProps) => {
   return (
-    <Link to="/" className={className}>
+    <DelayedLink to="/" className={className}>
       <div id="logo" className="flex justify-between items-center">
         <Image src="/logo.svg" alt="Singula" width={width} height={height} />
       </div>
-    </Link>
+    </DelayedLink>
   );
 };

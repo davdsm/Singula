@@ -1,5 +1,5 @@
-import { Link } from "@remix-run/react";
 import { useTranslation } from "react-i18next";
+import { DelayedLink } from "~/components/Elements/Link";
 
 export const Menu = ({
   list,
@@ -15,12 +15,12 @@ export const Menu = ({
       <ul className="ml-40 justify-between items-center w-half flex">
         {list.map((item) => (
           <li key={item.key} className="text-white text-lg mx-2">
-            <Link
+            <DelayedLink
               to={item.link}
               className="hover:text-gray-400 transition duration-300 uppercase"
             >
               {t(item.key)}
-            </Link>
+            </DelayedLink>
           </li>
         ))}
       </ul>
