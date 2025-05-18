@@ -6,8 +6,11 @@ import {
   ScrollRestoration,
 } from "@remix-run/react";
 import type { LinksFunction } from "@remix-run/node";
+import { I18nextProvider } from "react-i18next";
 
+import i18next from "./i18n";
 import "./global.css";
+
 import Header from "./components/Layout/Header";
 import Footer from "./components/Layout/Footer";
 
@@ -33,53 +36,55 @@ export const links: LinksFunction = () => [
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <head>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#000000" />
-        <title>Singula - Design que se vê, Design que se sente.</title>
-        <meta
-          name="title"
-          content="Singula - Design que se vê, Design que se sente."
-        />
-        <meta
-          name="description"
-          content="Na Singula, o metal ganha alma. E o design ganha ousadia.Seja no meio da cidade, num jardim ou à porta de casa. Desenhamos cada linha como se fosse um guião. Mas sem finais previsíveis.Só entradas de impacto e formas com destino."
-        />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://singula.pt/" />
-        <meta
-          property="og:title"
-          content="Singula - Design que se vê, Design que se sente."
-        />
-        <meta
-          property="og:description"
-          content="Na Singula, o metal ganha alma. E o design ganha ousadia.Seja no meio da cidade, num jardim ou à porta de casa. Desenhamos cada linha como se fosse um guião. Mas sem finais previsíveis.Só entradas de impacto e formas com destino."
-        />
-        <meta property="og:image" content="./cover.png" />
-        <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="./cover.png" />
-        <meta
-          property="twitter:title"
-          content="Singula - Design que se vê, Design que se sente."
-        />
-        <meta
-          property="twitter:description"
-          content="Na Singula, o metal ganha alma. E o design ganha ousadia.Seja no meio da cidade, num jardim ou à porta de casa. Desenhamos cada linha como se fosse um guião. Mas sem finais previsíveis.Só entradas de impacto e formas com destino."
-        />
-        <meta property="twitter:image" content="./cover.png" />
-        <Meta />
-        <Links />
-      </head>
-      <body>
-        <Header />
-        {children}
-        <Footer />
-        <ScrollRestoration />
-        <Scripts />
-      </body>
-    </html>
+    <I18nextProvider i18n={i18next}>
+      <html lang={i18next.language}>
+        <head>
+          <meta charSet="utf-8" />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <meta name="theme-color" content="#000000" />
+          <title>Singula - Design que se vê, Design que se sente.</title>
+          <meta
+            name="title"
+            content="Singula - Design que se vê, Design que se sente."
+          />
+          <meta
+            name="description"
+            content="Na Singula, o metal ganha alma. E o design ganha ousadia.Seja no meio da cidade, num jardim ou à porta de casa. Desenhamos cada linha como se fosse um guião. Mas sem finais previsíveis.Só entradas de impacto e formas com destino."
+          />
+          <meta property="og:type" content="website" />
+          <meta property="og:url" content="https://singula.pt/" />
+          <meta
+            property="og:title"
+            content="Singula - Design que se vê, Design que se sente."
+          />
+          <meta
+            property="og:description"
+            content="Na Singula, o metal ganha alma. E o design ganha ousadia.Seja no meio da cidade, num jardim ou à porta de casa. Desenhamos cada linha como se fosse um guião. Mas sem finais previsíveis.Só entradas de impacto e formas com destino."
+          />
+          <meta property="og:image" content="./cover.png" />
+          <meta property="twitter:card" content="summary_large_image" />
+          <meta property="twitter:url" content="./cover.png" />
+          <meta
+            property="twitter:title"
+            content="Singula - Design que se vê, Design que se sente."
+          />
+          <meta
+            property="twitter:description"
+            content="Na Singula, o metal ganha alma. E o design ganha ousadia.Seja no meio da cidade, num jardim ou à porta de casa. Desenhamos cada linha como se fosse um guião. Mas sem finais previsíveis.Só entradas de impacto e formas com destino."
+          />
+          <meta property="twitter:image" content="./cover.png" />
+          <Meta />
+          <Links />
+        </head>
+        <body>
+          <Header />
+          {children}
+          <Footer />
+          <ScrollRestoration />
+          <Scripts />
+        </body>
+      </html>
+    </I18nextProvider>
   );
 }
 

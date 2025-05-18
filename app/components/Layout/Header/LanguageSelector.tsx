@@ -1,11 +1,14 @@
 import { useState, useRef, useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import { useTranslation } from "react-i18next";
 
-const languages: string[] = ["EN", "PT", "FR", "ES"];
+const languages: string[] = ["en", "pt", "fr", "es"];
 
 export const LanguageSelector = (): JSX.Element => {
-  const [selectedLang, setSelectedLang] = useState<string>("PT");
+  const { i18n } = useTranslation();
+
+  const [selectedLang, setSelectedLang] = useState(i18n.language);
   const [open, setOpen] = useState<boolean>(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -14,6 +17,7 @@ export const LanguageSelector = (): JSX.Element => {
   };
 
   const handleSelect = (lang: string): void => {
+    i18n.changeLanguage(lang);
     setSelectedLang(lang);
     setOpen(false);
   };
@@ -38,7 +42,7 @@ export const LanguageSelector = (): JSX.Element => {
         onClick={toggleDropdown}
         className="inline-flex items-center font-medium focus:outline-none"
       >
-        {selectedLang}
+        {selectedLang.toUpperCase()}
         <FontAwesomeIcon icon={faChevronDown} className="ml-2 w-3 h-3" />
       </button>
 
@@ -58,7 +62,7 @@ export const LanguageSelector = (): JSX.Element => {
                   onClick={() => handleSelect(lang)}
                   className="w-full px-4 py-2 text-white text-left hover:bg-stone-800"
                 >
-                  {lang}
+                  {lang.toUpperCase()}
                 </button>
               </li>
             ))}

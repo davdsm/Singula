@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useTranslation } from "react-i18next";
 
 export const SearchBar = ({ onSearch }: { onSearch: Function }) => {
   const [searchText, setSearchText] = useState<string>("");
@@ -10,12 +11,18 @@ export const SearchBar = ({ onSearch }: { onSearch: Function }) => {
     onSearch(searchText);
   };
 
+  const { t } = useTranslation();
+
   return (
-    <form className="hidden md:block relative text-gray-600" action="" onSubmit={submit}>
+    <form
+      className="hidden md:block relative text-gray-600"
+      action=""
+      onSubmit={submit}
+    >
       <input
         type="text"
         name="search"
-        placeholder="Pesquisar..."
+        placeholder={t("menu.search")}
         className="bg-stone-900 h-10 px-5 pr-10 rounded-full text-sm focus:outline-none text-white"
         value={searchText}
         onChange={(e) => setSearchText(e.target.value)}
