@@ -52,9 +52,9 @@ export const Header = ({
   return (
     <>
       <motion.header
-        /* initial={{ opacity: 0, y: -20, x: "-50%" }}
+        initial={{ opacity: 0, y: -20, x: "-50%" }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, delay: 2 }} */
+        transition={{ duration: 1, delay: 2 }}
         className="p-5 px-8 md:px-14 bg-black w-4/5 rounded-[4rem] flex justify-between items-center fixed top-10 left-1/2 translate-x-[-50%] z-10"
       >
         {logo && <Logo width={112} height={26} />}

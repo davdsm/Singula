@@ -1,19 +1,27 @@
+import { motion } from "framer-motion";
 import {
   Links,
+  LiveReload,
   Meta,
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLocation,
 } from "@remix-run/react";
 import type { LinksFunction } from "@remix-run/node";
 import { I18nextProvider } from "react-i18next";
 
+import {
+  TransitionProvider,
+  useTransitionContext,
+} from "./context/TransitionContext";
 import i18next from "./i18n";
-import "./global.css";
 
 import Header from "./components/Layout/Header";
 import Footer from "./components/Layout/Footer";
+import { TransitionOverlay } from "./components/Elements/Transition";
 
+import "./global.css";
 import "./hooks/fontAwesome";
 
 export const links: LinksFunction = () => [
@@ -77,11 +85,15 @@ export function Layout({ children }: { children: React.ReactNode }) {
           <Links />
         </head>
         <body>
-          <Header />
-          {children}
-          <Footer />
-          <ScrollRestoration />
-          <Scripts />
+          <TransitionProvider>
+            <TransitionOverlay />
+            <Header />
+            {children}
+            <Footer />
+            <ScrollRestoration />
+            <Scripts />
+            <LiveReload />
+          </TransitionProvider>
         </body>
       </html>
     </I18nextProvider>
@@ -89,5 +101,16 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-  return <Outlet />;
+  const location = useLocation();
+  return (
+    <motion.div
+      key={location.pathname}
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -10 }}
+      transition={{ duration: 0.3, delay: 0.3 }}
+    >
+      <Outlet />
+    </motion.div>
+  );
 }

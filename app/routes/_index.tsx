@@ -1,5 +1,6 @@
-import type { MetaFunction } from "@remix-run/node";
+import { MetaFunction } from "@remix-run/node";
 import { Link } from "@remix-run/react";
+import { motion } from "framer-motion";
 
 /* export const meta: MetaFunction = () => {
   return [
@@ -10,12 +11,12 @@ import { Link } from "@remix-run/react";
 
 export const Index = () => {
   return (
-    <>
+    <main>
       <h1>Home</h1>
       <Link to="/about">
         <h2>about </h2>
       </Link>
-    </>
+    </main>
   );
 };
 
