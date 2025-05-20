@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { MainColor } from "../Elements/Colors/main";
 import { MaterialsSlide } from "./MaterialsSlide";
 
-export const About = () => {
+export const About = ({ setModalContent }: { setModalContent: Function }) => {
   return (
     <section className="bg-black">
       <motion.h2
@@ -21,7 +21,7 @@ export const About = () => {
         do que o básico, merece <MainColor> design com personalidade</MainColor>
         .
       </motion.h2>
-      <MaterialsSlide />
+      <MaterialsSlide setModalContent={setModalContent} />
     </section>
   );
 };
