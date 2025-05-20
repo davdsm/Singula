@@ -1,8 +1,10 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
-export const HPL = () => {
-  const [colors, setColors] = useState<{ title: string; img: string }[]>([]);
+export const HPL = ({ setModalContent }: { setModalContent: Function }) => {
+  const [colors, setColors] = useState<
+    { title: string; img: string; text?: string }[]
+  >([]);
 
   useEffect(() => {
     if (colors.length === 0)
@@ -56,8 +58,16 @@ export const HPL = () => {
               {colors.map((color) => (
                 <li className="w-[23%] md:w-[18%] pb-8">
                   <span
+                    onClick={() =>
+                      color.text &&
+                      setModalContent({
+                        title: color.title,
+                        img: color.img,
+                        text: color.text,
+                      })
+                    }
                     style={{ backgroundImage: `url('${color.img}')` }} // Corrected line
-                    className="border w-full h-[5rem] md:h-[10rem] block rounded-2xl bg-cover bg-center" // Added bg-cover and bg-center for better image display
+                    className="border cursor-pointer w-full h-[5rem] md:h-[10rem] block rounded-2xl bg-cover bg-center" // Added bg-cover and bg-center for better image display
                   ></span>
 
                   <p className="text-black text-md md:text-xl w-full text-center py-4">

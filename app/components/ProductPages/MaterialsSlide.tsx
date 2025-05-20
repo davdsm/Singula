@@ -4,9 +4,13 @@ import { CarouselComponent } from "../Elements/Carousel";
 import { Image } from "../Elements/Image";
 
 import "./index.scss";
-export const MaterialsSlide = () => {
+export const MaterialsSlide = ({
+  setModalContent,
+}: {
+  setModalContent: Function;
+}) => {
   const [materials, setMaterials] = useState<
-    { title: string; image: string }[]
+    { title: string; image: string; text?: string }[]
   >([]);
 
   useEffect(() => {
@@ -42,6 +46,14 @@ export const MaterialsSlide = () => {
                 key={`material-${index}`}
                 type="button"
                 className="text-center flex justify-center flex-col items-center w-full"
+                onClick={() =>
+                  item.text &&
+                  setModalContent({
+                    title: item.title,
+                    img: item.image,
+                    text: item.text,
+                  })
+                }
               >
                 <Image
                   src={item.image}
