@@ -15,7 +15,7 @@ export const Sidebar = ({
   const { t } = useTranslation();
 
   return (
-    <nav className="fixed w-full h-svh bg-stone-950 text-white flex justify-center items-center">
+    <nav className="fixed w-full h-dvh bg-stone-950 text-white flex justify-center items-center z-[90]">
       <ul className="justify-between items-center w-half flex flex-col">
         {open &&
           list.map((item, index) => (

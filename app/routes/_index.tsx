@@ -1,21 +1,17 @@
-import { MetaFunction } from "@remix-run/node";
-import { Link } from "@remix-run/react";
-import { motion } from "framer-motion";
-
-/* export const meta: MetaFunction = () => {
-  return [
-    { title: "New Remix App" },
-    { name: "description", content: "Welcome to Remix!" },
-  ];
-}; */
+import { Categories } from "~/components/Categories";
+import { AboutSection } from "~/components/CenterText";
+import { DesignsSlide } from "~/components/DesignsSlide";
+import { Hero } from "~/components/Hero";
+import { PhotoSlider } from "~/components/PhotoSlider";
 
 export const Index = () => {
   return (
     <main>
-      <h1>Home</h1>
-      <Link to="/about">
-        <h2>about </h2>
-      </Link>
+      <Hero />
+      <AboutSection />
+      <PhotoSlider />
+      <Categories />
+      <DesignsSlide />
     </main>
   );
 };
