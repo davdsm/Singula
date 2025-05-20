@@ -54,8 +54,8 @@ export const Header = ({
       <motion.header
         initial={{ opacity: 0, y: -20, x: "-50%" }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, delay: 2 }}
-        className="p-5 px-8 md:px-14 bg-black w-4/5 rounded-[4rem] flex justify-between items-center fixed top-10 left-1/2 translate-x-[-50%] z-10"
+        transition={{ duration: 0.3, delay: 0.8 }}
+        className="border border-singula-border z-[90] md:z-40 p-5 px-8 md:px-14 bg-black w-4/5 rounded-[4rem] flex justify-between items-center fixed top-10 left-1/2 translate-x-[-50%]"
       >
         {logo && <Logo width={112} height={26} />}
         {menu && <Menu list={menuList} />}
@@ -81,7 +81,8 @@ export const Header = ({
       <motion.aside
         initial={{ x: "-100%" }}
         animate={{ x: sidebar ? "0%" : "-100%" }}
-        transition={{ type: "spring", stiffness: 100, damping: 25 }}
+        transition={{ duration: 1, ease: "easeInOut", delay: 0 }}
+        className="z-40 fixed top-0 left-0 w-full h-dvh"
       >
         <Sidebar list={menuList} open={sidebar} />
       </motion.aside>

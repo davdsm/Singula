@@ -6,7 +6,7 @@ export const TransitionOverlay = () => {
 
   return isTransitioning ? (
     <motion.div
-      className="fixed inset-0 bg-black z-500 flex items-center justify-center w-[200vw]"
+      className="fixed inset-0 bg-black z-40 flex items-center justify-center w-[200vw] h-dvh"
       initial={{ x: "-200vw" }}
       animate={{ x: "200vw" }}
       transition={{ duration: 3, delay: 0, ease: "easeInOut" }}

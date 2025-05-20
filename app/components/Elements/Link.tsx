@@ -18,6 +18,8 @@ export function DelayedLink({
     startTransition(() => navigate(to));
   };
 
+  if (to === "#") return <>{children}</>;
+
   return (
     <a href={to} onClick={handleClick} className={className}>
       {children}
