@@ -185,7 +185,7 @@ export const Footer = () => {
                 className="w-3 h-3 text-white hidden peer-checked:block"
                 fill="none"
                 stroke="currentColor"
-                stroke-width="3"
+                strokeWidth="3"
                 viewBox="0 0 24 24"
               >
                 <path d="M5 13l4 4L19 7" />

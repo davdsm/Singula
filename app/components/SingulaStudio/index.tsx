@@ -57,6 +57,7 @@ export const SingulaStudio = () => {
       <div className="flex flex-col w-full gap-4 py-20">
         {members.map(({ name, role, text, img }, index) => (
           <TeamMember
+            key={`team-${index}`}
             image={img}
             name={name}
             role={role}
