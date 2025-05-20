@@ -58,8 +58,9 @@ export const CarouselComponent = ({
           <CarouselItem
             key={index}
             className={
-              itemClassName ??
-              "basis-1/2 md:basis-1/2 lg:basis-1/3 rounded"
+              itemClassName
+                ? itemClassName
+                : "basis-1/2 md:basis-1/2 lg:basis-1/3 rounded"
             }
           >
             {item}

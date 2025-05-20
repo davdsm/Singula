@@ -57,7 +57,7 @@ export const Header = ({
         transition={{ duration: 0.3, delay: 0.8 }}
         className="border border-singula-border z-[90] md:z-40 p-5 px-8 md:px-14 bg-black w-4/5 rounded-[4rem] flex justify-between items-center fixed top-10 left-1/2 translate-x-[-50%]"
       >
-        {logo && <Logo width={112} height={26} />}
+        {logo && <Logo width={112} height={26} className="w-[112px] h-[26px]" />}
         {menu && <Menu list={menuList} />}
         <div className="flex items-center justify-between">
           {searchbar && (
