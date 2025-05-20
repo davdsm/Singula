@@ -1,28 +1,24 @@
 import { motion } from "framer-motion";
 import { MainColor } from "../Elements/Colors/main";
 import { TeamMember } from "./TeamMember";
+import { useEffect, useState } from "react";
 
 export const SingulaStudio = () => {
-  const members = [
-    {
-      name: "Hugo Silva",
-      img: "/media/about/office.png",
-      role: "Mechanical Engineer",
-      text: "Licenciado em Engenharia Mecânica e fluente em milímetros. Fez carreira entre ventilações industriais e serralharia mecânica — mas é na precisão que se sente leve. Na Singula, é o especialista que faz com que tudo funcione. Por dentro, por fora, e até nos bastidores. Se uma peça vacila, ele sorri. Já resolveu coisas bem mais teimosas. Não precisa de falar alto. O metal já o conhece.",
-    },
-    {
-      name: "André Vieira",
-      img: "/media/about/office.png",
-      role: "Product Designer",
-      text: "O traço é firme. A visão, inquieta. Desenha como quem conta histórias. Com formação em Ilustração Gráfica, licenciatura em Design e mestrado Design de Produto, André desenha com uma pergunta em mente: “E se fosse diferente?” Passou por automatismos, domótica e mobiliário — e em cada área, aprendeu a escutar o que o produto não diz. Na Singula, é o responsável criativo de cada produto. É provocador, direto, emocional — e não descansa até dar forma a algo que mereça ser olhado duas vezes.",
-    },
-    {
-      name: "Pedro Fernandes",
-      img: "/media/about/office.png",
-      role: "Industrial Engineer",
-      text: "Quando o mundo exige lógica, ele responde com engenharia.Licenciado em Engenharia Industrial, Pedro é o equilíbrio entre a visão criativa e a execução sem falhas. Vê nos processos uma forma de arte — e na eficiência, um desafio pessoal. Trabalhou em produção, planeamento, qualidade e desenvolvimento de produto. Conhece a linha que une uma boa ideia a um produto viável. Na Singula, transforma planos em peças reais, com uma precisão quase obsessiva. É metódico, exigente, mas sempre com o olhar no todo.",
-    },
-  ];
+  const [members, setMembers] = useState<
+    { name: string; role: string; text: string; img: string }[]
+  >([]);
+
+  useEffect(() => {
+    if (members.length === 0)
+      fetch("/api/pt/members.json", {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => setMembers(data));
+  }, [members]);
 
   return (
     <section className="px-10 py-20 md:px-60 md:py-40">
