@@ -47,6 +47,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
     <I18nextProvider i18n={i18next}>
       <html lang={i18next.language}>
         <head>
+          <Meta />
           <meta charSet="utf-8" />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <meta name="theme-color" content="#000000" />
