@@ -1,0 +1,56 @@
+[
+  {
+    "title": "SENTAR & PARTILHAR",
+    "slug": "seating-sharing",
+    "design": "street",
+    "img": "/media/products/categories/2.jpg"
+  },
+  {
+    "title": "JARDIM & DECOR",
+    "slug": "garden-decor",
+    "design": "garden",
+    "img": "/media/products/categories/8.jpg"
+  },
+  {
+    "title": "LIMPEZA & RECICLAGEM",
+    "slug": "cleaning-recycling",
+    "design": "street",
+    "img": "/media/products/categories/5.jpg"
+  },
+  {
+    "title": "FOGO & GRELHA",
+    "slug": "fire-grill",
+    "design": "garden",
+    "img": "/media/products/categories/3.jpg"
+  },
+  {
+    "title": "INFO & SEGURANÇA",
+    "slug": "info-security",
+    "design": "street",
+    "img": "/media/products/categories/6.jpg"
+  },
+  {
+    "title": "DIVISÓRIAS & VARANDINS",
+    "slug": "dividers-railings",
+    "design": "home",
+    "img": "/media/products/categories/9.jpg"
+  },
+  {
+    "title": "ABRIGOS & MOBILIDADE",
+    "slug": "shelters-mobility",
+    "design": "street",
+    "img": "/media/products/categories/1.jpg"
+  },
+  {
+    "title": "CASA & DETALHES",
+    "slug": "home-details",
+    "design": "home",
+    "img": "/media/products/categories/4.jpg"
+  },
+  {
+    "title": "SUPORTE & PROTEÇÃO",
+    "slug": "support-protection",
+    "design": "street",
+    "img": "/media/products/categories/7.jpg"
+  }
+]

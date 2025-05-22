@@ -1,0 +1,86 @@
+[
+  {
+    "category": "seating-sharing",
+    "name": "Bancos",
+    "slug": "benches",
+    "img": "/media/products/subcategories/benches.jpg"
+  },
+  {
+    "category": "seating-sharing",
+    "name": "Conjuntos",
+    "slug": "sets",
+    "img": "/media/products/subcategories/benches.jpg"
+  },
+  {
+    "category": "garden-decor",
+    "name": "Floreiras",
+    "slug": "planters",
+    "img": "/media/products/subcategories/benches.jpg"
+  },
+  {
+    "category": "garden-decor",
+    "name": "Delimitadores",
+    "slug": "delimiters",
+    "img": "/media/products/subcategories/benches.jpg"
+  },
+  {
+    "category": "home-details",
+    "name": "Caixa Correio",
+    "slug": "mailbox",
+    "img": "/media/products/subcategories/benches.jpg"
+  },
+  {
+    "category": "fire-grill",
+    "name": "Braseiros",
+    "slug": "fire-bowls",
+    "img": "/media/products/subcategories/benches.jpg"
+  },
+  {
+    "category": "fire-grill",
+    "name": "Churrasqueiras",
+    "slug": "barbecues",
+    "img": "/media/products/subcategories/benches.jpg"
+  },
+  {
+    "category": "dividers-railings",
+    "name": "Gradeamento",
+    "slug": "railings",
+    "img": "/media/products/subcategories/benches.jpg"
+  },
+  {
+    "category": "dividers-railings",
+    "name": "Divisórias",
+    "slug": "dividers",
+    "img": "/media/products/subcategories/benches.jpg"
+  },
+  {
+    "category": "cleaning-recycling",
+    "name": "Papeleiras",
+    "slug": "waste-bins",
+    "img": "/media/products/subcategories/benches.jpg"
+  },
+  {
+    "category": "shelters-mobility",
+    "name": "Abrigos",
+    "slug": "shelters",
+    "img": "/media/products/subcategories/benches.jpg"
+  },
+  {
+    "category": "shelters-mobility",
+    "name": "Park Bicicletas",
+    "slug": "bike-parking",
+    "img": "/media/products/subcategories/benches.jpg"
+  },
+  {
+    "category": "support-protection",
+    "name": "Grelhas (arvore)",
+    "slug": "tree-grates",
+    "img": "/media/products/subcategories/benches.jpg"
+  },
+  {
+    "category": "info-security",
+    "name": "Limitadores",
+    "slug": "limiters",
+    "img": "/media/products/subcategories/benches.jpg"
+  }
+]
