@@ -1,12 +1,15 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export const CoresRal = () => {
+  const { t, i18n } = useTranslation();
   const [colors, setColors] = useState<{ title: string; color: string }[]>([]);
 
   useEffect(() => {
-    if (colors.length === 0)
-      fetch("/api/pt/ralColors.json", {
+    if (colors.length === 0) {
+      const lang = i18n.language || "pt";
+      fetch(`/api/${lang}/ralColors.json`, {
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
@@ -14,7 +17,8 @@ export const CoresRal = () => {
       })
         .then((res) => res.json())
         .then((data) => setColors(data));
-  }, [colors]);
+    }
+  }, [colors, i18n.language]);
 
   return (
     <>
@@ -28,35 +32,30 @@ export const CoresRal = () => {
           >
             <header>
               <h3 className="text-4xl md:text-6xl font-bold text-black text-center">
-                CORES RAL{" "}
-                <span className="text-lg md:text-2xl">recomendamos</span>
+                {t("ral.title")}{" "}
+                <span className="text-lg md:text-2xl">{t("ral.subtitle")}</span>
               </h3>
               <p className="text-md mx-auto md:text-lg text-black py-10 md:w-2/3">
-                As cores RAL constituem um sistema padrão de cores amplamente
-                utilizado na indústria, arquitetura e design. Originalmente
-                desenvolvido na Alemanha, o sistema atribui a cada cor um código
-                numérico único, facilitando a comunicação e a especificação
-                exata das tonalidades em projetos e produções.
+                {t("ral.paragraph1")}
                 <br />
                 <br />
-                Essa padronização garante uniformidade e consistência na
-                reprodução das cores, permitindo que designers, fabricantes e
-                clientes obtenham resultados precisos e de alta qualidade em
-                seus produtos e aplicações.
+                {t("ral.paragraph2")}
                 <br />
                 <br />
-                As cores apresentadas bla bla bla......
+                {t("ral.paragraph3")}
               </p>
             </header>
             <ul className="list-none p-0 m-0 flex flex-row justify-between align-start flex-wrap w-full">
-              {colors.map((color) => (
-                <li className="w-[23%] md:w-[18%] pb-8">
+              {colors.map((color, index) => (
+                <li key={index} className="w-[23%] md:w-[18%] pb-8">
                   <span
                     style={{ backgroundColor: color.color }}
                     className={`bg-[${color.color}] w-full h-[5rem] md:h-[10rem] block rounded-2xl`}
                   ></span>
 
-                  <p className="text-black text-md md:text-xl w-full text-center py-4">{color.title}</p>
+                  <p className="text-black text-md md:text-xl w-full text-center py-4">
+                    {color.title}
+                  </p>
                 </li>
               ))}
             </ul>

@@ -1,7 +1,10 @@
 import { motion } from "framer-motion";
 import { Image } from "../Elements/Image";
+import { useTranslation } from "react-i18next";
 
 export const Title = () => {
+  const { t } = useTranslation();
+
   return (
     <header className="py-10 md:py-20 px-10 md:px-60 flex align-center justify-between w-full h-full">
       <motion.h1
@@ -11,8 +14,7 @@ export const Title = () => {
         viewport={{ amount: 0.3 }}
         className="text-2xl md:text-5xl font-black text-left text-white w-full md:w-3/5"
       >
-        Três cenários. <br /> uma só atitude. <br /> Urbana, natural e
-        doméstica.
+        {t("categories.title.main")}
       </motion.h1>
       <motion.div
         initial={{ y: 30, opacity: 0 }}
