@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Hugo Silva",
+    "img": "/media/about/office.png",
+    "role": "Mechanical Engineer",
+    "text": "Degree in Mechanical Engineering and fluent in millimeters. Built his career between industrial ventilation and mechanical locksmithing — but it's in precision that he feels light. At Singula, he's the specialist who makes everything work. Inside, outside, and even behind the scenes. If a piece hesitates, he smiles. He's already solved much more stubborn things. He doesn't need to speak loudly. The metal already knows him."
+  },
+  {
+    "name": "André Vieira",
+    "img": "/media/about/office.png",
+    "role": "Product Designer",
+    "text": "The stroke is firm. The vision, restless. He draws like someone telling stories. With training in Graphic Illustration, a degree in Design and a master's in Product Design, André draws with one question in mind: 'What if it were different?' He's worked through automation, home automation and furniture — and in each area, he learned to listen to what the product doesn't say. At Singula, he's the creative head of each product. He's provocative, direct, emotional — and doesn't rest until he shapes something that deserves to be looked at twice."
+  },
+  {
+    "name": "Pedro Fernandes",
+    "img": "/media/about/office.png",
+    "role": "Industrial Engineer",
+    "text": "When the world demands logic, he responds with engineering. Degree in Industrial Engineering, Pedro is the balance between creative vision and flawless execution. He sees processes as a form of art — and in efficiency, a personal challenge. He worked in production, planning, quality and product development. He knows the line that connects a good idea to a viable product. At Singula, he transforms plans into real pieces, with almost obsessive precision. He's methodical, demanding, but always with his eye on the whole."
+  }
+]
