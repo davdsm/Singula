@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { CarouselComponent } from "../Elements/Carousel";
 import { Image } from "../Elements/Image";
+import { useTranslation } from "react-i18next";
 
 import "./index.scss";
 export const MaterialsSlide = ({
@@ -9,13 +10,17 @@ export const MaterialsSlide = ({
 }: {
   setModalContent: Function;
 }) => {
+  const { i18n } = useTranslation();
   const [materials, setMaterials] = useState<
     { title: string; image: string; text?: string }[]
   >([]);
 
   useEffect(() => {
-    if (materials.length === 0)
-      fetch("/api/pt/materials.json", {
+    if (materials.length === 0) {
+      const lang = i18n.language || "pt"; // Usar idioma atual
+
+      fetch(`/api/${lang}/materials.json`, {
+        // ✅ Usar template literal com variável lang
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
@@ -23,7 +28,8 @@ export const MaterialsSlide = ({
       })
         .then((res) => res.json())
         .then((data) => setMaterials(data));
-  }, [materials]);
+    }
+  }, [materials, i18n.language]);
 
   return (
     <>

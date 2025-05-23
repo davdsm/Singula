@@ -10,5 +10,91 @@
   "about.home.words.guiao": "guião",
   "about.home.text1": ", o metal ganha alma. E o design ganha",
   "about.home.text2": " Seja no meio da cidade, num jardim ou à porta de casa. Desenhamos cada linha como se fosse um",
-  "about.home.text3": " Mas sem finais previsíveis. Só entradas de impacto e formas com destino."
+  "about.home.text3": " Mas sem finais previsíveis. Só entradas de impacto e formas com destino.",
+
+  "about.singula.paragraph1": "A Singula é o ponto onde design e engenharia se encontram para reimaginar o mundo à nossa volta. Acreditamos que cada espaço — urbano, natural ou doméstico — merece ser emocionante, funcional e duradouro. Para nós, o metal não é só matéria-prima: é a nossa base.",
+  "about.singula.paragraph2": "Fazemos histórias que se moldam ao tempo, criando um legado de inovação e autenticidade.",
+
+  "catalog.title": "Singula Street Design Vol. 1",
+  "catalog.download.heading": "Descarregar Catálogo",
+  "catalog.description": "Não é catálogo. É convite. Para ver a cidade sem limite. Linhas cruas, ângulos que insistem. Peças que não pedem — existem. É aço com alma, traço com intenção, forma que fala antes da função. Um silêncio desenhado em plena estrutura, onde até a sombra ganha outra altura. E quando olhares a cidade com mais atenção, verás que o design é a verdadeira revolução. Faz o download. Há quem leve a cidade às costas, tu levas em PDF.",
+  "catalog.button.first": "Catálogo",
+  "catalog.button.second": "Download",
+  "catalog.image.alt": "Catálogo Singula",
+
+  "categories.title.main": "Três cenários. \nUma só atitude. \nUrbana, natural e doméstica.",
+
+  "contact.title": "Redesenhar o mundo",
+  "contact.form.name.label": "Nome",
+  "contact.form.email.label": "Email",
+  "contact.form.contact.label": "Contacto (opcional)",
+  "contact.form.message.label": "Mensagem",
+  "contact.form.message.placeholder": "Escreve aqui a tua mensagem...",
+  "contact.form.submit": "Enviar Mensagem",
+  "contact.quote.button": "Pedir Orçamento",
+
+  "designs.street.title": "Street Design",
+  "designs.street.description": "Mobiliário e Equipamento urbano que transforma a cidade em cenários de atitude e personalidade.",
+  "designs.garden.title": "Garden Design",
+  "designs.garden.description": "Mobiliário e Equipamento urbano que transforma a cidade em cenários de atitude e personalidade.",
+  "designs.home.title": "Home Design",
+  "designs.home.description": "Mobiliário e Equipamento urbano que transforma a cidade em cenários de atitude e personalidade.",
+  "designs.image.alt": "Singula Think Metal",
+
+  "hero.slogan": "Design que se vê, Design que se sente.",
+
+  "footer.links.urban": "Mobiliário Urbano",
+  "footer.links.garden": "Jardim",
+  "footer.links.residential": "Decoração Residencial",
+  "footer.links.materials": "Materiais",
+  "footer.copyright": "© 2025 Singula Lda. Todos os Direitos Reservados",
+  "footer.menu.about": "Sobre Nós",
+  "footer.menu.catalog": "Catálogo",
+  "footer.menu.studio": "Singula Studio",
+  "footer.menu.contacts": "Contactos",
+  "footer.email.title": "Contactar por email",
+  "footer.legal.privacy": "Política de Privacidade",
+  "footer.legal.terms": "Termos e Condições",
+  "footer.quote": "Pedir Orçamento",
+  "footer.newsletter.placeholder": "Subscrever a Newsletter",
+  "footer.newsletter.terms": "Aceito os termos e condições",
+
+  "about.materials.intro": "Na Singula, os materiais não são apenas materiais — são os protagonistas da história! Temos metal que não teme nada, a cortiça que é tão natural que até pede licença para entrar, o corian que brilha mais que um influencer, e o compacto HPL que é resistente e chique ao mesmo tempo. A madeira? Vem clássica, mas sai moderna. As cores RAL, claro, para dar aquele impacto final. E isso é só o começo — porque a cidade merece mais do que o básico, merece",
+  "about.materials.highlight": "design com personalidade",
+
+  "banner.highlight": "Optamos pela longevidade",
+  "banner.text": "nos materiais que escolhemos, porque acreditamos em peças que resistem ao tempo, não em coisas que desaparecem mais rápido que um café quente num dia frio!",
+
+  "ral.title": "CORES RAL",
+  "ral.subtitle": "recomendamos",
+  "ral.paragraph1": "As cores RAL constituem um sistema padrão de cores amplamente utilizado na indústria, arquitetura e design. Originalmente desenvolvido na Alemanha, o sistema atribui a cada cor um código numérico único, facilitando a comunicação e a especificação exata das tonalidades em projetos e produções.",
+  "ral.paragraph2": "Essa padronização garante uniformidade e consistência na reprodução das cores, permitindo que designers, fabricantes e clientes obtenham resultados precisos e de alta qualidade em seus produtos e aplicações.",
+  "ral.paragraph3": "As cores apresentadas bla bla bla......",
+
+  "hpl.title": "COMPACTO HPL",
+  "hpl.subtitle": "Fenólico",
+  "hpl.paragraph1": "O compacto HPL (High Pressure Laminate) é um material de alta resistência, composto por váriascamadas de papel kraft onde estas são impregnadas com resinas termoendurecíveis, prensadas sobalta pressão e temperatura. O resultado é um painel robusto, durável e extremamente versátil, idealpara ambientes exteriores e interiores.",
+  "hpl.paragraph2": "A sua superfície não porosa torna-o resistente à humidade, impactos, riscos e raios UV, garantindouma longevidade excecional com baixa manutenção. Além disso, permite um acabamento sofistica-do e minimalista, adaptando-se a diferentes aplicações no mobiliário urbano.",
+  "hpl.paragraph3": "Uma escolha funcional e estética, onde a inovação se alia à durabilidade.",
+
+  "studio.title.first": "Singula",
+  "studio.title.second": "Studio",
+  "studio.description.paragraph1": "Onde o design provoca. E a engenharia não pede desculpa.",
+  "studio.description.paragraph2": "Tudo começa com a visão irreverente de ",
+  "studio.description.designer": "André Vieira",
+  "studio.description.paragraph3": ", Designer de Produto que prefere rasgar o manual a segui-lo. Cada peça nasce com um objetivo claro: ser tudo menos comum — visual, funcional e emocional. Depois entra a dupla de precisão cirúrgica: ",
+  "studio.description.engineer1": "Hugo Silva",
+  "studio.description.and": "e",
+  "studio.description.engineer2": "Pedro Fernandes",
+  "studio.description.paragraph4": ". Engenheiros de formação. Inconformados por vocação. São eles que transformam ideias arrojadas em estruturas sérias. E sim, usam a régua.",
+
+  "title.entry.part1": "Somos Design & Engenharia",
+  "title.entry.part2": "Somos a história nunca contada.",
+
+  "vision.innovationTitle": "Inovação & Originalidade",
+  "vision.innovationText": "Desafiamos o convencional com soluções e design para o espaço urbano num cenário de constante reinvenção e personalidade.",
+  "vision.qualityTitle": "Qualidade",
+  "vision.qualityText": "Criamos peças que não apenas impressionam, mas que resistem ao tempo, construídas com materiais de excelência e acabamentos refinados.",
+  "vision.sustainabilityTitle": "Sustentabilidade",
+  "vision.sustainabilityText": "Escolhemos práticas e materiais que garantem um impacto mínimo no meio ambiente, pensando num futuro mais verde e duradouro."
 }

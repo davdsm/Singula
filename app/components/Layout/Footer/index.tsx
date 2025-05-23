@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -15,6 +16,7 @@ import { Logo } from "~/components/Elements/Logo";
 import { Image } from "~/components/Elements/Image";
 
 export const Footer = () => {
+  const { t } = useTranslation();
   const [Email, setEmail] = useState<string>("");
   const [Terms, setTerms] = useState<boolean>(false);
 
@@ -34,42 +36,40 @@ export const Footer = () => {
       >
         <Logo width={217} height={49} className="invert" />
         <ul className="p-0 list-none m-0">
-         <li className="text-center md:text-left">
+          <li className="text-center md:text-left">
             <DelayedLink
               to="/"
               className="bg-black py-2 px-4 text-white w-auto rounded-t-md rounded-br-md text-xl transition-all ease-linear duration-200 hover:text-singula-main"
             >
-              Mobiliário Urbano
+              {t("footer.links.urban")}
             </DelayedLink>
           </li>
-         <li className="text-center md:text-left">
+          <li className="text-center md:text-left">
             <DelayedLink
               to="/"
               className="bg-black py-2 px-4 text-white w-auto rounded-br-md rounded-t-md text-xl transition-all ease-linear duration-200 hover:text-singula-main"
             >
-              Jardim
+              {t("footer.links.garden")}
             </DelayedLink>
           </li>
-         <li className="text-center md:text-left">
+          <li className="text-center md:text-left">
             <DelayedLink
               to="/"
               className="bg-black py-2 px-4 text-white w-auto rounded-br-md rounded-t-md text-xl transition-all ease-linear duration-200 hover:text-singula-main"
             >
-              Decoração Residencial
+              {t("footer.links.residential")}
             </DelayedLink>
           </li>
-         <li className="text-center md:text-left">
+          <li className="text-center md:text-left">
             <DelayedLink
               to="/"
               className="bg-black py-2 px-4 text-white w-auto rounded-br-md rounded-t-md rounded-bl-md text-xl transition-all ease-linear duration-200 hover:text-singula-main"
             >
-              Materiais
+              {t("footer.links.materials")}
             </DelayedLink>
           </li>
         </ul>
-        <p className="text-black text-base">
-          © 2025 Singula Lda. Todos os Direitos Reservados
-        </p>
+        <p className="text-black text-base">{t("footer.copyright")}</p>
       </motion.div>
       <div className="w-1/12"></div>
       <motion.div
@@ -86,37 +86,39 @@ export const Footer = () => {
               to="/about"
               className="text-black font-bold text-xl transition-all ease-linear duration-200 hover:text-singula-main"
             >
-              Sobre Nós
+              {t("footer.menu.about")}
             </DelayedLink>
           </li>
-         <li className="text-center md:text-left">
+          <li className="text-center md:text-left">
             <DelayedLink
               to="/about"
               className="text-black font-bold text-xl transition-all ease-linear duration-200 hover:text-singula-main"
             >
-              Catálogo
+              {t("footer.menu.catalog")}
             </DelayedLink>
           </li>
-         <li className="text-center md:text-left">
+          <li className="text-center md:text-left">
             <DelayedLink
               to="/about"
               className="text-black font-bold text-xl transition-all ease-linear duration-200 hover:text-singula-main"
             >
-              Singula Studio
+              {t("footer.menu.studio")}
             </DelayedLink>
           </li>
-         <li className="text-center md:text-left">
+          <li className="text-center md:text-left">
             <DelayedLink
               to="/contacts"
               className="text-black font-bold text-xl transition-all ease-linear duration-200 hover:text-singula-main"
             >
-              Contactos
+              {t("footer.menu.contacts")}
             </DelayedLink>
           </li>
         </ul>
-        <span className="text-base text-black mt-10 md:mt-0">Contactar por email</span>
+        <span className="text-base text-black mt-10 md:mt-0">
+          {t("footer.email.title")}
+        </span>
         <ul className="p-0 m-0 list-none md:flex justify-start items-start gap-5">
-         <li className="text-center md:text-left">
+          <li className="text-center md:text-left">
             <a
               className="text-black font-bold text-xl transition-all ease-linear duration-200 hover:text-singula-main"
               href="mailto:info@singula.pt"
@@ -124,28 +126,28 @@ export const Footer = () => {
               info@singula.pt
             </a>
           </li>
-         <li className="text-center md:text-left">
+          <li className="text-center md:text-left">
             <DelayedLink
               to="/privacy"
               className="text-black font-bold text-xl transition-all ease-linear duration-200 hover:text-singula-main"
             >
-              Política de Privacidade
+              {t("footer.legal.privacy")}
             </DelayedLink>
           </li>
-         <li className="text-center md:text-left">
+          <li className="text-center md:text-left">
             <DelayedLink
               to="/terms"
               className="text-black font-bold text-xl transition-all ease-linear duration-200 hover:text-singula-main"
             >
-              Termos e Condições
+              {t("footer.legal.terms")}
             </DelayedLink>
           </li>
-         <li className="text-center md:text-left">
+          <li className="text-center md:text-left">
             <DelayedLink
               to="/quote"
               className="text-black font-extrabold text-xl transition-all ease-linear duration-200 hover:text-singula-main"
             >
-              Pedir Orçamento
+              {t("footer.quote")}
             </DelayedLink>
           </li>
         </ul>
@@ -168,7 +170,7 @@ export const Footer = () => {
               setEmail(e.target.value)
             }
             type="text"
-            placeholder="Subscrever a Newsletter"
+            placeholder={t("footer.newsletter.placeholder")}
             className="bg-black border-b w-[90%] focus:outline-none text-white"
             required
           />
@@ -192,7 +194,7 @@ export const Footer = () => {
               </svg>
             </div>
             <span className="text-white text-sm pl-2">
-              Aceito os termos e condições
+              {t("footer.newsletter.terms")}
             </span>
           </label>
         </form>

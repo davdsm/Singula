@@ -1,7 +1,10 @@
 import { motion } from "framer-motion";
 import { Image } from "../Elements/Image";
+import { useTranslation } from "react-i18next"; // Adicionar importação
 
 export const DesignsComponent = () => {
+  const { t } = useTranslation(); // Adicionar hook
+
   return (
     <motion.section
       initial={{ y: 30, opacity: 0 }}
@@ -13,29 +16,26 @@ export const DesignsComponent = () => {
       <div className="w-full py-10 md:py-0 md:w-1/3 flex-col">
         <div className="text-left py-2">
           <h3 className="font-black text-white text-2xl md:text-6xl text-left">
-            Street Design
+            {t("designs.street.title")}
           </h3>
           <p className="py-2 md:py-4 text-lg md:text-2xl font-regular text-white text-left">
-            Mobiliário e Equipamento urbano que transforma a cidade em cenários
-            de atitude e personalidade.
+            {t("designs.street.description")}
           </p>
         </div>
         <div className="text-left py-2">
-          <h3 className="font-black text-white text-2xl md:text-6xl  text-left">
-            Garden Design
+          <h3 className="font-black text-white text-2xl md:text-6xl text-left">
+            {t("designs.garden.title")}
           </h3>
-          <p className="py-2 md:py-4  text-lg md:text-2xl font-regular text-white text-left">
-            Mobiliário e Equipamento urbano que transforma a cidade em cenários
-            de atitude e personalidade.
+          <p className="py-2 md:py-4 text-lg md:text-2xl font-regular text-white text-left">
+            {t("designs.garden.description")}
           </p>
         </div>
         <div className="text-left py-2">
-          <h3 className="font-black text-white text-2xl md:text-6xl  text-left">
-            Home Design
+          <h3 className="font-black text-white text-2xl md:text-6xl text-left">
+            {t("designs.home.title")}
           </h3>
-          <p className="py-2 md:py-4  text-lg md:text-2xl font-regular text-white text-left">
-            Mobiliário e Equipamento urbano que transforma a cidade em cenários
-            de atitude e personalidade.
+          <p className="py-2 md:py-4 text-lg md:text-2xl font-regular text-white text-left">
+            {t("designs.home.description")}
           </p>
         </div>
       </div>
@@ -44,7 +44,7 @@ export const DesignsComponent = () => {
         <Image
           src="/media/designs/all.png"
           className="w-full h-[15rem] md:h-full object-cover rounded-tl-[2rem] rounded-bl-[2rem] md:rounded-tl-[3.2rem] md:rounded-bl-[3.2rem]"
-          alt="Singula Think Metal"
+          alt={t("designs.image.alt")}
         />
       </div>
     </motion.section>

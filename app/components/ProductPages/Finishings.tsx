@@ -2,8 +2,10 @@ import { motion } from "framer-motion";
 import { MainColor } from "../Elements/Colors/main";
 import { useEffect, useRef, useState } from "react";
 import { Image } from "../Elements/Image";
+import { useTranslation } from "react-i18next";
 
 export const Finishings = () => {
+  const { t, i18n } = useTranslation();
   const [finishings, setFinishings] = useState<
     { title: string; text: string; img: string }[]
   >([]);
@@ -12,7 +14,9 @@ export const Finishings = () => {
   const refs = useRef<HTMLDivElement[]>([]);
 
   useEffect(() => {
-    fetch("/api/pt/finishings.json", {
+    const lang = i18n.language || "pt"; // Usar idioma atual
+    fetch(`/api/${lang}/finishings.json`, {
+      // ✅ Usar template literal com variável lang
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
@@ -33,7 +37,9 @@ export const Finishings = () => {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            const index = parseInt(entry.target.getAttribute("data-index") || "0");
+            const index = parseInt(
+              entry.target.getAttribute("data-index") || "0"
+            );
             setCurrentImg(finishings[index]?.img);
           }
         });
