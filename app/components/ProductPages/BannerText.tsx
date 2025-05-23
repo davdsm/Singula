@@ -1,7 +1,9 @@
 import { motion } from "framer-motion";
 import { MainColor } from "../Elements/Colors/main";
+import { useTranslation } from "react-i18next";
 
 export const BannerText = () => {
+  const { t } = useTranslation();
   return (
     <motion.section
       initial={{ y: 30, opacity: 0 }}
@@ -11,9 +13,7 @@ export const BannerText = () => {
       className="w-full py-10 bg-singula-lightGray px-10 md:px-80"
     >
       <h3 className="text-black text-md md:text-2xl font-bold text-center">
-        <MainColor>Optamos pela longevidade</MainColor> nos materiais que
-        escolhemos, porque acreditamos em peças que resistem ao tempo, não em
-        coisas que desaparecem mais rápido que um café quente num dia frio!
+        <MainColor>{t("banner.highlight")}</MainColor> {t("banner.text")}
       </h3>
     </motion.section>
   );

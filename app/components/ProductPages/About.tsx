@@ -1,8 +1,11 @@
 import { motion } from "framer-motion";
 import { MainColor } from "../Elements/Colors/main";
 import { MaterialsSlide } from "./MaterialsSlide";
+import { useTranslation } from "react-i18next";
 
 export const About = ({ setModalContent }: { setModalContent: Function }) => {
+  const { t } = useTranslation();
+
   return (
     <section className="bg-black">
       <motion.h2
@@ -12,14 +15,8 @@ export const About = ({ setModalContent }: { setModalContent: Function }) => {
         viewport={{ amount: 0.3 }}
         className="py-20 px-10 text-lg md:px-80 md:text-2xl text-center"
       >
-        Na Singula, os materiais não são apenas materiais — são os protagonistas
-        da história! Temos metal que não teme nada, a cortiça que é tão natural
-        que até pede licença para entrar, o corian que brilha mais que um
-        influencer, e o compacto HPL que é resistente e chique ao mesmo tempo. A
-        madeira? Vem clássica, mas sai moderna. As cores RAL, claro, para dar
-        aquele impacto final. E isso é só o começo — porque a cidade merece mais
-        do que o básico, merece <MainColor> design com personalidade</MainColor>
-        .
+        {t("about.materials.intro")}
+        <MainColor> {t("about.materials.highlight")}</MainColor>.
       </motion.h2>
       <MaterialsSlide setModalContent={setModalContent} />
     </section>
