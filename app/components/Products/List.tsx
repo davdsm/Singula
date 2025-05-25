@@ -2,15 +2,20 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Image } from "../Elements/Image";
 import { DelayedLink } from "../Elements/Link";
+import { useTranslation } from "react-i18next";
 
 export const ProductList = ({}) => {
+  const { i18n } = useTranslation();
   const [categories, setCategories] = useState<
     { title: string; img: string; slug: string; design: string }[]
   >([]);
 
   useEffect(() => {
-    if (categories.length === 0)
-      fetch("/api/pt/categories.json", {
+    if (categories.length === 0) {
+      const lang = i18n.language || "pt"; // Usar idioma atual
+
+      fetch(`/api/${lang}/categories.json`, {
+        // ✅ Usar template literal com variável lang
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
@@ -18,7 +23,8 @@ export const ProductList = ({}) => {
       })
         .then((res) => res.json())
         .then((data) => setCategories(data));
-  }, [categories]);
+    }
+  }, [categories, i18n.language]); // ✅ Adicionar i18n.language como dependência
 
   return (
     <>
@@ -30,7 +36,11 @@ export const ProductList = ({}) => {
                 key={`prod-cat-${index + 1}`}
                 initial={{ y: 30, opacity: 0 }}
                 whileInView={{ y: 0, opacity: 1 }}
-                transition={{ duration: 1, ease: "easeInOut", delay: index / 10 }}
+                transition={{
+                  duration: 1,
+                  ease: "easeInOut",
+                  delay: index / 10,
+                }}
                 viewport={{ amount: 0.2 }}
                 className="transition-bg text-black bg-white border border-white w-[47%] md:w-[32%] rounded-3xl h-[60vw] md:h-[25vw] p-4 md:p-10 relative flex justify-center items-center hover:mix-blend-darken transition-600 hover:text-singula-main hover:border-[#D2D2D2]"
               >

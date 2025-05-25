@@ -1,5 +1,6 @@
 import { MetaFunction } from "@remix-run/node";
 import { ContactForm } from "~/components/ContactForm";
+import { ContactInfo } from "~/components/ContactForm/contactInfo";
 
 export const meta: MetaFunction = () => {
   return [
@@ -15,6 +16,7 @@ export const Contacts = () => {
   return (
     <main>
       <ContactForm />
+      <ContactInfo />
     </main>
   );
 };
