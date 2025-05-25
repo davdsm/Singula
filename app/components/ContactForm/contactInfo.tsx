@@ -3,7 +3,6 @@ import { useTranslation } from "react-i18next";
 import { MainColor } from "../Elements/Colors/main";
 import { useEffect, useState } from "react";
 
-// Definir a interface para o tipo de dados de contato
 interface ContactItem {
   title: string;
   email: string;
@@ -15,7 +14,7 @@ interface ContactItem {
 
 export const ContactInfo = () => {
   const { t, i18n } = useTranslation();
-  const [contactItems, setContactItems] = useState<ContactItem[]>([]); // ✅ Usar a interface
+  const [contactItems, setContactItems] = useState<ContactItem[]>([]);
 
   useEffect(() => {
     const lang = i18n.language || "pt";
@@ -27,14 +26,13 @@ export const ContactInfo = () => {
       },
     })
       .then((res) => res.json())
-      .then((data: ContactItem[]) => setContactItems(data)); // ✅ Tipar o data
+      .then((data: ContactItem[]) => setContactItems(data));
   }, [i18n.language]);
 
   return (
     <section className="bg-black text-white py-16 px-10">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col lg:flex-row lg:items-start lg:gap-16">
-          {/* Título principal com animação - lado esquerdo */}
           <motion.div
             initial={{ y: 30, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
@@ -51,7 +49,6 @@ export const ContactInfo = () => {
             </h3>
           </motion.div>
 
-          {/* Grid de contactos - lado direito */}
           <div className="lg:w-1/2 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-8 lg:gap-12">
             {contactItems.map((item, index) => (
               <motion.div
@@ -70,7 +67,6 @@ export const ContactInfo = () => {
                   {item.title}
                 </h4>
 
-                {/* Traço decorativo */}
                 <div className="w-8 h-0.5 bg-gray-500 mb-4"></div>
 
                 <div className="space-y-1 text-gray-300 text-sm md:text-base leading-relaxed">
