@@ -101,7 +101,6 @@ export const ProductInfoBoxes = () => {
           </motion.div>
         </div>
 
-        {/* Desktop Layout */}
         <div className="hidden lg:flex gap-6 items-start mb-16">
           <motion.div
             initial={{ y: 30, opacity: 0 }}
