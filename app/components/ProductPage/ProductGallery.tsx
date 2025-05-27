@@ -7,9 +7,7 @@ export const ProductGallery = () => {
   return (
     <section className="relative bg-white pt-8 md:pt-12 px-4 md:px-10 overflow-hidden">
       <div className="max-w-7xl mx-auto relative">
-        {/* Layout Mobile - Stack vertical */}
         <div className="block md:hidden space-y-8">
-          {/* Imagens empilhadas para mobile */}
           <div className="space-y-6">
             <motion.div
               initial={{ y: 30, opacity: 0 }}
@@ -38,8 +36,6 @@ export const ProductGallery = () => {
                 className="w-full h-auto object-contain rounded-xl"
               />
             </motion.div>
-
-            {/* Título e descrição entre a 2ª e 3ª imagem para mobile */}
             <motion.div
               initial={{ y: 30, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
@@ -83,8 +79,6 @@ export const ProductGallery = () => {
               />
             </motion.div>
           </div>
-
-          {/* Texto final para mobile */}
           <motion.div
             initial={{ y: 20, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
@@ -97,12 +91,8 @@ export const ProductGallery = () => {
             </p>
           </motion.div>
         </div>
-
-        {/* Layout Desktop - Mantém o layout original */}
         <div className="hidden md:block">
-          {/* Primeira linha - layout assimétrico com texto no meio */}
           <div className="relative h-[350px] md:h-[450px] mb-8">
-            {/* Primeira imagem - esquerda superior */}
             <motion.div
               initial={{ x: -50, opacity: 0 }}
               whileInView={{ x: 0, opacity: 1 }}
@@ -116,8 +106,6 @@ export const ProductGallery = () => {
                 className="w-full h-auto object-contain"
               />
             </motion.div>
-
-            {/* Texto à esquerda no espaço entre as duas primeiras imagens */}
             <motion.div
               initial={{ y: 30, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
@@ -132,8 +120,6 @@ export const ProductGallery = () => {
                 {t("product.gallery.description")}
               </p>
             </motion.div>
-
-            {/* Segunda imagem - direita mais baixa */}
             <motion.div
               initial={{ x: 50, opacity: 0 }}
               whileInView={{ x: 0, opacity: 1 }}
@@ -148,10 +134,7 @@ export const ProductGallery = () => {
               />
             </motion.div>
           </div>
-
-          {/* Segunda linha - layout espelhado */}
           <div className="relative h-[350px] md:h-[450px] mb-6">
-            {/* Terceira imagem - esquerda mais alta */}
             <motion.div
               initial={{ x: -50, opacity: 0 }}
               whileInView={{ x: 0, opacity: 1 }}
@@ -165,8 +148,6 @@ export const ProductGallery = () => {
                 className="w-full h-auto object-contain"
               />
             </motion.div>
-
-            {/* Quarta imagem - direita mais baixa */}
             <motion.div
               initial={{ x: 50, opacity: 0 }}
               whileInView={{ x: 0, opacity: 1 }}
@@ -181,8 +162,6 @@ export const ProductGallery = () => {
               />
             </motion.div>
           </div>
-
-          {/* Texto final - alinhado com o texto de cima */}
           <motion.div
             initial={{ y: 20, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}

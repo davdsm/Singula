@@ -1,7 +1,8 @@
 import { ProductHero } from "~/components/ProductPage/ProductHero";
 import { ProductGallery } from "~/components/ProductPage/ProductGallery";
 import { ProductMaterials } from "~/components/ProductPage/ProductMaterials";
-import { ProductDownload } from "~/components/ProductPage/ProductDownload";
+import { ProductInfoBoxes } from "~/components/ProductPage/ProductInfoBoxes";
+import { ProductMaterialsSection } from "~/components/ProductPage/ProductMaterialsSection";
 
 export const ProductPage = () => {
   return (
@@ -17,8 +18,11 @@ export const ProductPage = () => {
         {/* Seção Materiais e especificações */}
         <ProductMaterials />
 
-        {/* Seção Downloads e desenhos técnicos */}
-        <ProductDownload />
+        {/* Seção com as 3 caixas (Downloads, Cores e Notas) */}
+        <ProductInfoBoxes />
+
+        {/* Seção com imagem e botão de materiais */}
+        <ProductMaterialsSection />
       </div>
     </main>
   );

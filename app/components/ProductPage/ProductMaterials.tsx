@@ -8,7 +8,6 @@ export const ProductMaterials = () => {
     <section className="relative bg-white pt-8 md:pt-12 px-4 md:px-10 overflow-hidden">
       <div className="max-w-7xl mx-auto relative z-10">
         <div className="flex flex-col lg:flex-row gap-4 lg:gap-6 items-stretch">
-          {/* Caixa preta com especificações */}
           <motion.div
             initial={{ x: -50, opacity: 0 }}
             whileInView={{ x: 0, opacity: 1 }}
@@ -16,7 +15,6 @@ export const ProductMaterials = () => {
             viewport={{ amount: 0.3 }}
             className="bg-black text-white p-6 md:p-8 lg:p-10 rounded-2xl w-full lg:w-[30%] flex-shrink-0 flex flex-col justify-center order-1"
           >
-            {/* MATERIAIS */}
             <div className="mb-6 md:mb-8">
               <h3 className="text-xl md:text-2xl lg:text-3xl font-bold mb-4 md:mb-6 uppercase tracking-wider">
                 {t("product.materials.title")}
@@ -38,8 +36,6 @@ export const ProductMaterials = () => {
                 </div>
               </div>
             </div>
-
-            {/* ACABAMENTOS */}
             <div className="mb-6 md:mb-8">
               <h3 className="text-xl md:text-2xl lg:text-3xl font-bold mb-4 md:mb-6 uppercase tracking-wider">
                 {t("product.materials.finishes.title")}
@@ -52,8 +48,6 @@ export const ProductMaterials = () => {
                 </span>
               </div>
             </div>
-
-            {/* PESO */}
             <div>
               <h3 className="text-xl md:text-2xl lg:text-3xl font-bold mb-4 md:mb-6 uppercase tracking-wider">
                 {t("product.materials.weight.title")}
@@ -76,8 +70,6 @@ export const ProductMaterials = () => {
               </div>
             </div>
           </motion.div>
-
-          {/* Imagem grande do contexto */}
           <motion.div
             initial={{ x: 50, opacity: 0 }}
             whileInView={{ x: 0, opacity: 1 }}

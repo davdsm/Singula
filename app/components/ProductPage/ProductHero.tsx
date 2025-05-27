@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
-import { MainColor } from "../Elements/Colors/main";
 import { useTranslation } from "react-i18next";
+import { MainColor } from "../Elements/Colors/main";
 
 export const ProductHero = () => {
   const { t } = useTranslation();

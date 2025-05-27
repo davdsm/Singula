@@ -1,7 +1,7 @@
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { MainColor } from "../Elements/Colors/main";
-import { useEffect, useState } from "react";
 
 interface ContactItem {
   title: string;

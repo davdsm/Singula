@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 
-export const ProductDownload = () => {
+export const ProductInfoBoxes = () => {
   const { t } = useTranslation();
 
   const colorOptions = [
@@ -17,11 +17,10 @@ export const ProductDownload = () => {
   ];
 
   return (
-    <section className="relative bg-white py-12 md:py-20 px-4 md:px-10 overflow-hidden">
+    <section className="relative bg-white pt-12 md:pt-20 px-4 md:px-10 overflow-hidden">
       <div className="max-w-7xl mx-auto relative z-10">
-        {/* Layout Mobile - Stack vertical */}
+        {/* Mobile Layout */}
         <div className="block lg:hidden space-y-6 mb-12">
-          {/* Downloads - Caixa preta */}
           <motion.div
             initial={{ y: 30, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
@@ -48,7 +47,6 @@ export const ProductDownload = () => {
             </div>
           </motion.div>
 
-          {/* Cores e Acabamentos */}
           <motion.div
             initial={{ y: 30, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
@@ -61,7 +59,7 @@ export const ProductDownload = () => {
                 {t("product.colors.title")}
               </h3>
               <span className="text-xs text-gray-500 ml-2 lowercase">
-                recomendados
+                {t("product.colors.recommended")}
               </span>
             </div>
 
@@ -80,7 +78,6 @@ export const ProductDownload = () => {
             </div>
           </motion.div>
 
-          {/* Nota técnica */}
           <motion.div
             initial={{ y: 30, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
@@ -93,7 +90,7 @@ export const ProductDownload = () => {
                 {t("product.note.title")}
               </h3>
               <span className="text-xs text-gray-500 ml-2 lowercase">
-                personalização
+                {t("product.note.customization")}
               </span>
             </div>
 
@@ -104,9 +101,8 @@ export const ProductDownload = () => {
           </motion.div>
         </div>
 
-        {/* Layout Desktop - Flex horizontal */}
+        {/* Desktop Layout */}
         <div className="hidden lg:flex gap-6 items-start mb-16">
-          {/* Downloads - Caixa preta - largura fixa */}
           <motion.div
             initial={{ y: 30, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
@@ -131,7 +127,6 @@ export const ProductDownload = () => {
             </div>
           </motion.div>
 
-          {/* Cores e Acabamentos - largura fixa */}
           <motion.div
             initial={{ y: 30, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
@@ -144,7 +139,7 @@ export const ProductDownload = () => {
                 {t("product.colors.title")}
               </h3>
               <span className="text-xs text-gray-500 ml-2 lowercase">
-                recomendados
+                {t("product.colors.recommended")}
               </span>
             </div>
 
@@ -163,7 +158,6 @@ export const ProductDownload = () => {
             </div>
           </motion.div>
 
-          {/* Nota técnica - ocupa o resto do espaço */}
           <motion.div
             initial={{ y: 30, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
@@ -176,7 +170,7 @@ export const ProductDownload = () => {
                 {t("product.note.title")}
               </h3>
               <span className="text-xs text-gray-500 ml-2 lowercase">
-                personalização
+                {t("product.note.customization")}
               </span>
             </div>
 
@@ -186,53 +180,6 @@ export const ProductDownload = () => {
             </div>
           </motion.div>
         </div>
-
-        {/* Desenhos técnicos - Atualizado para corresponder ao design */}
-        <motion.div
-          initial={{ y: 50, opacity: 0 }}
-          whileInView={{ y: 0, opacity: 1 }}
-          transition={{ duration: 1, ease: "easeInOut", delay: 0.8 }}
-          viewport={{ amount: 0.2 }}
-          className="mb-12 md:mb-16"
-        >
-          {/* Container centralizado */}
-          <div className="px-8 md:px-16 flex flex-col items-center justify-center min-h-[400px] md:min-h-[500px]">
-            {/* Imagem dos desenhos técnicos */}
-            <motion.div
-              initial={{ y: 30, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              transition={{ duration: 1, ease: "easeInOut", delay: 0.3 }}
-              viewport={{ amount: 0.3 }}
-              className="w-full max-w-4xl flex justify-center mb-8 -m-5 -mt-24"
-            >
-              <img
-                src="/media/products/products/nexo-bench/5.png"
-                alt={t("product.technical.side.alt")}
-                className="w-full h-auto object-contain"
-              />
-            </motion.div>
-
-            {/* Botões de Acabamento */}
-            <motion.div
-              initial={{ y: 30, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              transition={{ duration: 1, ease: "easeInOut", delay: 0.5 }}
-              viewport={{ amount: 0.3 }}
-              className="flex items-center justify-center"
-            >
-              <button className="bg-black rounded-full font-bold text-sm md:text-base transition-colors uppercase tracking-wider shadow-lg inline-flex items-center p-1">
-                <span className="bg-red-500 text-white px-4 py-2 md:px-6 md:py-3 rounded-full uppercase font-bold">
-                  MATERIAIS
-                </span>
-                <span className="px-4 py-2 md:px-6 md:py-3 text-red-500 uppercase font-bold">
-                  Acabamentos →
-                </span>
-              </button>
-            </motion.div>
-          </div>
-        </motion.div>
-
-        {/* Botão de contacto - Removido ou movido para outro local se necessário */}
       </div>
     </section>
   );

@@ -139,5 +139,9 @@
   "product.note.measurements": "Ilustramos as medidas do produto mediante conceito e neste acrónimo, elas correspondem para solos duros.",
   "product.technical.side.alt": "Desenho técnico - vista lateral",
   "product.technical.top.alt": "Desenho técnico - vista superior",
-  "product.contact.availability": "Contactar Disponibilidade"
+  "product.contact.availability": "Contactar Disponibilidade",
+  "product.colors.recommended": "recomendados",
+  "product.note.customization": "personalização",
+  "product.materials.button": "MATERIAIS",
+  "product.materials.finishes": "Acabamentos →"
 }

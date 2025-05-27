@@ -139,5 +139,10 @@
   "product.note.measurements": "We illustrate the product measurements through concept and in this acronym, they correspond to hard floors.",
   "product.technical.side.alt": "Technical drawing - side view",
   "product.technical.top.alt": "Technical drawing - top view",
-  "product.contact.availability": "Contact Availability"
+  "product.contact.availability": "Contact Availability",
+
+  "product.colors.recommended": "recommended",
+  "product.note.customization": "customization",
+  "product.materials.button": "MATERIALS",
+  "product.materials.finishes": "Finishes →"
 }
