@@ -104,5 +104,40 @@
 
   "contact.info.title.part1": "Vamos criar",
   "contact.info.title.highlight": "impacto",
-  "contact.info.title.part2": "Estamos prontos, e tu?"
+  "contact.info.title.part2": "Estamos prontos, e tu?",
+
+  "product.hero.title.first": "Banco",
+  "product.hero.title.second": "Nexo",
+  "product.hero.subtitle": "Formas e natureza, juntos e num banco só.",
+  "product.hero.description": "O Nexo é geometria que entra em ação e curvas que hipnotizam. A opção de floreira integrada? Dá-lhe aquele toque verde que o espaço precisa, e a estrutura inclinada? É arte, sem esforço. E os detalhes perfurados? Luz a brincar com sombra, como se fosse magia.",
+  "product.hero.image.alt": "Banco Nexo - Vista principal",
+
+  "product.gallery.title": "Design ousado. Versatilidade sem limites.",
+  "product.gallery.description": "Feito em aço S235JR para durar e com assento em Fenólico Compacto HPL – para um conforto que aguenta o tempo e as estações. Um banco que não passa despercebido.",
+  "product.gallery.image1.alt": "Banco Nexo - Vista 1",
+  "product.gallery.image2.alt": "Banco Nexo - Vista 2",
+  "product.gallery.image3.alt": "Banco Nexo - Vista 3",
+  "product.gallery.image4.alt": "Banco Nexo - Vista 4",
+  "product.gallery.grouping.note": "O Banco Nexo pode ser agrupado lateralmente.",
+
+  "product.materials.title": "Materiais",
+  "product.materials.steel": "Aço S235JR",
+  "product.materials.hpl": "Compacto HPL Fenólico",
+  "product.materials.finishes.title": "Acabamentos",
+  "product.materials.finish.antislip": "Largura antiderrapante (só poluente)",
+  "product.materials.weight.title": "Peso",
+  "product.materials.weight.person": "Até 150 Kg/Pessoa",
+  "product.materials.weight.planter": "231 Kg c/Floreira",
+  "product.materials.context.alt": "Banco Nexo em contexto urbano",
+
+  "product.download.title": "Download",
+  "product.download.technical": "Ficha Técnica PDF",
+  "product.download.model3d": "Modelo 3dwg",
+  "product.colors.title": "Cores / Acabamentos",
+  "product.note.title": "Nota",
+  "product.note.colors": "Para solicitar cores/acabamentos, consulte a nossa gama de materiais.",
+  "product.note.measurements": "Ilustramos as medidas do produto mediante conceito e neste acrónimo, elas correspondem para solos duros.",
+  "product.technical.side.alt": "Desenho técnico - vista lateral",
+  "product.technical.top.alt": "Desenho técnico - vista superior",
+  "product.contact.availability": "Contactar Disponibilidade"
 }

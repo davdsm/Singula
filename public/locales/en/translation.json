@@ -104,5 +104,40 @@
 
   "contact.info.title.part1": "Let's create",
   "contact.info.title.highlight": "impact",
-  "contact.info.title.part2": "We're ready, are you?"
+  "contact.info.title.part2": "We're ready, are you?",
+
+  "product.hero.title.first": "Bench",
+  "product.hero.title.second": "Nexo",
+  "product.hero.subtitle": "Forms and nature, together in one bench.",
+  "product.hero.description": "TNexo is geometry that comes into play and curves that hypnotize. The integrated planter option? It gives that green touch that the space needs, and the inclined structure? It's art, effortlessly. What about the perforated details? Light playing with shadow, as if by magic.",
+  "product.hero.image.alt": "Nexo Bench - Main view",
+
+  "product.gallery.title": "Bold design. Limitless versatility.",
+  "product.gallery.description": "Made from S235JR steel to last and with a seat in Phenolic Compact HPL – for comfort that withstands time and seasons, a bench that doesn't go unnoticed.",
+  "product.gallery.image1.alt": "Nexo Bench - View 1",
+  "product.gallery.image2.alt": "Nexo Bench - View 2",
+  "product.gallery.image3.alt": "Nexo Bench - View 3",
+  "product.gallery.image4.alt": "Nexo Bench - View 4",
+  "product.gallery.grouping.note": "The Nexo Bench can be grouped laterally.",
+
+  "product.materials.title": "Materials",
+  "product.materials.steel": "S235JR Steel",
+  "product.materials.hpl": "Phenolic Compact HPL",
+  "product.materials.finishes.title": "Finishes",
+  "product.materials.finish.antislip": "Anti-slip width (pollutant only)",
+  "product.materials.weight.title": "Weight",
+  "product.materials.weight.person": "Up to 150 Kg/Person",
+  "product.materials.weight.planter": "231 Kg w/Planter",
+  "product.materials.context.alt": "Nexo Bench in urban context",
+
+  "product.download.title": "Download",
+  "product.download.technical": "Technical Datasheet PDF",
+  "product.download.model3d": "3D Model dwg",
+  "product.colors.title": "Colors / Finishes",
+  "product.note.title": "Note",
+  "product.note.colors": "To request colors/finishes, consult our range of materials.",
+  "product.note.measurements": "We illustrate the product measurements through concept and in this acronym, they correspond to hard floors.",
+  "product.technical.side.alt": "Technical drawing - side view",
+  "product.technical.top.alt": "Technical drawing - top view",
+  "product.contact.availability": "Contact Availability"
 }
