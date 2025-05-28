@@ -1,0 +1,61 @@
+{
+  "images": {
+    "hero": "/media/products/products/nexo-bench/hero.jpg",
+    "gallery": [
+      "/media/products/products/nexo-bench/1.jpg",
+      "/media/products/products/nexo-bench/2.jpg",
+      "/media/products/products/nexo-bench/3.jpg",
+      "/media/products/products/nexo-bench/4.jpg"
+    ],
+    "technical": "/media/products/products/nexo-bench/5.png",
+    "context": "/media/home/hero.jpg"
+  },
+  "materials": [
+    {
+      "name": "Aço S235JR",
+      "color": "#FF0000"
+    },
+    {
+      "name": "HPL Compacto Fenólico",
+      "color": "#FFFFFF"
+    }
+  ],
+  "finishes": [
+    {
+      "name": "Largura antiderrapante (só poluente)",
+      "color": "#FFFFFF"
+    }
+  ],
+  "weight": [
+    {
+      "description": "Até 150 Kg/Pessoa",
+      "color": "#FFFFFF"
+    },
+    {
+      "description": "231 Kg c/Floreira",
+      "color": "#FFFFFF"
+    }
+  ],
+  "colors": [
+    {
+      "name": "RAL 7016",
+      "color": "#383e42",
+      "code": "RAL 7016"
+    },
+    {
+      "name": "RAL 1013",
+      "color": "#eae6ca",
+      "code": "RAL 1013"
+    },
+    {
+      "name": "FREIJO F989",
+      "color": "#c8a882",
+      "code": "FREIJO F989"
+    },
+    {
+      "name": "NOGUEIRA M17",
+      "color": "#6b4423",
+      "code": "NOGUEIRA M17"
+    }
+  ]
+}

@@ -1,12 +1,44 @@
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
+import { useEffect, useState } from "react";
 import { MainColor } from "../Elements/Colors/main";
 
+interface ProductData {
+  images: {
+    hero: string;
+  };
+}
+
 export const ProductHero = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const [productData, setProductData] = useState<ProductData | null>(null);
+
+  useEffect(() => {
+    const lang = i18n.language || "pt";
+
+    fetch(`/api/${lang}/product-nexo-bench.json`, {
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => setProductData(data))
+      .catch((error) => console.error("Error loading product data:", error));
+  }, [i18n.language]);
 
   return (
     <section className="relative bg-white py-8 md:py-12 px-4 md:px-10 overflow-hidden">
+      {productData?.images.hero && (
+        <div className="absolute inset-0 opacity-5">
+          <img
+            src={productData.images.hero}
+            alt=""
+            className="w-full h-full object-cover"
+          />
+        </div>
+      )}
+
       <div className="max-w-4xl mx-auto relative z-10 text-center">
         <motion.h1
           initial={{ y: 30, opacity: 0 }}

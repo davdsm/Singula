@@ -1,8 +1,52 @@
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
+import { useEffect, useState } from "react";
+
+interface Material {
+  name: string;
+  color: string;
+}
+
+interface Finish {
+  name: string;
+  color: string;
+}
+
+interface Weight {
+  description: string;
+  color: string;
+}
+
+interface ProductData {
+  images: {
+    context: string;
+  };
+  materials: Material[];
+  finishes: Finish[];
+  weight: Weight[];
+}
 
 export const ProductMaterials = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const [productData, setProductData] = useState<ProductData | null>(null);
+
+  useEffect(() => {
+    const lang = i18n.language || "pt";
+
+    fetch(`/api/${lang}/product-nexo-bench.json`, {
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => setProductData(data))
+      .catch((error) => console.error("Error loading product data:", error));
+  }, [i18n.language]);
+
+  if (!productData) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <section className="relative bg-white pt-8 md:pt-12 px-4 md:px-10 overflow-hidden">
@@ -21,55 +65,61 @@ export const ProductMaterials = () => {
               </h3>
 
               <div className="space-y-3 md:space-y-4">
-                <div className="flex items-center">
-                  <div className="w-3 h-3 bg-red-500 rounded-full mr-3 md:mr-4 flex-shrink-0"></div>
-                  <span className="text-sm md:text-base lg:text-lg">
-                    {t("product.materials.steel")}
-                  </span>
-                </div>
-
-                <div className="flex items-center">
-                  <div className="w-3 h-3 bg-white rounded-full mr-3 md:mr-4 flex-shrink-0"></div>
-                  <span className="text-sm md:text-base lg:text-lg">
-                    {t("product.materials.hpl")}
-                  </span>
-                </div>
+                {productData.materials.map((material, index) => (
+                  <div key={`material-${index}`} className="flex items-center">
+                    <div
+                      className="w-3 h-3 rounded-full mr-3 md:mr-4 flex-shrink-0"
+                      style={{ backgroundColor: material.color }}
+                    ></div>
+                    <span className="text-sm md:text-base lg:text-lg">
+                      {material.name}
+                    </span>
+                  </div>
+                ))}
               </div>
             </div>
+
             <div className="mb-6 md:mb-8">
               <h3 className="text-xl md:text-2xl lg:text-3xl font-bold mb-4 md:mb-6 uppercase tracking-wider">
                 {t("product.materials.finishes.title")}
               </h3>
 
-              <div className="flex items-center">
-                <div className="w-3 h-3 bg-white rounded-full mr-3 md:mr-4 flex-shrink-0"></div>
-                <span className="text-sm md:text-base lg:text-lg">
-                  {t("product.materials.finish.antislip")}
-                </span>
+              <div className="space-y-3 md:space-y-4">
+                {productData.finishes.map((finish, index) => (
+                  <div key={`finish-${index}`} className="flex items-center">
+                    <div
+                      className="w-3 h-3 rounded-full mr-3 md:mr-4 flex-shrink-0"
+                      style={{ backgroundColor: finish.color }}
+                    ></div>
+                    <span className="text-sm md:text-base lg:text-lg">
+                      {finish.name}
+                    </span>
+                  </div>
+                ))}
               </div>
             </div>
+
             <div>
               <h3 className="text-xl md:text-2xl lg:text-3xl font-bold mb-4 md:mb-6 uppercase tracking-wider">
                 {t("product.materials.weight.title")}
               </h3>
 
               <div className="space-y-3 md:space-y-4">
-                <div className="flex items-center">
-                  <div className="w-3 h-3 bg-white rounded-full mr-3 md:mr-4 flex-shrink-0"></div>
-                  <span className="text-sm md:text-base lg:text-lg">
-                    {t("product.materials.weight.person")}
-                  </span>
-                </div>
-
-                <div className="flex items-center">
-                  <div className="w-3 h-3 bg-white rounded-full mr-3 md:mr-4 flex-shrink-0"></div>
-                  <span className="text-sm md:text-base lg:text-lg">
-                    {t("product.materials.weight.planter")}
-                  </span>
-                </div>
+                {productData.weight.map((weight, index) => (
+                  <div key={`weight-${index}`} className="flex items-center">
+                    <div
+                      className="w-3 h-3 rounded-full mr-3 md:mr-4 flex-shrink-0"
+                      style={{ backgroundColor: weight.color }}
+                    ></div>
+                    <span className="text-sm md:text-base lg:text-lg">
+                      {weight.description}
+                    </span>
+                  </div>
+                ))}
               </div>
             </div>
           </motion.div>
+
           <motion.div
             initial={{ x: 50, opacity: 0 }}
             whileInView={{ x: 0, opacity: 1 }}
@@ -79,7 +129,7 @@ export const ProductMaterials = () => {
           >
             <div className="w-full h-full">
               <img
-                src="/media/home/hero.jpg"
+                src={productData.images.context}
                 alt={t("product.materials.context.alt")}
                 className="w-full h-48 sm:h-64 md:h-80 lg:h-full object-cover rounded-2xl"
               />
