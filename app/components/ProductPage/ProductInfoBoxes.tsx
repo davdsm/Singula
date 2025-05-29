@@ -1,6 +1,7 @@
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
-import { useEffect, useState } from "react";
+import { UnifiedHoverItem } from "./UnifiedHoverItem";
 
 interface ColorOption {
   name: string;
@@ -30,7 +31,6 @@ export const ProductInfoBoxes = () => {
   useEffect(() => {
     const lang = i18n.language || "pt";
 
-    // Load product data (colors)
     fetch(`/api/${lang}/product-nexo-bench.json`, {
       headers: {
         "Content-Type": "application/json",
@@ -41,7 +41,6 @@ export const ProductInfoBoxes = () => {
       .then((data: ProductData) => setColorOptions(data.colors || []))
       .catch((error) => console.error("Error loading product data:", error));
 
-    // Load downloads data
     fetch(`/api/${lang}/downloads.json`, {
       headers: {
         "Content-Type": "application/json",
@@ -69,23 +68,21 @@ export const ProductInfoBoxes = () => {
             </h3>
 
             <div className="space-y-4">
-              {downloads.map((download, index) => (
-                <a
+              {downloads.map((download) => (
+                <UnifiedHoverItem
                   key={`download-${download.id}`}
                   href={download.url}
-                  download
-                  className="flex items-center cursor-pointer hover:text-red-400 transition-colors group"
+                  download={true}
                 >
-                  <div className="w-3 h-3 bg-white rounded-full mr-4 flex-shrink-0 group-hover:bg-red-400 transition-colors"></div>
                   <div className="flex flex-col">
-                    <span className="text-sm md:text-base text-white group-hover:text-red-400 transition-colors">
+                    <span className="text-sm md:text-base text-white group-hover:text-red-400 transition-colors duration-300">
                       {download.title}
                     </span>
                     <span className="text-xs text-gray-400">
                       {download.format} • {download.fileSize}
                     </span>
                   </div>
-                </a>
+                </UnifiedHoverItem>
               ))}
             </div>
           </motion.div>
@@ -159,23 +156,21 @@ export const ProductInfoBoxes = () => {
             </h3>
 
             <div className="space-y-6">
-              {downloads.map((download, index) => (
-                <a
+              {downloads.map((download) => (
+                <UnifiedHoverItem
                   key={`download-${download.id}`}
                   href={download.url}
-                  download
-                  className="flex items-center cursor-pointer hover:text-red-400 transition-colors group"
+                  download={true}
                 >
-                  <div className="w-3 h-3 bg-white rounded-full mr-4 flex-shrink-0 group-hover:bg-red-400 transition-colors"></div>
                   <div className="flex flex-col">
-                    <span className="text-base text-white group-hover:text-red-400 transition-colors">
+                    <span className="text-base text-white group-hover:text-red-400 transition-colors duration-300">
                       {download.title}
                     </span>
                     <span className="text-xs text-gray-400">
                       {download.format} • {download.fileSize}
                     </span>
                   </div>
-                </a>
+                </UnifiedHoverItem>
               ))}
             </div>
           </motion.div>

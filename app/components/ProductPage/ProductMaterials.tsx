@@ -1,15 +1,21 @@
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
-import { useEffect, useState } from "react";
+import { MaterialPopup } from "./MaterialPopup";
+import { UnifiedHoverItem } from "./UnifiedHoverItem";
 
 interface Material {
   name: string;
   color: string;
+  description?: string;
+  image?: string;
 }
 
 interface Finish {
   name: string;
   color: string;
+  description?: string;
+  image?: string;
 }
 
 interface Weight {
@@ -26,9 +32,17 @@ interface ProductData {
   weight: Weight[];
 }
 
+interface PopupContent {
+  title: string;
+  description: string;
+  image?: string;
+}
+
 export const ProductMaterials = () => {
   const { t, i18n } = useTranslation();
   const [productData, setProductData] = useState<ProductData | null>(null);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [popupContent, setPopupContent] = useState<PopupContent | null>(null);
 
   useEffect(() => {
     const lang = i18n.language || "pt";
@@ -44,99 +58,125 @@ export const ProductMaterials = () => {
       .catch((error) => console.error("Error loading product data:", error));
   }, [i18n.language]);
 
+  const handleMaterialClick = (material: Material) => {
+    setPopupContent({
+      title: material.name,
+      description:
+        material.description || t("product.materials.default.description"),
+      image: material.image,
+    });
+    setIsPopupOpen(true);
+  };
+
+  const handleFinishClick = (finish: Finish) => {
+    setPopupContent({
+      title: finish.name,
+      description:
+        finish.description || t("product.finishes.default.description"),
+      image: finish.image,
+    });
+    setIsPopupOpen(true);
+  };
+
+  const closePopup = () => {
+    setIsPopupOpen(false);
+    setPopupContent(null);
+  };
+
   if (!productData) {
     return <div>Loading...</div>;
   }
 
   return (
-    <section className="relative bg-white pt-8 md:pt-12 px-4 md:px-10 overflow-hidden">
-      <div className="max-w-7xl mx-auto relative z-10">
-        <div className="flex flex-col lg:flex-row gap-4 lg:gap-6 items-stretch">
-          <motion.div
-            initial={{ x: -50, opacity: 0 }}
-            whileInView={{ x: 0, opacity: 1 }}
-            transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
-            viewport={{ amount: 0.3 }}
-            className="bg-black text-white p-6 md:p-8 lg:p-10 rounded-2xl w-full lg:w-[30%] flex-shrink-0 flex flex-col justify-center order-1"
-          >
-            <div className="mb-6 md:mb-8">
-              <h3 className="text-xl md:text-2xl lg:text-3xl font-bold mb-4 md:mb-6 uppercase tracking-wider">
-                {t("product.materials.title")}
-              </h3>
+    <>
+      <section className="relative bg-white pt-8 md:pt-12 px-4 md:px-10 overflow-hidden">
+        <div className="max-w-7xl mx-auto relative z-10">
+          <div className="flex flex-col lg:flex-row gap-4 lg:gap-6 items-stretch">
+            <motion.div
+              initial={{ x: -50, opacity: 0 }}
+              whileInView={{ x: 0, opacity: 1 }}
+              transition={{ duration: 1, ease: "easeOut", delay: 0.2 }}
+              viewport={{ amount: 0.3 }}
+              className="bg-black text-white p-6 md:p-8 lg:p-10 rounded-2xl w-full lg:w-[30%] flex-shrink-0 flex flex-col justify-center order-1"
+            >
+              <div className="mb-6 md:mb-8">
+                <h3 className="text-xl md:text-2xl lg:text-3xl font-bold mb-4 md:mb-6 uppercase tracking-wider">
+                  {t("product.materials.title")}
+                </h3>
 
-              <div className="space-y-3 md:space-y-4">
-                {productData.materials.map((material, index) => (
-                  <div key={`material-${index}`} className="flex items-center">
-                    <div
-                      className="w-3 h-3 rounded-full mr-3 md:mr-4 flex-shrink-0"
-                      style={{ backgroundColor: material.color }}
-                    ></div>
-                    <span className="text-sm md:text-base lg:text-lg">
-                      {material.name}
-                    </span>
-                  </div>
-                ))}
+                <div className="space-y-3 md:space-y-4">
+                  {productData.materials.map((material, index) => (
+                    <UnifiedHoverItem
+                      key={`material-${index}`}
+                      onClick={() => handleMaterialClick(material)}
+                      isClickable={true}
+                    >
+                      <span>{material.name}</span>
+                    </UnifiedHoverItem>
+                  ))}
+                </div>
               </div>
-            </div>
 
-            <div className="mb-6 md:mb-8">
-              <h3 className="text-xl md:text-2xl lg:text-3xl font-bold mb-4 md:mb-6 uppercase tracking-wider">
-                {t("product.materials.finishes.title")}
-              </h3>
+              <div className="mb-6 md:mb-8">
+                <h3 className="text-xl md:text-2xl lg:text-3xl font-bold mb-4 md:mb-6 uppercase tracking-wider">
+                  {t("product.materials.finishes.title")}
+                </h3>
 
-              <div className="space-y-3 md:space-y-4">
-                {productData.finishes.map((finish, index) => (
-                  <div key={`finish-${index}`} className="flex items-center">
-                    <div
-                      className="w-3 h-3 rounded-full mr-3 md:mr-4 flex-shrink-0"
-                      style={{ backgroundColor: finish.color }}
-                    ></div>
-                    <span className="text-sm md:text-base lg:text-lg">
-                      {finish.name}
-                    </span>
-                  </div>
-                ))}
+                <div className="space-y-3 md:space-y-4">
+                  {productData.finishes.map((finish, index) => (
+                    <UnifiedHoverItem
+                      key={`finish-${index}`}
+                      onClick={() => handleFinishClick(finish)}
+                      isClickable={true}
+                    >
+                      <span>{finish.name}</span>
+                    </UnifiedHoverItem>
+                  ))}
+                </div>
               </div>
-            </div>
 
-            <div>
-              <h3 className="text-xl md:text-2xl lg:text-3xl font-bold mb-4 md:mb-6 uppercase tracking-wider">
-                {t("product.materials.weight.title")}
-              </h3>
+              <div>
+                <h3 className="text-xl md:text-2xl lg:text-3xl font-bold mb-4 md:mb-6 uppercase tracking-wider">
+                  {t("product.materials.weight.title")}
+                </h3>
 
-              <div className="space-y-3 md:space-y-4">
-                {productData.weight.map((weight, index) => (
-                  <div key={`weight-${index}`} className="flex items-center">
-                    <div
-                      className="w-3 h-3 rounded-full mr-3 md:mr-4 flex-shrink-0"
-                      style={{ backgroundColor: weight.color }}
-                    ></div>
-                    <span className="text-sm md:text-base lg:text-lg">
-                      {weight.description}
-                    </span>
-                  </div>
-                ))}
+                <div className="space-y-3 md:space-y-4">
+                  {productData.weight.map((weight, index) => (
+                    <UnifiedHoverItem
+                      key={`weight-${index}`}
+                      isClickable={false}
+                    >
+                      <span>{weight.description}</span>
+                    </UnifiedHoverItem>
+                  ))}
+                </div>
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
 
-          <motion.div
-            initial={{ x: 50, opacity: 0 }}
-            whileInView={{ x: 0, opacity: 1 }}
-            transition={{ duration: 1, ease: "easeOut", delay: 0.4 }}
-            viewport={{ amount: 0.2 }}
-            className="flex items-center flex-1 order-2"
-          >
-            <div className="w-full h-full">
-              <img
-                src={productData.images.context}
-                alt={t("product.materials.context.alt")}
-                className="w-full h-48 sm:h-64 md:h-80 lg:h-full object-cover rounded-2xl"
-              />
-            </div>
-          </motion.div>
+            <motion.div
+              initial={{ x: 50, opacity: 0 }}
+              whileInView={{ x: 0, opacity: 1 }}
+              transition={{ duration: 1, ease: "easeOut", delay: 0.4 }}
+              viewport={{ amount: 0.2 }}
+              className="flex items-center flex-1 order-2"
+            >
+              <div className="w-full h-full">
+                <img
+                  src={productData.images.context}
+                  alt={t("product.materials.context.alt")}
+                  className="w-full h-48 sm:h-64 md:h-80 lg:h-full object-cover rounded-2xl"
+                />
+              </div>
+            </motion.div>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      <MaterialPopup
+        isOpen={isPopupOpen}
+        content={popupContent}
+        onClose={closePopup}
+      />
+    </>
   );
 };

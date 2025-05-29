@@ -1,6 +1,6 @@
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
-import { useEffect, useState } from "react";
 
 interface ProductData {
   images: {

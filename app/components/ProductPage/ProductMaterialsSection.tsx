@@ -1,6 +1,7 @@
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
-import { useEffect, useState } from "react";
+import { AnimatedButton } from "./AnimatedButton";
 
 interface ProductData {
   images: {
@@ -62,14 +63,10 @@ export const ProductMaterialsSection = () => {
               viewport={{ amount: 0.3 }}
               className="flex items-center justify-center"
             >
-              <button className="bg-black rounded-full font-bold text-sm md:text-base transition-colors uppercase tracking-wider shadow-lg inline-flex items-center p-1">
-                <span className="bg-red-500 text-white px-4 py-2 md:px-6 md:py-3 rounded-full uppercase font-bold">
-                  {t("product.materials.button")}
-                </span>
-                <span className="px-4 py-2 md:px-6 md:py-3 text-red-500 uppercase font-bold">
-                  {t("product.materials.finishes")}
-                </span>
-              </button>
+              <AnimatedButton
+                primaryText={t("product.materials.button")}
+                secondaryText={t("product.materials.finishes")}
+              />
             </motion.div>
           </div>
         </motion.div>
