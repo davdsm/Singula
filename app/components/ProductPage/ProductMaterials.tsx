@@ -32,17 +32,14 @@ interface ProductData {
   weight: Weight[];
 }
 
-interface PopupContent {
-  title: string;
-  description: string;
-  image?: string;
-}
-
 export const ProductMaterials = () => {
   const { t, i18n } = useTranslation();
   const [productData, setProductData] = useState<ProductData | null>(null);
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const [popupContent, setPopupContent] = useState<PopupContent | null>(null);
+  const [modalContent, setModalContent] = useState<{
+    title: string;
+    img: string;
+    text: string;
+  } | null>(null);
 
   useEffect(() => {
     const lang = i18n.language || "pt";
@@ -59,28 +56,23 @@ export const ProductMaterials = () => {
   }, [i18n.language]);
 
   const handleMaterialClick = (material: Material) => {
-    setPopupContent({
+    setModalContent({
       title: material.name,
-      description:
-        material.description || t("product.materials.default.description"),
-      image: material.image,
+      text: material.description || t("product.materials.default.description"),
+      img: material.image || "",
     });
-    setIsPopupOpen(true);
   };
 
   const handleFinishClick = (finish: Finish) => {
-    setPopupContent({
+    setModalContent({
       title: finish.name,
-      description:
-        finish.description || t("product.finishes.default.description"),
-      image: finish.image,
+      text: finish.description || t("product.finishes.default.description"),
+      img: finish.image || "",
     });
-    setIsPopupOpen(true);
   };
 
-  const closePopup = () => {
-    setIsPopupOpen(false);
-    setPopupContent(null);
+  const closeModal = () => {
+    setModalContent(null);
   };
 
   if (!productData) {
@@ -172,11 +164,14 @@ export const ProductMaterials = () => {
         </div>
       </section>
 
-      <MaterialPopup
-        isOpen={isPopupOpen}
-        content={popupContent}
-        onClose={closePopup}
-      />
+      {modalContent && (
+        <MaterialPopup
+          img={modalContent.img}
+          text={modalContent.text}
+          title={modalContent.title}
+          close={closeModal}
+        />
+      )}
     </>
   );
 };
