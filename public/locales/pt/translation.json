@@ -96,5 +96,52 @@
   "vision.qualityTitle": "Qualidade",
   "vision.qualityText": "Criamos peças que não apenas impressionam, mas que resistem ao tempo, construídas com materiais de excelência e acabamentos refinados.",
   "vision.sustainabilityTitle": "Sustentabilidade",
-  "vision.sustainabilityText": "Escolhemos práticas e materiais que garantem um impacto mínimo no meio ambiente, pensando num futuro mais verde e duradouro."
+  "vision.sustainabilityText": "Escolhemos práticas e materiais que garantem um impacto mínimo no meio ambiente, pensando num futuro mais verde e duradouro.",
+
+  "entry.text.part1": "Na Singula não desenhamos só formas.",
+  "entry.text.highlight": "Criamos personalidade",
+  "entry.text.part2": " Seja num banco, numa floreira, numa divisória ou numa peça decorativa - cada detalhe conta. Porque o nosso design viva as ruas, respira nos jardins e arruma-se com rigor em casa. Street, Garden ou Home - o cenário muda, mas a atitude é a mesma.",
+
+  "contact.info.title.part1": "Vamos criar",
+  "contact.info.title.highlight": "impacto",
+  "contact.info.title.part2": "Estamos prontos, e tu?",
+
+  "product.hero.title.first": "Banco",
+  "product.hero.title.second": "Nexo",
+  "product.hero.subtitle": "Formas e natureza, juntos e num banco só.",
+  "product.hero.description": "O Nexo é geometria que entra em ação e curvas que hipnotizam. A opção de floreira integrada? Dá-lhe aquele toque verde que o espaço precisa, e a estrutura inclinada? É arte, sem esforço. E os detalhes perfurados? Luz a brincar com sombra, como se fosse magia.",
+  "product.hero.image.alt": "Banco Nexo - Vista principal",
+
+  "product.gallery.title": "Design ousado. Versatilidade sem limites.",
+  "product.gallery.description": "Feito em aço S235JR para durar e com assento em Fenólico Compacto HPL – para um conforto que aguenta o tempo e as estações. Um banco que não passa despercebido.",
+  "product.gallery.image1.alt": "Banco Nexo - Vista 1",
+  "product.gallery.image2.alt": "Banco Nexo - Vista 2",
+  "product.gallery.image3.alt": "Banco Nexo - Vista 3",
+  "product.gallery.image4.alt": "Banco Nexo - Vista 4",
+  "product.gallery.grouping.note": "O Banco Nexo pode ser agrupado lateralmente.",
+
+  "product.materials.title": "Materiais",
+  "product.materials.steel": "Aço S235JR",
+  "product.materials.hpl": "Compacto HPL Fenólico",
+  "product.materials.finishes.title": "Acabamentos",
+  "product.materials.finish.antislip": "Largura antiderrapante (só poluente)",
+  "product.materials.weight.title": "Peso",
+  "product.materials.weight.person": "Até 150 Kg/Pessoa",
+  "product.materials.weight.planter": "231 Kg c/Floreira",
+  "product.materials.context.alt": "Banco Nexo em contexto urbano",
+
+  "product.download.title": "Download",
+  "product.download.technical": "Ficha Técnica PDF",
+  "product.download.model3d": "Modelo 3dwg",
+  "product.colors.title": "Cores / Acabamentos",
+  "product.note.title": "Nota",
+  "product.note.colors": "Para solicitar cores/acabamentos, consulte a nossa gama de materiais.",
+  "product.note.measurements": "Ilustramos as medidas do produto mediante conceito e neste acrónimo, elas correspondem para solos duros.",
+  "product.technical.side.alt": "Desenho técnico - vista lateral",
+  "product.technical.top.alt": "Desenho técnico - vista superior",
+  "product.contact.availability": "Contactar Disponibilidade",
+  "product.colors.recommended": "recomendados",
+  "product.note.customization": "personalização",
+  "product.materials.button": "MATERIAIS",
+  "product.materials.finishes": "Acabamentos →"
 }

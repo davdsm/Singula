@@ -1,0 +1,67 @@
+{
+  "images": {
+    "hero": "/media/products/products/nexo-bench/hero.jpg",
+    "gallery": [
+      "/media/products/products/nexo-bench/1.jpg",
+      "/media/products/products/nexo-bench/2.jpg",
+      "/media/products/products/nexo-bench/3.jpg",
+      "/media/products/products/nexo-bench/4.jpg"
+    ],
+    "technical": "/media/products/products/nexo-bench/5.png",
+    "context": "/media/home/hero.jpg"
+  },
+  "materials": [
+    {
+      "name": "Aço S235JR",
+      "color": "#FFFFFF",
+      "description": "O Aço Corten S355J2W conhecido também como aço climatizado, desenvolve uma camada de pátina natural que protege a sua superfície e confere-lhe um aspeto rústico amaricado. Esta camada protetora evolui com o tempo, proporcionando ao material características únicas, sendo ideal para aplicações exteriores. O Corten em mobiliário urbano combina-se harmoniosamente em projetos urbanos e arquitetónicos. Além disso, essa manutenção reduzida torna-a numa escolha sustentável, combinando design e funcionalidade de forma exemplar. É a opção perfeita para quem procura criar ambientes com caráter e durabilidade comprovada.",
+      "image": "/media/products/products/nexo-bench/6.png"
+    },
+    {
+      "name": "HPL Compacto Fenólico",
+      "color": "#FFFFFF",
+      "description": "O HPL (High Pressure Laminate) Compacto Fenólico é um material de alta resistência, ideal para aplicações que exigem durabilidade e baixa manutenção. Este material oferece excelente resistência à humidade, aos raios UV e ao desgaste, mantendo as suas características estéticas ao longo do tempo. A sua superfície lisa e não porosa facilita a limpeza e higienização, sendo perfeito para mobiliário urbano exposto às condições climatéricas mais adversas.",
+      "image": "/media/materials/hpl-compact-sample.jpg"
+    }
+  ],
+  "finishes": [
+    {
+      "name": "Largura antiderrapante (só poluente)",
+      "color": "#FFFFFF",
+      "description": "O acabamento antiderrapante proporciona maior segurança aos utilizadores, especialmente em condições de humidade. Esta textura especial é aplicada nas superfícies de contacto, garantindo uma aderência superior e reduzindo significativamente o risco de escorregamentos. O tratamento mantém as propriedades estéticas do material enquanto proporciona características de segurança melhoradas.",
+      "image": "/media/finishes/antislip-detail.jpg"
+    }
+  ],
+  "weight": [
+    {
+      "description": "Até 150 Kg/Pessoa",
+      "color": "#FFFFFF"
+    },
+    {
+      "description": "231 Kg c/Floreira",
+      "color": "#FFFFFF"
+    }
+  ],
+  "colors": [
+    {
+      "name": "RAL 7016",
+      "color": "#383e42",
+      "code": "RAL 7016"
+    },
+    {
+      "name": "RAL 1013",
+      "color": "#eae6ca",
+      "code": "RAL 1013"
+    },
+    {
+      "name": "FREIJO F989",
+      "color": "#c8a882",
+      "code": "FREIJO F989"
+    },
+    {
+      "name": "NOGUEIRA M17",
+      "color": "#6b4423",
+      "code": "NOGUEIRA M17"
+    }
+  ]
+}

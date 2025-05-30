@@ -34,7 +34,7 @@ export const ContactForm = () => {
   };
 
   return (
-    <section className="p-10 py-40 md:p-40">
+    <section className="p-10 pt-40 pb-20 md:p-40 md:pb-20">
       <form action="" method="" onSubmit={(e) => handleSubmit(e)}>
         <h1 className="font-bold text-3xl md:text-5xl">{t("contact.title")}</h1>
         <div className="bg-black text-white pt-20 pb-4 flex flex-col justify-center">
