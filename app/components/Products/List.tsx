@@ -12,10 +12,9 @@ export const ProductList = ({}) => {
 
   useEffect(() => {
     if (categories.length === 0) {
-      const lang = i18n.language || "pt"; // Usar idioma atual
+      const lang = i18n.language || "pt";
 
       fetch(`/api/${lang}/categories.json`, {
-        // ✅ Usar template literal com variável lang
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
@@ -24,7 +23,7 @@ export const ProductList = ({}) => {
         .then((res) => res.json())
         .then((data) => setCategories(data));
     }
-  }, [categories, i18n.language]); // ✅ Adicionar i18n.language como dependência
+  }, [categories, i18n.language]);
 
   return (
     <>
