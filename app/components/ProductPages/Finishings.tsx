@@ -16,7 +16,6 @@ export const Finishings = () => {
   useEffect(() => {
     const lang = i18n.language || "pt"; // Usar idioma atual
     fetch(`/api/${lang}/finishings.json`, {
-      // ✅ Usar template literal com variável lang
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
@@ -72,7 +71,6 @@ export const Finishings = () => {
           </header>
 
           <div className="flex px-10 md:px-40 py-20 gap-8 md:gap-16 min-h-[200vh]">
-            {/* Sticky Image */}
             <div className="w-1/2">
               <div className="sticky top-40">
                 {currentImg && (
@@ -85,7 +83,6 @@ export const Finishings = () => {
               </div>
             </div>
 
-            {/* Scrollable text */}
             <div className="w-1/2 space-y-20">
               {finishings.map((item, index) => (
                 <div

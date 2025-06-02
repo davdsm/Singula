@@ -108,10 +108,10 @@ export const ProductGallery = () => {
               viewport={{ amount: 0.3 }}
               className="absolute left-8 md:left-24 top-1/2 mt-16 md:mt-20 transform -translate-y-1/2 text-left max-w-md z-10"
             >
-              <h2 className="text-2xl md:text-3xl font-bold mb-4 text-black">
+              <h2 className="text-black font-black text-2xl py-4">
                 {t("product.gallery.title")}
               </h2>
-              <p className="text-sm md:text-base text-gray-700 leading-relaxed">
+              <p className="text-gray-700 max-w-3xl mx-auto text-xl">
                 {t("product.gallery.description")}
               </p>
             </motion.div>

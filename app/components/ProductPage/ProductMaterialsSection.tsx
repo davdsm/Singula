@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { AnimatedButton } from "./AnimatedButton";
+import { useNavigate } from "@remix-run/react";
+import { Button } from "../Elements/Button";
 
 interface ProductData {
   images: {
@@ -12,6 +14,7 @@ interface ProductData {
 export const ProductMaterialsSection = () => {
   const { t, i18n } = useTranslation();
   const [productData, setProductData] = useState<ProductData | null>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const lang = i18n.language || "pt";
@@ -63,9 +66,10 @@ export const ProductMaterialsSection = () => {
               viewport={{ amount: 0.3 }}
               className="flex items-center justify-center"
             >
-              <AnimatedButton
-                primaryText={t("product.materials.button")}
-                secondaryText={t("product.materials.finishes")}
+              <Button
+                to="/about"
+                firstText={t("product.materials.button")}
+                secondText={t("product.materials.finishes")}
               />
             </motion.div>
           </div>

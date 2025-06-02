@@ -215,7 +215,7 @@ export const ProductInfoBoxes = () => {
             viewport={{ amount: 0.3 }}
             className="border border-gray-300 p-8 rounded-2xl flex-1 bg-white"
           >
-            <div className="mb-8">
+            <div className="mb-2">
               <h3 className="text-2xl font-bold uppercase tracking-wider text-black inline">
                 {t("product.note.title")}
               </h3>
@@ -224,7 +224,7 @@ export const ProductInfoBoxes = () => {
               </span>
             </div>
 
-            <div className="space-y-4 text-sm text-gray-700 leading-relaxed">
+            <div className="space-y-2 text-xl text-gray-700 leading-relaxed">
               <p>{t("product.note.colors")}</p>
               <p>{t("product.note.measurements")}</p>
             </div>

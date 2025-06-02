@@ -77,5 +77,21 @@ export default {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    require("tailwindcss-animate"),
+    function ({ addUtilities }) {
+      addUtilities({
+        ".no-scrollbar": {
+          /* Firefox */
+          "scrollbar-width": "none",
+          /* Safari and Chrome */
+          "&::-webkit-scrollbar": {
+            display: "none",
+          },
+          /* Edge and IE */
+          "-ms-overflow-style": "none",
+        },
+      });
+    },
+  ],
 } satisfies Config;
