@@ -8,10 +8,40 @@
     "title2": "Design ousado. Versatilidade sem limites.",
     "text2": "Feito em aço S235JR para durar e com assento em Fenólico Compacto HPL – para um conforto que aguenta o tempo e as estações. Um banco que não passa despercebido.",
     "imgs": [
-      "/media/products/nexo-bench/1.jpg",
-      "/media/products/nexo-bench/2.jpg",
-      "/media/products/nexo-bench/3.jpg",
-      "/media/products/nexo-bench/4.jpg"
+      "/media/products/items/nexo-bench/1.jpg",
+      "/media/products/items/nexo-bench/2.jpg",
+      "/media/products/items/nexo-bench/3.jpg",
+      "/media/products/items/nexo-bench/4.jpg"
+    ]
+  },
+  {
+    "name": "Conjunto Nexo",
+    "slug": "nexo-set",
+    "subcategory": "sets",
+    "title1": "Forma e natureza, juntos e num banco só.",
+    "text1": "O Nexo é geometria que entra em ação e curvas que hipnotizam. A opção de floreira integrada? Dá-lhe aquele toque verde que o espaço precisa, e a estrutura inclinada? É arte, sem esforço. E os detalhes perfurados? Luz a brincar com sombra, como se fosse magia.",
+    "title2": "Design ousado. Versatilidade sem limites.",
+    "text2": "Feito em aço S235JR para durar e com assento em Fenólico Compacto HPL – para um conforto que aguenta o tempo e as estações. Um banco que não passa despercebido.",
+    "imgs": [
+      "/media/products/items/nexo-bench/1.jpg",
+      "/media/products/items/nexo-bench/2.jpg",
+      "/media/products/items/nexo-bench/3.jpg",
+      "/media/products/items/nexo-bench/4.jpg"
+    ]
+  },
+  {
+    "name": "Conjunto Nexo 2",
+    "slug": "nexo-set-2",
+    "subcategory": "sets",
+    "title1": "Forma e natureza, juntos e num banco só.",
+    "text1": "O Nexo é geometria que entra em ação e curvas que hipnotizam. A opção de floreira integrada? Dá-lhe aquele toque verde que o espaço precisa, e a estrutura inclinada? É arte, sem esforço. E os detalhes perfurados? Luz a brincar com sombra, como se fosse magia.",
+    "title2": "Design ousado. Versatilidade sem limites.",
+    "text2": "Feito em aço S235JR para durar e com assento em Fenólico Compacto HPL – para um conforto que aguenta o tempo e as estações. Um banco que não passa despercebido.",
+    "imgs": [
+      "/media/products/items/nexo-bench/1.jpg",
+      "/media/products/items/nexo-bench/2.jpg",
+      "/media/products/items/nexo-bench/3.jpg",
+      "/media/products/items/nexo-bench/4.jpg"
     ]
   }
 ]
