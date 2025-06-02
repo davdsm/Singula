@@ -1,4 +1,4 @@
-import { useNavigate } from "@remix-run/react";
+import { useLocation, useNavigate } from "@remix-run/react";
 import { useTransitionContext } from "~/context/TransitionContext";
 
 export function DelayedLink({
@@ -11,11 +11,16 @@ export function DelayedLink({
   className?: string;
 }) {
   const navigate = useNavigate();
+  const location = useLocation();
   const { startTransition } = useTransitionContext();
 
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
-    startTransition(() => navigate(to));
+
+    if (location.pathname !== to) {
+      startTransition(() => navigate(to));
+    }
+
   };
 
   if (to === "#") return <>{children}</>;

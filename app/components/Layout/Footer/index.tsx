@@ -36,7 +36,7 @@ export const Footer = () => {
       >
         <Logo width={217} height={49} className="invert" />
         <ul className="p-0 list-none m-0">
-          <li className="text-center md:text-left">
+          <li className="text-left md:text-left">
             <DelayedLink
               to="/"
               className="bg-black py-2 px-4 text-white w-auto rounded-t-md rounded-br-md text-xl transition-all ease-linear duration-200 hover:text-singula-main"
@@ -44,7 +44,7 @@ export const Footer = () => {
               {t("footer.links.urban")}
             </DelayedLink>
           </li>
-          <li className="text-center md:text-left">
+          <li className="text-left md:text-left">
             <DelayedLink
               to="/"
               className="bg-black py-2 px-4 text-white w-auto rounded-br-md rounded-t-md text-xl transition-all ease-linear duration-200 hover:text-singula-main"
@@ -52,7 +52,7 @@ export const Footer = () => {
               {t("footer.links.garden")}
             </DelayedLink>
           </li>
-          <li className="text-center md:text-left">
+          <li className="text-left md:text-left">
             <DelayedLink
               to="/"
               className="bg-black py-2 px-4 text-white w-auto rounded-br-md rounded-t-md text-xl transition-all ease-linear duration-200 hover:text-singula-main"
@@ -60,7 +60,7 @@ export const Footer = () => {
               {t("footer.links.residential")}
             </DelayedLink>
           </li>
-          <li className="text-center md:text-left">
+          <li className="text-left md:text-left">
             <DelayedLink
               to="/"
               className="bg-black py-2 px-4 text-white w-auto rounded-br-md rounded-t-md rounded-bl-md text-xl transition-all ease-linear duration-200 hover:text-singula-main"

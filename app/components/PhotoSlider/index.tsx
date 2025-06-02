@@ -18,6 +18,7 @@ export const PhotoSlider = () => {
         className="w-[150%] px-10 md:translate-x-[-15%]"
         loop={true}
         autoplay
+        autoplayInterval={2}
         items={[
           <Image
             src="/media/home/1.jpg"

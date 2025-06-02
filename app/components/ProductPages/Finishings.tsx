@@ -70,8 +70,8 @@ export const Finishings = () => {
             ACABAMENTOS <MainColor>/</MainColor> PROTEÇÕES METAL
           </header>
 
-          <div className="flex px-10 md:px-40 py-20 gap-8 md:gap-16 min-h-[200vh]">
-            <div className="w-1/2">
+          <div className="flex px-10 md:px-40 py-20 gap-8 md:gap-16 md:min-h-[200vh]">
+            <div className="hidden md:block w-1/2">
               <div className="sticky top-40">
                 {currentImg && (
                   <Image
@@ -83,7 +83,7 @@ export const Finishings = () => {
               </div>
             </div>
 
-            <div className="w-1/2 space-y-20">
+            <div className="w-full md:w-1/2 space-y-20">
               {finishings.map((item, index) => (
                 <div
                   key={index}

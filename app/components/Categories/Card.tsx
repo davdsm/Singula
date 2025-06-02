@@ -29,7 +29,7 @@ export const CategoryCard = ({
           ease: "easeInOut",
           delay: index ? index / 10 : 0,
         }}
-        viewport={{ amount: 0.1 }}
+        viewport={{ amount: 0.1, once: true }}
         className="w-full md:w-full bg-white p-10 rounded-tl-[1rem] rounded-br-[1rem] rounded-tr-[3rem] rounded-bl-[3rem] md:rounded-tl-3xl md:rounded-tr-[5rem] md:rounded-bl-[5rem] md:rounded-br-3xl"
       >
         <div className="flex justify-between items-center w-full">
