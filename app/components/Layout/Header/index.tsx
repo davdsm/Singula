@@ -6,7 +6,7 @@ import { WhatsApp } from "./WhatsApp";
 import { LanguageSelector } from "./LanguageSelector";
 import { Hamburger } from "./Hamburger";
 import { Sidebar } from "./Sidebar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export const Header = ({
   logo = true,
@@ -22,6 +22,23 @@ export const Header = ({
   lang?: boolean;
 }) => {
   const [sidebar, setSidebar] = useState(false);
+  const [appear, setAppear] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      if (currentScrollY > lastScrollY && currentScrollY > 50) {
+        setAppear(false); // scrolling down
+      } else {
+        setAppear(true); // scrolling up
+      }
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [lastScrollY]);
 
   const menuList: {
     key: string;
@@ -53,11 +70,16 @@ export const Header = ({
     <>
       <motion.header
         initial={{ opacity: 0, y: -20, x: "-50%" }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.3, delay: 0.8 }}
+        animate={{
+          y: appear ? 0 : -20,
+          opacity: appear ? 1 : 0,
+        }}
+        transition={{ duration: 0.3, delay: lastScrollY === 0 ? 0.8 : 0 }}
         className="border border-singula-border z-[90] md:z-40 p-5 px-8 md:px-14 bg-black w-4/5 rounded-[4rem] flex justify-between items-center fixed top-10 left-1/2 translate-x-[-50%]"
       >
-        {logo && <Logo width={112} height={26} className="w-[112px] h-[26px]" />}
+        {logo && (
+          <Logo width={112} height={26} className="w-[112px] h-[26px]" />
+        )}
         {menu && <Menu list={menuList} />}
         <div className="flex items-center justify-between">
           {searchbar && (
@@ -71,6 +93,7 @@ export const Header = ({
           {lang && <LanguageSelector />}
           {menu && (
             <Hamburger
+              status={sidebar}
               open={() => setSidebar(true)}
               close={() => setTimeout(() => setSidebar(false), 10)}
             />

@@ -34,7 +34,7 @@ export const ContactForm = () => {
   };
 
   return (
-    <section className="p-10 pt-40 pb-20 md:p-40 md:pb-20">
+    <section className="p-10 pt-40 pb-10 md:p-40 md:pb-20">
       <form action="" method="" onSubmit={(e) => handleSubmit(e)}>
         <h1 className="font-bold text-3xl md:text-5xl">{t("contact.title")}</h1>
         <div className="bg-black text-white pt-20 pb-4 flex flex-col justify-center">
@@ -112,22 +112,10 @@ export const ContactForm = () => {
 
               <div className="flex justify-center md:justify-between items-center mt-8">
                 <button
-                  type="submit"
-                  className="text-2xl bg-red-400 text-white px-8 py-2 rounded-full flex items-center transition-ease transition-300"
+                  type="button"
+                  className="text-2xl border border-red-400 text-red-400 hover:bg-red-400 hover:text-white px-14 py-2 rounded-full transition-colors"
                 >
                   {t("contact.form.submit")}
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5 ml-2"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                  >
-                    <path
-                      fillRule="evenodd"
-                      d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
-                      clipRule="evenodd"
-                    />
-                  </svg>
                 </button>
               </div>
             </div>
@@ -136,10 +124,22 @@ export const ContactForm = () => {
       </form>
       <div className="flex justify-center items-center">
         <button
-          type="button"
-          className="font-black text-2xl border border-red-400 text-red-400 hover:bg-red-400 hover:text-white px-14 py-2 rounded-full transition-colors"
+          type="submit"
+          className="font-black mt-20 md: mt0 text-2xl bg-red-400 text-white px-8 py-2 rounded-full flex items-center transition-ease transition-300"
         >
           {t("contact.quote.button")}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-5 w-5 ml-2"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+          >
+            <path
+              fillRule="evenodd"
+              d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
+              clipRule="evenodd"
+            />
+          </svg>
         </button>
       </div>
     </section>

@@ -37,7 +37,7 @@ export const LanguageSelector = (): JSX.Element => {
   }, []);
 
   return (
-    <div className="relative inline-block text-left" ref={dropdownRef}>
+    <div className="relative inline-block text-left pr-4 md:pr-0" ref={dropdownRef}>
       <button
         onClick={toggleDropdown}
         className="inline-flex items-center font-medium focus:outline-none"

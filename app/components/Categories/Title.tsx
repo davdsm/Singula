@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Image } from "../Elements/Image";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 
 export const Title = () => {
   const { t } = useTranslation();
@@ -14,7 +14,7 @@ export const Title = () => {
         viewport={{ amount: 0.3 }}
         className="text-2xl md:text-5xl font-black text-left text-white w-full md:w-3/5"
       >
-        {t("categories.title.main")}
+        <Trans i18nKey={"categories.title.main"}></Trans>
       </motion.h1>
       <motion.div
         initial={{ y: 30, opacity: 0 }}

@@ -26,7 +26,7 @@ export const CategoriesList = ({
           {categories.map((category, index) => (
             <DelayedLink
               to={`/products/${category.slug}/`}
-              className="w-24 h-24 bg-white text-black rounded-full flex justify-center items-center shrink-0"
+              className="duration-4 transition-all w-24 h-24 bg-white text-black rounded-full flex justify-center items-center shrink-0 hover:mix-blend-darken hover:scale-[1.2]"
             >
               <Image src={category.img} alt={category.title} className="w-20 h-20 object-contain" />
             </DelayedLink>

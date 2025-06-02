@@ -14,6 +14,7 @@ export const DesignsSlide = () => {
         className="w-full py-20"
         loop={true}
         autoplay
+        autoplayInterval={4}
         items={[
           <img
             src="/media/designs/garden.png"

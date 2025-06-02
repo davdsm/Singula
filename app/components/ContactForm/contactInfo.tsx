@@ -30,7 +30,7 @@ export const ContactInfo = () => {
   }, [i18n.language]);
 
   return (
-    <section className="bg-black text-white py-16 px-10">
+    <section className="bg-black text-white pt-4 pb-16 md:py-16 px-10">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col lg:flex-row lg:items-start lg:gap-16">
           <motion.div
