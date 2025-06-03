@@ -1,11 +1,12 @@
 import { ReactElement } from "react";
 import { motion } from "framer-motion";
+import { parseTextWithMainColor } from "../utils";
 
 export const Entry = ({
   text,
   className,
 }: {
-  text: ReactElement<any, any>;
+  text: string;
   className?: string;
 }) => {
   return (
@@ -17,7 +18,7 @@ export const Entry = ({
         viewport={{ amount: 0.3 }}
         className="pb-20 px-10 text-lg md:w-[50%] mx-auto md:text-2xl text-center text-black font-bold"
       >
-        {text}
+        {parseTextWithMainColor(text)}
       </motion.h2>
     </section>
   );

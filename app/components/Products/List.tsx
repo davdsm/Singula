@@ -1,29 +1,14 @@
-import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Image } from "../Elements/Image";
 import { DelayedLink } from "../Elements/Link";
-import { useTranslation } from "react-i18next";
+import { useCategories } from "~/hooks/useProductCategories";
 
 export const ProductList = ({}) => {
-  const { i18n } = useTranslation();
-  const [categories, setCategories] = useState<
-    { title: string; img: string; slug: string; design: string }[]
-  >([]);
 
-  useEffect(() => {
-    if (categories.length === 0) {
-      const lang = i18n.language || "pt";
+  const { categories, loading, error } = useCategories();
 
-      fetch(`/api/${lang}/categories.json`, {
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      })
-        .then((res) => res.json())
-        .then((data) => setCategories(data));
-    }
-  }, [categories, i18n.language]);
+  if (loading) return <p>Loading categories...</p>;
+  if (error) return <p>Error: {error.message}</p>;  
 
   return (
     <>
@@ -48,7 +33,7 @@ export const ProductList = ({}) => {
                   className="w-full h-full"
                 >
                   <Image
-                    src={category.img}
+                    src={category.image as string}
                     alt={category.title}
                     className="w-full h-full object-contain pb-14"
                   />
