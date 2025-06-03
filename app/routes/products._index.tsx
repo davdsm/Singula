@@ -15,7 +15,7 @@ export const Products = () => {
   if (Object.keys(data).length === 0) return <p>Loading...</p>;
 
   return (
-    <main className="bg-white">
+    <main className="bg-white overflow-x-hidden">
       <ProductPageEntry
         textClassName="text-black md:text-white"
         imgClassName="object-[40%_80%] md:object-[50%_20%]"

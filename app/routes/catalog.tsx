@@ -20,7 +20,7 @@ export const Catalog = () => {
   if (Object.keys(data).length === 0) return <p>Loading...</p>;
 
   return (
-    <main>
+    <main className="overflow-x-hidden">
       <CatalogComponent
         subtitle={data["catalog-subtitle"] as string}
         title={data["catalog-title"] as string}

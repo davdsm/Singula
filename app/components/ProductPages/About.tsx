@@ -2,10 +2,22 @@ import { motion } from "framer-motion";
 import { MainColor } from "../Elements/Colors/main";
 import { MaterialsSlide } from "./MaterialsSlide";
 import { useTranslation } from "react-i18next";
+import { parseTextWithMainColor } from "../utils";
 
-export const About = ({ setModalContent }: { setModalContent: Function }) => {
-  const { t } = useTranslation();
-
+export const About = ({
+  setModalContent,
+  text,
+  list,
+}: {
+  setModalContent: Function;
+  text: string;
+  list: {
+    slug: string;
+    name: string;
+    text: string;
+    image?: string;
+  }[];
+}) => {
   return (
     <section className="bg-black">
       <motion.h2
@@ -15,10 +27,9 @@ export const About = ({ setModalContent }: { setModalContent: Function }) => {
         viewport={{ amount: 0.3 }}
         className="py-20 px-10 text-lg md:px-80 md:text-2xl text-center"
       >
-        {t("about.materials.intro")}
-        <MainColor> {t("about.materials.highlight")}</MainColor>.
+        {parseTextWithMainColor(text)}
       </motion.h2>
-      <MaterialsSlide setModalContent={setModalContent} />
+      <MaterialsSlide list={list} setModalContent={setModalContent} />
     </section>
   );
 };

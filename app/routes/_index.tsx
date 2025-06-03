@@ -12,7 +12,7 @@ export const Index = () => {
   if (Object.keys(data).length === 0) return <p>Loading...</p>;
 
   return (
-    <main>
+    <main className="overflow-x-hidden">
       <Hero
         img={data["home-slide-img"][0]}
         text={data["home-slide-text"] as string}
