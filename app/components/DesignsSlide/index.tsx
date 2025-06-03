@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { CarouselComponent } from "../Elements/Carousel";
 
-export const DesignsSlide = () => {
+export const DesignsSlide = ({ imgs }: { imgs: string[] }) => {
   return (
     <motion.section
       initial={{ y: 30, opacity: 0 }}
@@ -15,23 +15,14 @@ export const DesignsSlide = () => {
         loop={true}
         autoplay
         autoplayInterval={4}
-        items={[
+        items={imgs.map((img, index) => (
           <img
-            src="/media/designs/garden.png"
-            alt="Singula Garden Design"
+            key={`img-slide-design-${index}`}
+            src={img}
+            alt="Singula Design"
             className="w-full h-[20rem] md:h-[40rem] object-cover position-center"
-          />,
-          <img
-            src="/media/designs/home.png"
-            alt="Singula Home Design"
-            className="w-full h-[20rem] md:h-[40rem] object-cover "
-          />,
-          <img
-            src="/media/designs/street.png"
-            alt="Singula Street Design"
-            className="w-full h-[20rem] md:h-[40rem] object-cover"
-          />,
-        ]}
+          />
+        ))}
       />
     </motion.section>
   );

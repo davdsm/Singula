@@ -7,16 +7,19 @@ export const Button = ({
   secondText,
   to,
   className,
+  target,
 }: {
   firstText: string;
   secondText: string;
   to: string;
   className?: string;
+  target?: string;
 }) => {
   return (
     <DelayedLink
       to={to}
-      className={`inline-block bg-singula-black p-2 rounded-3xl pr-4 ${className}`}
+      target={target}
+      className={`hover:bg-transparent hover:translate-y-[-2px] transition-all transition duration-700 inline-block bg-singula-black p-2 rounded-3xl pr-4 ${className}`}
     >
       <span className="bg-singula-main text-white font-bold p-2 uppercase rounded-3xl text-md">
         {firstText}

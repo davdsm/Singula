@@ -22,13 +22,18 @@ export const CategoriesList = ({
         transition={{ duration: 1, ease: "easeInOut", delay: 0.2 }}
         viewport={{ amount: 0.1 }}
       >
-        <ul className="list-none py-20 m-0 flex flex-nowrap overflow-x-auto overflow-y-hidden scroll-smooth no-scrollbar gap-6">
+        <ul className="list-none py-20 m-0 flex justify-center flex-nowrap overflow-x-auto overflow-y-hidden scroll-smooth no-scrollbar gap-6">
           {categories.map((category, index) => (
             <DelayedLink
+              key={`category-${index}`}
               to={`/products/${category.slug}/`}
-              className="duration-4 transition-all w-24 h-24 bg-white text-black rounded-full flex justify-center items-center shrink-0 hover:mix-blend-darken hover:scale-[1.2]"
+              className="duration-700 transition-all w-24 h-24 bg-white text-black rounded-full flex justify-center items-center shrink-0 hover:mix-blend-darken hover:scale-[1.2]"
             >
-              <Image src={category.img} alt={category.title} className="w-20 h-20 object-contain" />
+              <Image
+                src={category.img}
+                alt={category.title}
+                className="w-20 h-20 object-contain"
+              />
             </DelayedLink>
           ))}
         </ul>

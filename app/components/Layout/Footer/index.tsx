@@ -9,7 +9,7 @@ import {
   faInstagram,
 } from "@fortawesome/free-brands-svg-icons";
 
-import { faPlaneCircleCheck } from "@fortawesome/free-solid-svg-icons";
+import { faEnvelope, faPlaneCircleCheck } from "@fortawesome/free-solid-svg-icons";
 
 import { DelayedLink } from "~/components/Elements/Link";
 import { Logo } from "~/components/Elements/Logo";
@@ -32,7 +32,7 @@ export const Footer = () => {
         whileInView={{ y: 0, opacity: 1 }}
         transition={{ duration: 1, ease: "easeInOut", delay: 0 }}
         viewport={{ amount: 0.5 }}
-        className="text-center md:text-left w-full md:w-3/12 flex flex-col justify-center items-center md:justify-start md:items-start gap-7 z-20"
+        className="text-center md:text-left w-full md:w-3/12 flex flex-col justify-center items-center md:justify-start md:items-start gap-7 z-30"
       >
         <Logo width={217} height={49} className="invert" />
         <ul className="p-0 list-none m-0">
@@ -77,7 +77,7 @@ export const Footer = () => {
         whileInView={{ y: 0, opacity: 1 }}
         transition={{ duration: 1, ease: "easeInOut", delay: 0.2 }}
         viewport={{ amount: 0.5 }}
-        className="w-full md:w-5/12 flex flex-col justify-center items-center md:justify-start md:items-start gap-4 z-20"
+        className="w-full md:w-5/12 flex flex-col justify-center items-center md:justify-start md:items-start gap-4 z-30"
       >
         <span className="text-base text-black">Singula</span>
         <ul className="p-0 list-none m-0">
@@ -157,7 +157,7 @@ export const Footer = () => {
         whileInView={{ y: 0, opacity: 1 }}
         transition={{ duration: 1, ease: "easeInOut", delay: 0.4 }}
         viewport={{ amount: 0.5 }}
-        className="w-full md:w-3/12 mt-10 md:mt-0 flex flex-col items-start gap-4 z-20"
+        className="w-full md:w-3/12 mt-10 md:mt-0 flex flex-col items-start gap-4 z-30"
       >
         <form
           action=""
@@ -178,7 +178,7 @@ export const Footer = () => {
             <input type="checkbox" className="peer hidden" required />
             <button type="submit" className="absolute right-10 top-16">
               <FontAwesomeIcon
-                icon={faPlaneCircleCheck}
+                icon={faEnvelope}
                 className="text-white"
               />
             </button>
