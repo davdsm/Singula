@@ -1,12 +1,9 @@
 import { motion } from "framer-motion";
-import { MainColor } from "../Elements/Colors/main";
 import { Image } from "../Elements/Image";
 import { Button } from "../Elements/Button";
-import { useTranslation } from "react-i18next";
+import { parseTextWithMainColor } from "~/components/utils";
 
-export const AboutSection = () => {
-  const { t } = useTranslation();
-
+export const AboutSection = ({ text }: { text: string }) => {
   return (
     <motion.section
       initial={{ y: 20, opacity: 0 }}
@@ -16,12 +13,7 @@ export const AboutSection = () => {
       className="relative w-full h-1/3 bg-black py-20 md:py-40 mx-auto flex items-center justify-center flex-col"
     >
       <h3 className="text-lg md:text-2xl text-white text-center font-bold w-4/5 md:w-3/5 inline-block md:max-w-[614px]">
-        {t("about.home.words.in")} <MainColor>Singula</MainColor>,{" "}
-        {t("about.home.text1")}{" "}
-        <MainColor>{t("about.home.words.ousadia")}</MainColor>
-        {t("about.home.text2")}
-        <MainColor>{t("about.home.words.guiao")}</MainColor>
-        {t("about.home.text3")}
+        {parseTextWithMainColor(text)}
       </h3>
       <Image
         src="/logo-icon.png"

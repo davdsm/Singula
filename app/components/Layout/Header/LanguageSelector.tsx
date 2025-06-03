@@ -37,13 +37,21 @@ export const LanguageSelector = (): JSX.Element => {
   }, []);
 
   return (
-    <div className="relative inline-block text-left pr-4 md:pr-0" ref={dropdownRef}>
+    <div
+      className="relative inline-block text-left pr-4 md:pr-0"
+      ref={dropdownRef}
+    >
       <button
         onClick={toggleDropdown}
         className="inline-flex items-center font-medium focus:outline-none"
       >
         {selectedLang.toUpperCase()}
-        <FontAwesomeIcon icon={faChevronDown} className="ml-2 w-3 h-3" />
+        <FontAwesomeIcon
+          icon={faChevronDown}
+          className={`transition duration-700 transition-all ml-2 w-3 h-3 ${
+            open && "rotate-180"
+          }`}
+        />
       </button>
 
       <div

@@ -4,7 +4,7 @@ import { Image } from "../Elements/Image";
 
 import "./index.scss";
 
-export const PhotoSlider = () => {
+export const PhotoSlider = ({ imgs }: { imgs: string[] }) => {
   return (
     <motion.section
       id="photo-slider"
@@ -19,31 +19,14 @@ export const PhotoSlider = () => {
         loop={true}
         autoplay
         autoplayInterval={2}
-        items={[
+        items={imgs.map((img, i) => (
           <Image
-            src="/media/home/1.jpg"
+            key={`img-${i}`}
+            src={img}
             alt="Hero Image"
             className="w-full h-[20rem] md:h-[30rem] object-cover rounded-3xl"
-          />,
-
-          <Image
-            src="/media/home/2.jpg"
-            alt="Hero Image"
-            className="w-full h-[20rem] md:h-[30rem] object-cover rounded-3xl"
-          />,
-
-          <Image
-            src="/media/home/3.jpg"
-            alt="Hero Image"
-            className="w-full h-[20rem] md:h-[30rem] object-cover rounded-3xl"
-          />,
-
-          <Image
-            src="/media/home/1.jpg"
-            alt="Hero Image"
-            className="w-full h-[20rem] md:h-[30rem] object-cover rounded-3xl"
-          />,
-        ]}
+          />
+        ))}
       />
     </motion.section>
   );

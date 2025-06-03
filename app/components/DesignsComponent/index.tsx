@@ -1,10 +1,24 @@
 import { motion } from "framer-motion";
 import { Image } from "../Elements/Image";
-import { useTranslation } from "react-i18next"; // Adicionar importação
+import { parseTextWithMainColor } from "../utils";
 
-export const DesignsComponent = () => {
-  const { t } = useTranslation(); // Adicionar hook
-
+export const DesignsComponent = ({
+  firstTitle,
+  secondTitle,
+  thirdTitle,
+  firstText,
+  secondText,
+  thirdText,
+  img,
+}: {
+  firstTitle: string;
+  secondTitle: string;
+  thirdTitle: string;
+  firstText: string;
+  secondText: string;
+  thirdText: string;
+  img: string;
+}) => {
   return (
     <motion.section
       initial={{ y: 30, opacity: 0 }}
@@ -22,10 +36,10 @@ export const DesignsComponent = () => {
           className="text-left py-2"
         >
           <h3 className="font-black text-white text-2xl md:text-6xl text-left">
-            {t("designs.street.title")}
+            {parseTextWithMainColor(firstTitle)}
           </h3>
           <p className="py-2 md:py-4 text-lg md:text-2xl font-regular text-white text-left">
-            {t("designs.street.description")}
+            {parseTextWithMainColor(firstText)}
           </p>
         </motion.div>
         <motion.div
@@ -36,10 +50,10 @@ export const DesignsComponent = () => {
           className="text-left py-2"
         >
           <h3 className="font-black text-white text-2xl md:text-6xl text-left">
-            {t("designs.garden.title")}
+            {parseTextWithMainColor(secondTitle)}
           </h3>
           <p className="py-2 md:py-4 text-lg md:text-2xl font-regular text-white text-left">
-            {t("designs.garden.description")}
+            {parseTextWithMainColor(secondText)}
           </p>
         </motion.div>
         <motion.div
@@ -50,10 +64,10 @@ export const DesignsComponent = () => {
           className="text-left py-2"
         >
           <h3 className="font-black text-white text-2xl md:text-6xl text-left">
-            {t("designs.home.title")}
+            {parseTextWithMainColor(thirdTitle)}
           </h3>
           <p className="py-2 md:py-4 text-lg md:text-2xl font-regular text-white text-left">
-            {t("designs.home.description")}
+            {parseTextWithMainColor(thirdText)}
           </p>
         </motion.div>
       </div>
@@ -65,9 +79,9 @@ export const DesignsComponent = () => {
         className="w-full md:w-2/3 flex justify-start"
       >
         <Image
-          src="/media/designs/all.png"
+          src={img}
           className="w-full h-[15rem] md:h-full object-cover rounded-tl-[2rem] rounded-bl-[2rem] md:rounded-tl-[3.2rem] md:rounded-bl-[3.2rem]"
-          alt={t("designs.image.alt")}
+          alt="Singula Designs Systems"
         />
       </motion.div>
     </motion.section>
