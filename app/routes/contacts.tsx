@@ -14,7 +14,7 @@ export const meta: MetaFunction = () => {
 
 export const Contacts = () => {
   return (
-    <main>
+    <main className="overflow-x-hidden">
       <ContactForm />
       <ContactInfo />
     </main>

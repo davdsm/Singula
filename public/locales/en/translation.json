@@ -124,6 +124,8 @@
   "product.materials.steel": "S235JR Steel",
   "product.materials.hpl": "Phenolic Compact HPL",
   "product.materials.finishes.title": "Finishes",
+  "product.materials.finishes.metal": "Proteções Metal",
+
   "product.materials.finish.antislip": "Anti-slip width (pollutant only)",
   "product.materials.weight.title": "Weight",
   "product.materials.weight.person": "Up to 150 Kg/Person",

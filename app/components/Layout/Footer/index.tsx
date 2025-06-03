@@ -91,7 +91,7 @@ export const Footer = () => {
           </li>
           <li className="text-center md:text-left">
             <DelayedLink
-              to="/about"
+              to="/catalog"
               className="text-black font-bold text-xl transition-all ease-linear duration-200 hover:text-singula-main"
             >
               {t("footer.menu.catalog")}
@@ -99,7 +99,7 @@ export const Footer = () => {
           </li>
           <li className="text-center md:text-left">
             <DelayedLink
-              to="/about"
+              to="/about#singula-studio"
               className="text-black font-bold text-xl transition-all ease-linear duration-200 hover:text-singula-main"
             >
               {t("footer.menu.studio")}

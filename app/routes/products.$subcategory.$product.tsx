@@ -4,19 +4,25 @@ import { ProductGallery } from "~/components/ProductPage/ProductGallery";
 import { ProductMaterials } from "~/components/ProductPage/ProductMaterials";
 import { ProductInfoBoxes } from "~/components/ProductPage/ProductInfoBoxes";
 import { ProductMaterialsSection } from "~/components/ProductPage/ProductMaterialsSection";
+import { useProducts } from "~/hooks/useProducts";
 
 export const ProductPage = () => {
   const { subcategory, product } = useParams();
 
-  console.log("subcategpry...", subcategory);
-  console.log("product...", product);
+  const { products: productFinal, loading } = useProducts({
+    productSlug: product,
+  });
+
+  if (loading) return <>loading...</>;
+
+  console.log("products..", productFinal);
 
   return (
-    <main className="bg-white">
+    <main className="bg-white overflow-x-hidden">
       <div className="pt-32 md:pt-36">
-        <ProductHero />
+        <ProductHero product={productFinal[0]} />
 
-        <ProductGallery />
+        <ProductGallery product={productFinal[0]} />
 
         <ProductMaterials />
 
