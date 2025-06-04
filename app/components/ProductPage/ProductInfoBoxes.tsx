@@ -1,181 +1,69 @@
-import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { UnifiedHoverItem } from "./UnifiedHoverItem";
+import { Product } from "~/hooks/interfaces";
+import { useState } from "react";
+import { MaterialPopup } from "./MaterialPopup";
+import { parseTextWithMainColor } from "../utils";
 
-interface ColorOption {
-  name: string;
-  color: string;
-  code: string;
-}
+export const ProductInfoBoxes = ({ product }: { product: Product }) => {
+  const { t } = useTranslation();
 
-interface DownloadOption {
-  id: string;
-  type: string;
-  title: string;
-  url: string;
-  fileSize: string;
-  format: string;
-  icon: string;
-}
+  const [modalContent, setModalContent] = useState<{
+    title: string;
+    img: string;
+    text: string;
+  } | null>(null);
 
-interface ProductData {
-  colors: ColorOption[];
-}
-
-export const ProductInfoBoxes = () => {
-  const { t, i18n } = useTranslation();
-  const [colorOptions, setColorOptions] = useState<ColorOption[]>([]);
-  const [downloads, setDownloads] = useState<DownloadOption[]>([]);
-
-  useEffect(() => {
-    const lang = i18n.language || "pt";
-
-    fetch(`/api/${lang}/product-nexo-bench.json`, {
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-    })
-      .then((res) => res.json())
-      .then((data: ProductData) => setColorOptions(data.colors || []))
-      .catch((error) => console.error("Error loading product data:", error));
-
-    fetch(`/api/${lang}/downloads.json`, {
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-    })
-      .then((res) => res.json())
-      .then((data: DownloadOption[]) => setDownloads(data))
-      .catch((error) => console.error("Error loading downloads data:", error));
-  }, [i18n.language]);
+  const closeModal = () => {
+    setModalContent(null);
+  };
 
   return (
-    <section className="relative bg-white pt-12 md:pt-20 px-4 md:px-10 overflow-hidden">
-      <div className="max-w-7xl mx-auto relative z-10">
-        <div className="block lg:hidden space-y-6 mb-12">
-          <motion.div
-            initial={{ y: 30, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            transition={{ duration: 1, ease: "easeInOut", delay: 0.2 }}
-            viewport={{ amount: 0.3 }}
-            className="bg-black text-white p-6 md:p-8 rounded-2xl w-full"
-          >
-            <h3 className="text-xl md:text-2xl font-bold mb-6 uppercase tracking-wider text-white">
-              {t("product.download.title")}
-            </h3>
-
-            <div className="space-y-4">
-              {downloads.map((download) => (
-                <UnifiedHoverItem
-                  key={`download-${download.id}`}
-                  href={download.url}
-                  download={true}
-                >
-                  <div className="flex flex-col">
-                    <span className="text-sm md:text-base text-white group-hover:text-red-400 transition-colors duration-300">
-                      {download.title}
-                    </span>
-                    <span className="text-xs text-gray-400">
-                      {download.format} • {download.fileSize}
-                    </span>
-                  </div>
-                </UnifiedHoverItem>
-              ))}
-            </div>
-          </motion.div>
-
-          {colorOptions.length > 0 && (
+    <>
+      <section className="relative bg-white pt-12 md:pt-20 px-4 md:px-40 overflow-hidden">
+        <div className="mx-auto relative z-10">
+          <div className="hidden lg:flex gap-6 items-start mb-16">
             <motion.div
               initial={{ y: 30, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
-              transition={{ duration: 1, ease: "easeInOut", delay: 0.4 }}
+              transition={{ duration: 1, ease: "easeInOut", delay: 0.2 }}
               viewport={{ amount: 0.3 }}
-              className="border border-gray-300 p-6 md:p-8 rounded-2xl w-full bg-white"
+              className="bg-black text-white p-8 rounded-2xl w-[300px] flex-shrink-0"
             >
-              <div className="mb-6">
-                <h3 className="text-xl md:text-2xl font-bold uppercase tracking-wider text-black inline">
-                  {t("product.colors.title")}
-                </h3>
-                <span className="text-xs text-gray-500 ml-2 lowercase">
-                  {t("product.colors.recommended")}
-                </span>
-              </div>
-
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                {colorOptions.map((option, index) => (
-                  <div key={`color-${index}`} className="text-center">
-                    <div
-                      className="w-12 h-12 sm:w-16 sm:h-16 rounded-lg mx-auto mb-2 border border-gray-300"
-                      style={{ backgroundColor: option.color }}
-                    ></div>
-                    <p className="text-xs font-bold uppercase tracking-wide text-black">
-                      {option.code}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-          )}
-
-          <motion.div
-            initial={{ y: 30, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            transition={{ duration: 1, ease: "easeInOut", delay: 0.6 }}
-            viewport={{ amount: 0.3 }}
-            className="border border-gray-300 p-6 md:p-8 rounded-2xl w-full bg-white"
-          >
-            <div className="mb-6">
-              <h3 className="text-xl md:text-2xl font-bold uppercase tracking-wider text-black inline">
-                {t("product.note.title")}
+              <h3 className="text-2xl font-bold mb-8 uppercase tracking-wider text-white">
+                {t("product.download.title")}
               </h3>
-              <span className="text-xs text-gray-500 ml-2 lowercase">
-                {t("product.note.customization")}
-              </span>
-            </div>
 
-            <div className="space-y-3 text-sm text-gray-700 leading-relaxed">
-              <p>{t("product.note.colors")}</p>
-              <p>{t("product.note.measurements")}</p>
-            </div>
-          </motion.div>
-        </div>
-
-        <div className="hidden lg:flex gap-6 items-start mb-16">
-          <motion.div
-            initial={{ y: 30, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            transition={{ duration: 1, ease: "easeInOut", delay: 0.2 }}
-            viewport={{ amount: 0.3 }}
-            className="bg-black text-white p-8 rounded-2xl w-[300px] flex-shrink-0"
-          >
-            <h3 className="text-2xl font-bold mb-8 uppercase tracking-wider text-white">
-              {t("product.download.title")}
-            </h3>
-
-            <div className="space-y-6">
-              {downloads.map((download) => (
+              <div className="space-y-6">
                 <UnifiedHoverItem
-                  key={`download-${download.id}`}
-                  href={download.url}
+                  key={`download-${product.name}`}
+                  href={product.Ficha_Tecnica || ""}
                   download={true}
                 >
                   <div className="flex flex-col">
                     <span className="text-base text-white group-hover:text-red-400 transition-colors duration-300">
-                      {download.title}
+                      {t("product.downloads.techfile")}
                     </span>
-                    <span className="text-xs text-gray-400">
-                      {download.format} • {download.fileSize}
-                    </span>
+                    <span className="text-xs text-gray-400">PDF • Singula</span>
                   </div>
                 </UnifiedHoverItem>
-              ))}
-            </div>
-          </motion.div>
 
-          {colorOptions.length > 0 && (
+                <UnifiedHoverItem
+                  key={`download-${product.name}`}
+                  href={product.Model_DWG || ""}
+                  download={true}
+                >
+                  <div className="flex flex-col">
+                    <span className="text-base text-white group-hover:text-red-400 transition-colors duration-300">
+                      {t("product.downloads.dwg")}
+                    </span>
+                    <span className="text-xs text-gray-400">DWG • Singula</span>
+                  </div>
+                </UnifiedHoverItem>
+              </div>
+            </motion.div>
+
             <motion.div
               initial={{ y: 30, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
@@ -193,44 +81,75 @@ export const ProductInfoBoxes = () => {
               </div>
 
               <div className="grid grid-cols-4 gap-4">
-                {colorOptions.map((option, index) => (
+                {product.cores_recomendado.map((color, index) => (
                   <div key={`color-${index}`} className="text-center">
                     <div
-                      className="w-16 h-16 rounded-lg mx-auto mb-2 border border-gray-300"
-                      style={{ backgroundColor: option.color }}
+                      className="w-16 h-16 rounded-lg mx-auto mb-2 border"
+                      style={{ background: `url(${color.image})` }}
                     ></div>
                     <p className="text-xs font-bold uppercase tracking-wide text-black">
-                      {option.code}
+                      {color.name}
                     </p>
                   </div>
                 ))}
+                {product.acabamentos_recomendado.map((acab) => (
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setModalContent({
+                        title: acab.name,
+                        img: acab.image,
+                        text: acab.text,
+                      })
+                    }
+                    key={`acab-${acab.name}-${acab.image}`}
+                    className="text-center focus:outline-none"
+                    tabIndex={0}
+                    aria-label={acab.name}
+                  >
+                    <div
+                      className="w-16 h-16 rounded-lg mx-auto mb-2 border"
+                      style={{ background: `url(${acab.image})` }}
+                    ></div>
+                    <p className="text-xs font-bold uppercase tracking-wide text-black">
+                      {acab.name}
+                    </p>
+                  </button>
+                ))}
               </div>
             </motion.div>
-          )}
 
-          <motion.div
-            initial={{ y: 30, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            transition={{ duration: 1, ease: "easeInOut", delay: 0.6 }}
-            viewport={{ amount: 0.3 }}
-            className="border border-gray-300 p-8 rounded-2xl flex-1 bg-white"
-          >
-            <div className="mb-2">
-              <h3 className="text-2xl font-bold uppercase tracking-wider text-black inline">
-                {t("product.note.title")}
-              </h3>
-              <span className="text-xs text-gray-500 ml-2 lowercase">
-                {t("product.note.customization")}
-              </span>
-            </div>
+            <motion.div
+              initial={{ y: 30, opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              transition={{ duration: 1, ease: "easeInOut", delay: 0.6 }}
+              viewport={{ amount: 0.3 }}
+              className="border border-gray-300 p-8 rounded-2xl flex-1 bg-white"
+            >
+              <div className="mb-2">
+                <h3 className="text-2xl font-bold uppercase tracking-wider text-black inline">
+                  {t("product.note.title")}
+                </h3>
+                <span className="text-xs text-gray-500 ml-2 lowercase">
+                  {t("product.note.customization")}
+                </span>
+              </div>
 
-            <div className="space-y-2 text-xl text-gray-700 leading-relaxed">
-              <p>{t("product.note.colors")}</p>
-              <p>{t("product.note.measurements")}</p>
-            </div>
-          </motion.div>
+              <div className="space-y-2 text-xl text-gray-700 leading-relaxed">
+                <Trans>{parseTextWithMainColor(product.note)}</Trans>
+              </div>
+            </motion.div>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+      {modalContent && (
+        <MaterialPopup
+          img={modalContent.img}
+          text={modalContent.text}
+          title={modalContent.title}
+          close={closeModal}
+        />
+      )}
+    </>
   );
 };

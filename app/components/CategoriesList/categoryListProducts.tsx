@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Image } from "../Elements/Image";
 import { DelayedLink } from "../Elements/Link";
+import { parseTextWithMainColor } from "../utils";
 
 export const ProductCategoryList = ({
   list,
@@ -50,7 +50,7 @@ export const ProductCategoryList = ({
                       className="w-full h-full object-contain pb-14"
                     />
                     <p className="transition-bg transition-600 text-md md:text-3xl font-bold absolute bottom-6 md:bottom-10 w-full text-center left-0">
-                      {item.name}
+                      {parseTextWithMainColor(item.name)}
                     </p>
                   </DelayedLink>
                 </motion.li>

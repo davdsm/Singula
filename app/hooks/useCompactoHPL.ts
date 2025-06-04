@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-const POCKETBASE_URL = "http://localhost:8090";
+const POCKETBASE_URL = "http://192.168.1.135:8090";
 
 type CompactoHPLItem = {
   id: string;

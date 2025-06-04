@@ -25,7 +25,7 @@ export const Title = ({ text }: { text: string }) => {
         className="w-2/5 hidden md:flex justify-end items-center flex-col"
       >
         <Image
-          src="/media/home/icons.png"
+          src="/media/icons.png"
           alt="Singula Designs"
           className="md:w-3/5"
         />

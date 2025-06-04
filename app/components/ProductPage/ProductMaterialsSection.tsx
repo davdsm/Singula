@@ -1,38 +1,10 @@
-import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
-import { AnimatedButton } from "./AnimatedButton";
-import { useNavigate } from "@remix-run/react";
 import { Button } from "../Elements/Button";
+import { Product } from "../../hooks/interfaces";
 
-interface ProductData {
-  images: {
-    technical: string;
-  };
-}
-
-export const ProductMaterialsSection = () => {
-  const { t, i18n } = useTranslation();
-  const [productData, setProductData] = useState<ProductData | null>(null);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const lang = i18n.language || "pt";
-
-    fetch(`/api/${lang}/product-nexo-bench.json`, {
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => setProductData(data))
-      .catch((error) => console.error("Error loading product data:", error));
-  }, [i18n.language]);
-
-  if (!productData) {
-    return <div>Loading...</div>;
-  }
+export const ProductMaterialsSection = ({ product }: { product: Product }) => {
+  const { t } = useTranslation();
 
   return (
     <section className="relative bg-white pb-12 md:pb-20 px-4 md:px-10 overflow-hidden">
@@ -53,7 +25,7 @@ export const ProductMaterialsSection = () => {
               className="w-full max-w-4xl flex justify-center mb-8 -m-5 -mt-24"
             >
               <img
-                src={productData.images.technical}
+                src={product.ImagemBottom || ""}
                 alt={t("product.technical.side.alt")}
                 className="w-full h-auto object-contain"
               />

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import PocketBase from "pocketbase";
 import { useTranslation } from "react-i18next";
 
-const pb = new PocketBase("http://localhost:8090");
+const pb = new PocketBase("http://192.168.1.135:8090");
 
 export type CoresRal = {
   id: string;

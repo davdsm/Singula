@@ -38,11 +38,11 @@ export const CategoryCard = ({
             category={design.toLowerCase() as "garden" | "home" | "street"}
           />
         </div>
-        <Image
+       {/*  <Image
           src={image}
           alt={title}
           className="w-full h-[10rem] md:h-[20rem] object-contain"
-        />
+        /> */}
         <span className="text-black font-bold w-full text-center block text-lg">
           {design} Design
         </span>

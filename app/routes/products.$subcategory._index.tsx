@@ -1,5 +1,5 @@
 import { useParams } from "@remix-run/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CategoriesList } from "~/components/CategoriesList";
 import { ProductCategoryList } from "~/components/CategoriesList/categoryListProducts";
 import { Filters } from "~/components/CategoriesList/filters";
@@ -17,17 +17,20 @@ export const Subcategory = () => {
   const { subcategories, loading, error } = useSubcategoriesBySlug(
     subcategory || ""
   );
-  const { categories } = useCategories();
-  const { products } = useProducts({
+  const { categories, loading: loadingCategories } = useCategories();
+  const { products, loading: loadingProduct } = useProducts({
     subcategoryIds: subcategories.map((subcat) => subcat.slug),
   });
 
-  if (!subcategory || loading) return <h1>Loading...</h1>;
+  if (!subcategory || loading || loadingProduct || loadingCategories)
+    return <h1>Loading...</h1>;
   if (error || subcategories.length === 0) return <h1>Error or no data</h1>;
 
   const filteredProducts = products.filter((product) =>
-    product.subcategory.slug.includes(SelectedSubCat)
+    product.subcategory?.slug.includes(SelectedSubCat)
   );
+
+  console.log("products...", products);
 
   return (
     <main className="bg-[#f5f5f5] overflow-x-hidden">
@@ -63,7 +66,7 @@ export const Subcategory = () => {
         list={filteredProducts.map((product) => ({
           name: product.name,
           slug: product.slug,
-          img: product.ImagemPrincipal,
+          img: product.ImagemPrincipal || "",
         }))}
         subcategory={subcategory}
       />
