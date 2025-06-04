@@ -144,5 +144,8 @@
   "product.colors.recommended": "recomendados",
   "product.note.customization": "personalização",
   "product.materials.button": "MATERIAIS",
-  "product.materials.finishes": "Acabamentos"
+  "product.materials.finishes": "Acabamentos",
+
+  "product.downloads.techfile": "Ficha Técnica",
+  "product.downloads.dwg": "Modelo .dwg "
 }

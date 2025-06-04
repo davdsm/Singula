@@ -24,11 +24,11 @@ export const ProductPage = () => {
 
         <ProductGallery product={productFinal[0]} />
 
-        <ProductMaterials />
+        <ProductMaterials product={productFinal[0]} />
 
-        <ProductInfoBoxes />
+        <ProductInfoBoxes product={productFinal[0]} />
 
-        <ProductMaterialsSection />
+        <ProductMaterialsSection product={productFinal[0]} />
       </div>
     </main>
   );

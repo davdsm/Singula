@@ -20,10 +20,10 @@ export const MaterialPopup = ({
         whileInView={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5, ease: "easeInOut", delay: 0 }}
         viewport={{ amount: 0.3 }}
-        className="relative bg-white flex flex-flow justify-between items-center w-[90%] md:w-2/3 h-[60%] rounded-[1rem] z-20"
+        className="flex-col md:flex-row relative bg-white flex flex-flow justify-between items-center w-[90%] md:w-2/3 h-[60%] rounded-[1rem] z-20"
       >
         <button
-          className="absolute top-4 right-4 md:top-8 md:right-8 text-singula-garden"
+          className="absolute top-4 right-4 md:top-8 md:right-8 text-white md:text-singula-garden"
           onClick={() => close()}
         >
           <svg
@@ -45,10 +45,10 @@ export const MaterialPopup = ({
         <Image
           src={img}
           alt={title}
-          className="w-[40%] h-full rounded-tl-[1rem] rounded-bl-[1rem] object-cover"
+          className="w-full md:w-[40%] h-full rounded-tl-[1rem] rounded-bl-[1rem] object-cover"
         />
 
-        <div className="w-[55%]">
+        <div className="w-full md:w-[55%] p-10 md:p-0">
           <h3 className="text-lg md:text-4xl text-black font-bold w-full text-left">
             {title}
           </h3>

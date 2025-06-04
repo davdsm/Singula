@@ -19,7 +19,7 @@ export const ContactInfo = () => {
   useEffect(() => {
     const lang = i18n.language || "pt";
 
-    fetch(`/api/${lang}/contactInfo.json`, {
+    fetch(`info/${lang}/contactInfo.json`, {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",

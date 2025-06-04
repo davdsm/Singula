@@ -13,7 +13,7 @@ export const ProductHero = ({ product }: { product: Product }) => {
           whileInView={{ y: 0, opacity: 1 }}
           transition={{ duration: 1, ease: "easeInOut", delay: 0.2 }}
           viewport={{ amount: 0.3 }}
-          className="text-5xl font-bold uppercase text-black"
+          className="text-3xl md:text-5xl font-bold uppercase text-black"
         >
           {parseTextWithMainColor(product.name)}
         </motion.h1>
@@ -23,7 +23,7 @@ export const ProductHero = ({ product }: { product: Product }) => {
           whileInView={{ y: 0, opacity: 1 }}
           transition={{ duration: 1, ease: "easeInOut", delay: 0.4 }}
           viewport={{ amount: 0.3 }}
-          className="text-black font-black text-2xl py-4"
+          className="text-black font-black text-xl md:text-2xl py-2 md:py-4"
         >
           {parseTextWithMainColor(product.subtitle)}
         </motion.p>
@@ -33,7 +33,7 @@ export const ProductHero = ({ product }: { product: Product }) => {
           whileInView={{ y: 0, opacity: 1 }}
           transition={{ duration: 1, ease: "easeInOut", delay: 0.6 }}
           viewport={{ amount: 0.3 }}
-          className="font-bold text-gray-700 max-w-3xl mx-auto text-xl"
+          className="font-bold text-gray-700 max-w-3xl mx-auto text-md md:text-xl"
         >
          {parseTextWithMainColor(product.text)}
         </motion.p>
