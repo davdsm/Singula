@@ -5,7 +5,7 @@ import pb from "~/lib/pocketbase";
 type PageData = Record<string, string | string[]>;
 
 // Set your PocketBase base URL here
-const pocketBaseUrl = "http://192.168.1.135:8090";
+const pocketBaseUrl = "http://localhost:8090";
 
 export function usePageContent(collection: string) {
   const [data, setData] = useState<PageData>({});

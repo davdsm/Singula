@@ -16,7 +16,7 @@ export function useTeam() {
   const [error, setError] = useState<string | null>(null);
   const { i18n } = useTranslation();
 
-  const pocketBaseUrl = "http://192.168.1.135:8090"; // <-- Update this to your actual base URL
+  const pocketBaseUrl = "http://localhost:8090"; // <-- Update this to your actual base URL
 
   useEffect(() => {
     const fetchData = async () => {

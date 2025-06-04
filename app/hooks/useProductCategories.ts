@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-const pocketBaseUrl = "http://192.168.1.135:8090"; // Use your actual URL in production
+const pocketBaseUrl = "http://localhost:8090"; // Use your actual URL in production
 
 export type Design = {
   id: string;
