@@ -11,7 +11,7 @@ import {
   Product,
 } from "./interfaces";
 
-const pocketBaseUrl = "http://192.168.1.135:8090";
+const pocketBaseUrl = "http://localhost:8090";
 
 export const useProducts = ({
   subcategoryIds,
