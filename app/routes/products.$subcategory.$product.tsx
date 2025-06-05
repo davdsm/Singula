@@ -15,8 +15,6 @@ export const ProductPage = () => {
 
   if (loading) return <>loading...</>;
 
-  console.log("products..", productFinal);
-
   return (
     <main className="bg-white overflow-x-hidden">
       <div className="pt-32 md:pt-36">

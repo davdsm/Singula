@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { Button } from "../Elements/Button";
 import { Product } from "../../hooks/interfaces";
+import { Image } from "../Elements/Image";
 
 export const ProductMaterialsSection = ({ product }: { product: Product }) => {
   const { t } = useTranslation();
@@ -16,21 +17,28 @@ export const ProductMaterialsSection = ({ product }: { product: Product }) => {
           viewport={{ amount: 0.2 }}
           className="mb-12 md:mb-16"
         >
-          <div className="px-8 md:px-16 flex flex-col items-center justify-center min-h-[400px] md:min-h-[500px]">
-            <motion.div
-              initial={{ y: 30, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              transition={{ duration: 1, ease: "easeInOut", delay: 0.3 }}
-              viewport={{ amount: 0.3 }}
-              className="w-full max-w-4xl flex justify-center mb-8 -m-5 -mt-24"
-            >
-              <img
-                src={product.ImagemBottom || ""}
-                alt={t("product.technical.side.alt")}
-                className="w-full h-auto object-contain"
-              />
-            </motion.div>
-
+          <div className="px-8 md:px-16 flex flex-col items-center justify-center">
+            {product.ImagemBottom && (
+              <motion.div
+                initial={{ y: 30, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                transition={{ duration: 1, ease: "easeInOut", delay: 0.3 }}
+                viewport={{ amount: 0.3 }}
+                className="w-full max-w-4xl flex justify-center mb-8"
+              >
+                {product.ImagemBottom?.map((imagem: string) => (
+                  <Image
+                    className={`w-full object-contain ${
+                      product.ImagemBottom?.length === 1
+                        ? "max-h-[60vw]"
+                        : "max-h-[30vw]"
+                    }`}
+                    src={imagem || ""}
+                    alt={product.name}
+                  />
+                ))}
+              </motion.div>
+            )}
             <motion.div
               initial={{ y: 30, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}

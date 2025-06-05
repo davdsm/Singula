@@ -19,13 +19,20 @@ export const Button = ({
     <DelayedLink
       to={to}
       target={target}
-      className={`hover:bg-transparent hover:translate-y-[-2px] transition-all transition duration-700 inline-block bg-singula-black p-2 rounded-3xl pr-4 ${className}`}
+      className={`group hover:bg-singula-main hover:translate-y-[-2px] transition-all transition duration-700 inline-block bg-singula-black p-2 rounded-3xl pr-4 flex items-center ${
+        className ?? ""
+      }`}
     >
-      <span className="bg-singula-main text-white font-bold p-2 uppercase rounded-3xl text-md">
+      <span className="bg-singula-mainDarker text-white font-bold p-2 uppercase rounded-3xl text-md">
         {firstText}
       </span>
-      <span className="text-singula-main text-lg mx-4">{secondText}</span>
-      <FontAwesomeIcon icon={faArrowRight} className="text-singula-main" />
+      <span className="transition-colors duration-300 group-hover:text-white text-singula-main text-lg mx-4">
+        {secondText}
+      </span>
+      <FontAwesomeIcon
+        icon={faArrowRight}
+        className="w-4 h-4 text-singula-main transition-colors group-hover:text-white duration-300"
+      />
     </DelayedLink>
   );
 };

@@ -9,7 +9,10 @@ import {
   faInstagram,
 } from "@fortawesome/free-brands-svg-icons";
 
-import { faEnvelope, faPlaneCircleCheck } from "@fortawesome/free-solid-svg-icons";
+import {
+  faEnvelope,
+  faPlaneCircleCheck,
+} from "@fortawesome/free-solid-svg-icons";
 
 import { DelayedLink } from "~/components/Elements/Link";
 import { Logo } from "~/components/Elements/Logo";
@@ -177,10 +180,7 @@ export const Footer = () => {
           <label className="inline-flex items-center cursor-pointer mt-1">
             <input type="checkbox" className="peer hidden" required />
             <button type="submit" className="absolute right-10 top-16">
-              <FontAwesomeIcon
-                icon={faEnvelope}
-                className="text-white"
-              />
+              <FontAwesomeIcon icon={faEnvelope} className="text-white" />
             </button>
             <div className="w-3 h-3 border-2 border-white rounded-md flex items-center justify-center peer-checked:border-black peer-checked:bg-white transition-colors duration-200">
               <svg
@@ -204,7 +204,7 @@ export const Footer = () => {
               href="https://facebook.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-10 h-10 text-xl flex items-center justify-center rounded-full text-black hover:text-singula-main transition-colors duration-300"
+              className="w-4 h-4 text-xl flex items-center justify-center rounded-full text-black hover:text-singula-main transition-colors duration-300"
               aria-label="Facebook"
             >
               <FontAwesomeIcon icon={faFacebook} />
@@ -214,7 +214,7 @@ export const Footer = () => {
               href="https://linkedin.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-10 h-10 text-xl  flex items-center justify-center rounded-full text-black hover:text-singula-main transition-colors duration-300"
+              className="mx-4 w-4 h-4 text-xl flex items-center justify-center rounded-full text-black hover:text-singula-main transition-colors duration-300"
               aria-label="LinkedIn"
             >
               <FontAwesomeIcon icon={faLinkedinIn} />
@@ -224,7 +224,7 @@ export const Footer = () => {
               href="https://instagram.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-10 h-10 text-xl flex items-center justify-center rounded-full text-black hover:text-singula-main transition-colors duration-300"
+              className="w-4 h-4 text-xl flex items-center justify-center rounded-full text-black hover:text-singula-main transition-colors duration-300"
               aria-label="Instagram"
             >
               <FontAwesomeIcon icon={faInstagram} />

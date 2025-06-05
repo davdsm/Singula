@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { useTranslation } from "react-i18next";
-import { MainColor } from "../Elements/Colors/main";
 import { parseTextWithMainColor } from "../utils";
+import { Product } from "~/hooks/interfaces";
+import { Trans } from "react-i18next";
 
 export const ProductHero = ({ product }: { product: Product }) => {
   return (
@@ -25,7 +24,7 @@ export const ProductHero = ({ product }: { product: Product }) => {
           viewport={{ amount: 0.3 }}
           className="text-black font-black text-xl md:text-2xl py-2 md:py-4"
         >
-          {parseTextWithMainColor(product.subtitle)}
+          <Trans>{parseTextWithMainColor(product.subtitle)}</Trans>
         </motion.p>
 
         <motion.p
@@ -35,7 +34,7 @@ export const ProductHero = ({ product }: { product: Product }) => {
           viewport={{ amount: 0.3 }}
           className="font-bold text-gray-700 max-w-3xl mx-auto text-md md:text-xl"
         >
-         {parseTextWithMainColor(product.text)}
+          <Trans>{parseTextWithMainColor(product.text)}</Trans>
         </motion.p>
       </div>
     </section>

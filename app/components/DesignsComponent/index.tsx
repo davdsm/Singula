@@ -25,9 +25,9 @@ export const DesignsComponent = ({
       whileInView={{ y: 0, opacity: 1 }}
       transition={{ duration: 1, ease: "easeInOut", delay: 0.4 }}
       viewport={{ amount: 0.3 }}
-      className="py-10 md:py-40 pl-10 md:pl-40 flex justify-center gap-5 flex-col md:flex-row"
+      className="py-10 md:py-40 pl-10 md:pl-40 md:pl-40 flex justify-center gap-5 flex-col md:flex-row"
     >
-      <div className="w-full pr-40 md:pr-0 py-10 md:py-0 md:w-1/3 flex-col">
+      <div className="w-full md:pr-10 md:pr-0 py-10 md:py-0 md:w-1/3 flex-col">
         <motion.div
           initial={{ y: 20, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}

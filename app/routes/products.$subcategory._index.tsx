@@ -26,11 +26,11 @@ export const Subcategory = () => {
     return <h1>Loading...</h1>;
   if (error || subcategories.length === 0) return <h1>Error or no data</h1>;
 
+  console.log("products...", products);
+
   const filteredProducts = products.filter((product) =>
     product.subcategory?.slug.includes(SelectedSubCat)
   );
-
-  console.log("products...", products);
 
   return (
     <main className="bg-[#f5f5f5] overflow-x-hidden">
