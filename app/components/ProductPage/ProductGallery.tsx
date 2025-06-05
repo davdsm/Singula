@@ -19,6 +19,7 @@ export const ProductGallery = ({ product }: { product: Product }) => {
         >
           {product.PrimeiraImagem?.map((imagem: string) => (
             <Image
+              key={`imagem-${imagem}`}
               className={`w-full object-contain ${
                 product.PrimeiraImagem?.length === 1
                   ? "max-h-[60vw]"
@@ -64,6 +65,7 @@ export const ProductGallery = ({ product }: { product: Product }) => {
         >
           {product.ImagemMeio?.map((imagem: string) => (
             <Image
+              key={`imagem-${imagem}`}
               className={`w-full object-contain ${
                 product.ImagemMeio?.length === 1
                   ? "max-h-[60vw]"
