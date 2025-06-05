@@ -75,7 +75,7 @@ export const useProducts = ({
         const formatted: Product[] = filtered.map((item: ApiProduct) => ({
           id: item.id,
           slug: item.slug,
-          special: item[`NotaEspecial_${lang}`] || "",
+          special: (item as any)[`NotaEspecial_${lang}`] || "",
           name: (item as any)[`name_${lang}`] || item.name_pt,
           subtitle: (item as any)[`subtitle_${lang}`] || item.subtitle_pt,
           text: (item as any)[`text_${lang}`] || item.text_pt,
@@ -91,15 +91,19 @@ export const useProducts = ({
           ImagemPrincipal: item.ImagemPrincipal
             ? `${pocketBaseUrl}/api/files/${item.collectionId}/${item.id}/${item.ImagemPrincipal}`
             : null,
-          PrimeiraImagem: item.PrimeiraImagem
-            ? `${pocketBaseUrl}/api/files/${item.collectionId}/${item.id}/${item.PrimeiraImagem}`
-            : null,
-          ImagemMeio: item.ImagemMeio
-            ? `${pocketBaseUrl}/api/files/${item.collectionId}/${item.id}/${item.ImagemMeio}`
-            : null,
-          ImagemBottom: item.ImagemBottom
-            ? `${pocketBaseUrl}/api/files/${item.collectionId}/${item.id}/${item.ImagemBottom}`
-            : null,
+          PrimeiraImagem: item.PrimeiraImagem?.map(
+            (imagem: string) =>
+              `${pocketBaseUrl}/api/files/${item.collectionId}/${item.id}/${imagem}`
+          ),
+
+          ImagemMeio: item.ImagemMeio?.map(
+            (imagem: string) =>
+              `${pocketBaseUrl}/api/files/${item.collectionId}/${item.id}/${imagem}`
+          ),
+          ImagemBottom: item.ImagemBottom?.map(
+            (imagem: string) =>
+              `${pocketBaseUrl}/api/files/${item.collectionId}/${item.id}/${imagem}`
+          ),
           Ficha_Tecnica: item.Ficha_Tecnica
             ? `${pocketBaseUrl}/api/files/${item.collectionId}/${item.id}/${item.Ficha_Tecnica}`
             : null,
@@ -107,11 +111,15 @@ export const useProducts = ({
             ? `${pocketBaseUrl}/api/files/${item.collectionId}/${item.id}/${item.Model_DWG}`
             : null,
           subcategory: item.expand?.subcategory || null,
-          materiais: formatMateriais(item.expand!.materiais!) || [],
-          cores_recomendado: formatColors(item.expand?.cores_recomendado ?? []),
-          acabamentos_recomendado: formatAcabamento(
-            item.expand?.acabamentos_recomendado ?? []
-          ),
+          materiais: item.expand?.materiais
+            ? formatMateriais(item.expand!.materiais!)
+            : [],
+          cores_recomendado: item.expand?.cores_recomendado
+            ? formatColors(item.expand?.cores_recomendado)
+            : [],
+          acabamentos_recomendado: item.expand?.acabamentos_recomendado
+            ? formatAcabamento(item.expand?.acabamentos_recomendado)
+            : [],
         }));
 
         setProducts(formatted);

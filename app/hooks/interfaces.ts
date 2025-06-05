@@ -102,9 +102,9 @@ export interface Product {
   note: string;
   banner: string | null;
   ImagemPrincipal: string | null;
-  PrimeiraImagem: string | null;
-  ImagemMeio: string | null;
-  ImagemBottom: string | null;
+  PrimeiraImagem: string[] | null;
+  ImagemMeio: string[] | null;
+  ImagemBottom: string[] | null;
   Ficha_Tecnica: string | null;
   Model_DWG: string | null;
   subcategory: Subcategory | null;
@@ -180,9 +180,9 @@ export interface ApiProduct {
   // Image and file fields
   banner?: string;
   ImagemPrincipal?: string;
-  PrimeiraImagem?: string;
-  ImagemMeio?: string;
-  ImagemBottom?: string;
+  PrimeiraImagem?: string[];
+  ImagemMeio?: string[];
+  ImagemBottom?: string[];
   Ficha_Tecnica?: string;
   Model_DWG?: string;
 

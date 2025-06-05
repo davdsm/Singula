@@ -15,7 +15,7 @@ export const SearchBar = ({ onSearch }: { onSearch: Function }) => {
 
   return (
     <form
-      className="hidden md:block relative text-gray-600"
+      className="hidden md:flex relative text-gray-600 items-center"
       action=""
       onSubmit={submit}
     >
@@ -27,7 +27,7 @@ export const SearchBar = ({ onSearch }: { onSearch: Function }) => {
         value={searchText}
         onChange={(e) => setSearchText(e.target.value)}
       />
-      <button type="submit" className="absolute right-0 mt-2 mr-4 text-white">
+      <button type="submit" className="absolute right-0 mr-4 text-white">
         <FontAwesomeIcon icon={faSearch} className="w-4 h-4" />
       </button>
     </form>

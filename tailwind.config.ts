@@ -21,6 +21,7 @@ export default {
       colors: {
         singula: {
           main: "#F1585E",
+          mainDarker: "#b34448",
           white: "#FFFFFF",
           black: "#121212",
           realBlack: "#000000",

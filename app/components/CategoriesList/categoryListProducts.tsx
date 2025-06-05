@@ -38,11 +38,11 @@ export const ProductCategoryList = ({
                     delay: index / 10,
                   }}
                   viewport={{ amount: 0.2 }}
-                  className="transition-bg text-black bg-white border border-white w-[47%] md:w-[32%] rounded-3xl h-[60vw] md:h-[25vw] p-4 md:p-10 relative flex justify-center items-center hover:mix-blend-darken transition-600 hover:text-singula-main hover:border-[#D2D2D2]"
+                  className="transition-bg text-black bg-white border border-white w-[47%] md:w-[32%] rounded-3xl h-[60vw] md:h-[25vw] relative flex justify-center items-center hover:mix-blend-darken transition-600 hover:text-singula-main hover:border-[#D2D2D2]"
                 >
                   <DelayedLink
                     to={`/products/${subcategory}/${item.slug}`}
-                    className="w-full h-full"
+                    className="w-full h-full p-4 md:p-10"
                   >
                     <Image
                       src={item.img}
