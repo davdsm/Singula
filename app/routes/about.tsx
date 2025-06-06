@@ -55,7 +55,7 @@ export const About = () => {
       />
       <Banner
         url={aboutData["about-banner-img"][0] as string}
-        className="w-full h-[40vh] md:h-[60vh] object-cover"
+        className="w-full h-[20vh] md:h-[40vh] object-contain"
       />
       <SingulaStudio
         title={aboutData["about-team-title"] as string}
