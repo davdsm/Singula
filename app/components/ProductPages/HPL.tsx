@@ -23,7 +23,7 @@ export const HPL = ({
   const { t } = useTranslation();
 
   return (
-    <section className="bg-white">
+    <section className="bg-white" id="hpl-colors">
       <motion.div
         initial={{ y: 30, opacity: 0 }}
         whileInView={{ y: 0, opacity: 1 }}

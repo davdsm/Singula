@@ -13,8 +13,8 @@ export const ProductMaterialsSection = ({ product }: { product: Product }) => {
         <motion.div
           initial={{ y: 50, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
-          transition={{ duration: 1, ease: "easeInOut", delay: 0.8 }}
-          viewport={{ amount: 0.2 }}
+          transition={{ duration: 1, ease: "easeInOut", delay: 0.2 }}
+          viewport={{ amount: 0.1 }}
           className="mb-12 md:mb-16"
         >
           <div className="px-8 md:px-16 flex flex-col items-center justify-center">
@@ -24,14 +24,15 @@ export const ProductMaterialsSection = ({ product }: { product: Product }) => {
                 whileInView={{ y: 0, opacity: 1 }}
                 transition={{ duration: 1, ease: "easeInOut", delay: 0.3 }}
                 viewport={{ amount: 0.3 }}
-                className="w-full max-w-4xl flex justify-center mb-8"
+                className="w-full max-w-4xl flex justify-center mb-8 flex-col"
               >
                 {product.ImagemBottom?.map((imagem: string) => (
                   <Image
+                    key={`imagem-${imagem}`}
                     className={`w-full object-contain ${
                       product.ImagemBottom?.length === 1
-                        ? "max-h-[60vw]"
-                        : "max-h-[30vw]"
+                        ? "md:max-h-[60vw]"
+                        : "md:max-h-[30vw]"
                     }`}
                     src={imagem || ""}
                     alt={product.name}
@@ -42,8 +43,8 @@ export const ProductMaterialsSection = ({ product }: { product: Product }) => {
             <motion.div
               initial={{ y: 30, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
-              transition={{ duration: 1, ease: "easeInOut", delay: 0.5 }}
-              viewport={{ amount: 0.3 }}
+              transition={{ duration: 1, ease: "easeInOut", delay: 0.2 }}
+              viewport={{ amount: 0.1 }}
               className="flex items-center justify-center"
             >
               <Button

@@ -199,7 +199,7 @@ export const Footer = () => {
           </label>
         </form>
         <div className="social w-full">
-          <div className="flex space-x-2 justify-center md:justify-end">
+          <div className="flex space-x-8 justify-center md:justify-end">
             <a
               href="https://facebook.com"
               target="_blank"

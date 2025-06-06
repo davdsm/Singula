@@ -15,7 +15,7 @@ export const CoresRal = ({
 }) => {
   const { t } = useTranslation();
   return (
-    <section className="bg-white w-[90%] m-auto py-20 md:px-40 md:pt-40 md:w-full">
+    <section id="ral-colors" className="bg-white w-[90%] m-auto py-20 md:px-40 md:pt-40 md:w-full">
       <motion.div
         initial={{ y: 30, opacity: 0 }}
         whileInView={{ y: 0, opacity: 1 }}

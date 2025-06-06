@@ -1,5 +1,8 @@
+import { faFile, faPlaneDeparture } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState, ChangeEvent } from "react";
 import { useTranslation } from "react-i18next";
+import { useSendMail } from "~/hooks/useEmail";
 
 interface FormData {
   name: string;
@@ -10,6 +13,7 @@ interface FormData {
 
 export const ContactForm = () => {
   const { t } = useTranslation();
+  const { sendMail, Loading, Sent } = useSendMail();
 
   const [formData, setFormData] = useState<FormData>({
     name: "",
@@ -29,8 +33,7 @@ export const ContactForm = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
-    // Here you would normally send the data to a server
+    sendMail(formData.name, formData.contact, formData.email, formData.message);
   };
 
   return (
@@ -111,11 +114,16 @@ export const ContactForm = () => {
               </div>
 
               <div className="flex justify-center md:justify-between items-center mt-8">
-                <button
-                  type="button"
-                  className="text-2xl border border-red-400 text-red-400 hover:bg-red-400 hover:text-white px-14 py-2 rounded-full transition-colors"
-                >
-                  {t("contact.form.submit")}
+                <button className="group relative inline-flex h-12 items-center justify-center overflow-hidden rounded-full bg-gray-800 px-8 font-medium text-neutral-200">
+                  <div className="mr-0 w-0 -translate-x-[100%] opacity-0 transition-all duration-200 group-hover:mr-1 group-hover:w-5 group-hover:translate-x-0 group-hover:opacity-100">
+                    <FontAwesomeIcon
+                      icon={faPlaneDeparture}
+                      className="w-6 h-6"
+                    />
+                  </div>
+                  <span className="text-xl px-2">
+                    {Sent ? "✉️✅" : Loading ? "..." : t("contact.form.submit")}
+                  </span>
                 </button>
               </div>
             </div>
@@ -125,21 +133,18 @@ export const ContactForm = () => {
       <div className="flex justify-center items-center">
         <button
           type="submit"
-          className="font-black mt-20 md: mt0 text-2xl bg-red-400 text-white px-8 py-2 rounded-full flex items-center transition-ease transition-300"
+          className="group relative inline-flex h-12 items-center justify-center overflow-hidden rounded-full bg-singula-main"
         >
-          {t("contact.quote.button")}
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5 ml-2"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-          >
-            <path
-              fillRule="evenodd"
-              d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z"
-              clipRule="evenodd"
-            />
-          </svg>
+          <div className="text-xl uppercase text-white font-bold inline-flex h-12 translate-y-0 items-center justify-center px-12 py-4 text-white transition duration-500 group-hover:-translate-y-[150%]">
+            {t("contact.quote.button")}
+            <FontAwesomeIcon icon={faFile} className="w-6 h-6 ml-4" />
+          </div>
+          <div className="flex absolute inline-flex h-12 w-full translate-y-[100%] items-center justify-center text-neutral-50 transition duration-500 group-hover:translate-y-0">
+            <span className="absolute h-full w-full translate-y-full skew-y-12 scale-y-0 bg-singula-mainDarker transition duration-500 group-hover:translate-y-0 group-hover:scale-150"></span>
+            <span className="z-10 text-2xl font-bold flex items-center">
+              {t("contact.quote.button")}
+            </span>
+          </div>
         </button>
       </div>
     </section>
