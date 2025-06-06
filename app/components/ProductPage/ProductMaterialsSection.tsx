@@ -10,20 +10,12 @@ export const ProductMaterialsSection = ({ product }: { product: Product }) => {
   return (
     <section className="relative bg-white pb-12 md:pb-20 px-4 md:px-10 overflow-hidden">
       <div className="max-w-7xl mx-auto relative z-10">
-        <motion.div
-          initial={{ y: 50, opacity: 0 }}
-          whileInView={{ y: 0, opacity: 1 }}
-          transition={{ duration: 1, ease: "easeInOut", delay: 0.2 }}
-          viewport={{ amount: 0.1 }}
+        <div
           className="mb-12 md:mb-16"
         >
           <div className="px-8 md:px-16 flex flex-col items-center justify-center">
             {product.ImagemBottom && (
-              <motion.div
-                initial={{ y: 30, opacity: 0 }}
-                whileInView={{ y: 0, opacity: 1 }}
-                transition={{ duration: 1, ease: "easeInOut", delay: 0.3 }}
-                viewport={{ amount: 0.3 }}
+              <div
                 className="w-full max-w-4xl flex justify-center mb-8 flex-col"
               >
                 {product.ImagemBottom?.map((imagem: string) => (
@@ -38,7 +30,7 @@ export const ProductMaterialsSection = ({ product }: { product: Product }) => {
                     alt={product.name}
                   />
                 ))}
-              </motion.div>
+              </div>
             )}
             <motion.div
               initial={{ y: 30, opacity: 0 }}
@@ -54,7 +46,7 @@ export const ProductMaterialsSection = ({ product }: { product: Product }) => {
               />
             </motion.div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
