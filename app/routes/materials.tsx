@@ -5,8 +5,8 @@ import { BannerText } from "~/components/ProductPages/BannerText";
 import { CoresRal } from "~/components/ProductPages/CoresRal";
 import { ProductPageEntry } from "~/components/ProductPages/Entry";
 import { Finishings } from "~/components/ProductPages/Finishings";
-import { HPL } from "~/components/ProductPages/HPL";
-import { Modal } from "~/components/ProductPages/Modal";
+import { HPL as Hpl } from "~/components/ProductPages/HPL";
+import { Modal } from "~/components/Elements/Modal";
 import { useAcabamentos } from "~/hooks/useAcabamentos";
 import { useCoresRal } from "~/hooks/useColors";
 import { useCompactoHPL } from "~/hooks/useCompactoHPL";
@@ -43,7 +43,13 @@ export const Materials = () => {
       />
       <About
         text={data["materials-entry-text"] as string}
-        setModalContent={setModalContent}
+        setModalContent={(content) =>
+          setModalContent({
+            title: content.title,
+            img: content.img ?? "",
+            text: content.text,
+          })
+        }
         list={materiais}
       />
       <BannerText text={data["materials-central-text"] as string} />
@@ -52,14 +58,14 @@ export const Materials = () => {
         title={data["materials-ral-colors-title"] as string}
         colors={cores}
       />
-      <HPL
+      <Hpl
         title={data["materials-hpl-title"] as string}
         text={data["materials-hpl-text"] as string}
         img={data["materials-hpl-img"] as string}
         setModalContent={setModalContent}
         list={compactoHPL.map((item) => ({
           name: item.name,
-          img: item.image || "",
+          img: item.image ?? "",
           description: item.description,
         }))}
       />

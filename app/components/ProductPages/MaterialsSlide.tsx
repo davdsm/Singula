@@ -3,11 +3,16 @@ import { CarouselComponent } from "../Elements/Carousel";
 import { Image } from "../Elements/Image";
 
 import "./index.scss";
+import { useNavigate } from "@remix-run/react";
 export const MaterialsSlide = ({
   setModalContent,
   list,
 }: {
-  setModalContent: Function;
+  setModalContent: (content: {
+    title: string;
+    img?: string;
+    text: string;
+  }) => void;
   list: {
     slug: string;
     name: string;
@@ -15,6 +20,27 @@ export const MaterialsSlide = ({
     image?: string;
   }[];
 }) => {
+  const navigate = useNavigate();
+
+  const handleMaterialButton = (item: {
+    slug: string;
+    name: string;
+    text: string;
+    image?: string;
+  }) => {
+    if (item.text.includes("#")) {
+      navigate(item.text);
+      return;
+    }
+
+    item.text &&
+      setModalContent({
+        title: item.name,
+        img: item.image,
+        text: item.text,
+      });
+  };
+
   return (
     <motion.div
       initial={{ y: 30, opacity: 0 }}
@@ -34,14 +60,7 @@ export const MaterialsSlide = ({
             key={`material-${index}`}
             type="button"
             className="text-center flex justify-center flex-col items-center w-full"
-            onClick={() =>
-              item.text &&
-              setModalContent({
-                title: item.name,
-                img: item.image,
-                text: item.text,
-              })
-            }
+            onClick={() => handleMaterialButton(item)}
           >
             <Image
               src={item.image || ""}

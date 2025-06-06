@@ -7,7 +7,7 @@ export const About = ({
   text,
   list,
 }: {
-  setModalContent: Function;
+  setModalContent: (content: { title: string; img?: string; text: string }) => void;
   text: string;
   list: {
     slug: string;
