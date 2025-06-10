@@ -64,6 +64,9 @@ body {
   /*overflow-x: hidden;*/
 }
 
+nav ul li a, h1, h2, h3 {
+  letter-spacing: 1px;
+}
 
 
 

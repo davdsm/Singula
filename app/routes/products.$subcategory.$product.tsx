@@ -5,6 +5,7 @@ import { ProductMaterials } from "~/components/ProductPage/ProductMaterials";
 import { ProductInfoBoxes } from "~/components/ProductPage/ProductInfoBoxes";
 import { ProductMaterialsSection } from "~/components/ProductPage/ProductMaterialsSection";
 import { useProducts } from "~/hooks/useProducts";
+import { useSubcategoriesBySlug } from "~/hooks/useProductSubCategories";
 
 export const ProductPage = () => {
   const { subcategory, product } = useParams();
@@ -13,12 +14,26 @@ export const ProductPage = () => {
     productSlug: product,
   });
 
-  if (loading) return <>loading...</>;
+  // Hooks must be called unconditionally
+  const {
+    subcategories,
+    loading: LoadingSubcategories,
+    error,
+  } = useSubcategoriesBySlug(subcategory || "");
+
+  const subcategoryTreated = subcategories.find(
+    (subcat) => subcat.category.slug === subcategory
+  );
+
+  if (loading || !subcategoryTreated) return <>loading...</>;
 
   return (
     <main className="bg-white overflow-x-hidden">
       <div className="pt-32 md:pt-36">
-        <ProductHero product={productFinal[0]} />
+        <ProductHero
+          product={productFinal[0]}
+          subcategory={subcategoryTreated!}
+        />
 
         <ProductGallery product={productFinal[0]} />
 

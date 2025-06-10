@@ -73,19 +73,21 @@ export const ProductMaterials = ({ product }: { product: Product }) => {
                 </div>
               </div>
 
-              <div>
-                <h3 className="text-xl md:text-2xl lg:text-3xl font-bold mb-4 md:mb-6 uppercase tracking-wider">
-                  {t("product.materials.weight.title")}
-                </h3>
+              {/* {product.pesos.length > 0 && (
+                <div>
+                  <h3 className="text-xl md:text-2xl lg:text-3xl font-bold mb-4 md:mb-6 uppercase tracking-wider">
+                    {t("product.materials.weight.title")}
+                  </h3>
 
-                <div className="space-y-3 md:space-y-4">
-                  {product.pesos.split(",").map((peso, index) => (
-                    <UnifiedHoverItem key={`finish-${index}`}>
-                      <span>{peso}</span>
-                    </UnifiedHoverItem>
-                  ))}
+                  <div className="space-y-3 md:space-y-4">
+                    {product.pesos.split(",").map((peso, index) => (
+                      <UnifiedHoverItem key={`finish-${index}`}>
+                        <span>{peso}</span>
+                      </UnifiedHoverItem>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              )} */}
             </motion.div>
 
             <motion.div
@@ -97,7 +99,7 @@ export const ProductMaterials = ({ product }: { product: Product }) => {
             >
               <div className="w-full h-full">
                 <img
-                  src={product.banner || ''}
+                  src={product.banner || ""}
                   alt={t("product.materials.context.alt")}
                   className="w-full h-48 sm:h-64 md:h-80 lg:h-full object-cover rounded-2xl"
                 />

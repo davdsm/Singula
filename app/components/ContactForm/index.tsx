@@ -14,6 +14,7 @@ interface FormData {
 export const ContactForm = () => {
   const { t } = useTranslation();
   const { sendMail, Loading, Sent } = useSendMail();
+  const [Error, setError] = useState<boolean>(false);
 
   const [formData, setFormData] = useState<FormData>({
     name: "",
@@ -33,6 +34,18 @@ export const ContactForm = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setError(false);
+
+    const requiredFields: (keyof FormData)[] = ["name", "email", "message"];
+    const emptyField = requiredFields.find(
+      (key) => !formData[key].trim()
+    );
+
+    if (emptyField) {
+      setError(true);
+      return;
+    }
+
     sendMail(formData.name, formData.contact, formData.email, formData.message);
   };
 
@@ -126,6 +139,16 @@ export const ContactForm = () => {
                   </span>
                 </button>
               </div>
+
+              {Error && (
+                <div
+                  className="my-4 p-4 text-lg text-rose-500 rounded-lg bg-rose-950 w-auto"
+                  role="alert"
+                >
+                  <span className="font-bold">Atenção!</span> Preencha todos os
+                  campos.
+                </div>
+              )}
             </div>
           </div>
         </div>
