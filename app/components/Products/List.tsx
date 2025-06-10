@@ -36,9 +36,9 @@ export const ProductList = ({}) => {
                     alt={category.title}
                     className="w-full h-full object-contain pb-14"
                   />
-                  <p className="transition-bg transition-600 text-md md:text-3xl font-bold absolute bottom-6 md:bottom-10 w-full text-center left-0">
+                  <h3 className="transition-bg transition-600 text-md md:text-3xl font-bold absolute bottom-6 md:bottom-10 w-full text-center left-0">
                     {category.title}
-                  </p>
+                  </h3>
                 </DelayedLink>
               </motion.li>
             ))}

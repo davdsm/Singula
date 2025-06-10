@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 
 const pocketBaseUrl = "http://185.11.167.133:8090";
 
-type Subcategory = {
+export type Subcategory = {
   id: string;
   title: string;
   slug: string;

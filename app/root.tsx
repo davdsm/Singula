@@ -23,6 +23,7 @@ import { TransitionOverlay } from "./components/Elements/Transition";
 
 import "./global.css";
 import "./hooks/fontAwesome";
+import { useEffect } from "react";
 
 export const links: LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -103,6 +104,26 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
 export default function App() {
   const location = useLocation();
+
+  useEffect(() => {
+    // define a custom handler function
+    // for the contextmenu event
+    const handleContextMenu = (e) => {
+      // prevent the right-click menu from appearing
+      e.preventDefault();
+    };
+
+    // attach the event listener to
+    // the document object
+    document.addEventListener("contextmenu", handleContextMenu);
+
+    // clean up the event listener when
+    // the component unmounts
+    return () => {
+      document.removeEventListener("contextmenu", handleContextMenu);
+    };
+  }, []);
+
   return (
     <motion.div
       key={location.pathname}
