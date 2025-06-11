@@ -23,7 +23,7 @@ import { TransitionOverlay } from "./components/Elements/Transition";
 
 import "./global.css";
 import "./hooks/fontAwesome";
-import { useEffect } from "react";
+import { StrictMode, useEffect } from "react";
 
 export const links: LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -87,15 +87,17 @@ export function Layout({ children }: { children: React.ReactNode }) {
           <Links />
         </head>
         <body>
-          <TransitionProvider>
-            <TransitionOverlay />
-            <Header />
-            {children}
-            <Footer />
-            <ScrollRestoration />
-            <Scripts />
-            <LiveReload />
-          </TransitionProvider>
+          <StrictMode>
+            <TransitionProvider>
+              <TransitionOverlay />
+              <Header />
+              {children}
+              <Footer />
+              <ScrollRestoration />
+              <Scripts />
+              <LiveReload />
+            </TransitionProvider>
+          </StrictMode>
         </body>
       </html>
     </I18nextProvider>
@@ -105,7 +107,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 export default function App() {
   const location = useLocation();
 
-  useEffect(() => {
+  /* useEffect(() => {
     // define a custom handler function
     // for the contextmenu event
     const handleContextMenu = (e) => {
@@ -122,7 +124,7 @@ export default function App() {
     return () => {
       document.removeEventListener("contextmenu", handleContextMenu);
     };
-  }, []);
+  }, []); */
 
   return (
     <motion.div
@@ -131,6 +133,7 @@ export default function App() {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -10 }}
       transition={{ duration: 0.3, delay: 0.3 }}
+      className=""
     >
       <Outlet />
     </motion.div>
