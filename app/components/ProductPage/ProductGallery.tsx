@@ -25,7 +25,7 @@ export const ProductGallery = ({ product }: { product: Product }) => {
               } w-full ${
                 product.PrimeiraImagem?.length === 1
                   ? "md:max-h-[60vw]"
-                  : "md:max-h-[30vw]"
+                  : "md:max-h-[40vw]"
               }`}
               src={imagem || ""}
               alt={product.name}
@@ -73,7 +73,7 @@ export const ProductGallery = ({ product }: { product: Product }) => {
               } w-full ${
                 product.ImagemMeio?.length === 1
                   ? "md:max-h-[60vw]"
-                  : "md:max-h-[30vw]"
+                  : "md:max-h-[40vw]"
               }`}
               src={imagem || ""}
               alt={product.name}

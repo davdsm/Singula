@@ -61,7 +61,11 @@ body {
   line-height: 1.5;
   color: #fff;
   background-color: #000;
-  /*overflow-x: hidden;*/
+  min-height: 200vh;
+}
+
+body {
+  overflow-x: hidden;
 }
 
 nav ul li a, h1, h2, h3 {

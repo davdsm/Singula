@@ -6,11 +6,13 @@ export function DelayedLink({
   children,
   className,
   target,
+  onClick,
 }: {
   to: string;
   children: React.ReactNode;
   className?: string;
   target?: string;
+  onClick?: () => void;
 }) {
   const navigate = useNavigate();
   const location = useLocation();
@@ -23,6 +25,8 @@ export function DelayedLink({
     if (location.pathname !== to) {
       startTransition(() => navigate(to));
     }
+
+    onClick?.();
   };
 
   if (to === "#") return <>{children}</>;

@@ -1,16 +1,19 @@
 import { motion } from "framer-motion";
 import { Link } from "@remix-run/react";
 import { useTranslation } from "react-i18next";
+import { DelayedLink } from "~/components/Elements/Link";
 
 export const Sidebar = ({
   list,
   open,
+  hide
 }: {
   list: {
     key: string;
     link: string;
   }[];
   open: boolean;
+  hide: () => void;
 }) => {
   const { t } = useTranslation();
 
@@ -31,12 +34,13 @@ export const Sidebar = ({
                 delay: index * 0.1,
               }}
             >
-              <Link
+              <DelayedLink
+                onClick={hide}
                 to={item.link}
                 className="hover:text-gray-400 transition duration-300 uppercase"
               >
                 {t(item.key)}
-              </Link>
+              </DelayedLink>
             </motion.li>
           ))}
       </ul>

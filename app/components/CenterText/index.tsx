@@ -24,7 +24,7 @@ export const AboutSection = ({ text }: { text: string }) => {
         initial={{ y: 20, opacity: 0 }}
         whileInView={{ y: 0, opacity: 1 }}
         transition={{ duration: 1, ease: "easeInOut", delay: 0.2 }}
-        viewport={{ amount: 0.1 }}
+        viewport={{ amount: 0.3 }}
         className="mt-6"
       >
         <Button to="/about" firstText="Singula" secondText="Studio" />

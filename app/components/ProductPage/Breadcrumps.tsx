@@ -18,7 +18,7 @@ export const Breadcrumbs = ({
       initial={{ y: -10, opacity: 0 }}
       whileInView={{ y: 0, opacity: 1 }}
       transition={{ duration: 1, ease: "easeInOut", delay: 1.2 }}
-      viewport={{ amount: 0.3 }}
+      viewport={{ amount: 0.3, once: true }}
       className="flex"
       aria-label="Breadcrumb"
     >
