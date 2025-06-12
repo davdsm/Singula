@@ -72,7 +72,7 @@ export const DesignsComponent = ({
         </motion.div>
       </div>
       <motion.div
-        initial={{ x: 40, opacity: 0 }}
+        initial={{ x: -40, opacity: 0 }}
         whileInView={{ x: 0, opacity: 1 }}
         transition={{ duration: 1, ease: "easeInOut", delay: 1 }}
         viewport={{ amount: 0.3 }}

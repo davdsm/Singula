@@ -4,6 +4,7 @@ import { Link } from "@remix-run/react";
 import { AboutSingula } from "~/components/AboutSingula";
 import { Banner } from "~/components/Banner";
 import { DesignsComponent } from "~/components/DesignsComponent";
+import { Loading } from "~/components/Elements/Loading";
 import { SingulaStudio } from "~/components/SingulaStudio";
 import { TitleEntry } from "~/components/TitleEntry";
 import { Vision } from "~/components/Vision";
@@ -25,9 +26,9 @@ export const About = () => {
     usePageContent("Pagina_Sobre");
   const { team: teamData, loading: teamLoading } = useTeam();
 
-  if (aboutLoading || teamLoading) return <p>Loading...</p>;
+  if (aboutLoading || teamLoading) return <Loading />;
   if (Object.keys(aboutData).length === 0 || Object.keys(teamData).length === 0)
-    return <p>Loading...</p>;
+    return <Loading />;
 
   return (
     <main>
@@ -61,9 +62,9 @@ export const About = () => {
         title={aboutData["about-team-title"] as string}
         subtitle={aboutData["about-team-subtitle"] as string}
         text={aboutData["about-team-text"] as string}
-        members={teamData.map(member => ({
+        members={teamData.map((member) => ({
           ...member,
-          image: member.image ?? ""
+          image: member.image ?? "",
         }))}
       />
     </main>

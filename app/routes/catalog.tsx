@@ -1,5 +1,6 @@
 import { MetaFunction } from "@remix-run/node";
 import { CatalogComponent } from "~/components/Catalog";
+import { Loading } from "~/components/Elements/Loading";
 import { usePageContent } from "~/hooks/usePageContent";
 
 export const meta: MetaFunction = () => {
@@ -16,8 +17,8 @@ export const meta: MetaFunction = () => {
 export const Catalog = () => {
   const { data, loading } = usePageContent("Pagina_Catalogo");
 
-  if (loading) return <p>Loading...</p>;
-  if (Object.keys(data).length === 0) return <p>Loading...</p>;
+  if (loading) return <Loading />;
+  if (Object.keys(data).length === 0) return <Loading />;
 
   return (
     <main className="overflow-x-hidden">
