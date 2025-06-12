@@ -74,7 +74,10 @@ export const ContactInfo = () => {
                     {item.email}
                   </p>
                   <p className="hover:text-white transition-colors cursor-pointer">
-                    {item.phone}
+                    {item.phone}{" "}
+                    <span className="text-xs font-medium text-white">
+                      (chamada para rede móvel nacional)
+                    </span>
                   </p>
                   <p className="text-sm mt-3">{item.address}</p>
                   <p className="text-sm">{item.addressLine2}</p>
