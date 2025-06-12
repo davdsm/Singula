@@ -8,16 +8,19 @@ export const Button = ({
   to,
   className,
   target,
+  onClick,
 }: {
   firstText: string;
   secondText: string;
   to: string;
   className?: string;
   target?: string;
+  onClick?: () => void;
 }) => {
   return (
     <DelayedLink
       to={to}
+      onClick={onClick}
       target={target}
       className={`group hover:bg-singula-main hover:translate-y-[-2px] transition-all transition duration-700 inline-block bg-singula-black p-2 rounded-3xl pr-4 flex items-center ${
         className ?? ""

@@ -25,10 +25,7 @@ export function useTeam() {
 
       try {
         const records = await pb.collection("Equipa").getFullList<any>({});
-        const lang = i18n.language?.toLowerCase() || "en";
-
-        console.log('landg...', lang);
-        
+        const lang = i18n.language?.toLowerCase() || "en";        
 
         const teamData: TeamMember[] = records.map((item: any) => {
           const role = item[`role_${lang}`] || "";

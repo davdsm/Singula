@@ -68,12 +68,9 @@ body {
   overflow-x: hidden;
 }
 
-nav ul li a, h1, h2, h3 {
-  letter-spacing: 1px;
+*{
+  letter-spacing: 1.2px;
 }
-
-
-
 
 
 
@@ -146,4 +143,25 @@ nav ul li a, h1, h2, h3 {
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* app/styles/custom-select.css or global.css */
+.rs__control {
+  @apply bg-gray-100 border border-gray-300 rounded-lg text-sm min-h-[38px];
+}
+
+.rs__menu {
+  @apply bg-white border border-gray-300 mt-1 rounded-md shadow-lg z-50;
+}
+
+.rs__option {
+  @apply px-4 py-2 text-sm text-black hover:bg-gray-200 cursor-pointer;
+}
+
+.rs__multi-value {
+  @apply bg-blue-100 text-blue-800 rounded px-2 py-0.5 text-xs mr-1;
+}
+
+.rs__multi-value__remove {
+  @apply text-blue-800 hover:text-red-600;
 }

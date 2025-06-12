@@ -68,7 +68,7 @@ export const Footer = () => {
             </li>
             <li className="text-left md:text-left">
               <DelayedLink
-                to="/"
+                to="/materials"
                 className="bg-black py-2 px-4 text-white w-auto rounded-br-md rounded-t-md rounded-bl-md text-xl transition-all ease-linear duration-200 hover:text-singula-main"
               >
                 {t("footer.links.materials")}
@@ -83,7 +83,7 @@ export const Footer = () => {
           whileInView={{ y: 0, opacity: 1 }}
           transition={{ duration: 1, ease: "easeInOut", delay: 0.2 }}
           viewport={{ amount: 0.5 }}
-          className="w-full md:w-5/12 flex flex-col justify-center items-center md:justify-start md:items-start gap-4 z-30"
+          className="w-full md:w-6/12 flex flex-col justify-center items-center md:justify-start md:items-start gap-4 z-30"
         >
           <span className="text-base text-black">Singula</span>
           <ul className="p-0 list-none m-0">

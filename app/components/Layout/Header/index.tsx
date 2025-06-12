@@ -45,12 +45,12 @@ export const Header = ({
     link: string;
   }[] = [
     {
-      key: "menu.about",
-      link: "/about",
-    },
-    {
       key: "menu.products",
       link: "/products",
+    },
+    {
+      key: "menu.about",
+      link: "/about",
     },
     {
       key: "menu.materials",
@@ -78,7 +78,11 @@ export const Header = ({
         className="border border-singula-border z-[90] md:z-40 p-5 px-8 md:px-14 bg-black w-4/5 rounded-[4rem] flex justify-between items-center fixed top-10 left-1/2 translate-x-[-50%]"
       >
         {logo && (
-          <Logo width={112} height={26} className="w-[112px] h-[26px] shrink-0" />
+          <Logo
+            width={112}
+            height={26}
+            className="w-[112px] h-[26px] shrink-0"
+          />
         )}
         {menu && <Menu list={menuList} />}
         <div className="flex items-center justify-between">
@@ -107,7 +111,11 @@ export const Header = ({
         transition={{ duration: 1, ease: "easeInOut", delay: 0 }}
         className="z-40 fixed top-0 left-0 w-full h-dvh"
       >
-        <Sidebar list={menuList} open={sidebar} hide={() => setTimeout(() => setSidebar(false), 10)} />
+        <Sidebar
+          list={menuList}
+          open={sidebar}
+          hide={() => setTimeout(() => setSidebar(false), 10)}
+        />
       </motion.aside>
     </>
   );
