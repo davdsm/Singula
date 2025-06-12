@@ -1,3 +1,4 @@
+import { StrictMode } from "react";
 import { motion } from "framer-motion";
 import {
   Links,
@@ -11,10 +12,7 @@ import {
 import type { LinksFunction } from "@remix-run/node";
 import { I18nextProvider } from "react-i18next";
 
-import {
-  TransitionProvider,
-  useTransitionContext,
-} from "./context/TransitionContext";
+import { TransitionProvider } from "./context/TransitionContext";
 import i18next from "./i18n";
 
 import Header from "./components/Layout/Header";
@@ -23,7 +21,6 @@ import { TransitionOverlay } from "./components/Elements/Transition";
 
 import "./global.css";
 import "./hooks/fontAwesome";
-import { StrictMode, useEffect } from "react";
 
 export const links: LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },

@@ -21,7 +21,7 @@ export const ProductInfoBoxes = ({ product }: { product: Product }) => {
 
   return (
     <>
-      <section className="relative bg-white pt-12 md:pt-20 px-4 md:px-40 overflow-hidden">
+      <section className="relative bg-white pt-4 md:pt-8 px-4 md:px-40 overflow-hidden">
         <div className="mx-auto relative z-10">
           <div className="hidden lg:flex gap-6 items-stretch mb-16">
             {product.Ficha_Tecnica &&

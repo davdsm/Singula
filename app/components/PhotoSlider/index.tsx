@@ -24,7 +24,7 @@ export const PhotoSlider = ({ imgs }: { imgs: string[] }) => {
             key={`img-${i}`}
             src={img}
             alt="Hero Image"
-            className="w-full h-[20rem] md:h-[30rem] object-cover rounded-3xl"
+            className="!overflow-hidden w-full h-[20rem] md:h-[30rem] object-cover rounded-3xl"
           />
         ))}
       />
