@@ -282,9 +282,7 @@ export const Quote = ({ close }: { close: () => void }) => {
                   </svg>
                 </div>
                 <span className="text-black text-sm pl-2">
-                  <DelayedLink to="/terms">
-                    {t("footer.newsletter.terms")}
-                  </DelayedLink>
+                  {t("footer.newsletter.terms")}
                 </span>
               </label>
               <button
