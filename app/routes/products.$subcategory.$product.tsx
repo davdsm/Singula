@@ -6,6 +6,7 @@ import { ProductInfoBoxes } from "~/components/ProductPage/ProductInfoBoxes";
 import { ProductMaterialsSection } from "~/components/ProductPage/ProductMaterialsSection";
 import { useProducts } from "~/hooks/useProducts";
 import { useSubcategoriesBySlug } from "~/hooks/useProductSubCategories";
+import { Loading } from "~/components/Elements/Loading";
 
 export const ProductPage = () => {
   const { subcategory, product } = useParams();
@@ -25,7 +26,7 @@ export const ProductPage = () => {
     (subcat) => subcat.category.slug === subcategory
   );
 
-  if (loading || !subcategoryTreated) return <>loading...</>;
+  if (loading || !subcategoryTreated) return <Loading />;
 
   return (
     <main className="bg-white overflow-x-hidden">

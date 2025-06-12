@@ -12,6 +12,7 @@ import { useCoresRal } from "~/hooks/useColors";
 import { useCompactoHPL } from "~/hooks/useCompactoHPL";
 import { useMateriais } from "~/hooks/useMateriais";
 import { usePageContent } from "~/hooks/usePageContent";
+import { Loading } from "~/components/Elements/Loading";
 
 export const Materials = () => {
   const { t } = useTranslation();
@@ -32,8 +33,8 @@ export const Materials = () => {
   const acabamentos = useAcabamentos();
   const materiais = useMateriais();
 
-  if (loading) return <p>Loading...</p>;
-  if (Object.keys(data).length === 0) return <p>Loading...</p>;
+  if (loading) return <Loading />;
+  if (Object.keys(data).length === 0) return <Loading />;
 
   return (
     <main className="bg-white">

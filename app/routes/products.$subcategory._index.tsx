@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { CategoriesList } from "~/components/CategoriesList";
 import { ProductCategoryList } from "~/components/CategoriesList/categoryListProducts";
 import { Filters } from "~/components/CategoriesList/filters";
+import { Loading } from "~/components/Elements/Loading";
 import { ProductPageEntry } from "~/components/ProductPages/Entry";
 import { Entry } from "~/components/Products/Entry";
 import { useCategories } from "~/hooks/useProductCategories";
@@ -23,10 +24,8 @@ export const Subcategory = () => {
   });
 
   if (!subcategory || loading || loadingProduct || loadingCategories)
-    return <h1>Loading...</h1>;
+    return <Loading />;
   if (error || subcategories.length === 0) return <h1>Error or no data</h1>;
-
-  console.log("products...", products);
 
   const filteredProducts = products.filter((product) =>
     product.subcategory?.slug.includes(SelectedSubCat)

@@ -1,6 +1,7 @@
 import { Categories } from "~/components/Categories";
 import { AboutSection } from "~/components/CenterText";
 import { DesignsSlide } from "~/components/DesignsSlide";
+import { Loading } from "~/components/Elements/Loading";
 import { Hero } from "~/components/Hero";
 import { PhotoSlider } from "~/components/PhotoSlider";
 import { usePageContent } from "~/hooks/usePageContent";
@@ -8,8 +9,8 @@ import { usePageContent } from "~/hooks/usePageContent";
 export const Index = () => {
   const { data, loading } = usePageContent("Pagina_Inicial");
 
-  if (loading) return <p>Loading...</p>;
-  if (Object.keys(data).length === 0) return <p>Loading...</p>;
+  if (loading) return <Loading />;
+  if (Object.keys(data).length === 0) return <Loading />;
 
   return (
     <main>

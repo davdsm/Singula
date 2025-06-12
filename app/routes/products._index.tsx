@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { MainColor } from "~/components/Elements/Colors/main";
+import { Loading } from "~/components/Elements/Loading";
 import { ProductPageEntry } from "~/components/ProductPages/Entry";
 import { Entry } from "~/components/Products/Entry";
 import { ProductList } from "~/components/Products/List";
@@ -11,8 +12,8 @@ export const Products = () => {
 
   const { data, loading } = usePageContent("Pagina_Produtos");
 
-  if (loading) return <p>Loading...</p>;
-  if (Object.keys(data).length === 0) return <p>Loading...</p>;
+  if (loading) return <Loading />;
+  if (Object.keys(data).length === 0) return <Loading />;
 
   return (
     <main className="bg-white overflow-x-hidden">
