@@ -103,7 +103,9 @@ export interface Product {
   banner: string | null;
   ImagemPrincipal: string | null;
   PrimeiraImagem: string[] | null;
+  RefPrimeiraImagem: string | null;
   ImagemMeio: string[] | null;
+  RefImagemMeio: string | null;
   ImagemBottom: string[] | null;
   Ficha_Tecnica: string | null;
   Model_DWG: string | null;
@@ -185,6 +187,8 @@ export interface ApiProduct {
   ImagemBottom?: string[];
   Ficha_Tecnica?: string;
   Model_DWG?: string;
+  ref_primeiras_imagens: string | null;
+  ref_imagens_meio: string | null;
 
   // Relation fields
   subcategory: string;

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { Button } from "../Elements/Button";
@@ -5,12 +6,10 @@ import { Product } from "../../hooks/interfaces";
 import { Image } from "../Elements/Image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFile } from "@fortawesome/free-solid-svg-icons";
-import { Quote } from "../Layout/Footer/quote";
-import { useState } from "react";
+import { DelayedLink } from "../Elements/Link";
 
 export const ProductMaterialsSection = ({ product }: { product: Product }) => {
   const { t } = useTranslation();
-  const [QuoteModal, setQuoteModal] = useState(false);
 
   return (
     <>
@@ -54,8 +53,8 @@ export const ProductMaterialsSection = ({ product }: { product: Product }) => {
                 viewport={{ amount: 0.1 }}
                 className="mt-10 flex justify-center items-center"
               >
-                <button
-                  type="submit"
+                <DelayedLink
+                  to="/quote"
                   className="group relative inline-flex h-12 items-center justify-center overflow-hidden rounded-full bg-singula-main"
                 >
                   <div className="text-xl uppercase text-white font-bold inline-flex h-12 translate-y-0 items-center justify-center px-12 py-4 text-white transition duration-500 group-hover:-translate-y-[150%]">
@@ -68,14 +67,12 @@ export const ProductMaterialsSection = ({ product }: { product: Product }) => {
                       {t("contact.quote.button")}
                     </span>
                   </div>
-                </button>
+                </DelayedLink>
               </motion.div>
             </div>
           </div>
         </div>
       </section>
-
-      {QuoteModal && <Quote close={() => setQuoteModal(false)} />}
     </>
   );
 };

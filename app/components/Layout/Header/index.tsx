@@ -81,7 +81,7 @@ export const Header = ({
           <Logo
             width={112}
             height={26}
-            className="w-[112px] h-[26px] shrink-0"
+            className="w-[112px] h-[26px] flex"
           />
         )}
         {menu && <Menu list={menuList} />}

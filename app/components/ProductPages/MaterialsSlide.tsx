@@ -65,7 +65,7 @@ export const MaterialsSlide = ({
             <Image
               src={item.image || ""}
               alt={item.name}
-              className="rounded-full w-[30px] h-[30px] md:w-[60px] md:h-[60px]"
+              className="rounded-full w-[30px] h-[30px] md:w-[60px] md:h-[60px] object-cover"
             />
             <p className="text-md md:text-lg text-white py-2">{item.name}</p>
           </button>

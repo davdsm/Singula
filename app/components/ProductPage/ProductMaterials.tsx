@@ -66,7 +66,7 @@ export const ProductMaterials = ({ product }: { product: Product }) => {
                   {product.acabamento
                     .split(",")
                     .map((acab: string, index: number) => (
-                      <UnifiedHoverItem key={`finish-${index}`}>
+                      <UnifiedHoverItem key={`finish-${index}`} isClickable={false}>
                         <span>{acab}</span>
                       </UnifiedHoverItem>
                     ))}

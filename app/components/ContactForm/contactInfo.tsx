@@ -31,14 +31,14 @@ export const ContactInfo = () => {
 
   return (
     <section className="bg-black text-white pt-4 pb-16 md:py-16 px-10">
-      <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col lg:flex-row lg:items-start lg:gap-16">
+      <div className="w-full mx-auto">
+        <div className="flex flex-col lg:flex-row lg:items-start lg:gap-4">
           <motion.div
             initial={{ y: 30, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             transition={{ duration: 1, ease: "easeInOut", delay: 0.2 }}
             viewport={{ amount: 0.3 }}
-            className="lg:w-1/2 mb-12 lg:mb-0"
+            className="lg:w-2/5 mb-12 lg:mb-0"
           >
             <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-2">
               {t("contact.info.title.part1")}{" "}
@@ -49,7 +49,7 @@ export const ContactInfo = () => {
             </h3>
           </motion.div>
 
-          <div className="lg:w-1/2 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-8 lg:gap-12">
+          <div className="lg:w-3/5 grid grid-cols-1 md:grid-cols-4 lg:grid-cols-4 gap-8 lg:gap-12">
             {contactItems.map((item, index) => (
               <motion.div
                 key={`contact-${index}`}
@@ -69,19 +69,19 @@ export const ContactInfo = () => {
 
                 <div className="w-8 h-0.5 bg-gray-500 mb-4"></div>
 
-                <div className="space-y-1 text-gray-300 text-sm md:text-base leading-relaxed">
+                <div className="space-y-1 text-gray-300 text-lg md:text-base leading-relaxed">
                   <p className="hover:text-white transition-colors cursor-pointer">
                     {item.email}
                   </p>
                   <p className="hover:text-white transition-colors cursor-pointer">
-                    {item.phone}{" "}
+                    {item.phone}{" "}<br/>
                     <span className="text-xs font-medium text-white">
                       (chamada para rede móvel nacional)
                     </span>
                   </p>
-                  <p className="text-sm mt-3">{item.address}</p>
-                  <p className="text-sm">{item.addressLine2}</p>
-                  <p className="text-sm">{item.city}</p>
+                  <p className="text-lg mt-3">{item.address}</p>
+                  <p className="text-lg">{item.addressLine2}</p>
+                  <p className="text-lg">{item.city}</p>
                 </div>
               </motion.div>
             ))}

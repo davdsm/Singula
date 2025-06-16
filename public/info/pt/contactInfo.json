@@ -1,22 +1,24 @@
 [
   {
-    "title": "Dpt Comercial",
-    "email": "comercial@singula.pt",
-    "phone": "(+351) 924 009 275",
-    "address": "Rua das Boucinhas,",
-    "addressLine2": "No 751, 4805-479 Airão Santa Maria,",
-    "city": "Guimarães, Portugal"
+    "title": "Dpt Comercial Suiça",
+    "email": "sales@singula.pt",
+    "phone": "(+41) 26 400 06 79"
   },
   {
-    "title": "Singula Portugal",
-    "email": "info@singula.pt",
-    "phone": "(+351) 924 009 275",
-    "address": "Rua das Boucinhas,",
-    "addressLine2": "No 751, 4805-479 Airão Santa Maria,",
-    "city": "Guimarães, Portugal"
+    "title": "Dpt Comercial Portugal",
+    "email": "sales@singula.pt",
+    "phone": "(+351) 924 009 275"
   },
   {
     "title": "Singula Suíça",
+    "email": "info@singula.pt",
+    "phone": "(+41) 26 400 06 79",
+    "address": "PHF Concept Sàrl,",
+    "addressLine2": "Chemin de la Cornache 1, 1753",
+    "city": "Matran, Suiça"
+  },
+  {
+    "title": "Singula Portugal",
     "email": "info@singula.pt",
     "phone": "(+351) 924 009 275",
     "address": "Rua das Boucinhas,",

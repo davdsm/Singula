@@ -96,10 +96,15 @@ export const useProducts = ({
               `${pocketBaseUrl}/api/files/${item.collectionId}/${item.id}/${imagem}`
           ),
 
+          RefPrimeiraImagem: item.ref_primeiras_imagens,
+
           ImagemMeio: item.ImagemMeio?.map(
             (imagem: string) =>
               `${pocketBaseUrl}/api/files/${item.collectionId}/${item.id}/${imagem}`
           ),
+
+          RefImagemMeio: item.ref_imagens_meio,
+
           ImagemBottom: item.ImagemBottom?.map(
             (imagem: string) =>
               `${pocketBaseUrl}/api/files/${item.collectionId}/${item.id}/${imagem}`

@@ -97,7 +97,20 @@ export const ProductInfoBoxes = ({ product }: { product: Product }) => {
 
                 <div className="grid grid-cols-4 gap-4">
                   {product.cores_recomendado.map((color, index) => (
-                    <div key={`color-${index}`} className="text-center">
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setModalContent({
+                          title: color.name,
+                          img: color.image,
+                          text: '',
+                        })
+                      }
+                      key={`color-${index}`}
+                      className="text-center focus:outline-none"
+                      tabIndex={0}
+                      aria-label={color.name}
+                    >
                       <div
                         className="w-16 h-16 rounded-lg mx-auto mb-2 border"
                         style={{ background: `url(${color.image})` }}
@@ -105,7 +118,7 @@ export const ProductInfoBoxes = ({ product }: { product: Product }) => {
                       <p className="text-xs font-bold uppercase tracking-wide text-black">
                         {color.name}
                       </p>
-                    </div>
+                    </button>
                   ))}
                   {product.acabamentos_recomendado.map((acab) => (
                     <button
