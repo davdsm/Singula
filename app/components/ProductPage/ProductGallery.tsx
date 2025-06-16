@@ -5,6 +5,11 @@ import { Product } from "~/hooks/interfaces";
 import { Trans } from "react-i18next";
 
 export const ProductGallery = ({ product }: { product: Product }) => {
+  const firstRefs: string[] | undefined =
+    product.RefPrimeiraImagem?.trim().split(",");
+  const secondRefs: string[] | undefined =
+    product.RefPrimeiraImagem?.trim().split(",");
+
   return (
     <section className="relative bg-white pt-8 md:pt-12 px-4 md:px-20 overflow-hidden">
       <div className="mx-auto flex justify-center items-center w-full md:w-4/5 flex justify-center items-start flex-col md:flex-row gap-[100px]">
@@ -14,7 +19,7 @@ export const ProductGallery = ({ product }: { product: Product }) => {
             whileInView={{ x: 0, opacity: 1 }}
             transition={{ duration: 1, ease: "easeInOut", delay: index / 2 }}
             viewport={{ amount: 0.1 }}
-            className=""
+            className="relative"
           >
             <Image
               key={`imagem-${imagem}`}
@@ -28,12 +33,15 @@ export const ProductGallery = ({ product }: { product: Product }) => {
               src={imagem || ""}
               alt={product.name}
             />
+            <span className="absolute bottom-0 left-0 text-black font-bold text-lg">
+              {firstRefs?.[index] ?? ""}
+            </span>
           </motion.span>
         ))}
       </div>
 
       {product.secondTitle && product.secondText && (
-        <div className="w-full md:w-1/2 py-10 mx-auto">
+        <div className="max-w-4xl py-10 mx-auto">
           <motion.h3
             initial={{ y: 30, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
@@ -48,7 +56,7 @@ export const ProductGallery = ({ product }: { product: Product }) => {
             whileInView={{ y: 0, opacity: 1 }}
             transition={{ duration: 1, ease: "easeInOut", delay: 0.2 }}
             viewport={{ amount: 0.1 }}
-            className="text-gray-700 max-w-3xl  text-md md:text-xl w-full font-bold text-center"
+            className="text-gray-700 text-md md:text-xl w-full font-bold text-center"
           >
             <Trans>{parseTextWithMainColor(product.secondText)}</Trans>
           </motion.p>
@@ -62,7 +70,7 @@ export const ProductGallery = ({ product }: { product: Product }) => {
             whileInView={{ x: 0, opacity: 1 }}
             transition={{ duration: 1, ease: "easeInOut", delay: index / 2 }}
             viewport={{ amount: 0.1 }}
-            className=""
+            className="relative"
           >
             <Image
               key={`imagem-${imagem}`}
@@ -76,6 +84,9 @@ export const ProductGallery = ({ product }: { product: Product }) => {
               src={imagem || ""}
               alt={product.name}
             />
+            <span className="absolute bottom-0 left-0 text-black font-bold text-lg">
+              {secondRefs?.[index] ?? ""}
+            </span>
           </motion.span>
         ))}
       </div>

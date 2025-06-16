@@ -4,7 +4,6 @@ import { useState, ChangeEvent } from "react";
 import { useTranslation } from "react-i18next";
 import { useSendMail } from "~/hooks/useEmail";
 import { DelayedLink } from "../Elements/Link";
-import { Quote } from "../Layout/Footer/quote";
 
 interface FormData {
   name: string;
@@ -18,7 +17,6 @@ export const ContactForm = () => {
   const { t } = useTranslation();
   const { sendMail, Loading, Sent } = useSendMail();
   const [Error, setError] = useState<boolean>(false);
-  const [QuoteModal, setQuoteModal] = useState(false);
 
   const [formData, setFormData] = useState<FormData>({
     name: "",
@@ -158,7 +156,7 @@ export const ContactForm = () => {
                       </svg>
                     </div>
                     <span className="text-white text-sm pl-2">
-                      <DelayedLink to="/terms">
+                      <DelayedLink to="/privacy" className="underline">
                         {t("footer.newsletter.terms")}
                       </DelayedLink>
                     </span>
@@ -197,9 +195,8 @@ export const ContactForm = () => {
           </div>
         </form>
         <div className="flex justify-center items-center">
-          <button
-            type="button"
-            onClick={() => setQuoteModal(true)}
+          <DelayedLink
+            to="/quote"
             className="group relative inline-flex h-12 items-center justify-center overflow-hidden rounded-full bg-singula-main"
           >
             <div className="text-xl uppercase text-white font-bold inline-flex h-12 translate-y-0 items-center justify-center px-12 py-4 text-white transition duration-500 group-hover:-translate-y-[150%]">
@@ -212,10 +209,9 @@ export const ContactForm = () => {
                 {t("contact.quote.button")}
               </span>
             </div>
-          </button>
+          </DelayedLink>
         </div>
       </section>
-      {QuoteModal && <Quote close={() => setQuoteModal(false)} />}
     </>
   );
 };

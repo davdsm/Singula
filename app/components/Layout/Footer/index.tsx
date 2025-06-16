@@ -17,13 +17,11 @@ import {
 import { DelayedLink } from "~/components/Elements/Link";
 import { Logo } from "~/components/Elements/Logo";
 import { Image } from "~/components/Elements/Image";
-import { Quote } from "./quote";
 
 export const Footer = () => {
   const { t } = useTranslation();
   const [Email, setEmail] = useState<string>("");
   const [Terms, setTerms] = useState<boolean>(false);
-  const [QuoteModal, setQuoteModal] = useState<boolean>(false);
 
   const submitForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -149,12 +147,12 @@ export const Footer = () => {
               </DelayedLink>
             </li>
             <li className="text-center md:text-left">
-              <button
-                onClick={() => setQuoteModal(true)}
+              <DelayedLink
+                to="/quote"
                 className="text-black font-extrabold text-xl transition-all ease-linear duration-200 hover:text-singula-main"
               >
                 {t("footer.quote")}
-              </button>
+              </DelayedLink>
             </li>
           </ul>
         </motion.div>
@@ -207,7 +205,7 @@ export const Footer = () => {
                 href="https://facebook.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-4 h-4 text-xl flex items-center justify-center rounded-full text-black hover:text-singula-main transition-colors duration-300"
+                className="w-6 h-6 text-2xl flex items-center justify-center rounded-full text-black hover:text-singula-main transition-colors duration-300"
                 aria-label="Facebook"
               >
                 <FontAwesomeIcon icon={faFacebook} />
@@ -217,7 +215,7 @@ export const Footer = () => {
                 href="https://linkedin.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mx-4 w-4 h-4 text-xl flex items-center justify-center rounded-full text-black hover:text-singula-main transition-colors duration-300"
+                className="mx-4 w-6 h-6 text-2xl flex items-center justify-center rounded-full text-black hover:text-singula-main transition-colors duration-300"
                 aria-label="LinkedIn"
               >
                 <FontAwesomeIcon icon={faLinkedinIn} />
@@ -227,7 +225,7 @@ export const Footer = () => {
                 href="https://instagram.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-4 h-4 text-xl flex items-center justify-center rounded-full text-black hover:text-singula-main transition-colors duration-300"
+                className="w-6 h-6 text-2xl flex items-center justify-center rounded-full text-black hover:text-singula-main transition-colors duration-300"
                 aria-label="Instagram"
               >
                 <FontAwesomeIcon icon={faInstagram} />
@@ -252,7 +250,6 @@ export const Footer = () => {
           alt="blur"
         />
       </footer>
-      {QuoteModal && <Quote close={() => setQuoteModal(false)} />}
     </>
   );
 };
