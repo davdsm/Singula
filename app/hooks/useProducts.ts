@@ -16,9 +16,11 @@ const pocketBaseUrl = "http://185.11.167.133:8090";
 export const useProducts = ({
   subcategoryIds,
   productSlug,
+  featured,
 }: {
   subcategoryIds?: string[];
   productSlug?: string;
+  featured?: boolean;
 }) => {
   const { i18n } = useTranslation();
   const lang = i18n.language;
@@ -56,10 +58,22 @@ export const useProducts = ({
   useEffect(() => {
     const fetchProducts = async () => {
       try {
+        const filters = [];
+
+        if (productSlug) {
+          filters.push(`slug~"${productSlug}"`);
+        }
+
+        if (featured) {
+          filters.push(`featured=true`);
+        }
+
+        const filterQuery = filters.length
+          ? `&filter=${filters.join(" && ")}`
+          : "";
+
         const res = await fetch(
-          `${pocketBaseUrl}/api/collections/Produtos/records?expand=subcategory,materiais,cores_recomendado,acabamentos_recomendado${
-            productSlug ? `&filter=slug~"${productSlug}"` : ""
-          }`
+          `${pocketBaseUrl}/api/collections/Produtos/records?expand=design,subcategory,materiais,cores_recomendado,acabamentos_recomendado,subcategory.category${filterQuery}`
         );
 
         const data = await res.json();
@@ -75,6 +89,8 @@ export const useProducts = ({
         const formatted: Product[] = filtered.map((item: ApiProduct) => ({
           id: item.id,
           slug: item.slug,
+          design: item.expand?.design?.slug,
+          link: `/products/${item.expand.subcategory.expand.category.slug}/${item.slug}`,
           special: (item as any)[`NotaEspecial_${lang}`] || "",
           name: (item as any)[`name_${lang}`] || item.name_pt,
           subtitle: (item as any)[`subtitle_${lang}`] || item.subtitle_pt,

@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { CategoryIcon } from "./Icon";
 import { Image } from "../Elements/Image";
 import { DelayedLink } from "../Elements/Link";
+import { parseTextWithMainColor } from "../utils";
 
 export const CategoryCard = ({
   title,
@@ -12,7 +13,7 @@ export const CategoryCard = ({
   hidden,
 }: {
   title: string;
-  design: "Garden" | "Home" | "Street";
+  design: string;
   link?: string;
   image: string;
   index?: number;
@@ -33,17 +34,17 @@ export const CategoryCard = ({
         className="w-full md:w-full bg-white p-10 rounded-tl-[1rem] rounded-br-[1rem] rounded-tr-[3rem] rounded-bl-[3rem] md:rounded-tl-3xl md:rounded-tr-[5rem] md:rounded-bl-[5rem] md:rounded-br-3xl"
       >
         <div className="flex justify-between items-center w-full">
-          <h5 className="text-xl md:text-3xl text-black font-extrabold">{title}</h5>
+          <h5 className="text-xl md:text-3xl text-black font-extrabold">{parseTextWithMainColor(title)}</h5>
           <CategoryIcon
             category={design.toLowerCase() as "garden" | "home" | "street"}
           />
         </div>
-       {/*  <Image
+       <Image
           src={image}
           alt={title}
           className="w-full h-[10rem] md:h-[20rem] object-contain"
-        /> */}
-        <span className="text-black font-bold w-full text-center block text-lg">
+        />
+        <span className="capitalize text-black font-bold w-full text-center block text-lg">
           {design} Design
         </span>
       </motion.div>

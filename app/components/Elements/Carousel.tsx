@@ -29,10 +29,15 @@ export const CarouselComponent = ({
 }: CarouselProps) => {
   const [api, setApi] = useState<CarouselApi | null>(null);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const [Stopped, setStopped] = useState<boolean>(false);
 
   // Wait for API and autoplay to be active before starting interval
   useEffect(() => {
     if (!autoplay || !api) return;
+    if (Stopped && intervalRef.current) {
+      clearInterval(intervalRef.current);
+      return;
+    }
 
     intervalRef.current = setInterval(() => {
       if (api.canScrollNext()) {
@@ -45,13 +50,15 @@ export const CarouselComponent = ({
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current);
     };
-  }, [api, autoplay, autoplayInterval, loop]);
+  }, [api, autoplay, autoplayInterval, loop, Stopped]);
 
   return (
     <Carousel
       opts={{ align: "start", loop }}
       setApi={setApi}
       className={`carousel w-full mx-auto ${className}`}
+      onMouseEnter={() => setStopped(true)}
+      onMouseLeave={() => setStopped(false)}
     >
       <CarouselContent>
         {items.map((item, index) => (

@@ -98,8 +98,10 @@ export interface Product {
   secondTitle: string;
   secondText: string;
   acabamento: string;
+  design: string;
   pesos: string;
   note: string;
+  link: string;
   banner: string | null;
   ImagemPrincipal: string | null;
   PrimeiraImagem: string[] | null;
@@ -123,6 +125,9 @@ export interface ApiProduct {
   created: string;
   updated: string;
   slug: string;
+
+  design: string;
+  feature: boolean;
 
   // Multilingual fields
   name_de: string;
@@ -202,5 +207,8 @@ export interface ApiProduct {
     materiais?: Material[];
     cores_recomendado?: Color[];
     acabamentos_recomendado?: Acabamento[];
+    design?: {
+      slug: string
+    }
   };
 }

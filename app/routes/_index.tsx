@@ -5,11 +5,16 @@ import { Loading } from "~/components/Elements/Loading";
 import { Hero } from "~/components/Hero";
 import { PhotoSlider } from "~/components/PhotoSlider";
 import { usePageContent } from "~/hooks/usePageContent";
+import { useProducts } from "~/hooks/useProducts";
 
 export const Index = () => {
   const { data, loading } = usePageContent("Pagina_Inicial");
+  const { products, loading: productsLoading } = useProducts({
+    featured: true
+  }); 
 
-  if (loading) return <Loading />;
+
+  if (loading || productsLoading) return <Loading />;
   if (Object.keys(data).length === 0) return <Loading />;
 
   return (
@@ -20,7 +25,7 @@ export const Index = () => {
       />
       <AboutSection text={data["home-about-text"] as string} />
       <PhotoSlider imgs={data["home-carousel-imgs"] as string[]} />
-      <Categories title={data["home-categories-text"] as string} />
+      <Categories products={products} title={data["home-categories-text"] as string} />
       <DesignsSlide imgs={data["home-design-imgs"] as string[]} />
     </main>
   );

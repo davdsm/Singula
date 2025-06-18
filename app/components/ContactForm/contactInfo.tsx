@@ -1,93 +1,73 @@
-import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { useTranslation } from "react-i18next";
+import { Trans, useTranslation } from "react-i18next";
 import { MainColor } from "../Elements/Colors/main";
-
-interface ContactItem {
-  title: string;
-  email: string;
-  phone: string;
-  address: string;
-  addressLine2: string;
-  city: string;
-}
+import { useContacts } from "~/hooks/useContacts";
 
 export const ContactInfo = () => {
-  const { t, i18n } = useTranslation();
-  const [contactItems, setContactItems] = useState<ContactItem[]>([]);
-
-  useEffect(() => {
-    const lang = i18n.language || "pt";
-
-    fetch(`info/${lang}/contactInfo.json`, {
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-    })
-      .then((res) => res.json())
-      .then((data: ContactItem[]) => setContactItems(data));
-  }, [i18n.language]);
+  const { t } = useTranslation();
+  const { contacts, loading } = useContacts();
 
   return (
-    <section className="bg-black text-white pt-4 pb-16 md:py-16 px-10">
-      <div className="w-full mx-auto">
-        <div className="flex flex-col lg:flex-row lg:items-start lg:gap-4">
-          <motion.div
-            initial={{ y: 30, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            transition={{ duration: 1, ease: "easeInOut", delay: 0.2 }}
-            viewport={{ amount: 0.3 }}
-            className="lg:w-2/5 mb-12 lg:mb-0"
-          >
-            <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-2">
-              {t("contact.info.title.part1")}{" "}
-              <MainColor>{t("contact.info.title.highlight")}</MainColor>.
-            </h2>
-            <h3 className="text-3xl md:text-5xl lg:text-6xl font-bold">
-              {t("contact.info.title.part2")}
-            </h3>
-          </motion.div>
-
-          <div className="lg:w-3/5 grid grid-cols-1 md:grid-cols-4 lg:grid-cols-4 gap-8 lg:gap-12">
-            {contactItems.map((item, index) => (
+    <>
+      {!loading && (
+        <section className="bg-black text-white pt-4 pb-16 md:py-16 px-10">
+          <div className="w-full mx-auto">
+            <div className="flex flex-col lg:flex-row lg:items-start lg:gap-4">
               <motion.div
-                key={`contact-${index}`}
                 initial={{ y: 30, opacity: 0 }}
                 whileInView={{ y: 0, opacity: 1 }}
-                transition={{
-                  duration: 1,
-                  ease: "easeInOut",
-                  delay: 0.4 + index * 0.1,
-                }}
-                viewport={{ amount: 0.2 }}
-                className=""
+                transition={{ duration: 1, ease: "easeInOut", delay: 0.2 }}
+                viewport={{ amount: 0.3 }}
+                className="lg:w-2/5 mb-12 lg:mb-0"
               >
-                <h4 className="text-lg md:text-xl font-bold text-red-400 mb-2">
-                  {item.title}
-                </h4>
-
-                <div className="w-8 h-0.5 bg-gray-500 mb-4"></div>
-
-                <div className="space-y-1 text-gray-300 text-lg md:text-base leading-relaxed">
-                  <p className="hover:text-white transition-colors cursor-pointer">
-                    {item.email}
-                  </p>
-                  <p className="hover:text-white transition-colors cursor-pointer">
-                    {item.phone}{" "}<br/>
-                    <span className="text-xs font-medium text-white">
-                      (chamada para rede móvel nacional)
-                    </span>
-                  </p>
-                  <p className="text-lg mt-3">{item.address}</p>
-                  <p className="text-lg">{item.addressLine2}</p>
-                  <p className="text-lg">{item.city}</p>
-                </div>
+                <h2 className="text-3xl md:text-5xl lg:text-6xl font-bold mb-2">
+                  {t("contact.info.title.part1")}{" "}
+                  <MainColor>{t("contact.info.title.highlight")}</MainColor>.
+                </h2>
+                <h3 className="text-3xl md:text-5xl lg:text-6xl font-bold">
+                  {t("contact.info.title.part2")}
+                </h3>
               </motion.div>
-            ))}
+
+              <div className="lg:w-3/5 grid grid-cols-1 md:grid-cols-4 lg:grid-cols-4 gap-8 lg:gap-12">
+                {contacts.map((item, index) => (
+                  <motion.div
+                    key={`contact-${index}`}
+                    initial={{ y: 30, opacity: 0 }}
+                    whileInView={{ y: 0, opacity: 1 }}
+                    transition={{
+                      duration: 1,
+                      ease: "easeInOut",
+                      delay: 0.4 + index * 0.1,
+                    }}
+                    viewport={{ amount: 0.2 }}
+                    className=""
+                  >
+                    <h4 className="text-lg md:text-xl font-bold text-red-400 mb-2">
+                      {item.name}
+                    </h4>
+
+                    <div className="w-8 h-0.5 bg-gray-500 mb-4"></div>
+
+                    <div className="space-y-1 text-gray-300 text-lg md:text-base leading-relaxed">
+                      <p className="hover:text-white transition-colors cursor-pointer">
+                        {item.email}
+                      </p>
+                      <p className="hover:text-white transition-colors cursor-pointer">
+                        {item.contact} <br />
+                        <span className="text-xs font-medium text-white">
+                          (chamada para rede móvel nacional)
+                        </span>
+                      </p>
+                      <p className="text-lg mt-3"><Trans>{item.address}</Trans></p>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-    </section>
+        </section>
+      )}
+    </>
   );
 };

@@ -1,10 +1,17 @@
+import { Product } from "~/hooks/interfaces";
 import { CarouselComponent } from "../Elements/Carousel";
 import { CategoryCard } from "./Card";
 import { Title } from "./Title";
 
 import "./index.scss";
 
-export const Categories = ({ title }: { title: string }) => {
+export const Categories = ({
+  title,
+  products,
+}: {
+  title: string;
+  products: Product[];
+}) => {
   return (
     <section
       id="categories-carousel"
@@ -16,75 +23,16 @@ export const Categories = ({ title }: { title: string }) => {
         className="w-full px-10 md:px-60 py-10 md:py-20 w-full md:w-[135%]"
         autoplay
         loop
-        items={[
+        items={products.map((item, index) => (
           <CategoryCard
-            key={1}
-            title="Delimitadores Ero"
-            design="Garden"
-            link=""
-            image="/media/home/garden.jpg"
-            index={1}
-          />,
-          <CategoryCard
-            key={2}
-            title="Delimitadores Ero"
-            design="Street"
-            link=""
-            image="/media/home/street.jpg"
-            index={2}
-          />,
-          <CategoryCard
-            key={3}
-            title="Delimitadores Ero"
-            design="Home"
-            link=""
-            image="/media/home/home.jpg"
-            index={3}
-          />,
-          <CategoryCard
-            key={4}
-            title="Delimitadores Ero"
-            design="Garden"
-            link=""
-            image="/media/home/garden.jpg"
-            index={1}
-          />,
-          <CategoryCard
-            key={5}
-            title="Delimitadores Ero"
-            design="Street"
-            link=""
-            image="/media/home/street.jpg"
-          />,
-          <CategoryCard
-            key={6}
-            title="Delimitadores Ero"
-            design="Home"
-            link=""
-            image="/media/home/home.jpg"
-          />,
-          <CategoryCard
-            key={7}
-            title="Delimitadores Ero"
-            design="Garden"
-            link=""
-            image="/media/home/garden.jpg"
-          />,
-          <CategoryCard
-            key={8}
-            title="Delimitadores Ero"
-            design="Street"
-            link=""
-            image="/media/home/street.jpg"
-          />,
-          <CategoryCard
-            key={10}
-            title="Delimitadores Ero"
-            design="Home"
-            link=""
-            image="/media/home/home.jpg"
-          />,
-        ]}
+            key={item.id}
+            title={item.name}
+            design={item.design || ''}
+            link={item.link}
+            image={item.ImagemPrincipal || ''} 
+            index={index}
+          />
+        ))}
       />
     </section>
   );
