@@ -14,20 +14,21 @@ export const PhotoSlider = ({ imgs }: { imgs: string[] }) => {
       viewport={{ amount: 0.3 }}
       className="w-full overflow-x-hidden"
     >
-      <CarouselComponent
-        className="w-[150%] px-10 md:translate-x-[-15%]"
-        loop={true}
-        autoplay
-        autoplayInterval={2}
-        items={imgs.map((img, i) => (
-          <Image
-            key={`img-${i}`}
-            src={img}
-            alt="Hero Image"
-            className="!overflow-hidden w-full h-[20rem] md:h-[30rem] object-cover rounded-3xl"
-          />
-        ))}
-      />
+        <CarouselComponent
+          className="w-full md:w-[150%] translation-none md:-translate-x-[50%]"
+          loop={true}
+          autoplay
+          autoplayInterval={2}
+          itemClassName="basis-4/5 md:basis-1/2 lg:basis-1/3 rounded"
+          items={imgs.map((img, i) => (
+            <Image
+              key={`img-${i}`}
+              src={img}
+              alt="Hero Image"
+              className="!overflow-hidden w-full h-[20rem] md:h-[30rem] object-cover rounded-3xl"
+            />
+          ))}
+        />
     </motion.section>
   );
 };

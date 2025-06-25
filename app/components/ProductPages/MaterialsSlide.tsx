@@ -51,7 +51,7 @@ export const MaterialsSlide = ({
       className="overflow-hidden pb-20"
     >
       <CarouselComponent
-        itemClassName="w-[50px] basis-1/4 md:basis-1/6"
+        itemClassName="w-[50px] basis-1/2 md:basis-1/6"
         className="w-full"
         loop={true}
         autoplay
@@ -65,7 +65,7 @@ export const MaterialsSlide = ({
             <Image
               src={item.image || ""}
               alt={item.name}
-              className="rounded-full w-[30px] h-[30px] md:w-[60px] md:h-[60px] object-cover"
+              className="rounded-full w-[60px] h-[60px] object-cover"
             />
             <p className="text-md md:text-lg text-white py-2">{item.name}</p>
           </button>

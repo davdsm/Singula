@@ -20,7 +20,7 @@ export const ProductHero = ({
         product={product}
       />
 
-      <div className="max-w-4xl mx-auto relative z-10 text-center">
+      <div className="max-w-4xl mx-auto relative z-10 text-center px-8 md:px-0">
         <motion.h1
           initial={{ y: 30, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}

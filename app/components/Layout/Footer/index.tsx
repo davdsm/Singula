@@ -208,7 +208,7 @@ export const Footer = () => {
                 className="w-6 h-6 text-2xl flex items-center justify-center rounded-full text-black hover:text-singula-main transition-colors duration-300"
                 aria-label="Facebook"
               >
-                <FontAwesomeIcon icon={faFacebook} />
+                <FontAwesomeIcon icon={faFacebook} className="w-6 h-6" />
               </a>
 
               <a
@@ -218,7 +218,7 @@ export const Footer = () => {
                 className="mx-4 w-6 h-6 text-2xl flex items-center justify-center rounded-full text-black hover:text-singula-main transition-colors duration-300"
                 aria-label="LinkedIn"
               >
-                <FontAwesomeIcon icon={faLinkedinIn} />
+                <FontAwesomeIcon icon={faLinkedinIn} className="w-6 h-6" />
               </a>
 
               <a
@@ -228,7 +228,7 @@ export const Footer = () => {
                 className="w-6 h-6 text-2xl flex items-center justify-center rounded-full text-black hover:text-singula-main transition-colors duration-300"
                 aria-label="Instagram"
               >
-                <FontAwesomeIcon icon={faInstagram} />
+                <FontAwesomeIcon icon={faInstagram} className="w-6 h-6" />
               </a>
             </div>
           </div>
