@@ -78,11 +78,7 @@ export const Header = ({
         className="border border-singula-border z-[90] md:z-40 p-5 px-8 md:px-14 bg-black w-4/5 rounded-[4rem] flex justify-between items-center fixed top-10 left-1/2 translate-x-[-50%]"
       >
         {logo && (
-          <Logo
-            width={112}
-            height={26}
-            className="w-[112px] h-[26px] flex"
-          />
+          <Logo width={112} height={26} className="w-[112px] h-[26px] flex" />
         )}
         {menu && <Menu list={menuList} />}
         <div className="flex items-center justify-between">
@@ -108,7 +104,7 @@ export const Header = ({
       <motion.aside
         initial={{ x: "-100%" }}
         animate={{ x: sidebar ? "0%" : "-100%" }}
-        transition={{ duration: 1, ease: "easeInOut", delay: 0 }}
+        transition={{ duration: sidebar ? 1 : 0, ease: "easeInOut", delay: 0 }}
         className="z-40 fixed top-0 left-0 w-full h-dvh"
       >
         <Sidebar

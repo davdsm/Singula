@@ -8,7 +8,7 @@ export const ProductGallery = ({ product }: { product: Product }) => {
   const firstRefs: string[] | undefined =
     product.RefPrimeiraImagem?.trim().split(",");
   const secondRefs: string[] | undefined =
-    product.RefPrimeiraImagem?.trim().split(",");
+    product.RefImagemMeio?.trim().split(",");
 
   return (
     <section className="relative bg-white pt-8 md:pt-12 px-4 md:px-20 overflow-hidden">
@@ -33,7 +33,7 @@ export const ProductGallery = ({ product }: { product: Product }) => {
               src={imagem || ""}
               alt={product.name}
             />
-            <span className="absolute bottom-0 left-0 text-black font-bold text-lg">
+            <span className="absolute bottom-4 left-8 text-black font-bold text-lg">
               {firstRefs?.[index] ?? ""}
             </span>
           </motion.span>
@@ -41,7 +41,7 @@ export const ProductGallery = ({ product }: { product: Product }) => {
       </div>
 
       {product.secondTitle && product.secondText && (
-        <div className="max-w-4xl py-10 mx-auto">
+        <div className="max-w-4xl py-10 mx-auto px-8 md:px-0">
           <motion.h3
             initial={{ y: 30, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
@@ -84,7 +84,7 @@ export const ProductGallery = ({ product }: { product: Product }) => {
               src={imagem || ""}
               alt={product.name}
             />
-            <span className="absolute bottom-0 left-0 text-black font-bold text-lg">
+            <span className="absolute bottom-0 left-8 text-black font-bold text-lg">
               {secondRefs?.[index] ?? ""}
             </span>
           </motion.span>

@@ -15,7 +15,6 @@ export const ProductPage = () => {
     productSlug: product,
   });
 
-  // Hooks must be called unconditionally
   const {
     subcategories,
     loading: LoadingSubcategories,
