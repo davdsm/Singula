@@ -33,7 +33,17 @@ export const ProductGallery = ({ product }: { product: Product }) => {
               src={imagem || ""}
               alt={product.name}
             />
-            <span className="absolute bottom-4 left-8 text-black font-bold text-lg">
+            <span
+              className={`absolute pt-2 w-full text-center text-black font-bold text-lg opacity-25
+              ${product.PrimeiraImagem?.length === 1 && "bottom-0"}
+              ${product.PrimeiraImagem?.length === 2 && "-bottom-2"}
+              ${
+                product.PrimeiraImagem &&
+                product.PrimeiraImagem.length >= 3 &&
+                "-bottom-4"
+              }
+              `}
+            >
               {firstRefs?.[index] ?? ""}
             </span>
           </motion.span>
@@ -84,7 +94,17 @@ export const ProductGallery = ({ product }: { product: Product }) => {
               src={imagem || ""}
               alt={product.name}
             />
-            <span className="absolute bottom-0 left-8 text-black font-bold text-lg">
+            <span
+              className={`absolute pt-2 w-full text-center text-black font-bold text-lg opacity-25
+              ${product.ImagemMeio?.length === 1 && "bottom-0"}
+              ${product.ImagemMeio?.length === 2 && "-bottom-2"}
+              ${
+                product.ImagemMeio &&
+                product.ImagemMeio.length >= 3 &&
+                "-bottom-4"
+              }
+              `}
+            >
               {secondRefs?.[index] ?? ""}
             </span>
           </motion.span>

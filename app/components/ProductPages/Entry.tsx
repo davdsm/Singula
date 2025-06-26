@@ -13,7 +13,7 @@ export const ProductPageEntry = ({
   textClassName?: string;
 }) => {
   return (
-    <section className="relative w-full h-[30vh] md:h-[50vh] overflow-hidden">
+    <section className="relative w-full max-h-[400px] h-[30vh] md:h-[50vh] overflow-hidden">
       <Image
         className={`w-full h-full object-cover ${imgClassName}`}
         src={img}

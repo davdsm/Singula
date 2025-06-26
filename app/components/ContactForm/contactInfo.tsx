@@ -55,9 +55,9 @@ export const ContactInfo = () => {
                       </p>
                       <p className="hover:text-white transition-colors cursor-pointer">
                         {item.contact} <br />
-                        <span className="text-xs font-medium text-white">
+                        {/* <span className="text-xs font-medium text-white">
                           (chamada para rede móvel nacional)
-                        </span>
+                        </span> */}
                       </p>
                       <p className="text-lg mt-3"><Trans>{item.address}</Trans></p>
                     </div>
