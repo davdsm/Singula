@@ -195,7 +195,7 @@ const QuotePage = () => {
                     htmlFor="company-input"
                     className="block mb-2 text-sm font-medium text-black"
                   >
-                    Empresa
+                    Nome Entidade
                   </label>
                   <input
                     type="text"
@@ -402,8 +402,8 @@ const QuotePage = () => {
                   name="message"
                   value={formData.message}
                   onChange={handleChange}
-                  className="outline-none block p-2.5 w-full text-sm rounded-lg border border-gray-300 placeholder-gray-400 bg-[#f5f5f5] text-black"
-                  placeholder="Deixe aqui a sua mensagem"
+                  className="font-sans outline-none block p-2.5 w-full text-sm rounded-lg border border-gray-300 placeholder-gray-400 bg-[#f5f5f5] text-black"
+                  placeholder="Deixe aqui a sua mensagem (Escrever referência do produto)"
                 ></textarea>
               </div>
               <div className="w-full pt-4 ">

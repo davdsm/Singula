@@ -31,7 +31,7 @@ export const Sidebar = ({
                 type: "spring",
                 stiffness: 100,
                 damping: 25,
-                delay: index * 0.1,
+                delay: index * 0.05,
               }}
             >
               <DelayedLink

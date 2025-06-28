@@ -13,6 +13,7 @@ import { useCompactoHPL } from "~/hooks/useCompactoHPL";
 import { useMateriais } from "~/hooks/useMateriais";
 import { usePageContent } from "~/hooks/usePageContent";
 import { Loading } from "~/components/Elements/Loading";
+import { MaterialPopup } from "~/components/ProductPage/MaterialPopup";
 
 export const Materials = () => {
   const { t } = useTranslation();
@@ -78,10 +79,10 @@ export const Materials = () => {
         }))}
       />
       {ModalContent.title.length > 0 && (
-        <Modal
-          title={ModalContent.title}
+        <MaterialPopup
           img={ModalContent.img}
           text={ModalContent.text}
+          title={ModalContent.title}
           close={() => setModalContent({ title: "", img: "", text: "" })}
         />
       )}

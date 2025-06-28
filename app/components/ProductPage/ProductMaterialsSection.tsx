@@ -41,7 +41,7 @@ export const ProductMaterialsSection = ({ product }: { product: Product }) => {
                 className="flex items-center justify-center"
               >
                 <Button
-                  to="/materials"
+                  to="/materials#ral-colors"
                   firstText={t("product.materials.button")}
                   secondText={t("product.materials.finishes")}
                 />
