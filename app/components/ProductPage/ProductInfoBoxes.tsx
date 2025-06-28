@@ -25,7 +25,7 @@ export const ProductInfoBoxes = ({ product }: { product: Product }) => {
         <div className="mx-auto relative z-10">
           <div className="hidden lg:flex gap-6 items-stretch mb-16">
             {product.Ficha_Tecnica &&
-              product.Ficha_Tecnica.length > 0 &&
+              product.Ficha_Tecnica.length > 0 ||
               product.Model_DWG &&
               product.Model_DWG.length > 0 && (
                 <motion.div

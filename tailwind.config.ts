@@ -8,6 +8,7 @@ export default {
       fontFamily: {
         phenomena: ["Phenomena", "sans-serif"],
         sans: [
+          "Arial",
           "Inter",
           "ui-sans-serif",
           "system-ui",

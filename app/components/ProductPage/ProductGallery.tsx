@@ -12,7 +12,7 @@ export const ProductGallery = ({ product }: { product: Product }) => {
 
   return (
     <section className="relative bg-white pt-8 md:pt-12 px-4 md:px-20 overflow-hidden">
-      <div className="mx-auto flex justify-center items-center w-full md:w-4/5 flex justify-center items-start flex-col md:flex-row gap-[100px]">
+      <div className="mx-auto flex justify-center items-center w-full md:w-4/5 flex justify-center items-start flex-col md:flex-row gap-[20px] md:gap-[100px]">
         {product.PrimeiraImagem?.map((imagem: string, index: number) => (
           <motion.span
             initial={{ x: -30, opacity: 0 }}
@@ -33,7 +33,17 @@ export const ProductGallery = ({ product }: { product: Product }) => {
               src={imagem || ""}
               alt={product.name}
             />
-            <span className="absolute bottom-4 left-8 text-black font-bold text-lg">
+            <span
+              className={`block pt-2 w-full text-center text-black font-bold text-lg opacity-25
+              ${product.PrimeiraImagem?.length === 1 && "-bottom-6 md:-bottom-2"}
+              ${product.PrimeiraImagem?.length === 2 && "-bottom-2"}
+              ${
+                product.PrimeiraImagem &&
+                product.PrimeiraImagem.length >= 3 &&
+                "-bottom-8"
+              }
+              `}
+            >
               {firstRefs?.[index] ?? ""}
             </span>
           </motion.span>
@@ -84,7 +94,17 @@ export const ProductGallery = ({ product }: { product: Product }) => {
               src={imagem || ""}
               alt={product.name}
             />
-            <span className="absolute bottom-0 left-8 text-black font-bold text-lg">
+            <span
+              className={`block pt-2 w-full text-center text-black font-bold text-lg opacity-25
+              ${product.ImagemMeio?.length === 1 && "-bottom-6 md:-bottom-2"}
+              ${product.ImagemMeio?.length === 2 && "-bottom-2"}
+              ${
+                product.ImagemMeio &&
+                product.ImagemMeio.length >= 3 &&
+                "-bottom-8"
+              }
+              `}
+            >
               {secondRefs?.[index] ?? ""}
             </span>
           </motion.span>
@@ -97,7 +117,7 @@ export const ProductGallery = ({ product }: { product: Product }) => {
         viewport={{ amount: 0.1 }}
         className="text-gray-700 max-w-3xl text-black  text-md md:text-xl w-full font-bold text-center mx-auto pt-8"
       >
-        {parseTextWithMainColor(product.special)}
+        <Trans>{parseTextWithMainColor(product.special)}</Trans>
       </motion.p>
     </section>
   );

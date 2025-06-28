@@ -7,6 +7,7 @@ import { LanguageSelector } from "./LanguageSelector";
 import { Hamburger } from "./Hamburger";
 import { Sidebar } from "./Sidebar";
 import { useEffect, useState } from "react";
+import { useUrlParams } from "~/hooks/useUrlParams";
 
 export const Header = ({
   logo = true,
@@ -24,6 +25,8 @@ export const Header = ({
   const [sidebar, setSidebar] = useState(false);
   const [appear, setAppear] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+
+  useUrlParams();
 
   useEffect(() => {
     const handleScroll = () => {

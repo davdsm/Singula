@@ -10,29 +10,29 @@ export const MaterialPopup = ({
   img: string;
   text: string;
   title: string;
-  close: Function;
+  close: () => void;
 }) => {
   return (
     <section className="fixed top-0 left-0 w-full h-full z-20 flex justify-center items-center">
-      <div className="absolute top-0 left-0 w-full h-full z-10 bg-black opacity-60"></div>
+      <div className="absolute top-0 left-0 w-full h-full z-10 bg-black opacity-60" onClick={close}></div>
       <motion.div
         initial={{ y: 10, opacity: 0 }}
         whileInView={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5, ease: "easeInOut", delay: 0 }}
         viewport={{ amount: 0.3 }}
-        className="flex-col md:flex-row relative bg-white flex flex-flow justify-between items-center w-[90%] md:w-2/3 h-[60%] rounded-[1rem] z-20"
+        className="flex-col md:flex-row relative bg-white flex flex-flow justify-between items-center w-[90%] md:w-2/3 h-[70%] rounded-[1rem] z-20"
       >
         <button
-          className="absolute top-4 right-4 md:top-8 md:right-8 text-white md:text-singula-garden"
+          className="absolute top-4 right-4 md:top-8 md:right-8 text-black md:text-singula-garden"
           onClick={() => close()}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
-            strokeWidth="1.5"
-            stroke="currentColor"
-            className="size-6"
+            strokeWidth="3"
+            stroke="black"
+            className="size-4 md:size-6"
           >
             <path
               strokeLinecap="round"
@@ -45,7 +45,7 @@ export const MaterialPopup = ({
         <Image
           src={img}
           alt={title}
-          className="w-full md:w-[40%] h-full rounded-tl-[1rem] rounded-bl-[1rem] object-cover"
+          className="w-full h-[40%] md:h-full md:w-[40%] h-full rounded-tl-[1rem] rounded-bl-[1rem] object-cover"
         />
 
         <div className="w-full md:w-[55%] p-10 md:p-0">

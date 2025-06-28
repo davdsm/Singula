@@ -71,7 +71,7 @@ export const ContactForm = () => {
                       htmlFor="name"
                       className="block text-md md:text-xl mb-2"
                     >
-                      {t("contact.form.name.label")}
+                      {t("contact.form.name.label")}*
                     </label>
                     <input
                       type="text"
@@ -88,7 +88,7 @@ export const ContactForm = () => {
                       htmlFor="email"
                       className="block text-md md:text-xl mb-2"
                     >
-                      {t("contact.form.email.label")}
+                      {t("contact.form.email.label")}*
                     </label>
                     <input
                       type="email"
@@ -105,7 +105,7 @@ export const ContactForm = () => {
                       htmlFor="contact"
                       className="block text-md md:text-xl mb-2"
                     >
-                      {t("contact.form.contact.label")}
+                      {t("contact.form.contact.label")}*
                     </label>
                     <input
                       type="text"
@@ -123,7 +123,7 @@ export const ContactForm = () => {
                     htmlFor="message"
                     className="block text-md md:text-xl mb-2"
                   >
-                    {t("contact.form.message.label")}
+                    {t("contact.form.message.label")}*
                   </label>
                   <textarea
                     id="message"
@@ -180,6 +180,8 @@ export const ContactForm = () => {
                     </span>
                   </button>
                 </div>
+
+                <p className="mt-2 text-sm text-gray-400">* campo obrigatório.</p>
 
                 {Error && (
                   <div
