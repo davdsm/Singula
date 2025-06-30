@@ -108,6 +108,8 @@ export interface Product {
   RefPrimeiraImagem: string | null;
   ImagemMeio: string[] | null;
   RefImagemMeio: string | null;
+  SegundaMeio: string[] | null;
+  RefSegundaMeio: string | null;
   ImagemBottom: string[] | null;
   Ficha_Tecnica: string | null;
   Model_DWG: string | null;
@@ -190,6 +192,10 @@ export interface ApiProduct {
   PrimeiraImagem?: string[];
   ImagemMeio?: string[];
   ImagemBottom?: string[];
+
+  SegundaMeio?: string[];
+  ref_segunda_imagem_meio?: string[];
+
   Ficha_Tecnica?: string;
   Model_DWG?: string;
   ref_primeiras_imagens: string | null;
