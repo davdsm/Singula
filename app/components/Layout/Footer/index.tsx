@@ -11,7 +11,6 @@ import {
 
 import {
   faEnvelope,
-  faPlaneCircleCheck,
 } from "@fortawesome/free-solid-svg-icons";
 
 import { DelayedLink } from "~/components/Elements/Link";
@@ -165,7 +164,7 @@ export const Footer = () => {
         >
           <form
             action=""
-            className="w-full h-full flex justify-start items-start gap-1 bg-black rounded-xl p-10 flex-col pt-16 relative"
+            className="relative w-full h-full flex justify-start items-start gap-1 bg-black rounded-xl p-10 flex-col pt-16 relative"
             onSubmit={submitForm}
           >
             <input
@@ -181,7 +180,7 @@ export const Footer = () => {
             <label className="inline-flex items-center cursor-pointer mt-1">
               <input type="checkbox" className="peer hidden" required />
               <button type="submit" className="absolute right-10 top-16">
-                <FontAwesomeIcon icon={faEnvelope} className="text-white" />
+                <FontAwesomeIcon icon={faEnvelope} className="text-white w-6 h-6" />
               </button>
               <div className="w-3 h-3 border-2 border-white rounded-md flex items-center justify-center peer-checked:border-black peer-checked:bg-white transition-colors duration-200">
                 <svg

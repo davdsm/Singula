@@ -23,7 +23,7 @@ export const ProductPageEntry = ({
         initial={{ y: 50 }}
         animate={{ y: 0 }}
         transition={{ duration: 1, ease: "easeInOut", delay: 1.5 }}
-        className={`px-20 absolute bottom-[-6px] md:bottom-[-10px] w-full text-center md:text-left text-5xl md:text-7xl text-black font-bold z-10 ${textClassName}`}
+        className={`hidden md:block px-20 absolute bottom-[-6px] md:bottom-[-10px] w-full text-center md:text-left text-5xl md:text-7xl text-black font-bold z-10 ${textClassName}`}
       >
         {title}
       </motion.h1>
