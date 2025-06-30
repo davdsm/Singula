@@ -90,7 +90,7 @@ export const useProducts = ({
           id: item.id,
           slug: item.slug,
           design: item.expand?.design?.slug,
-          link: `/products/${item.expand.subcategory.expand.category.slug}/${item.slug}`,
+          link: `/products/${item.expand?.subcategory?.expand?.category.slug}/${item.slug}`,
           special: (item as any)[`NotaEspecial_${lang}`] || "",
           name: (item as any)[`name_${lang}`] || item.name_pt,
           subtitle: (item as any)[`subtitle_${lang}`] || item.subtitle_pt,
@@ -120,6 +120,13 @@ export const useProducts = ({
           ),
 
           RefImagemMeio: item.ref_imagens_meio,
+
+          SegundaMeio: item.SegundaMeio?.map(
+            (imagem: string) =>
+              `${pocketBaseUrl}/api/files/${item.collectionId}/${item.id}/${imagem}`
+          ),
+
+          RefSegundaMeio: item.ref_segunda_imagem_meio,
 
           ImagemBottom: item.ImagemBottom?.map(
             (imagem: string) =>

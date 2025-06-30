@@ -15,7 +15,7 @@ export const CategoriesList = ({
   }[];
 }) => {
   return (
-    <section className="w-[90%] m-auto md:px-40 md:mt-10 md:w-auto overflow-auto no-scrollbar">
+    <section className="w-[90%] m-auto md:px-40 md:mt-10 md:w-auto overflow-y-hidden overflow-x-auto no-scrollbar">
       <motion.div
         initial={{ y: 30, opacity: 0 }}
         whileInView={{ y: 0, opacity: 1 }}

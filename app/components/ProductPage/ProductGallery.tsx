@@ -9,6 +9,8 @@ export const ProductGallery = ({ product }: { product: Product }) => {
     product.RefPrimeiraImagem?.trim().split(",");
   const secondRefs: string[] | undefined =
     product.RefImagemMeio?.trim().split(",");
+  const thirdRefs: string[] | undefined =
+    product.RefSegundaMeio?.trim().split(",");
 
   return (
     <section className="relative bg-white pt-8 md:pt-12 px-4 md:px-20 overflow-hidden">
@@ -35,7 +37,9 @@ export const ProductGallery = ({ product }: { product: Product }) => {
             />
             <span
               className={`block pt-2 w-full text-center text-black font-bold text-lg opacity-25
-              ${product.PrimeiraImagem?.length === 1 && "-bottom-6 md:-bottom-2"}
+              ${
+                product.PrimeiraImagem?.length === 1 && "-bottom-6 md:-bottom-2"
+              }
               ${product.PrimeiraImagem?.length === 2 && "-bottom-2"}
               ${
                 product.PrimeiraImagem &&
@@ -110,6 +114,47 @@ export const ProductGallery = ({ product }: { product: Product }) => {
           </motion.span>
         ))}
       </div>
+
+      {product.SegundaMeio && product.SegundaMeio.length > 0 && (
+        <div className="p-14 flex flex-col justify-center items-baseline mx-auto w-full mx-auto flex justify-center items-start flex-col md:flex-row gap-[100px]">
+          {product.SegundaMeio.map((imagem: string, index: number) => (
+            <motion.span
+              initial={{ x: 30, opacity: 0 }}
+              whileInView={{ x: 0, opacity: 1 }}
+              transition={{ duration: 1, ease: "easeInOut", delay: index / 2 }}
+              viewport={{ amount: 0.1 }}
+              className="relative"
+            >
+              <Image
+                key={`imagem-${imagem}`}
+                className={`w-full object-contain ${
+                  product.SegundaMeio!.length > 1 && "aspect-square"
+                } w-full ${
+                  product.SegundaMeio?.length === 1
+                    ? "md:max-h-[60vw]"
+                    : "md:max-h-[50vw]"
+                }`}
+                src={imagem || ""}
+                alt={product.name}
+              />
+              <span
+                className={`block pt-2 w-full text-center text-black font-bold text-lg opacity-25
+              ${product.SegundaMeio?.length === 1 && "-bottom-6 md:-bottom-2"}
+              ${product.SegundaMeio?.length === 2 && "-bottom-2"}
+              ${
+                product.SegundaMeio &&
+                product.SegundaMeio.length >= 3 &&
+                "-bottom-8"
+              }
+              `}
+              >
+                {thirdRefs?.[index] ?? ""}
+              </span>
+            </motion.span>
+          ))}
+        </div>
+      )}
+
       <motion.p
         initial={{ y: 30, opacity: 0 }}
         whileInView={{ y: 0, opacity: 1 }}

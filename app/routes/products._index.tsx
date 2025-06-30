@@ -1,10 +1,8 @@
 import { useTranslation } from "react-i18next";
-import { MainColor } from "~/components/Elements/Colors/main";
 import { Loading } from "~/components/Elements/Loading";
 import { ProductPageEntry } from "~/components/ProductPages/Entry";
 import { Entry } from "~/components/Products/Entry";
 import { ProductList } from "~/components/Products/List";
-import { parseTextWithMainColor } from "~/components/utils";
 import { usePageContent } from "~/hooks/usePageContent";
 
 export const Products = () => {
