@@ -14,6 +14,17 @@ import { useMateriais } from "~/hooks/useMateriais";
 import { usePageContent } from "~/hooks/usePageContent";
 import { Loading } from "~/components/Elements/Loading";
 import { MaterialPopup } from "~/components/ProductPage/MaterialPopup";
+import { MetaFunction } from "@remix-run/react";
+
+export const meta: MetaFunction = () => {
+  return [
+    { title: "Materiais - Singula" },
+    {
+      name: "description",
+      content: "Na Singula, os materiais não são apenas materiais — são os protagonistas da história! Temos metal que não teme nada, a cortiça que é tão natural que até pede licença para entrar, o corian que brilha mais que um influencer, e o compacto HPL que é resistente e chique ao mesmo tempo. A madeira? Vem clássica, mas sai moderna. As cores RAL, claro, para dar aquele impacto final. E isso é só o começo — porque os espaços precisam mais do que o básico, precisam de design com personalidade.",
+    },
+  ];
+};
 
 export const Materials = () => {
   const { t } = useTranslation();

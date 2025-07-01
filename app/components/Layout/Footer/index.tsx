@@ -41,7 +41,7 @@ export const Footer = () => {
           <ul className="p-0 list-none m-0">
             <li className="text-left md:text-left">
               <DelayedLink
-                to="/"
+                to="/search?look=street&design=true"
                 className="bg-black py-2 px-4 text-white w-auto rounded-t-md rounded-br-md text-xl transition-all ease-linear duration-200 hover:text-singula-main"
               >
                 {t("footer.links.urban")}
@@ -49,7 +49,7 @@ export const Footer = () => {
             </li>
             <li className="text-left md:text-left">
               <DelayedLink
-                to="/"
+                to="/search?look=garden&design=true"
                 className="bg-black py-2 px-4 text-white w-auto rounded-br-md rounded-t-md text-xl transition-all ease-linear duration-200 hover:text-singula-main"
               >
                 {t("footer.links.garden")}
@@ -57,7 +57,7 @@ export const Footer = () => {
             </li>
             <li className="text-left md:text-left">
               <DelayedLink
-                to="/"
+                to="/search?look=home&design=true"
                 className="bg-black py-2 px-4 text-white w-auto rounded-br-md rounded-t-md text-xl transition-all ease-linear duration-200 hover:text-singula-main"
               >
                 {t("footer.links.residential")}

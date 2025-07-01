@@ -10,26 +10,14 @@ import {
   MaterialFormatted,
   Product,
 } from "./interfaces";
+import { StringOptions } from "sass";
 
 const pocketBaseUrl = "http://185.11.167.133:8090";
 
-export const useProducts = ({
-  subcategoryIds,
-  productSlug,
-  featured,
-}: {
-  subcategoryIds?: string[];
-  productSlug?: string;
-  featured?: boolean;
-}) => {
-  const { i18n } = useTranslation();
-  const lang = i18n.language;
-
-  const [Ready, setReady] = useState(false);
-  const [products, setProducts] = useState<Product[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
+export const formatApiProductsIntoProducts = (
+  lang: string,
+  products: ApiProduct[]
+): Product[] => {
   const formatMateriais = (materials: Material[]): MaterialFormatted[] => {
     return materials.map((mat) => ({
       name: (mat as any)[`name_${lang}`],
@@ -55,6 +43,101 @@ export const useProducts = ({
     }));
   };
 
+  const Products: Product[] = products.map((item: ApiProduct) => ({
+    id: item.id,
+    slug: item.slug,
+    design: item.expand?.design?.slug ?? "",
+    link: `/products/${item.expand?.subcategory?.expand?.category.slug}/${item.slug}`,
+    special: (item as any)[`NotaEspecial_${lang}`] || "",
+    name: (item as any)[`name_${lang}`] || item.name_pt,
+    subtitle: (item as any)[`subtitle_${lang}`] || item.subtitle_pt,
+    text: (item as any)[`text_${lang}`] || item.text_pt,
+    secondTitle: (item as any)[`secondTitle_${lang}`] || item.secondTitle_pt,
+    secondText: (item as any)[`secondText_${lang}`] || item.secondText_pt,
+    acabamento: (item as any)[`acabamento_${lang}`] || item.acabamento_pt,
+    pesos: (item as any)[`pesos_${lang}`] || item.pesos_pt,
+    note: (item as any)[`note_${lang}`] || item.note_pt,
+    banner: item.banner
+      ? `${pocketBaseUrl}/api/files/${item.collectionId}/${item.id}/${item.banner}`
+      : null,
+    ImagemPrincipal: item.ImagemPrincipal
+      ? `${pocketBaseUrl}/api/files/${item.collectionId}/${item.id}/${item.ImagemPrincipal}`
+      : null,
+    PrimeiraImagem: item.PrimeiraImagem
+      ? item.PrimeiraImagem.map(
+          (imagem: string) =>
+            `${pocketBaseUrl}/api/files/${item.collectionId}/${item.id}/${imagem}`
+        )
+      : null,
+
+    RefPrimeiraImagem: item.ref_primeiras_imagens,
+
+    ImagemMeio: item.ImagemMeio
+      ? item.ImagemMeio.map(
+          (imagem: string) =>
+            `${pocketBaseUrl}/api/files/${item.collectionId}/${item.id}/${imagem}`
+        )
+      : null,
+
+    RefImagemMeio: item.ref_imagens_meio,
+
+    SegundaMeio: item.SegundaMeio
+      ? item.SegundaMeio.map(
+          (imagem: string) =>
+            `${pocketBaseUrl}/api/files/${item.collectionId}/${item.id}/${imagem}`
+        )
+      : null,
+
+    RefSegundaMeio: Array.isArray(item.ref_segunda_imagem_meio)
+      ? item.ref_segunda_imagem_meio.length > 0
+        ? item.ref_segunda_imagem_meio[0]
+        : null
+      : item.ref_segunda_imagem_meio ?? null,
+
+    ImagemBottom: item.ImagemBottom
+      ? item.ImagemBottom.map(
+          (imagem: string) =>
+            `${pocketBaseUrl}/api/files/${item.collectionId}/${item.id}/${imagem}`
+        )
+      : null,
+    Ficha_Tecnica: item.Ficha_Tecnica
+      ? `${pocketBaseUrl}/api/files/${item.collectionId}/${item.id}/${item.Ficha_Tecnica}`
+      : null,
+    Model_DWG: item.Model_DWG
+      ? `${pocketBaseUrl}/api/files/${item.collectionId}/${item.id}/${item.Model_DWG}`
+      : null,
+    subcategory: item.expand?.subcategory || null,
+    materiais: item.expand?.materiais
+      ? formatMateriais(item.expand!.materiais!)
+      : [],
+    cores_recomendado: item.expand?.cores_recomendado
+      ? formatColors(item.expand?.cores_recomendado)
+      : [],
+    acabamentos_recomendado: item.expand?.acabamentos_recomendado
+      ? formatAcabamento(item.expand?.acabamentos_recomendado)
+      : [],
+  }));
+
+  return Products;
+};
+
+export const useProducts = ({
+  subcategoryIds,
+  productSlug,
+  featured,
+}: {
+  subcategoryIds?: string[];
+  productSlug?: string;
+  featured?: boolean;
+}) => {
+  const { i18n } = useTranslation();
+  const lang = i18n.language;
+
+  const [Ready, setReady] = useState(false);
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -73,7 +156,7 @@ export const useProducts = ({
           : "";
 
         const res = await fetch(
-          `${pocketBaseUrl}/api/collections/Produtos/records?expand=design,subcategory,materiais,cores_recomendado,acabamentos_recomendado,subcategory.category${filterQuery}`
+          `${pocketBaseUrl}/api/collections/Produtos/records?sort=order,id&expand=design,subcategory,materiais,cores_recomendado,acabamentos_recomendado,subcategory.category${filterQuery}`
         );
 
         const data = await res.json();
@@ -86,69 +169,7 @@ export const useProducts = ({
             )
           : data.items;
 
-        const formatted: Product[] = filtered.map((item: ApiProduct) => ({
-          id: item.id,
-          slug: item.slug,
-          design: item.expand?.design?.slug,
-          link: `/products/${item.expand?.subcategory?.expand?.category.slug}/${item.slug}`,
-          special: (item as any)[`NotaEspecial_${lang}`] || "",
-          name: (item as any)[`name_${lang}`] || item.name_pt,
-          subtitle: (item as any)[`subtitle_${lang}`] || item.subtitle_pt,
-          text: (item as any)[`text_${lang}`] || item.text_pt,
-          secondTitle:
-            (item as any)[`secondTitle_${lang}`] || item.secondTitle_pt,
-          secondText: (item as any)[`secondText_${lang}`] || item.secondText_pt,
-          acabamento: (item as any)[`acabamento_${lang}`] || item.acabamento_pt,
-          pesos: (item as any)[`pesos_${lang}`] || item.pesos_pt,
-          note: (item as any)[`note_${lang}`] || item.note_pt,
-          banner: item.banner
-            ? `${pocketBaseUrl}/api/files/${item.collectionId}/${item.id}/${item.banner}`
-            : null,
-          ImagemPrincipal: item.ImagemPrincipal
-            ? `${pocketBaseUrl}/api/files/${item.collectionId}/${item.id}/${item.ImagemPrincipal}`
-            : null,
-          PrimeiraImagem: item.PrimeiraImagem?.map(
-            (imagem: string) =>
-              `${pocketBaseUrl}/api/files/${item.collectionId}/${item.id}/${imagem}`
-          ),
-
-          RefPrimeiraImagem: item.ref_primeiras_imagens,
-
-          ImagemMeio: item.ImagemMeio?.map(
-            (imagem: string) =>
-              `${pocketBaseUrl}/api/files/${item.collectionId}/${item.id}/${imagem}`
-          ),
-
-          RefImagemMeio: item.ref_imagens_meio,
-
-          SegundaMeio: item.SegundaMeio?.map(
-            (imagem: string) =>
-              `${pocketBaseUrl}/api/files/${item.collectionId}/${item.id}/${imagem}`
-          ),
-
-          RefSegundaMeio: item.ref_segunda_imagem_meio,
-
-          ImagemBottom: item.ImagemBottom?.map(
-            (imagem: string) =>
-              `${pocketBaseUrl}/api/files/${item.collectionId}/${item.id}/${imagem}`
-          ),
-          Ficha_Tecnica: item.Ficha_Tecnica
-            ? `${pocketBaseUrl}/api/files/${item.collectionId}/${item.id}/${item.Ficha_Tecnica}`
-            : null,
-          Model_DWG: item.Model_DWG
-            ? `${pocketBaseUrl}/api/files/${item.collectionId}/${item.id}/${item.Model_DWG}`
-            : null,
-          subcategory: item.expand?.subcategory || null,
-          materiais: item.expand?.materiais
-            ? formatMateriais(item.expand!.materiais!)
-            : [],
-          cores_recomendado: item.expand?.cores_recomendado
-            ? formatColors(item.expand?.cores_recomendado)
-            : [],
-          acabamentos_recomendado: item.expand?.acabamentos_recomendado
-            ? formatAcabamento(item.expand?.acabamentos_recomendado)
-            : [],
-        }));
+        const formatted = formatApiProductsIntoProducts(lang, filtered);
 
         setProducts(formatted);
         if (products.length > 0) {

@@ -85,13 +85,7 @@ export const Header = ({
         )}
         {menu && <Menu list={menuList} />}
         <div className="flex items-center justify-between">
-          {searchbar && (
-            <SearchBar
-              onSearch={(searchText: string) =>
-                console.log(`search...${searchText}`)
-              }
-            />
-          )}
+          {searchbar && <SearchBar showMobile={false} />}
           {whatsApp && <WhatsApp />}
           {lang && <LanguageSelector />}
           {menu && (

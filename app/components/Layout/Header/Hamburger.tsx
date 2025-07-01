@@ -22,7 +22,7 @@ export const Hamburger = ({
       <button
         onClick={handleClick}
         className="relative group focus:outline-none"
-        onBlur={close}
+        // onBlur={close}
       >
         <div className="relative flex overflow-hidden items-center justify-center w-[30px] h-[20px] transform transition-all duration-200">
           <div className="flex flex-col justify-between w-[15px] h-[13px] transform transition-all duration-300 origin-center overflow-hidden">

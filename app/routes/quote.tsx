@@ -11,6 +11,7 @@ import {
 } from "@headlessui/react";
 import { useProducts } from "~/hooks/useProducts";
 import { Image } from "~/components/Elements/Image";
+import { MetaFunction } from "@remix-run/react";
 
 interface Option {
   id: string;
@@ -30,6 +31,17 @@ interface FormData {
   file?: File;
   terms: boolean;
 }
+
+
+export const meta: MetaFunction = () => {
+  return [
+    { title: "Pedido de Orçamento - Singula" },
+    {
+      name: "description",
+      content: "Aqui não desenhamos só produtos, desenhamos personagens. E como toda boa personagem, têm histórias para contar, piadas na manga e zero vontade de serem aborrecidas. Pensa Metal. Pensa Singula.",
+    },
+  ];
+};
 
 const QuotePage = () => {
   const [formData, setFormData] = useState<FormData>({

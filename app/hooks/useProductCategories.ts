@@ -31,7 +31,7 @@ export function useCategories() {
         setLoading(true);
 
         const res = await fetch(
-          `${pocketBaseUrl}/api/collections/Categorias/records?expand=design`
+          `${pocketBaseUrl}/api/collections/Categorias/records?expand=design&sort=order,id`
         );
         const data = await res.json();
 

@@ -23,6 +23,7 @@ export const UnifiedHoverItem = ({
     ? {
         href,
         download: download ? true : undefined,
+        target: "_blank"
       }
     : {
         onClick,
