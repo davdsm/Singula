@@ -11,13 +11,14 @@ export const ProductCategoryList = ({
     name: string;
     slug: string;
     img: string;
+    link?: string;
   }[];
-  subcategory: string;
-}) => {
+  subcategory?: string;
+}) => {  
   return (
     <>
       {list && (
-        <section className="bg-[#f5f5f5] pb-40">
+        <section className="bg-[#f5f5f5] pb-40 w-full">
           <ul className="flex flex-flow justify-start items-start flex-wrap w-[90%] md:w-[70%] mx-auto gap-4">
             {list.map(
               (
@@ -25,6 +26,7 @@ export const ProductCategoryList = ({
                   name: string;
                   slug: string;
                   img: string;
+                  link?: string;
                 },
                 index
               ) => (
@@ -41,7 +43,7 @@ export const ProductCategoryList = ({
                   className="transition-bg text-black bg-white border border-white w-[47%] md:w-[32%] rounded-3xl h-[60vw] md:h-[25vw] relative flex justify-center items-center hover:mix-blend-darken transition-600 hover:text-singula-main hover:border-[#D2D2D2]"
                 >
                   <DelayedLink
-                    to={`/products/${subcategory}/${item.slug}`}
+                    to={item.link ? item.link : `/products/${subcategory ?? ''}/${item.slug}`}
                     className="w-full h-full p-4 md:p-10"
                   >
                     <Image

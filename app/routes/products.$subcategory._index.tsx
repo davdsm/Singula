@@ -1,5 +1,5 @@
 import { useParams } from "@remix-run/react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { CategoriesList } from "~/components/CategoriesList";
 import { ProductCategoryList } from "~/components/CategoriesList/categoryListProducts";
 import { Filters } from "~/components/CategoriesList/filters";
@@ -9,6 +9,42 @@ import { Entry } from "~/components/Products/Entry";
 import { useCategories } from "~/hooks/useProductCategories";
 import { useProducts } from "~/hooks/useProducts";
 import { useSubcategoriesBySlug } from "~/hooks/useProductSubCategories";
+import { LoaderFunction, MetaFunction } from "@remix-run/node";
+
+type Category = {
+  title_pt?: string;
+  text_pt?: string;
+  title?: string;
+  text?: string;
+  slug?: string;
+  banner?: string;
+  image?: string;
+  design?: { slug?: string };
+};
+
+export const loader: LoaderFunction = async ({ params }) => {
+  const subcategorySlug = params.subcategory;
+  const pocketBaseUrl = "http://185.11.167.133:8090";
+
+  const res = await fetch(
+    `${pocketBaseUrl}/api/collections/Categorias/records?expand=design&sort=order,id`
+  );
+  const data = await res.json();
+  const category: Category = data.items.find((item: any) => item.slug === subcategorySlug);
+
+  return category;
+};
+
+export const meta: MetaFunction = ({ data }) => {
+  const category = data as Category;
+  return [
+    { title: `${category?.title_pt || "Produtos"} - Singula` },
+    {
+      name: "description",
+      content: category?.text_pt || "Veja nossos produtos",
+    },
+  ];
+};
 
 export const Subcategory = () => {
   const { subcategory } = useParams();

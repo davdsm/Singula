@@ -1,9 +1,20 @@
+import { MetaFunction } from "@remix-run/react";
 import { useTranslation } from "react-i18next";
 import { Loading } from "~/components/Elements/Loading";
 import { ProductPageEntry } from "~/components/ProductPages/Entry";
 import { Entry } from "~/components/Products/Entry";
 import { ProductList } from "~/components/Products/List";
 import { usePageContent } from "~/hooks/usePageContent";
+
+export const meta: MetaFunction = () => {
+  return [
+    { title: "Produtos - Singula" },
+    {
+      name: "description",
+      content: "Na Singula não desenhamos só formas. Criamos personalidade. Seja num banco, numa floreira, numa divisória ou numa peça decorativa - cada detalhe conta. Porque o nosso design vive nas ruas, respira nos jardins e arruma-se com rigor em casa. Street, Garden ou Home - o cenário muda, mas a atitude é a mesma.",
+    },
+  ];
+};
 
 export const Products = () => {
   const { t } = useTranslation();
@@ -23,7 +34,7 @@ export const Products = () => {
       />
       <Entry
         text={data["product-entry-text"] as string}
-        className="py-20"
+        className="pt-20 md:py-20"
       />
       <ProductList />
     </main>

@@ -1,12 +1,12 @@
 import { motion } from "framer-motion";
-import { Link } from "@remix-run/react";
 import { useTranslation } from "react-i18next";
 import { DelayedLink } from "~/components/Elements/Link";
+import { SearchBar } from "./Searchbar";
 
 export const Sidebar = ({
   list,
   open,
-  hide
+  hide,
 }: {
   list: {
     key: string;
@@ -18,7 +18,7 @@ export const Sidebar = ({
   const { t } = useTranslation();
 
   return (
-    <nav className="fixed w-full h-dvh bg-stone-950 text-white flex justify-center items-center z-[90]">
+    <nav className="fixed w-full h-dvh bg-stone-950 text-white flex justify-center flex-col items-center z-[90]">
       <ul className="justify-between items-center w-half flex flex-col">
         {open &&
           list.map((item, index) => (
@@ -44,6 +44,7 @@ export const Sidebar = ({
             </motion.li>
           ))}
       </ul>
+      <SearchBar showMobile closeSidebar={hide} />
     </nav>
   );
 };

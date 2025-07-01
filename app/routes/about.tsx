@@ -13,10 +13,10 @@ import { useTeam } from "~/hooks/useTeam";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "Sobre Nós - Singula" },
+    { title: "Singula - Somos design e engenharia, somos a história nunca contada." },
     {
       name: "description",
-      content: "Somos design e engenharia, somos a história nunca contada.",
+      content: "A Singula é o ponto onde design e engenharia se encontram para reimaginar o mundo à nossa volta. Acreditamos que cada espaço — urbano, natural ou doméstico — merece ser emocionante, funcional e duradouro. Para nós, o metal não é só matéria-prima: é a nossa base.",
     },
   ];
 };

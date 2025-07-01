@@ -1,25 +1,58 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useTranslation } from "react-i18next";
+import { useNavigate, useSearchParams } from "@remix-run/react";
+import { LoaderFunction } from "@remix-run/node";
 
-export const SearchBar = ({ onSearch }: { onSearch: Function }) => {
+export const loader: LoaderFunction = async ({ request }) => {
+  const url = new URL(request.url);
+  const look = url.searchParams.get("look");
+  const design = url.searchParams.get("design");
+
+  return { look, design };
+};
+
+export const SearchBar = ({
+  showMobile,
+  closeSidebar,
+}: {
+  showMobile: boolean;
+  closeSidebar?: Function;
+}) => {
   const [searchText, setSearchText] = useState<string>("");
+  const [searchParams] = useSearchParams();
+  const element = useRef(null);
+  const searchString = searchParams.get("look");
+  const isDesign = searchParams.get("design");
+
+  const navigate = useNavigate();
 
   const submit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    onSearch(searchText);
+    closeSidebar && closeSidebar();
+    element.current?.blur();
+    navigate(`/search?look=${searchText}`);
   };
 
   const { t } = useTranslation();
 
+  useEffect(() => {
+    if (!isDesign) {
+      setSearchText(searchString ?? "");
+    }
+  }, [searchString]);
+
   return (
     <form
-      className="hidden md:flex relative text-gray-600 items-center"
+      className={`${
+        showMobile ? "absolute -bottom-8" : "hidden"
+      } flex relative text-gray-600 items-center`}
       action=""
       onSubmit={submit}
     >
       <input
+        ref={element}
         type="text"
         name="search"
         placeholder={t("menu.search")}

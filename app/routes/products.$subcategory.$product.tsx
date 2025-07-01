@@ -7,6 +7,51 @@ import { ProductMaterialsSection } from "~/components/ProductPage/ProductMateria
 import { useProducts } from "~/hooks/useProducts";
 import { useSubcategoriesBySlug } from "~/hooks/useProductSubCategories";
 import { Loading } from "~/components/Elements/Loading";
+import { LoaderFunction, MetaFunction } from "@remix-run/node";
+import { ApiProduct } from "~/hooks/interfaces";
+
+interface ProdutoItem {
+  slug: string;
+  [key: string]: any;
+}
+
+interface ProdutosResponse {
+  items: ProdutoItem[];
+  [key: string]: any;
+}
+
+export const loader: LoaderFunction = async ({ params }) => {
+  const productSlug = params.product;
+  const pocketBaseUrl = "http://185.11.167.133:8090";
+
+  const res = await fetch(
+    `${pocketBaseUrl}/api/collections/Produtos/records?sort=order,id&expand=design,subcategory,materiais,cores_recomendado,acabamentos_recomendado,subcategory.category&slug~"${productSlug}"`
+  );
+
+  const data: ProdutosResponse = await res.json();
+  const product: ProdutoItem | undefined = data.items.find(
+    (item: ProdutoItem) => item.slug === productSlug
+  );
+
+  return product;
+};
+
+export const meta: MetaFunction = ({ data }) => {
+  const product = data as ApiProduct;
+  return [
+    {
+      title: `${
+        product?.name_pt.replaceAll("<red>", "").replaceAll("</red>", "") ||
+        "Produto"
+      } - Singula`,
+    },
+    {
+      name: "description",
+      content: product?.subtitle_pt || "Veja nossos produtos",
+    },
+    { name: "icon", content: "" },
+  ];
+};
 
 export const ProductPage = () => {
   const { subcategory, product } = useParams();
