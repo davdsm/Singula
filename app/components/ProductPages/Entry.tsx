@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Image } from "../Elements/Image";
+import { useHeader } from "~/context/HeaderContext";
 
 export const ProductPageEntry = ({
   img,
@@ -12,8 +13,16 @@ export const ProductPageEntry = ({
   imgClassName?: string;
   textClassName?: string;
 }) => {
+  const { showHeader, setShowHeader } = useHeader();
+
   return (
-    <section className="relative w-full max-h-[400px] h-[30vh] md:h-[50vh] overflow-hidden">
+    <section
+      className="relative w-full max-h-[400px] h-[30vh] md:h-[50vh] overflow-hidden"
+      role="button"
+      tabIndex={0}
+      onClick={() => setShowHeader(!showHeader)}
+      onBlur={() => setShowHeader(true)}
+    >
       <Image
         className={`w-full h-full object-cover ${imgClassName}`}
         src={img}

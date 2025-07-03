@@ -6,7 +6,13 @@ type ResponsiveImageProps = {
   className?: string;
 };
 
-export function Image({ src, alt, width, height, className }: ResponsiveImageProps) {
+export function Image({
+  src,
+  alt,
+  width,
+  height,
+  className,
+}: Readonly<ResponsiveImageProps>) {
   // Example with Cloudinary URL transformations for responsive sizes
   const baseUrl = src;
 

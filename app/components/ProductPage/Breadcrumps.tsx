@@ -22,7 +22,7 @@ export const Breadcrumbs = ({
       className="flex"
       aria-label="Breadcrumb"
     >
-      <ol className="flex-wrap mx-auto pb-8 inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
+      <ol className="flex-wrap mx-auto pb-8 inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse justify-center">
         <li className="inline-flex items-center">
           <DelayedLink
             to="/"

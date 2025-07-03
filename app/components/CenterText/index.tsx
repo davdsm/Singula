@@ -27,7 +27,7 @@ export const AboutSection = ({ text }: { text: string }) => {
         viewport={{ amount: 0.3 }}
         className="mt-6"
       >
-        <Button to="/about" firstText="Singula" secondText="Studio" />
+        <Button to="/about#singula-studio" firstText="Singula" secondText="Studio" />
       </motion.div>
     </motion.section>
   );

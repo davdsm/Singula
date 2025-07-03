@@ -49,7 +49,7 @@ export const ContactInfo = () => {
 
                     <div className="w-8 h-0.5 bg-gray-500 mb-4"></div>
 
-                    <div className="space-y-1 text-gray-300 text-lg md:text-base leading-relaxed">
+                    <div className="space-y-1 text-gray-300 text-lg md:text-base leading-relaxed font-sans font-regular">
                       <p className="hover:text-white transition-colors cursor-pointer">
                         {item.email}
                       </p>

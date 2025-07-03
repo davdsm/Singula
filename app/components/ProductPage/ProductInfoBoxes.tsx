@@ -166,7 +166,7 @@ export const ProductInfoBoxes = ({ product }: { product: Product }) => {
                   </span>
                 </div>
 
-                <div className="space-y-2 text-xl text-gray-700 leading-relaxed">
+                <div className="space-y-2 text-md md:text-xl text-gray-700 leading-relaxed">
                   <Trans>{parseTextWithMainColor(product.note)}</Trans>
                 </div>
               </motion.div>

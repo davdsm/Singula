@@ -15,14 +15,14 @@ export const CategoriesList = ({
   }[];
 }) => {
   return (
-    <section className="w-[90%] m-auto md:px-40 md:mt-10 md:w-auto overflow-y-hidden overflow-x-auto no-scrollbar">
+    <section className="w-full md:w-[90%] mx-auto md:px-40 md:mt-10 md:w-auto overflow-y-hidden overflow-x-auto no-scrollbar">
       <motion.div
         initial={{ y: 30, opacity: 0 }}
         whileInView={{ y: 0, opacity: 1 }}
         transition={{ duration: 1, ease: "easeInOut", delay: 0.2 }}
         viewport={{ amount: 0.1 }}
       >
-        <ul className="list-none py-20 m-0 flex justify-center flex-nowrap overflow-x-auto overflow-y-hidden scroll-smooth no-scrollbar gap-6">
+        <ul className="list-none py-20 px-8 md:w-4/5 md:mx-auto flex justify-start flex-nowrap overflow-x-auto overflow-y-hidden scroll-smooth no-scrollbar gap-6">
           {categories.map((category, index) => (
             <DelayedLink
               key={`category-${index}`}

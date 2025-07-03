@@ -20,10 +20,10 @@ export function TransitionProvider({
     setIsTransitioning(true);
     setTimeout(() => {
       navigateFn();
-    }, 1000);
+    }, 500);
     setTimeout(() => {
       setIsTransitioning(false);
-    }, 2000);
+    }, 1500);
   };
 
   return (

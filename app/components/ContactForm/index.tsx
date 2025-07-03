@@ -79,7 +79,7 @@ export const ContactForm = () => {
                       name="name"
                       value={formData.name}
                       onChange={handleChange}
-                      className="w-full bg-transparent border-b border-gray-600 pb-2 focus:outline-none focus:border-gray-300"
+                      className="w-full bg-transparent border-b border-gray-600 pb-2 focus:outline-none focus:border-gray-300 font-sans font-regular"
                     />
                   </div>
 
@@ -96,7 +96,7 @@ export const ContactForm = () => {
                       name="email"
                       value={formData.email}
                       onChange={handleChange}
-                      className="w-full bg-transparent border-b border-gray-600 pb-2 focus:outline-none focus:border-gray-300"
+                      className="w-full bg-transparent border-b border-gray-600 pb-2 focus:outline-none focus:border-gray-300 font-sans font-regular"
                     />
                   </div>
 
@@ -105,7 +105,7 @@ export const ContactForm = () => {
                       htmlFor="contact"
                       className="block text-md md:text-xl mb-2"
                     >
-                      {t("contact.form.contact.label")}*
+                      {t("contact.form.contact.label")}
                     </label>
                     <input
                       type="text"
@@ -113,7 +113,7 @@ export const ContactForm = () => {
                       name="contact"
                       value={formData.contact}
                       onChange={handleChange}
-                      className="w-full bg-transparent border-b border-gray-600 pb-2 focus:outline-none focus:border-gray-300"
+                      className="w-full bg-transparent border-b border-gray-600 pb-2 focus:outline-none focus:border-gray-300 font-sans font-regular"
                     />
                   </div>
                 </div>
@@ -131,7 +131,7 @@ export const ContactForm = () => {
                     value={formData.message}
                     onChange={handleChange}
                     placeholder={t("contact.form.message.placeholder")}
-                    className="w-full bg-transparent border-b border-gray-600 pb-2 focus:outline-none focus:border-gray-300 h-24 resize-none text-gray-400"
+                    className="w-full bg-transparent border-b border-gray-600 pb-2 focus:outline-none focus:border-gray-300 h-24 resize-none text-gray-400 font-sans font-regular"
                   ></textarea>
                 </div>
 

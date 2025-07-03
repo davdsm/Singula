@@ -17,6 +17,7 @@ export const ProductGallery = ({ product }: { product: Product }) => {
       <div className="mx-auto flex justify-center items-center w-full md:w-4/5 flex justify-center items-start flex-col md:flex-row gap-[20px] md:gap-[100px]">
         {product.PrimeiraImagem?.map((imagem: string, index: number) => (
           <motion.span
+            key={`primeira-imagem-span-${index}`}
             initial={{ x: -30, opacity: 0 }}
             whileInView={{ x: 0, opacity: 1 }}
             transition={{ duration: 1, ease: "easeInOut", delay: index / 2 }}
@@ -77,9 +78,10 @@ export const ProductGallery = ({ product }: { product: Product }) => {
         </div>
       )}
 
-      <div className="flex flex-col justify-center items-baseline mx-auto w-full mx-auto flex justify-center items-start flex-col md:flex-row gap-[100px]">
+      <div className="flex flex-col justify-center items-baseline mx-auto w-full mx-auto flex justify-center items-start flex-col md:flex-row gap-[20px] md:gap-[100px]">
         {product.ImagemMeio?.map((imagem: string, index: number) => (
           <motion.span
+            key={`imagem-meio-span-${index}`}
             initial={{ x: 30, opacity: 0 }}
             whileInView={{ x: 0, opacity: 1 }}
             transition={{ duration: 1, ease: "easeInOut", delay: index / 2 }}
@@ -116,9 +118,10 @@ export const ProductGallery = ({ product }: { product: Product }) => {
       </div>
 
       {product.SegundaMeio && product.SegundaMeio.length > 0 && (
-        <div className="p-14 flex flex-col justify-center items-baseline mx-auto w-full mx-auto flex justify-center items-start flex-col md:flex-row gap-[100px]">
+        <div className="flex flex-col justify-center items-baseline mx-auto w-full md:flex-row gap-[100px]">
           {product.SegundaMeio.map((imagem: string, index: number) => (
             <motion.span
+              key={`segunda-meio-span-${index}`}
               initial={{ x: 30, opacity: 0 }}
               whileInView={{ x: 0, opacity: 1 }}
               transition={{ duration: 1, ease: "easeInOut", delay: index / 2 }}
@@ -154,6 +157,7 @@ export const ProductGallery = ({ product }: { product: Product }) => {
           ))}
         </div>
       )}
+      
 
       <motion.p
         initial={{ y: 30, opacity: 0 }}

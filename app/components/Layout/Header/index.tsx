@@ -8,6 +8,7 @@ import { Hamburger } from "./Hamburger";
 import { Sidebar } from "./Sidebar";
 import { useEffect, useState } from "react";
 import { useUrlParams } from "~/hooks/useUrlParams";
+import { useHeader } from "~/context/HeaderContext";
 
 export const Header = ({
   logo = true,
@@ -27,11 +28,14 @@ export const Header = ({
   const [lastScrollY, setLastScrollY] = useState(0);
 
   useUrlParams();
+  const { showHeader, setShowHeader, delayMenu, setDelayMenu } = useHeader();
 
   useEffect(() => {
-    const handleScroll = () => {
+    const handleScroll = () => { 
       const currentScrollY = window.scrollY;
       if (currentScrollY > lastScrollY && currentScrollY > 50) {
+        delayMenu && setDelayMenu(false);
+        !showHeader && setShowHeader(true);
         setAppear(false); // scrolling down
       } else {
         setAppear(true); // scrolling up
@@ -71,45 +75,60 @@ export const Header = ({
 
   return (
     <>
-      <motion.header
-        initial={{ opacity: 0, y: -20, x: "-50%" }}
-        animate={{
-          y: appear ? 0 : -20,
-          opacity: appear ? 1 : 0,
-        }}
-        transition={{ duration: 0.3, delay: lastScrollY === 0 ? 0.8 : 0 }}
-        className="border border-singula-border z-[90] md:z-40 p-5 px-8 md:px-14 bg-black w-4/5 rounded-[4rem] flex justify-between items-center fixed top-10 left-1/2 translate-x-[-50%]"
-      >
-        {logo && (
-          <Logo width={112} height={26} className="w-[112px] h-[26px] flex" />
-        )}
-        {menu && <Menu list={menuList} />}
-        <div className="flex items-center justify-between">
-          {searchbar && <SearchBar showMobile={false} />}
-          {whatsApp && <WhatsApp />}
-          {lang && <LanguageSelector />}
-          {menu && (
-            <Hamburger
-              status={sidebar}
-              open={() => setSidebar(true)}
-              close={() => setTimeout(() => setSidebar(false), 10)}
-            />
-          )}
-        </div>
-      </motion.header>
+      {showHeader && (
+        <>
+          <motion.header
+            initial={{ opacity: 0, y: -20, x: "-50%" }}
+            animate={{
+              y: appear ? 0 : -20,
+              opacity: appear ? 1 : 0,
+            }}
+            transition={{
+              duration: 0.3,
+              delay: delayMenu ? 5 : lastScrollY === 0 ? 0.8 : 0,
+            }}
+            className="border border-singula-border z-[90] md:z-40 p-5 px-8 md:px-14 bg-black w-4/5 rounded-[4rem] flex justify-between items-center fixed top-10 left-1/2 translate-x-[-50%]"
+          >
+            {logo && (
+              <Logo
+                width={112}
+                height={26}
+                className="w-full  md:w-[10%]"
+              />
+            )}
+            {menu && <Menu list={menuList} />}
+            <div className="w-full md:w-[40%] flex items-center justify-end">
+              {searchbar && <SearchBar showMobile={false} />}
+              {whatsApp && <WhatsApp />}
+              {lang && <LanguageSelector />}
+              {menu && (
+                <Hamburger
+                  status={sidebar}
+                  open={() => setSidebar(true)}
+                  close={() => setTimeout(() => setSidebar(false), 10)}
+                />
+              )}
+            </div>
+          </motion.header>
 
-      <motion.aside
-        initial={{ x: "-100%" }}
-        animate={{ x: sidebar ? "0%" : "-100%" }}
-        transition={{ duration: sidebar ? 1 : 0, ease: "easeInOut", delay: 0 }}
-        className="z-40 fixed top-0 left-0 w-full h-dvh"
-      >
-        <Sidebar
-          list={menuList}
-          open={sidebar}
-          hide={() => setTimeout(() => setSidebar(false), 10)}
-        />
-      </motion.aside>
+          <motion.aside
+            initial={{ x: "-100%" }}
+            animate={{ x: sidebar ? "0%" : "-100%" }}
+            transition={{
+              duration: sidebar ? 1 : 0,
+              ease: "easeInOut",
+              delay: 0,
+            }}
+            className="z-40 fixed top-0 left-0 w-full h-dvh"
+          >
+            <Sidebar
+              list={menuList}
+              open={sidebar}
+              hide={() => setTimeout(() => setSidebar(false), 10)}
+            />
+          </motion.aside>
+        </>
+      )}
     </>
   );
 };
