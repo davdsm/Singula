@@ -14,8 +14,8 @@ export const Menu = ({
   const location = useLocation();
 
   return (
-    <nav className="hidden md:flex">
-      <ul className="ml-40 justify-between items-center w-half flex">
+    <nav className="w-[50%] hidden md:flex flex justify-end">
+      <ul className="justify-between items-center w-half flex">
         {list.map((item) => (
           <li key={item.key} className="text-white text-lg mx-2">
             <DelayedLink

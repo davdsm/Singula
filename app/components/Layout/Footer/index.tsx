@@ -174,7 +174,7 @@ export const Footer = () => {
               }
               type="text"
               placeholder={t("footer.newsletter.placeholder")}
-              className="bg-black border-b w-[90%] focus:outline-none text-white"
+              className="bg-black border-b w-[90%] focus:outline-none text-white font-sans font-regular"
               required
             />
             <label className="inline-flex items-center cursor-pointer mt-1">

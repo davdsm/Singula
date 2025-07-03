@@ -146,7 +146,7 @@ const QuotePage = () => {
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
-                    className="block w-full p-2 rounded-lg text-xs outline-none placeholder-gray-400 bg-[#f5f5f5] text-black"
+                    className="font-sans font-regular block w-full p-2 rounded-lg text-xs outline-none placeholder-gray-400 bg-[#f5f5f5] text-black"
                     required
                   />
                 </div>
@@ -163,7 +163,7 @@ const QuotePage = () => {
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    className="block w-full p-2 rounded-lg text-xs outline-none placeholder-gray-400 bg-[#f5f5f5] text-black"
+                    className="font-sans font-regular block w-full p-2 rounded-lg text-xs outline-none placeholder-gray-400 bg-[#f5f5f5] text-black"
                     required
                   />
                 </div>
@@ -179,7 +179,7 @@ const QuotePage = () => {
                   <input
                     type="text"
                     id="phone-input"
-                    className="block w-full p-2 rounded-lg text-xs outline-none placeholder-gray-400 bg-[#f5f5f5] text-black"
+                    className="font-sans font-regular block w-full p-2 rounded-lg text-xs outline-none placeholder-gray-400 bg-[#f5f5f5] text-black"
                     name="contact"
                     value={formData.contact}
                     onChange={handleChange}
@@ -198,7 +198,7 @@ const QuotePage = () => {
                     name="country"
                     value={formData.country}
                     onChange={handleChange}
-                    className="block w-full p-2 rounded-lg text-xs outline-none placeholder-gray-400 bg-[#f5f5f5] text-black"
+                    className="font-sans font-regular block w-full p-2 rounded-lg text-xs outline-none placeholder-gray-400 bg-[#f5f5f5] text-black"
                     required
                   />
                 </div>
@@ -215,19 +215,19 @@ const QuotePage = () => {
                     value={formData.company}
                     onChange={handleChange}
                     id="company-input"
-                    className="block w-full p-2 rounded-lg text-xs outline-none placeholder-gray-400 bg-[#f5f5f5] text-black"
+                    className="font-sans font-regular block w-full p-2 rounded-lg text-xs outline-none placeholder-gray-400 bg-[#f5f5f5] text-black"
                   />
                 </div>
                 <div className="w-full md:w-2/5">
                   <label
                     htmlFor="countries"
-                    className="block mb-2 text-sm font-medium text-gray-900"
+                    className="font-sans font-regular block mb-2 text-sm font-medium text-gray-900"
                   >
                     Entidade
                   </label>
                   <select
                     id="countries"
-                    className="text-sm rounded-lg block w-full p-2 outline-none bg-[#f5f5f5] text-black"
+                    className="font-sans font-regular text-sm rounded-lg block w-full p-2 outline-none bg-[#f5f5f5] text-black"
                     name="entity"
                     onChange={handleChange}
                   >
@@ -281,7 +281,7 @@ const QuotePage = () => {
                     multiple
                   >
                     <div className="relative">
-                      <ListboxButton className="w-full bg-[#f5f5f5] text-left rounded-lg p-2 text-sm outline-none ">
+                      <ListboxButton className="font-sans font-regular w-full bg-[#f5f5f5] text-left rounded-lg p-2 text-sm outline-none ">
                         {selectedProducts.length === 0
                           ? "Selecione os produtos"
                           : ""}
@@ -337,7 +337,7 @@ const QuotePage = () => {
                               alt={product.name}
                               className="w-8 h-8 mr-4 mix-blend-darken"
                             />
-                            <span className="font-bold text-sm text-black">
+                            <span className="font-bold text-sm text-black font-sans font-regular">
                               {product.name?.toUpperCase()}
                             </span>
                           </div>
@@ -347,7 +347,7 @@ const QuotePage = () => {
                       <div className="w-1/5 md:w-2/5">
                         <label
                           htmlFor="number-input"
-                          className="block mb-2 text-sm font-medium text-black"
+                          className="block mb-2 text-sm font-medium text-black font-sans font-regular"
                         >
                           Quantidade
                         </label>
@@ -355,7 +355,7 @@ const QuotePage = () => {
                           type="number"
                           id="number-input"
                           aria-describedby="helper-text-explanation"
-                          className="block w-full p-4 rounded-lg text-xs outline-none placeholder-gray-400 bg-[#f5f5f5] text-black"
+                          className="font-sans font-regular block w-full p-4 rounded-lg text-xs outline-none placeholder-gray-400 bg-[#f5f5f5] text-black"
                           placeholder="1"
                           min={0}
                           value={product.qty}
@@ -435,7 +435,7 @@ const QuotePage = () => {
                     }}
                     id="file-input"
                     accept=".pdf,.jpg,.png"
-                    className="border border-gray-200 shadow-sm rounded-lg block w-full md:w-3/5 text-sm focus:z-10 file:bg-gray-50 file:border-0 file:me-4 file:py-3 file:px-4"
+                    className="font-sans font-regular border border-gray-200 shadow-sm rounded-lg block w-full md:w-3/5 text-sm focus:z-10 file:bg-gray-50 file:border-0 file:me-4 file:py-3 file:px-4"
                   />
                   <span className="w-full md:w-2/5 text-sm ml-6 text-slate-700 opacity-50">
                     Anexar Ficheiro. (PDF, JPG, PNG)(max. 2MB)

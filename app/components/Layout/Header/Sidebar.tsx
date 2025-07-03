@@ -24,20 +24,20 @@ export const Sidebar = ({
           list.map((item, index) => (
             <motion.li
               key={`menu-${index}`}
-              className="text-white text-xl mx-2 my-6"
+              className="text-white text-xl mx-2 my-6 transform-gpu"
               initial={{ x: "-255px", opacity: 0 }}
               animate={{ x: "0px", opacity: 1 }}
               transition={{
                 type: "spring",
                 stiffness: 100,
                 damping: 25,
-                delay: index * 0.05,
+                delay: index * 0.03,
               }}
             >
               <DelayedLink
                 onClick={hide}
                 to={item.link}
-                className="hover:text-gray-400 transition duration-300 uppercase"
+                className="hover:text-gray-400 transition duration-300 uppercase transform-gpu"
               >
                 {t(item.key)}
               </DelayedLink>

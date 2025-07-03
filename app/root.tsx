@@ -21,6 +21,7 @@ import { TransitionOverlay } from "./components/Elements/Transition";
 
 import "./global.css";
 import "./hooks/fontAwesome";
+import { HeaderProvider } from "./context/HeaderContext";
 
 export const links: LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -86,13 +87,15 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <body>
           <StrictMode>
             <TransitionProvider>
-              <TransitionOverlay />
-              <Header />
-              {children}
-              <Footer />
-              <ScrollRestoration />
-              <Scripts />
-              <LiveReload />
+              <HeaderProvider>
+                <TransitionOverlay />
+                <Header />
+                {children}
+                <Footer />
+                <ScrollRestoration />
+                <Scripts />
+                <LiveReload />
+              </HeaderProvider>
             </TransitionProvider>
           </StrictMode>
         </body>

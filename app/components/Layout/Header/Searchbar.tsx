@@ -46,8 +46,8 @@ export const SearchBar = ({
   return (
     <form
       className={`${
-        showMobile ? "absolute -bottom-8" : "hidden"
-      } flex relative text-gray-600 items-center`}
+        showMobile ? "flex absolute -bottom-8" : "hidden"
+      } md:flex relative text-gray-600 items-center`}
       action=""
       onSubmit={submit}
     >
@@ -56,11 +56,18 @@ export const SearchBar = ({
         type="text"
         name="search"
         placeholder={t("menu.search")}
-        className="bg-stone-900 h-10 px-5 pr-10 rounded-full text-sm focus:outline-none text-white"
+        className={`bg-stone-900 ${
+          showMobile ? "h-14" : "h-10"
+        } px-5 pr-10 rounded-full text-sm focus:outline-none text-white font-sans font-regular`}
         value={searchText}
         onChange={(e) => setSearchText(e.target.value)}
       />
-      <button type="submit" className="absolute right-0 mr-4 text-white">
+      <button
+        type="submit"
+        className={`absolute ${
+          showMobile ? "right-2" : "right-0"
+        } mr-4 text-white`}
+      >
         <FontAwesomeIcon icon={faSearch} className="w-4 h-4" />
       </button>
     </form>

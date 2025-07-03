@@ -72,7 +72,7 @@ export const CarouselComponent = ({
     <Carousel
       opts={{ align: "center", loop }}
       setApi={setApi}
-      className={`carousel w-full mx-auto ${className}`}
+      className={`carousel w-full mx-auto ${className} transform-gpu`}
       onMouseEnter={() => setStopped(true)}
       onMouseLeave={() => setStopped(false)}
     >
