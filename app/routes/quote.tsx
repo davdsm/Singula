@@ -32,13 +32,13 @@ interface FormData {
   terms: boolean;
 }
 
-
 export const meta: MetaFunction = () => {
   return [
     { title: "Pedido de Orçamento - Singula" },
     {
       name: "description",
-      content: "Aqui não desenhamos só produtos, desenhamos personagens. E como toda boa personagem, têm histórias para contar, piadas na manga e zero vontade de serem aborrecidas. Pensa Metal. Pensa Singula.",
+      content:
+        "Aqui não desenhamos só produtos, desenhamos personagens. E como toda boa personagem, têm histórias para contar, piadas na manga e zero vontade de serem aborrecidas. Pensa Metal. Pensa Singula.",
     },
   ];
 };
@@ -125,12 +125,9 @@ const QuotePage = () => {
         >
           <div className="relative flex items-start justify-center flex-col text-left w-full p-4 md:p-12">
             <h1 className="text-black text-2xl font-bold">
-              Pedido de Orçamento
+              {t("quote.title")}
             </h1>
-            <p className="text-gray-400">
-              Para solicitar um orçamento, por favor, preencha o formulário
-              abaixo com as informações necessárias.
-            </p>
+            <p className="text-gray-400">{t("quote.description")}</p>
             <form className="mt-4 w-full" action="/" onSubmit={handleSubmit}>
               <div className="flex flex-row gap-4 mb-4 w-full">
                 <div className="w-2/5">
@@ -138,7 +135,7 @@ const QuotePage = () => {
                     htmlFor="name-input"
                     className="block mb-2 text-sm font-medium text-black"
                   >
-                    Nome*
+                    {t("quote.name")}*
                   </label>
                   <input
                     type="text"
@@ -155,7 +152,7 @@ const QuotePage = () => {
                     htmlFor="email-input"
                     className="block mb-2 text-sm font-medium text-black"
                   >
-                    Email*
+                    {t("quote.email")}*
                   </label>
                   <input
                     type="email"
@@ -174,7 +171,7 @@ const QuotePage = () => {
                     htmlFor="phone-input"
                     className="block mb-2 text-sm font-medium text-black"
                   >
-                    Contacto
+                    {t("quote.contact")}*
                   </label>
                   <input
                     type="text"
@@ -190,7 +187,7 @@ const QuotePage = () => {
                     htmlFor="phone-input"
                     className="block mb-2 text-sm font-medium text-black"
                   >
-                    País*
+                    {t("quote.country")}*
                   </label>
                   <input
                     type="text"
@@ -207,7 +204,7 @@ const QuotePage = () => {
                     htmlFor="company-input"
                     className="block mb-2 text-sm font-medium text-black"
                   >
-                    Nome Entidade
+                    {t("quote.entity-name")}
                   </label>
                   <input
                     type="text"
@@ -223,7 +220,7 @@ const QuotePage = () => {
                     htmlFor="countries"
                     className="font-sans font-regular block mb-2 text-sm font-medium text-gray-900"
                   >
-                    Entidade
+                    {t("quote.entity")}
                   </label>
                   <select
                     id="countries"
@@ -235,25 +232,25 @@ const QuotePage = () => {
                       selected={formData.entity === "" ? true : false}
                       disabled
                     >
-                      Escolher uma opção
+                      {t("quote.entity-choose")}
                     </option>
                     <option
                       selected={formData.entity === "Public" ? true : false}
                       value="Public"
                     >
-                      Pública
+                      {t("quote.entity-public")}
                     </option>
                     <option
                       selected={formData.entity === "Private" ? true : false}
                       value="Private"
                     >
-                      Privada
+                      {t("quote.entity-private")}
                     </option>
                     <option
                       selected={formData.entity === "Particular" ? true : false}
                       value="Particular"
                     >
-                      Particular
+                      {t("quote.entity-person")}
                     </option>
                   </select>
                 </div>
@@ -264,7 +261,7 @@ const QuotePage = () => {
                     htmlFor="phone-input"
                     className="block mb-2 text-sm font-medium text-black"
                   >
-                    Produtos
+                    {t("quote.products")}
                   </label>
                   <Listbox
                     value={selectedProducts}
@@ -283,7 +280,7 @@ const QuotePage = () => {
                     <div className="relative">
                       <ListboxButton className="font-sans font-regular w-full bg-[#f5f5f5] text-left rounded-lg p-2 text-sm outline-none ">
                         {selectedProducts.length === 0
-                          ? "Selecione os produtos"
+                          ? t("quote.choose-products")
                           : ""}
                         {selectedProducts
                           .map((product) => product.name?.toUpperCase())
@@ -328,7 +325,7 @@ const QuotePage = () => {
                           htmlFor="number-input"
                           className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                         >
-                          Produto
+                          {t("quote.product")}
                         </label>
                         <div className="flex items-center justify-between bg-[#f5f5f5] p-2 rounded-lg">
                           <div className="flex items-center">
@@ -349,7 +346,7 @@ const QuotePage = () => {
                           htmlFor="number-input"
                           className="block mb-2 text-sm font-medium text-black font-sans font-regular"
                         >
-                          Quantidade
+                          {t("quote.qty")}
                         </label>
                         <input
                           type="number"
@@ -406,7 +403,7 @@ const QuotePage = () => {
                   htmlFor="message"
                   className="block mb-2 text-sm font-medium text-black"
                 >
-                  A sua mensagem
+                  {t("quote.message")}
                 </label>
                 <textarea
                   id="message"
@@ -421,7 +418,7 @@ const QuotePage = () => {
               <div className="w-full pt-4 ">
                 <div className="flex items-center justify-between flex-col md:flex-row">
                   <label htmlFor="file-input" className="sr-only">
-                    Anexar Ficheiro
+                    {t("quote.file")}
                   </label>
                   <input
                     type="file"
@@ -438,7 +435,7 @@ const QuotePage = () => {
                     className="font-sans font-regular border border-gray-200 shadow-sm rounded-lg block w-full md:w-3/5 text-sm focus:z-10 file:bg-gray-50 file:border-0 file:me-4 file:py-3 file:px-4"
                   />
                   <span className="w-full md:w-2/5 text-sm ml-6 text-slate-700 opacity-50">
-                    Anexar Ficheiro. (PDF, JPG, PNG)(max. 2MB)
+                    {t("quote.file")} (PDF, JPG, PNG)(max. 2MB)
                   </span>
                 </div>
               </div>
@@ -472,10 +469,10 @@ const QuotePage = () => {
                 className="mt-8 w-full md:w-[50%] inline-block group hover:bg-singula-main hover:translate-y-[-2px] transition-all transition duration-700 inline-block bg-singula-black p-2 rounded-3xl pr-4 flex items-center"
               >
                 <span className="bg-singula-mainDarker text-white font-bold p-2 uppercase rounded-3xl text-md">
-                  Orçamento
+                  {t("quote.quote")}
                 </span>
                 <span className="w-full text-center transition-colors duration-300 group-hover:text-white text-singula-main text-lg mx-4">
-                  Enviar Pedido
+                  {t("quote.send")}
                 </span>
                 <FontAwesomeIcon
                   icon={faArrowRight}
@@ -487,12 +484,12 @@ const QuotePage = () => {
                   className="my-4 p-4 text-lg text-rose-500 rounded-lg bg-rose-950 w-auto"
                   role="alert"
                 >
-                  <span className="font-bold">Atenção!</span> Preencha todos os
-                  campos obrigatórios.
+                  <span className="font-bold">Atenção!</span>{" "}
+                  {t("quote.fields")}
                 </div>
               )}
             </form>
-            <p className="mt-2 text-sm text-gray-400">* campo obrigatório.</p>
+            <p className="mt-2 text-sm text-gray-400">* {t("quote.field")}.</p>
           </div>
         </motion.section>
       )}
