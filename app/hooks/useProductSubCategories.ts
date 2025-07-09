@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-const pocketBaseUrl = "http://185.11.167.133:8090";
+const pocketBaseUrl = "https://singula.pt/admin";
 
 export type Subcategory = {
   id: string;

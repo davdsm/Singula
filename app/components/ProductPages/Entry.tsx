@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Image } from "../Elements/Image";
 import { useHeader } from "~/context/HeaderContext";
+import { useEffect } from "react";
 
 export const ProductPageEntry = ({
   img,
@@ -13,14 +14,17 @@ export const ProductPageEntry = ({
   imgClassName?: string;
   textClassName?: string;
 }) => {
-  const { showHeader, setShowHeader } = useHeader();
+  const { showHeader, setShowHeader, setDelayMenu } = useHeader();
 
   return (
     <section
       className="relative w-full max-h-[400px] h-[30vh] md:h-[50vh] overflow-hidden"
       role="button"
       tabIndex={0}
-      onClick={() => setShowHeader(!showHeader)}
+      onClick={() => {
+        setShowHeader(!showHeader);
+        setDelayMenu(false);
+      }}
       onBlur={() => setShowHeader(true)}
     >
       <Image

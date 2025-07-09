@@ -3,7 +3,7 @@ import { Product } from "./interfaces";
 import { useTranslation } from "react-i18next";
 import { formatApiProductsIntoProducts } from "./useProducts";
 
-const pocketBaseUrl = "http://185.11.167.133:8090";
+const pocketBaseUrl = "https://singula.pt/admin";
 
 export const useSearch = ({ searchString }: { searchString: string }) => {
   const { i18n } = useTranslation();

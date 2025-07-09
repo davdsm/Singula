@@ -19,28 +19,33 @@ const HeaderContext = createContext<HeaderContextType | undefined>(undefined);
 export const HeaderProvider = ({ children }: { children: ReactNode }) => {
   const location = useLocation();
 
-  const currentRoute = location.pathname.trim().split("/");
+  let currentRoute = location.pathname.trim().split("/");
   currentRoute.shift();
+  currentRoute = currentRoute.filter((path) => path !== "")
 
   const [delayMenu, setDelayMenu] = useState(
     currentRoute.length === 2 && currentRoute[0] === "products"
   );
   const [showHeader, setShowHeader] = useState(true);
 
-  useEffect(() => {
+  useEffect(() => {    
     if (currentRoute.length === 2 && currentRoute[0] === "products") {
       setShowHeader(false);
       setTimeout(() => {
         setDelayMenu(true);
         setShowHeader(true);
-
       }, 50);
     }
   }, [location]);
 
   return (
     <HeaderContext.Provider
-      value={{ delayMenu, setDelayMenu, showHeader, setShowHeader }}
+      value={{
+        delayMenu,
+        setDelayMenu,
+        showHeader,
+        setShowHeader,
+      }}
     >
       {children}
     </HeaderContext.Provider>

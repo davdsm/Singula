@@ -20799,7 +20799,7 @@ namespace router {
   * 	// generate a http.ServeMux instance based on the router configurations
   * 	mux, _ := r.BuildMux()
   * 
-  * 	http.ListenAndServe("185.11.167.133:8090", mux)
+  * 	http.ListenAndServe("https://singula.pt/admin", mux)
   * ```
   */
  type _sAyDGzz<T> = RouterGroup<T>

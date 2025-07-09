@@ -16,7 +16,7 @@ export function useTeam() {
   const [error, setError] = useState<string | null>(null);
   const { i18n } = useTranslation();
 
-  const pocketBaseUrl = "http://185.11.167.133:8090"; // <-- Update this to your actual base URL
+  const pocketBaseUrl = "https://singula.pt/admin"; // <-- Update this to your actual base URL
 
   useEffect(() => {
     const fetchData = async () => {
