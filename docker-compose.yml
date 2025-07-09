@@ -1,20 +1,18 @@
 services:
-  singula:
+  singula-app:
     container_name: singula-app
+    hostname: singula-app
     build:
       context: ./
       dockerfile: Dockerfile
-    ports:
-      - 5173:3000
     networks:
       - singula
 
-  singulaapi:
+  singula-api:
     image: ghcr.io/muchobien/pocketbase:latest
     container_name: singula-api
+    hostname: singula-api
     restart: unless-stopped
-    ports:
-      - 8090:8090
     volumes:
       - ./api:/api
       - ./api/data:/pb_data
@@ -23,3 +21,4 @@ services:
 
 networks:
   singula:
+    external: true
