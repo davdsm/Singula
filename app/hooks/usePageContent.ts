@@ -5,7 +5,7 @@ import pb from "~/lib/pocketbase";
 type PageData = Record<string, string | string[]>;
 
 // Set your PocketBase base URL here
-const pocketBaseUrl = "http://185.11.167.133:8090";
+const pocketBaseUrl = "https://singula.pt/admin";
 
 export function usePageContent(collection: string) {
   const [data, setData] = useState<PageData>({});

@@ -12,7 +12,7 @@ import {
 } from "./interfaces";
 import { StringOptions } from "sass";
 
-const pocketBaseUrl = "http://185.11.167.133:8090";
+const pocketBaseUrl = "https://singula.pt/admin";
 
 export const formatApiProductsIntoProducts = (
   lang: string,

@@ -22,7 +22,7 @@ interface ProdutosResponse {
 
 export const loader: LoaderFunction = async ({ params }) => {
   const productSlug = params.product;
-  const pocketBaseUrl = "http://185.11.167.133:8090";
+  const pocketBaseUrl = "https://singula.pt/admin";
 
   const res = await fetch(
     `${pocketBaseUrl}/api/collections/Produtos/records?sort=order,id&expand=design,subcategory,materiais,cores_recomendado,acabamentos_recomendado,subcategory.category&slug~"${productSlug}"`

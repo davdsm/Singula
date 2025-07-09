@@ -24,7 +24,7 @@ type Category = {
 
 export const loader: LoaderFunction = async ({ params }) => {
   const subcategorySlug = params.subcategory;
-  const pocketBaseUrl = "http://185.11.167.133:8090";
+  const pocketBaseUrl = "https://singula.pt/admin";
 
   const res = await fetch(
     `${pocketBaseUrl}/api/collections/Categorias/records?expand=design&sort=order,id`
