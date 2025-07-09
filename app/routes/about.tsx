@@ -1,6 +1,5 @@
 import { MetaFunction } from "@remix-run/node";
 
-import { Link } from "@remix-run/react";
 import { AboutSingula } from "~/components/AboutSingula";
 import { Banner } from "~/components/Banner";
 import { DesignsComponent } from "~/components/DesignsComponent";

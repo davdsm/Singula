@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { useTranslation } from "react-i18next";
 
-const languages: string[] = ["en", "pt"];
+const languages: string[] = ["en", "pt", "es", "fr", "de"];
 
 export const LanguageSelector = (): JSX.Element => {
   const { i18n } = useTranslation();

@@ -11,7 +11,7 @@ i18next
   .use(initReactI18next) // React integration
   .init({
     fallbackLng: "en", // Default language
-    supportedLngs: ["en", "pt"], // List of supported languages
+    supportedLngs: ["en", "pt", "es", "fr", "de"], // List of supported languages
     detection: {
       order: ["cookie", "localStorage", "navigator"],
       caches: ["cookie"], // Language preference is stored in a cookie

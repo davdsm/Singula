@@ -18,7 +18,7 @@ export const ProductPageEntry = ({
 
   return (
     <section
-      className="relative w-full max-h-[400px] h-[30vh] md:h-[50vh] overflow-hidden"
+      className="relative w-full max-h-[140px] md:max-h-[400px] h-[30vh] md:h-[50vh] overflow-hidden"
       role="button"
       tabIndex={0}
       onClick={() => {

@@ -6,7 +6,6 @@ import { CoresRal } from "~/components/ProductPages/CoresRal";
 import { ProductPageEntry } from "~/components/ProductPages/Entry";
 import { Finishings } from "~/components/ProductPages/Finishings";
 import { HPL as Hpl } from "~/components/ProductPages/HPL";
-import { Modal } from "~/components/Elements/Modal";
 import { useAcabamentos } from "~/hooks/useAcabamentos";
 import { useCoresRal } from "~/hooks/useColors";
 import { useCompactoHPL } from "~/hooks/useCompactoHPL";
