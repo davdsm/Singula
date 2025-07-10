@@ -1,5 +1,6 @@
 import { MetaFunction } from "@remix-run/react";
 import { useTranslation } from "react-i18next";
+import { usePageContent } from "~/hooks/usePageContent";
 
 export const meta: MetaFunction = () => {
   return [
@@ -8,9 +9,10 @@ export const meta: MetaFunction = () => {
 };
 
 export const Terms = () => {
-  const { t } = useTranslation();
+  const { data, loading } =
+      usePageContent("Legal");    
 
-  return <div dangerouslySetInnerHTML={{ __html: t("text.privacy") }} />;
+  return !loading && <div dangerouslySetInnerHTML={{ __html: `<section class='bg-black-100 py-20'>${data.privacy}</section>` }} />;
 };
 
 export default Terms;
