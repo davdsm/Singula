@@ -18,7 +18,7 @@ export const Catalog = () => {
   const { data, loading } = usePageContent("Pagina_Catalogo");
 
   if (loading) return <Loading />;
-  if (Object.keys(data).length === 0) return <Loading />;
+  if (Object.keys(data).length === 0) return <Loading />;  
 
   return (
     <main className="overflow-x-hidden">
@@ -26,8 +26,8 @@ export const Catalog = () => {
         subtitle={data["catalog-subtitle"] as string}
         title={data["catalog-title"] as string}
         text={data["catalog-text"] as string}
-        img={data["catalog-img"][0] as string}
-        file={data["catalog-file"][0] as string}
+        img={data["catalog-img"] as string}
+        file={data["catalog-file"] as string}
       />
     </main>
   );

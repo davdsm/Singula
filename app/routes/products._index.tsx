@@ -1,5 +1,4 @@
 import { MetaFunction } from "@remix-run/react";
-import { useTranslation } from "react-i18next";
 import { Loading } from "~/components/Elements/Loading";
 import { ProductPageEntry } from "~/components/ProductPages/Entry";
 import { Entry } from "~/components/Products/Entry";
@@ -17,8 +16,6 @@ export const meta: MetaFunction = () => {
 };
 
 export const Products = () => {
-  const { t } = useTranslation();
-
   const { data, loading } = usePageContent("Pagina_Produtos");
 
   if (loading) return <Loading />;
@@ -28,7 +25,7 @@ export const Products = () => {
     <main className="bg-white overflow-x-hidden">
       <ProductPageEntry
         textClassName="text-black md:text-white"
-        imgClassName="object-[40%_80%] md:object-[50%_20%]"
+        imgClassName="object-center md:object-[50%_20%]"
         img={data["product-entry-img"][0]}
         title="Products"
       />

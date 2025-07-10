@@ -32,7 +32,10 @@ export function usePageContent(collection: string) {
           const value = item[langKey];
           const image = item.image;
 
-          if (value) {
+          if (item.image_fr && item.image_fr.length > 0) {            
+            const img =  `${pocketBaseUrl}/api/files/${item.collectionId}/${item.id}/${item[`image_${lang}`]}`;
+            mapped[item.section_id] = img;
+          }else if (value) {
             mapped[item.section_id] = value;
           } else if (Array.isArray(image) && image.length > 0) {
             // Build full URLs for each image

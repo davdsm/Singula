@@ -3,12 +3,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { useTranslation } from "react-i18next";
 
-const languages: string[] = ["en", "pt"];
+const languages: string[] = ["en", "pt", "es", "fr", "de"];
 
 export const LanguageSelector = (): JSX.Element => {
   const { i18n } = useTranslation();
 
-  const [selectedLang, setSelectedLang] = useState(i18n.language || "pt");
+  const [selectedLang, setSelectedLang] = useState(i18n.language || "en");
   const [open, setOpen] = useState<boolean>(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 

@@ -10,7 +10,6 @@ import {
   MaterialFormatted,
   Product,
 } from "./interfaces";
-import { StringOptions } from "sass";
 
 const pocketBaseUrl = "https://singula.pt/admin";
 

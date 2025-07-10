@@ -71,7 +71,7 @@ export const Subcategory = () => {
     <main className="bg-[#f5f5f5] overflow-x-hidden">
       <ProductPageEntry
         textClassName="text-white md:white"
-        imgClassName="object-[40%_80%] md:object-[50%_20%]"
+        imgClassName="object-center md:object-[50%_20%]"
         img={subcategories[0].category.banner}
         title={subcategories[0].category.title}
       />
