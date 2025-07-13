@@ -80,28 +80,35 @@ const SplitText: React.FC<SplitTextProps> = ({
       style={{ textAlign: textAlign }}
     >
       {words.map((word, wIdx) => (
-        <span key={wIdx} className="inline-block whitespace-nowrap">
-          {word.map((letter, lIdx) => {
-            const index =
-              words.slice(0, wIdx).reduce((acc, w) => acc + w.length, 0) + lIdx;
+        <>
+          <span key={wIdx} className="inline-block whitespace-nowrap">
+            {word.map((letter, lIdx) => {
+              const index =
+                words.slice(0, wIdx).reduce((acc, w) => acc + w.length, 0) +
+                lIdx;
 
-            return (
-              <animated.span
-                key={index}
-                style={
-                  {
-                    ...springs[index],
-                    display: "inline-block",
-                    willChange: "transform, opacity",
-                  } as unknown as Record<string, SpringValue | string | number>
-                }
-              >
-                {letter}
-              </animated.span>
-            );
-          })}
-          <span className="inline-block w-[0.3em]">&nbsp;</span>
-        </span>
+              return (
+                <animated.span
+                  key={index}
+                  style={
+                    {
+                      ...springs[index],
+                      display: "inline-block",
+                      willChange: "transform, opacity",
+                    } as unknown as Record<
+                      string,
+                      SpringValue | string | number
+                    >
+                  }
+                >
+                  {letter}
+                </animated.span>
+              );
+            })}
+            <span className="inline-block w-[0.3em]">&nbsp;</span>
+          </span>
+          {word.includes(".") && wIdx + 2 !== words.length ? (<br/>) : ''}
+        </>
       ))}
     </p>
   );

@@ -24,12 +24,12 @@ export const HeaderProvider = ({ children }: { children: ReactNode }) => {
   currentRoute = currentRoute.filter((path) => path !== "")
 
   const [delayMenu, setDelayMenu] = useState(
-    currentRoute.length === 2 && currentRoute[0] === "products"
+    currentRoute.find((path) => path === "products") ? true : false
   );
   const [showHeader, setShowHeader] = useState(true);
 
   useEffect(() => {    
-    if (currentRoute.length === 2 && currentRoute[0] === "products") {
+    if (currentRoute.find((path) => path === "products")) {
       setShowHeader(false);
       setTimeout(() => {
         setDelayMenu(true);

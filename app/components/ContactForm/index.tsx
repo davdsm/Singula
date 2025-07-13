@@ -42,8 +42,6 @@ export const ContactForm = () => {
     const requiredFields: (keyof FormData)[] = [
       "name",
       "email",
-      "message",
-      "terms",
     ];
     const emptyField = requiredFields.find((key) => !formData[key].trim());
 

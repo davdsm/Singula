@@ -46,7 +46,6 @@ export const ProductInfoBoxes = ({ product }: { product: Product }) => {
                       <UnifiedHoverItem
                         key={`download-${product.name}`}
                         href={product.Ficha_Tecnica || ""}
-                        download={true}
                       >
                         <div className="flex flex-col">
                           <span className="text-base text-white group-hover:text-red-400 transition-colors duration-300">

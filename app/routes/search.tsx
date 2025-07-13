@@ -5,6 +5,7 @@ import { useSearch } from "~/hooks/useSearch";
 import { useEffect } from "react";
 import { ProductCategoryList } from "~/components/CategoriesList/categoryListProducts";
 import { Image } from "~/components/Elements/Image";
+import { useTranslation } from "react-i18next";
 
 export const loader: LoaderFunction = async ({ request }) => {
   const url = new URL(request.url);
@@ -35,6 +36,7 @@ export const meta: MetaFunction<{ look?: string; design?: string }> = ({
 };
 
 export const Search = () => {
+  const { t } = useTranslation();
   const [searchParams] = useSearchParams();
   const searchString = searchParams.get("look");
   const isDesign = searchParams.get("design");
@@ -44,7 +46,7 @@ export const Search = () => {
   });
 
   useEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
     searchProducts(searchString ?? "");
   }, [searchString]);
 
@@ -124,7 +126,7 @@ export const Search = () => {
               className="max-w-4xl pt-20 mx-auto text-gray-800 flex items-center justify-center flex-col md:flex-row px-4 md:px-0"
             >
               <h1 className="font-bold text-3xl md:text-5xl">
-                Resultados da procura por:{" "}
+                {t("search.results.title")}{" "}
                 <span className="font-extrabold">"{searchString}"</span>{" "}
               </h1>
             </motion.section>
@@ -166,7 +168,9 @@ export const Search = () => {
           transition={{ duration: 0.3, ease: "easeInOut" }}
           className="max-w-4xl mx-auto text-gray-400 flex items-center justify-center flex-col md:flex-row px-4 md:px-0"
         >
-          <h1 className="text-md md:text-2xl">Sem Resultados Encontrados</h1>
+          <h1 className="text-md md:text-2xl">
+            {t("search.results.no-results")}
+          </h1>
         </motion.section>
       )}
     </main>

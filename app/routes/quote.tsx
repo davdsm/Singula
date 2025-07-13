@@ -12,12 +12,15 @@ import {
 import { useProducts } from "~/hooks/useProducts";
 import { Image } from "~/components/Elements/Image";
 import { MetaFunction } from "@remix-run/react";
+import useCountries from "~/hooks/useCountries";
+import { useSendMail } from "~/hooks/useEmail";
+import useDB from "~/hooks/useDB";
 
 interface Option {
   id: string;
   name: string;
   img: string;
-  qty: number;
+  qty: string;
 }
 
 interface FormData {
@@ -58,18 +61,20 @@ const QuotePage = () => {
 
   const [selectedProducts, setSelectedProducts] = useState<Option[]>([]);
   const [Error, setError] = useState<boolean>(false);
-  const [Sent, setSent] = useState(false);
   const { products } = useProducts({});
+  const { Countries, Loading } = useCountries();
   const { t } = useTranslation();
+  const { sendMail, Sent, Loading: EmailLoading } = useSendMail();
+  const db = useDB();
 
   const options: Option[] = [];
 
   if (products.length > 0) {
     products.forEach((product) => {
       options.push({
-        id: product.slug,
+        id: product.id,
         img: product.ImagemPrincipal || "",
-        qty: 0,
+        qty: "",
         name: product.name
           .replaceAll("<red>", "")
           .replaceAll("</red>", "")
@@ -87,13 +92,14 @@ const QuotePage = () => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError(false);
 
     const requiredFields: (keyof FormData)[] = [
       "name",
       "email",
+      "contact",
       "country",
       "terms",
     ];
@@ -107,16 +113,33 @@ const QuotePage = () => {
       return;
     }
 
-    console.log("formData...", formData);
-    console.log("selectedProducts...", selectedProducts);
+    window.scrollTo({ top: 0, behavior: "smooth" });
 
-    // sendMail(formData.name, formData.contact, formData.email, formData.message);
-    setSent(true);
+    const data = {
+      Name: formData.name,
+      Email: formData.email,
+      Contact: formData.contact,
+      Country: formData.country,
+      Entity: formData.company,
+      Entity_Type: formData.entity,
+      Products: selectedProducts.map((product) => product.id),
+      File: formData.file,
+      Message: formData.message,
+    };
+
+    const id = await db.addData("Orcamentos", data);
+
+    sendMail(
+      formData.name,
+      formData.contact,
+      formData.email,
+      `Nova pedido de orçamento já <a href="https://singula.pt/admin/_/#/collections?collection=pbc_2578185338&filter=&sort=-%40rowid&recordId=${id}">Disponível no BackOffice.</a>`
+    );
   };
 
   return (
     <main className="bg-white overflow-x-hidden">
-      {!Sent && (
+      {!EmailLoading && !Sent && (
         <motion.section
           initial={{ y: 10, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
@@ -184,20 +207,35 @@ const QuotePage = () => {
                 </div>
                 <div className="w-2/5 md:w-1/5">
                   <label
-                    htmlFor="phone-input"
+                    htmlFor="countries"
                     className="block mb-2 text-sm font-medium text-black"
                   >
                     {t("quote.country")}*
                   </label>
-                  <input
-                    type="text"
-                    id="phone-input"
+                  <select
+                    id="countries"
+                    className="font-sans font-regular text-[12px] md:text-sm rounded-lg block w-full p-2 outline-none bg-[#f5f5f5] text-black"
                     name="country"
-                    value={formData.country}
                     onChange={handleChange}
-                    className="font-sans font-regular block w-full p-2 rounded-lg text-xs outline-none placeholder-gray-400 bg-[#f5f5f5] text-black"
-                    required
-                  />
+                    defaultValue=""
+                  >
+                    <option
+                      selected={formData.country === "" ? true : false}
+                      disabled
+                    >
+                      {t("quote.entity-choose")}
+                    </option>
+                    {!Loading &&
+                      Countries.map((country) => (
+                        <option
+                          key={country}
+                          value={country}
+                          selected={formData.country === country ? true : false}
+                        >
+                          {country}
+                        </option>
+                      ))}
+                  </select>
                 </div>
                 <div className="w-1/5">
                   <label
@@ -217,16 +255,17 @@ const QuotePage = () => {
                 </div>
                 <div className="w-full md:w-2/5">
                   <label
-                    htmlFor="countries"
-                    className="font-sans font-regular block mb-2 text-sm font-medium text-gray-900"
+                    htmlFor="entities"
+                    className="font-sans font-regular block mb-2 text-[12px] md:text-sm font-medium text-gray-900"
                   >
                     {t("quote.entity")}
                   </label>
                   <select
-                    id="countries"
-                    className="font-sans font-regular text-sm rounded-lg block w-full p-2 outline-none bg-[#f5f5f5] text-black"
+                    id="entities"
+                    className="font-sans font-regular text-[12px] md:text-sm rounded-lg block w-full p-2 outline-none bg-[#f5f5f5] text-black"
                     name="entity"
                     onChange={handleChange}
+                    defaultValue=""
                   >
                     <option
                       selected={formData.entity === "" ? true : false}
@@ -271,14 +310,14 @@ const QuotePage = () => {
                           const existing = selectedProducts.find(
                             (p) => p.id === product.id
                           );
-                          return existing ? existing : { ...product, qty: 1 };
+                          return existing ? existing : { ...product, qty: "1" };
                         })
                       );
                     }}
                     multiple
                   >
                     <div className="relative">
-                      <ListboxButton className="font-sans font-regular w-full bg-[#f5f5f5] text-left rounded-lg p-2 text-sm outline-none ">
+                      <ListboxButton className="font-sans font-regular w-full bg-[#f5f5f5] text-left rounded-lg p-2 text-[12px] md:text-sm outline-none ">
                         {selectedProducts.length === 0
                           ? t("quote.choose-products")
                           : ""}
@@ -334,7 +373,7 @@ const QuotePage = () => {
                               alt={product.name}
                               className="w-8 h-8 mr-4 mix-blend-darken"
                             />
-                            <span className="font-bold text-sm text-black font-sans font-regular">
+                            <span className="md:font-bold text-[8px] md:text-sm text-black font-sans font-regular">
                               {product.name?.toUpperCase()}
                             </span>
                           </div>
@@ -344,27 +383,25 @@ const QuotePage = () => {
                       <div className="w-1/5 md:w-2/5">
                         <label
                           htmlFor="number-input"
-                          className="block mb-2 text-sm font-medium text-black font-sans font-regular"
+                          className="block mb-2 text-xs md:text-sm font-medium text-black font-sans font-regular"
                         >
                           {t("quote.qty")}
                         </label>
                         <input
-                          type="number"
+                          type="string"
                           id="number-input"
                           aria-describedby="helper-text-explanation"
                           className="font-sans font-regular block w-full p-4 rounded-lg text-xs outline-none placeholder-gray-400 bg-[#f5f5f5] text-black"
                           placeholder="1"
-                          min={0}
                           value={product.qty}
                           onChange={(e) => {
-                            const qty = parseInt(e.target.value, 10);
-                            if (qty >= 0) {
-                              setSelectedProducts((prev) =>
-                                prev.map((p) =>
-                                  p.id === product.id ? { ...p, qty: qty } : p
-                                )
-                              );
-                            }
+                            setSelectedProducts((prev) =>
+                              prev.map((p) =>
+                                p.id === product.id
+                                  ? { ...p, qty: e.target.value }
+                                  : p
+                              )
+                            );
                           }}
                           required
                         />
@@ -511,6 +548,63 @@ const QuotePage = () => {
             </p>
           </div>
         </motion.div>
+      )}
+
+      {EmailLoading && (
+        <div className="py-40 mt-40 flex justify-center items-center">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 100 100"
+            width="100"
+            height="100"
+          >
+            <rect
+              fill="black"
+              stroke="black"
+              stroke-width="7.5"
+              stroke-linejoin="round"
+              width="15"
+              height="15"
+              x="42.5"
+              y="42.5"
+              rx="0"
+              ry="0"
+            >
+              <animate
+                attributeName="rx"
+                calcMode="spline"
+                dur="2s"
+                values="7.5;7.5;2.5;7.5;7.5"
+                keySplines=".5 0 .5 1;.8 0 1 .2;0 .8 .2 1;.5 0 .5 1"
+                repeatCount="indefinite"
+              />
+              <animate
+                attributeName="ry"
+                calcMode="spline"
+                dur="2s"
+                values="7.5;7.5;5;7.5;7.5"
+                keySplines=".5 0 .5 1;.8 0 1 .2;0 .8 .2 1;.5 0 .5 1"
+                repeatCount="indefinite"
+              />
+              <animate
+                attributeName="height"
+                calcMode="spline"
+                dur="2s"
+                values="15;15;0.5;15;15"
+                keySplines=".5 0 .5 1;.8 0 1 .2;0 .8 .2 1;.5 0 .5 1"
+                repeatCount="indefinite"
+              />
+              <animate
+                attributeName="y"
+                calcMode="spline"
+                dur="2s"
+                values="20;85;20"
+                keySplines=".6 0 1 .4;0 .8 .2 1"
+                repeatCount="indefinite"
+              />
+            </rect>
+          </svg>
+        </div>
       )}
     </main>
   );

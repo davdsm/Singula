@@ -52,6 +52,7 @@
   "product.materials.title": "Materialien",
 
   "product.materials.finishes.title": "Oberflächen",
+  "product.materials.finishes.metal": "Metall",
 
   "product.materials.weight.title": "Gewicht",
 
@@ -90,5 +91,12 @@
   "quote.quote": "Angebot",
   "quote.send": "Anfrage senden",
   "quote.fields": "Bitte füllen Sie alle Pflichtfelder aus.",
-  "quote.field": "Pflichtfeld"
+  "quote.field": "Pflichtfeld",
+
+  "search.results.title": "Suchergebnisse für:",
+  "search.results.no-results": "Keine Ergebnisse gefunden",
+
+  "not-found.title": "Seite nicht gefunden",
+  "not-found.description": "Wir sind uns ziemlich sicher, dass diese Seite früher hier war, aber sie scheint verschwunden zu sein. Wir entschuldigen uns dafür.",
+  "not-found.home": "Zurück zur Startseite"
 }

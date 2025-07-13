@@ -52,6 +52,7 @@
   "product.materials.title": "Materiales",
 
   "product.materials.finishes.title": "Acabados",
+  "product.materials.finishes.metal": "Metal",
 
   "product.materials.weight.title": "Peso",
 
@@ -90,5 +91,12 @@
   "quote.quote": "Presupuesto",
   "quote.send": "Enviar Solicitud",
   "quote.fields": "Completa todos los campos obligatorios.",
-  "quote.field": "campo obligatorio"
+  "quote.field": "campo obligatorio",
+
+  "search.results.title": "Resultados de búsqueda para:",
+  "search.results.no-results": "No se encontraron resultados",
+
+  "not-found.title": "Página no encontrada",
+  "not-found.description": "Estamos casi seguros de que esta página solía estar aquí, pero parece que ha desaparecido. Pedimos disculpas en su nombre.",
+  "not-found.home": "Volver al Inicio"
 }
