@@ -107,7 +107,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 export default function App() {
   const location = useLocation();
 
-  /* useEffect(() => {
+  useEffect(() => {
     // define a custom handler function
     // for the contextmenu event
     const handleContextMenu = (e) => {
@@ -124,7 +124,7 @@ export default function App() {
     return () => {
       document.removeEventListener("contextmenu", handleContextMenu);
     };
-  }, []); */
+  }, []);
 
   return (
     <motion.div

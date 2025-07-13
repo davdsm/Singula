@@ -9,9 +9,7 @@ import {
   faInstagram,
 } from "@fortawesome/free-brands-svg-icons";
 
-import {
-  faEnvelope,
-} from "@fortawesome/free-solid-svg-icons";
+import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 
 import { DelayedLink } from "~/components/Elements/Link";
 import { Logo } from "~/components/Elements/Logo";
@@ -21,10 +19,16 @@ export const Footer = () => {
   const { t } = useTranslation();
   const [Email, setEmail] = useState<string>("");
   const [Terms, setTerms] = useState<boolean>(false);
+  const [Error, setError] = useState<boolean>(false);
 
   const submitForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    alert("form");
+    console.log("Email and Terms:", Email, Terms);
+
+    if (!Email || !Terms) {
+      setError(true);
+      return;
+    }
   };
 
   return (
@@ -178,9 +182,16 @@ export const Footer = () => {
               required
             />
             <label className="inline-flex items-center cursor-pointer mt-1">
-              <input type="checkbox" className="peer hidden" required />
+              <input
+                type="checkbox"
+                onChange={() => setTerms(!Terms)}
+                className="peer hidden"
+              />
               <button type="submit" className="absolute right-10 top-16">
-                <FontAwesomeIcon icon={faEnvelope} className="text-white w-6 h-6" />
+                <FontAwesomeIcon
+                  icon={faEnvelope}
+                  className="text-white w-6 h-6"
+                />
               </button>
               <div className="w-3 h-3 border-2 border-white rounded-md flex items-center justify-center peer-checked:border-black peer-checked:bg-white transition-colors duration-200">
                 <svg
@@ -197,6 +208,14 @@ export const Footer = () => {
                 {t("footer.newsletter.terms")}
               </span>
             </label>
+            <span>
+              {Error && (
+                <span className="text-red-500 text-sm">
+                  {t("footer.legal.privacy")}{" "}
+                  {t("quote.field")}
+                </span>
+              )}
+            </span>
           </form>
           <div className="social w-full">
             <div className="flex space-x-8 justify-center md:justify-end">

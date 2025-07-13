@@ -79,7 +79,7 @@ export default {
       },
       screens: {
         sm: "640px",
-        md: "993px", // ← Updated from 768px to 993px
+        md: "1192px", // ← Updated from 768px to 993px and now to 1192px
         lg: "1024px",
         xl: "1280px",
         "2xl": "1536px",

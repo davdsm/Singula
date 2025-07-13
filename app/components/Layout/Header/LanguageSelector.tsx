@@ -20,6 +20,7 @@ export const LanguageSelector = (): JSX.Element => {
     i18n.changeLanguage(lang);
     setSelectedLang(lang);
     setOpen(false);
+    window.location.reload();
   };
 
   useEffect(() => {

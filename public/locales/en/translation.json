@@ -52,6 +52,7 @@
   "product.materials.title": "Materials",
 
   "product.materials.finishes.title": "Finishes",
+  "product.materials.finishes.metal": "Metal",
 
   "product.materials.weight.title": "Weight",
 
@@ -90,5 +91,12 @@
   "quote.quote": "Quote",
   "quote.send": "Send Request",
   "quote.fields": "Please fill in all required fields.",
-  "quote.field": "required field"
+  "quote.field": "required field",
+
+  "search.results.title": "Search Results for:",
+  "search.results.no-results": "No results found",
+
+  "not-found.title": "We can't find that page",
+  "not-found.description": "We're fairly sure that page used to be here, but seems to have gone missing. We do apologise on it's behalf.",
+  "not-found.home": "Back to Home"
 }

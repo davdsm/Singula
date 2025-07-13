@@ -19,6 +19,7 @@ export const formatApiProductsIntoProducts = (
 ): Product[] => {
   const formatMateriais = (materials: Material[]): MaterialFormatted[] => {
     return materials.map((mat) => ({
+      id: mat.id,
       name: (mat as any)[`name_${lang}`],
       text: (mat as any)[`text_${lang}`],
       image: `${pocketBaseUrl}/api/files/${mat.collectionId}/${mat.id}/${mat.image}`,
