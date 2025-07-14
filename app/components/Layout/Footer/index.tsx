@@ -9,26 +9,30 @@ import {
   faInstagram,
 } from "@fortawesome/free-brands-svg-icons";
 
-import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import { faCheckCircle, faEnvelope, faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 import { DelayedLink } from "~/components/Elements/Link";
 import { Logo } from "~/components/Elements/Logo";
 import { Image } from "~/components/Elements/Image";
+import { useSendMail } from "~/hooks/useEmail";
 
 export const Footer = () => {
   const { t } = useTranslation();
   const [Email, setEmail] = useState<string>("");
   const [Terms, setTerms] = useState<boolean>(false);
   const [Error, setError] = useState<boolean>(false);
+  const { sendMail, Sent, Loading } = useSendMail();
 
   const submitForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("Email and Terms:", Email, Terms);
+    setError(false);
 
     if (!Email || !Terms) {
       setError(true);
       return;
     }
+
+    sendMail("newsletter", "", Email, `${Email} Subscreveu a newsletter`);
   };
 
   return (
@@ -187,12 +191,31 @@ export const Footer = () => {
                 onChange={() => setTerms(!Terms)}
                 className="peer hidden"
               />
-              <button type="submit" className="absolute right-10 top-16">
-                <FontAwesomeIcon
-                  icon={faEnvelope}
-                  className="text-white w-6 h-6"
-                />
-              </button>
+              {Sent && !Loading && (
+                <button type="submit" className="absolute right-10 top-16">
+                  <FontAwesomeIcon
+                    icon={faCheckCircle}
+                    className="text-white w-6 h-6"
+                  />
+                </button>
+              )}
+              {!Sent && !Loading && (
+                <button type="submit" className="absolute right-10 top-16">
+                  <FontAwesomeIcon
+                    icon={faEnvelope}
+                    className="text-white w-6 h-6"
+                  />
+                </button>
+              )}
+              {Loading && (
+                <button type="submit" className="absolute right-10 top-16 animate-spin">
+                  <FontAwesomeIcon
+                    icon={faSpinner}
+                    className="text-white w-6 h-6"
+                  />
+                </button>
+              )}
+
               <div className="w-3 h-3 border-2 border-white rounded-md flex items-center justify-center peer-checked:border-black peer-checked:bg-white transition-colors duration-200">
                 <svg
                   className="w-3 h-3 text-white hidden peer-checked:block"
@@ -211,8 +234,7 @@ export const Footer = () => {
             <span>
               {Error && (
                 <span className="text-red-500 text-sm">
-                  {t("footer.legal.privacy")}{" "}
-                  {t("quote.field")}
+                  {t("footer.legal.privacy")} {t("quote.field")}
                 </span>
               )}
             </span>

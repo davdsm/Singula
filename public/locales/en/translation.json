@@ -93,6 +93,9 @@
   "quote.fields": "Please fill in all required fields.",
   "quote.field": "required field",
 
+  "quote.open.list": "Open Product List",
+  "quote.close.list": "Close Product List",
+
   "search.results.title": "Search Results for:",
   "search.results.no-results": "No results found",
 

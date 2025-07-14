@@ -316,39 +316,44 @@ const QuotePage = () => {
                     }}
                     multiple
                   >
-                    <div className="relative">
-                      <ListboxButton className="font-sans font-regular w-full bg-[#f5f5f5] text-left rounded-lg p-2 text-[12px] md:text-sm outline-none ">
-                        {selectedProducts.length === 0
-                          ? t("quote.choose-products")
-                          : ""}
-                        {selectedProducts
-                          .map((product) => product.name?.toUpperCase())
-                          .join(", ")}
-                      </ListboxButton>
+                    {({ open }) => (
+                      <div className="relative">
+                        <ListboxButton className="font-sans font-regular w-full bg-[#f5f5f5] text-left rounded-lg p-2 text-[12px] md:text-sm outline-none ">
+                          {selectedProducts.length === 0
+                            ? t("quote.choose-products")
+                            : ""}
+                          {selectedProducts.length > 0 &&
+                            (open
+                              ? t("quote.close.list")
+                              : t("quote.open.list"))}
+                        </ListboxButton>
 
-                      <ListboxOptions className="outline-none absolute mt-1 w-full rounded-md bg-white shadow-lg z-10 max-h-60 overflow-auto text-sm border border-gray-300">
-                        {options.map((option) => (
-                          <ListboxOption
-                            key={option.id}
-                            value={option}
-                            className={({ selected }) =>
-                              `cursor-pointer flex items-center justify-start select-none relative px-4 py-2 ${
-                                selected
-                                  ? "bg-singula-main text-white"
-                                  : "text-gray-900"
-                              }`
-                            }
-                          >
-                            <Image
-                              className="w-12 h-12 mr-4"
-                              src={option.img}
-                              alt={option.name}
-                            />{" "}
-                            <span>{option.name}</span>
-                          </ListboxOption>
-                        ))}
-                      </ListboxOptions>
-                    </div>
+                        {open && (
+                          <ListboxOptions className="outline-none absolute mt-1 w-full rounded-md bg-white shadow-lg z-10 max-h-60 overflow-auto text-sm border border-gray-300">
+                            {options.map((option) => (
+                              <ListboxOption
+                                key={option.id}
+                                value={option}
+                                className={({ selected }) =>
+                                  `cursor-pointer flex items-center justify-start select-none relative px-4 py-2 ${
+                                    selected
+                                      ? "bg-singula-main text-white"
+                                      : "text-gray-900"
+                                  }`
+                                }
+                              >
+                                <Image
+                                  className="w-12 h-12 mr-4"
+                                  src={option.img}
+                                  alt={option.name}
+                                />
+                                <span>{option.name}</span>
+                              </ListboxOption>
+                            ))}
+                          </ListboxOptions>
+                        )}
+                      </div>
+                    )}
                   </Listbox>
                 </div>
               </div>

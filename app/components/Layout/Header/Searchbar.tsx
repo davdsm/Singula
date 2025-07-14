@@ -22,7 +22,7 @@ export const SearchBar = ({
 }) => {
   const [searchText, setSearchText] = useState<string>("");
   const [searchParams] = useSearchParams();
-  const element = useRef(null);
+  const element = useRef<HTMLInputElement>(null);
   const searchString = searchParams.get("look");
   const isDesign = searchParams.get("design");
 
@@ -30,6 +30,7 @@ export const SearchBar = ({
 
   const submit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if(searchText.trim() === "") return
     closeSidebar && closeSidebar();
     element.current?.blur();
     navigate(`/search?look=${searchText}`);

@@ -42,7 +42,7 @@ export const CategoryCard = ({
        <Image
           src={image}
           alt={title}
-          className="w-full h-[10rem] h-[10rem] md:h-[20rem] object-contain"
+          className="w-full h-[10rem] md:h-[20vw] object-contain"
         />
         <span className="capitalize text-black font-bold w-full text-center block text-lg">
           {design} Design
