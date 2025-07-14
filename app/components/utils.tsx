@@ -13,7 +13,11 @@ export const parseTextWithMainColor = (text: string): React.ReactNode[] => {
   return parts.map((part, i) => {
     if (part.startsWith("<red>") && part.endsWith("</red>")) {
       const content = part.slice(5, -6);
-      return <MainColor key={`color-singula-${i}`}>{content}</MainColor>;
+      return (
+        <MainColor key={`color-singula-${i}`}>
+          {content.replace(/[\r\n]+/g, "")}
+        </MainColor>
+      );
     }
     return <Fragment key={`color-normal-${i}`}>{part}</Fragment>;
   });

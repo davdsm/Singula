@@ -20,7 +20,7 @@ export const MaterialPopup = ({
         whileInView={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5, ease: "easeInOut", delay: 0 }}
         viewport={{ amount: 0.3 }}
-        className="flex-col md:flex-row relative bg-white flex flex-flow justify-between items-center w-[90%] md:w-2/3 h-[70%] rounded-[1rem] z-20"
+        className="flex-col md:flex-row relative bg-white flex flex-flow justify-between items-center w-[90%] md:w-2/3 h-auto max-h-[80%] rounded-[1rem] z-20 overflow-hidden"
       >
         <button
           className="absolute top-4 right-4 md:top-8 md:right-8 text-black md:text-singula-garden"
@@ -45,10 +45,10 @@ export const MaterialPopup = ({
         <Image
           src={img}
           alt={title}
-          className="w-full h-[40%] md:h-full md:w-[40%] h-full rounded-tl-[1rem] rounded-bl-[1rem] object-cover"
+          className="w-full h-[200px] md:h-full md:w-[40%] rounded-tl-[1rem] rounded-bl-[1rem] object-cover"
         />
 
-        <div className="w-full md:w-[55%] p-10 md:p-0">
+        <div className="w-full h-full md:w-[55%] p-10">
           <h3 className="text-lg md:text-4xl text-black font-bold w-full text-left">
             {title}
           </h3>

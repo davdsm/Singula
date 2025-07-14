@@ -99,7 +99,7 @@
   "search.results.title": "Resultados de búsqueda para:",
   "search.results.no-results": "No se encontraron resultados",
 
-  "not-found.title": "Página no encontrada",
-  "not-found.description": "Estamos casi seguros de que esta página solía estar aquí, pero parece que ha desaparecido. Pedimos disculpas en su nombre.",
+  "not-found.title": "404. ¿Encontrar? Solo con estilo.",
+  "not-found.description": "Esta página se ha ido de paseo. Tal vez esté tomando selfies con un brasero o filosofando en un banco urbano.",
   "not-found.home": "Volver al Inicio"
 }

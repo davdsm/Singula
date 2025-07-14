@@ -32,7 +32,8 @@ export function Image({
       width={width}
       height={height}
       loading="lazy"
-      className={className}
+      className={`${className} pointer-events-none`}
+      draggable="false"
     />
   );
 }

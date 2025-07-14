@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { CarouselComponent } from "../Elements/Carousel";
+import { Image } from "../Elements/Image";
 
 export const DesignsSlide = ({ imgs }: { imgs: string[] }) => {
   return (
@@ -16,7 +17,7 @@ export const DesignsSlide = ({ imgs }: { imgs: string[] }) => {
         autoplay
         autoplayInterval={4}
         items={imgs.map((img, index) => (
-          <img
+          <Image
             key={`img-slide-design-${index}`}
             src={img}
             alt="Singula Design"

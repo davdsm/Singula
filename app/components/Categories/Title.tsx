@@ -4,7 +4,11 @@ import { Trans } from "react-i18next";
 import { parseTextWithMainColor } from "../utils";
 
 export const Title = ({ text }: { text: string }) => {
-  const element = parseTextWithMainColor(text);
+  const element = parseTextWithMainColor(text.replaceAll(/[\r\n]+/g, ''));
+
+  console.log("Title component text:", text);
+  console.log("element component text:", element);
+  
 
   return (
     <header className="py-10 md:py-20 px-10 md:px-60 flex align-center justify-between w-full h-full">

@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { MaterialPopup } from "./MaterialPopup";
 import { UnifiedHoverItem } from "./UnifiedHoverItem";
 import { MaterialFormatted, Product } from "~/hooks/interfaces";
+import { Image } from "../Elements/Image";
 
 export const ProductMaterials = ({ product }: { product: Product }) => {
   const { t } = useTranslation();
@@ -98,7 +99,7 @@ export const ProductMaterials = ({ product }: { product: Product }) => {
               className="flex items-center flex-1 order-2"
             >
               <div className="w-full h-full">
-                <img
+                <Image
                   src={product.banner || ""}
                   alt={t("product.materials.context.alt")}
                   className="w-full h-48 sm:h-64 md:h-full object-center lg:h-full object-cover rounded-2xl "

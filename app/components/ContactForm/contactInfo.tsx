@@ -56,7 +56,7 @@ export const ContactInfo = () => {
                       <p className="hover:text-white transition-colors cursor-pointer">
                         {item.contact} <br />
                       </p>
-                      <p className="text-sm mt-3 font-sans font-regular"><Trans>{item.address}</Trans></p>
+                      <p className="text-sm mt-3 font-sans font-regular"><Trans>{item.address.replace(/[\r\n]+/g, '')}</Trans></p>
                     </div>
                   </motion.div>
                 ))}
