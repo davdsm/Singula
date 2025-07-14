@@ -101,7 +101,7 @@ export const ProductMaterials = ({ product }: { product: Product }) => {
                 <img
                   src={product.banner || ""}
                   alt={t("product.materials.context.alt")}
-                  className="w-full h-48 sm:h-64 md:h-80 lg:h-full object-cover rounded-2xl"
+                  className="w-full h-48 sm:h-64 md:h-full object-center lg:h-full object-cover rounded-2xl "
                 />
               </div>
             </motion.div>

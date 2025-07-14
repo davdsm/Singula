@@ -15,7 +15,7 @@ export const PhotoSlider = ({ imgs }: { imgs: string[] }) => {
       className="w-full overflow-x-hidden"
     >
         <CarouselComponent
-          className="w-full md:w-[150%] translation-none md:-translate-x-[50%]"
+          className="w-full md:w-[100%]"
           loop={true}
           autoplay
           autoplayInterval={2}
@@ -25,7 +25,7 @@ export const PhotoSlider = ({ imgs }: { imgs: string[] }) => {
               key={`img-${i}`}
               src={img}
               alt="Hero Image"
-              className="!overflow-hidden w-full h-[20rem] md:h-[30rem] object-cover rounded-3xl"
+              className="!overflow-hidden w-full h-[20rem] md:h-[35vw] object-cover rounded-3xl"
             />
           ))}
         />

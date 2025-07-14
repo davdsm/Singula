@@ -93,6 +93,9 @@
   "quote.fields": "Preencha todos os campos obrigatórios.",
   "quote.field": "campo obrigatório",
 
+  "quote.open.list": "Abrir Listagem Produtos",
+  "quote.close.list": "Fechar Listagem Produtos",
+
   "search.results.title": "Resultados da procura:",
   "search.results.no-results": "Nenhum resultado encontrado",
 

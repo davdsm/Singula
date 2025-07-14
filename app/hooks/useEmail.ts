@@ -16,7 +16,7 @@ const goMail = async (
     body: JSON.stringify({
       sender: "⚙️ Singula",
       receiver: {
-        email: "sales@singula.pt",
+        email: "samuel_david_8@hotmail.com",
         name: "Administração",
       },
       subject: `🔔 Nova Mensagem de Singula.pt!`,
