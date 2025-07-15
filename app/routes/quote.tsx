@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { useTranslation } from "react-i18next";
@@ -66,6 +66,13 @@ const QuotePage = () => {
   const { t } = useTranslation();
   const { sendMail, Sent, Loading: EmailLoading } = useSendMail();
   const db = useDB();
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    if(typeof window !== "undefined") {
+      setIsMobile(window.innerWidth < 1192);
+    }
+  }, []);
 
   const options: Option[] = [];
 
@@ -393,7 +400,7 @@ const QuotePage = () => {
                           {t("quote.qty")}
                         </label>
                         <input
-                          type="string"
+                          type={isMobile ? "text" : "number"}
                           id="number-input"
                           aria-describedby="helper-text-explanation"
                           className="font-sans font-regular block w-full p-4 rounded-lg text-xs outline-none placeholder-gray-400 bg-[#f5f5f5] text-black"
