@@ -6,6 +6,9 @@
   "menu.contacts": "Contacts",
   "menu.search": "Search",
 
+  "begin": "Home",
+  "all": "All",
+
   "catalog.button.first": "Catalog",
   "catalog.button.second": "Download",
   "catalog.image.alt": "Singula Catalog",

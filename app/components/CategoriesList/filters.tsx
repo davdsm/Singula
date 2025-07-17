@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { MouseEventHandler } from "react";
+import { useTranslation } from "react-i18next";
 
 export const Filters = ({
   filtersList,
@@ -14,6 +15,9 @@ export const Filters = ({
   selectedSlug: string;
   clearFilters: MouseEventHandler<HTMLButtonElement>;
 }) => {
+
+  const { t } = useTranslation();
+
   return (
     <motion.section
       initial={{ y: 30, opacity: 0 }}
@@ -32,7 +36,7 @@ export const Filters = ({
                 : "text-black bg-transparent"
             } font-bold p-2 px-4 border border-black rounded-full mx-2 text-lg`}
           >
-            Todos
+            {t("all")}
           </button>
         </li>
         {filtersList.map(

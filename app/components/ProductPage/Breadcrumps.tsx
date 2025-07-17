@@ -3,6 +3,7 @@ import { DelayedLink } from "../Elements/Link";
 import { Product } from "~/hooks/interfaces";
 import { Subcategory } from "~/hooks/useProductSubCategories";
 import { parseTextWithMainColor } from "../utils";
+import { useTranslation } from "react-i18next";
 
 export const Breadcrumbs = ({
   category,
@@ -13,6 +14,9 @@ export const Breadcrumbs = ({
   product: Product;
   subcategory: Subcategory;
 }) => {
+
+  const { t } = useTranslation();
+
   return (
     <motion.nav
       initial={{ y: -10, opacity: 0 }}
@@ -37,7 +41,7 @@ export const Breadcrumbs = ({
             >
               <path d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z" />
             </svg>
-            Início
+            {t("begin")}
           </DelayedLink>
         </li>
         <li>
@@ -61,7 +65,7 @@ export const Breadcrumbs = ({
               to={`/products/`}
               className="ms-1 text-sm font-medium text-gray-700 hover:text-singula-main"
             >
-              Produtos
+              {t("menu.products")}
             </DelayedLink>
           </div>
         </li>

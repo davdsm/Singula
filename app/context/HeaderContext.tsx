@@ -21,15 +21,16 @@ export const HeaderProvider = ({ children }: { children: ReactNode }) => {
 
   let currentRoute = location.pathname.trim().split("/");
   currentRoute.shift();
-  currentRoute = currentRoute.filter((path) => path !== "")
+  currentRoute = currentRoute.filter((path) => path !== "");
 
   const [delayMenu, setDelayMenu] = useState(
-    currentRoute.find((path) => path === "products") ? true : false
+    (currentRoute.length <= 2) && currentRoute[0] === "products"
   );
   const [showHeader, setShowHeader] = useState(true);
+ 
 
-  useEffect(() => {    
-    if (currentRoute.find((path) => path === "products")) {
+  useEffect(() => {
+    if (currentRoute.length <= 2 && currentRoute[0] === "products") {
       setShowHeader(false);
       setTimeout(() => {
         setDelayMenu(true);
