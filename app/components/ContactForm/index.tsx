@@ -35,7 +35,7 @@ export const ContactForm = () => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError(false);
 
@@ -50,7 +50,8 @@ export const ContactForm = () => {
       return;
     }
 
-    sendMail(formData.name, formData.contact, formData.email, formData.message);
+    await sendMail(formData.name, formData.contact, formData.email, formData.message);
+    await sendMail(formData.name, formData.contact, formData.email, formData.message, false, undefined, formData.email);
   };
 
   return (

@@ -106,7 +106,6 @@ const QuotePage = () => {
     const requiredFields: (keyof FormData)[] = [
       "name",
       "email",
-      "contact",
       "country",
       "terms",
     ];
@@ -134,13 +133,52 @@ const QuotePage = () => {
       Message: formData.message,
     };
 
-    const id = await db.addData("Orcamentos", data);
+    const id = await db.addData("Orcamentos", data);    
 
     sendMail(
       formData.name,
       formData.contact,
       formData.email,
-      `Nova pedido de orçamento já <a href="https://singula.pt/admin/_/#/collections?collection=pbc_2578185338&filter=&sort=-%40rowid&recordId=${id}">Disponível no BackOffice.</a>`
+      formData.message,
+      true,
+      {
+        country: formData.country,
+        entity: formData.company,
+        entity_type: formData.entity,
+        products: selectedProducts.map((product) => `${product.name} (${product.qty})`).join(", "),
+        attachment: formData.file ? `<a href="https://singula.pt/admin/_/#/collections?collection=pbc_2578185338&filter=&sort=-%40rowid&recordId=${id}">Disponível no BackOffice.</a>` : false,
+      }
+    );
+
+    await sendMail(
+      formData.name,
+      formData.contact,
+      formData.email,
+      formData.message,
+      true,
+      {
+        country: formData.country,
+        entity: formData.company,
+        entity_type: formData.entity,
+        products: selectedProducts.map((product) => `${product.name} (${product.qty})`).join(", "),
+        attachment: formData.file ? `<a href="https://singula.pt/admin/_/#/collections?collection=pbc_2578185338&filter=&sort=-%40rowid&recordId=${id}">Disponível no BackOffice.</a>` : false,
+      }
+    );
+
+    await sendMail(
+      formData.name,
+      formData.contact,
+      formData.email,
+      formData.message,
+      true,
+      {
+        country: formData.country,
+        entity: formData.company,
+        entity_type: formData.entity,
+        products: selectedProducts.map((product) => `${product.name} (${product.qty})`).join(", "),
+        attachment: formData.file ? `<a href="https://singula.pt/admin/_/#/collections?collection=pbc_2578185338&filter=&sort=-%40rowid&recordId=${id}">Disponível no BackOffice.</a>` : false,
+      },
+      formData.email
     );
   };
 
@@ -201,7 +239,7 @@ const QuotePage = () => {
                     htmlFor="phone-input"
                     className="block mb-2 text-sm font-medium text-black"
                   >
-                    {t("quote.contact")}*
+                    {t("quote.contact")}
                   </label>
                   <input
                     type="text"

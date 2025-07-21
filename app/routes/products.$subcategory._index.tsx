@@ -30,7 +30,9 @@ export const loader: LoaderFunction = async ({ params }) => {
     `${pocketBaseUrl}/api/collections/Categorias/records?expand=design&sort=order,id`
   );
   const data = await res.json();
-  const category: Category = data.items.find((item: any) => item.slug === subcategorySlug);
+  const category: Category = data.items.find(
+    (item: any) => item.slug === subcategorySlug
+  );
 
   return category;
 };
@@ -43,6 +45,28 @@ export const meta: MetaFunction = ({ data }) => {
       name: "description",
       content: category?.text_pt || "Veja nossos produtos",
     },
+
+    { property: "og:image", content: category.image },
+    {
+      property: "og:title",
+      content: `${
+        category.title?.replaceAll("<red>", "").replaceAll("</red>", "") ||
+        "Produto"
+      } - Singula`,
+    },
+    { property: "og:description", content: category.title },
+    { property: "og:type", content: "category" },
+
+    { name: "twitter:card", content: "summary_large_image" },
+    {
+      name: "twitter:title",
+      content: `${
+        category.title?.replaceAll("<red>", "").replaceAll("</red>", "") ||
+        "Categoria"
+      } - Singula`,
+    },
+    { name: "twitter:description", content: category.text },
+    { name: "twitter:image", content: category.image },
   ];
 };
 

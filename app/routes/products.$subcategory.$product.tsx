@@ -49,7 +49,28 @@ export const meta: MetaFunction = ({ data }) => {
       name: "description",
       content: product?.subtitle_pt || "Veja nossos produtos",
     },
-    { name: "icon", content: "" },
+
+    { property: "og:image", content: product.ImagemPrincipal },
+    {
+      property: "og:title",
+      content: `${
+        product?.name_pt.replaceAll("<red>", "").replaceAll("</red>", "") ||
+        "Produto"
+      } - Singula`,
+    },
+    { property: "og:description", content: product?.subtitle_pt },
+    { property: "og:type", content: "product" },
+
+    { name: "twitter:card", content: "summary_large_image" },
+    {
+      name: "twitter:title",
+      content: `${
+        product?.name_pt.replaceAll("<red>", "").replaceAll("</red>", "") ||
+        "Produto"
+      } - Singula`,
+    },
+    { name: "twitter:description", content: product?.subtitle_pt },
+    { name: "twitter:image", content: product.ImagemPrincipal },
   ];
 };
 

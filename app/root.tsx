@@ -69,9 +69,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
             property="og:description"
             content="Na Singula, o metal ganha alma. E o design ganha ousadia.Seja no meio da cidade, num jardim ou à porta de casa. Desenhamos cada linha como se fosse um guião. Mas sem finais previsíveis.Só entradas de impacto e formas com destino."
           />
-          <meta property="og:image" content="./cover.png" />
+          <meta property="og:image" content="https://singula.pt/cover.png" />
           <meta property="twitter:card" content="summary_large_image" />
-          <meta property="twitter:url" content="./cover.png" />
+          <meta property="twitter:url" content="https://singula.pt/cover.png" />
           <meta
             property="twitter:title"
             content="Singula - Design que se vê, Design que se sente."
@@ -80,7 +80,10 @@ export function Layout({ children }: { children: React.ReactNode }) {
             property="twitter:description"
             content="Na Singula, o metal ganha alma. E o design ganha ousadia.Seja no meio da cidade, num jardim ou à porta de casa. Desenhamos cada linha como se fosse um guião. Mas sem finais previsíveis.Só entradas de impacto e formas com destino."
           />
-          <meta property="twitter:image" content="./cover.png" />
+          <meta
+            property="twitter:image"
+            content="https://singula.pt/cover.png"
+          />
           <Meta />
           <Links />
         </head>
@@ -110,7 +113,11 @@ export default function App() {
   useEffect(() => {
     // define a custom handler function
     // for the contextmenu event
-    const handleContextMenu = (e) => {
+    interface ContextMenuEvent extends React.MouseEvent {
+      preventDefault: () => void;
+    }
+
+    const handleContextMenu = (e: MouseEvent) => {
       // prevent the right-click menu from appearing
       e.preventDefault();
     };
