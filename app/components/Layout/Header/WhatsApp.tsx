@@ -5,7 +5,7 @@ import { Link } from "@remix-run/react";
 export const WhatsApp = () => {
   return (
     <Link
-      to="https://wa.me/+351924009275"
+      to="https://wa.me/+351961735242"
       aria-label="Contact on WhatsApp"
       target="_blank"
       rel="noopener noreferrer"

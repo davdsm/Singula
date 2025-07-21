@@ -13,7 +13,8 @@ const goMail = async (
     products: string;
     attachment: string | false;
   },
-  receiver?: string
+  receiver?: string,
+  ref?: string
 ) => {
   let status: boolean = false;
 
@@ -131,21 +132,7 @@ const goMail = async (
 														<tr>
 															<td class="pad" style="width:100%;">
 																<div class="alignment" align="center">
-																	<div style="max-width: 166.667px;"><a href="http://185.11.167.133:5173/" target="_blank" style="outline:none" tabindex="-1"><img src="https://6a1d946592.imgdist.com/pub/bfra/0s6e6jpj/qn8/wws/1nm/Logo%20Singula%20Horizontal.png" style="display: block; height: auto; border: 0; width: 100%;" width="166.667" alt title height="auto"></a></div>
-																</div>
-															</td>
-														</tr>
-													</table>
-												</td>
-												<td class="column gap" style="vertical-align: top; mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left;">
-													<table style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 99px; height: 99px;" width="99" height="99"></table>
-												</td>
-												<td class="column column-2" width="66.66666666666667%" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; padding-top: 5px; vertical-align: middle;">
-													<table class="image_block block-1" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
-														<tr>
-															<td class="pad" style="width:100%;">
-																<div class="alignment" align="center">
-																	<div style="max-width: 333.333px;"><img src="https://6a1d946592.imgdist.com/pub/bfra/0s6e6jpj/f7d/fn9/zk5/braseiro%20hexum%20pres%201.jpg.png" style="display: block; height: auto; border: 0; width: 100%;" width="333.333" alt title height="auto"></div>
+																	<div style="max-width: 166.667px;"><a href="https://singula.pt/" target="_blank" style="outline:none" tabindex="-1"><img src="https://singula.pt/logo-email.png" style="display: block; height: auto; border: 0; width: 100%;" width="166.667" alt title height="auto"></a></div>
 																</div>
 															</td>
 														</tr>
@@ -347,21 +334,7 @@ const goMail = async (
                                              <tr>
                                                 <td class="pad" style="width:100%;">
                                                    <div class="alignment" align="center">
-                                                      <div style="max-width: 166.667px;"><a href="http://185.11.167.133:5173/" target="_blank" style="outline:none" tabindex="-1"><img src="https://6a1d946592.imgdist.com/pub/bfra/0s6e6jpj/qn8/wws/1nm/Logo%20Singula%20Horizontal.png" style="display: block; height: auto; border: 0; width: 100%;" width="166.667" alt title height="auto"></a></div>
-                                                   </div>
-                                                </td>
-                                             </tr>
-                                          </table>
-                                       </td>
-                                       <td class="column gap" style="vertical-align: top; mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left;">
-                                          <table style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 99px; height: 99px;" width="99" height="99"></table>
-                                       </td>
-                                       <td class="column column-2" width="66.66666666666667%" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; padding-top: 5px; vertical-align: middle;">
-                                          <table class="image_block block-1" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
-                                             <tr>
-                                                <td class="pad" style="width:100%;">
-                                                   <div class="alignment" align="center">
-                                                      <div style="max-width: 333.333px;"><img src="https://6a1d946592.imgdist.com/pub/bfra/0s6e6jpj/f7d/fn9/zk5/braseiro%20hexum%20pres%201.jpg.png" style="display: block; height: auto; border: 0; width: 100%;" width="333.333" alt title height="auto"></div>
+                                                      <div style="max-width: 166.667px;"><a href="https://singula.pt/" target="_blank" style="outline:none" tabindex="-1"><img src="https://singula.pt/logo-email.png" style="display: block; height: auto; border: 0; width: 100%;" width="166.667" alt title height="auto"></a></div>
                                                    </div>
                                                 </td>
                                              </tr>
@@ -573,21 +546,7 @@ const goMail = async (
                                              <tr>
                                                 <td class="pad" style="width:100%;">
                                                    <div class="alignment" align="center">
-                                                      <div style="max-width: 166.667px;"><a href="http://185.11.167.133:5173/" target="_blank" style="outline:none" tabindex="-1"><img src="https://6a1d946592.imgdist.com/pub/bfra/0s6e6jpj/qn8/wws/1nm/Logo%20Singula%20Horizontal.png" style="display: block; height: auto; border: 0; width: 100%;" width="166.667" alt title height="auto"></a></div>
-                                                   </div>
-                                                </td>
-                                             </tr>
-                                          </table>
-                                       </td>
-                                       <td class="column gap" style="vertical-align: top; mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left;">
-                                          <table style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 99px; height: 99px;" width="99" height="99"></table>
-                                       </td>
-                                       <td class="column column-2" width="66.66666666666667%" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; padding-top: 5px; vertical-align: middle;">
-                                          <table class="image_block block-1" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
-                                             <tr>
-                                                <td class="pad" style="width:100%;">
-                                                   <div class="alignment" align="center">
-                                                      <div style="max-width: 333.333px;"><img src="https://6a1d946592.imgdist.com/pub/bfra/0s6e6jpj/f7d/fn9/zk5/braseiro%20hexum%20pres%201.jpg.png" style="display: block; height: auto; border: 0; width: 100%;" width="333.333" alt title height="auto"></div>
+                                                      <div style="max-width: 166.667px;"><a href="https://singula.pt/" target="_blank" style="outline:none" tabindex="-1"><img src="https://singula.pt/logo-email.png" style="display: block; height: auto; border: 0; width: 100%;" width="166.667" alt title height="auto"></a></div>
                                                    </div>
                                                 </td>
                                              </tr>
@@ -692,21 +651,21 @@ Think Metal</strong>
     headers: {
       "Content-Type": "application/json",
       davdsmKey: "d41d8cd98f00b204e9800998ecf8427e",
-	  replyTo: email,
+      replyTo: email,
     },
     body: JSON.stringify({
-      sender: "⚙️ Singula",
-	  senderEmail: "design@singula.pt",
+      sender: "Singula",
+      senderEmail: "design@singula.pt",
       receiver: {
         email: receiver ? receiver : "sales@singula.pt",
         name: receiver ? name : "Administração",
       },
       subject: receiver
         ? isQuote
-          ? `${name}, Obrigado pelo seu pedido de orçamento!`
+          ? `#${ref} ${name}, Obrigado pelo seu pedido de orçamento!`
           : `${name}, Obrigado pela sua mensagem.`
         : isQuote
-        ? `📝 Novo Pedido de Orçamento`
+        ? `#${ref} 📝 Novo Pedido de Orçamento`
         : `🔔 Nova Mensagem de Singula.pt!`,
       message: receiver ? bodyReceiver : isQuote ? bodyQuote : bodyContact,
     }),
@@ -743,12 +702,22 @@ export const useSendMail = () => {
       products: string;
       attachment: string | false;
     },
-	receiver?: string
+    receiver?: string,
+    ref?: string
   ) => {
     if (!Sent) {
       setSent(false);
       setLoading(true);
-      await goMail(name, contact, message, email, isQuote, quoteData, receiver);
+      await goMail(
+        name,
+        contact,
+        message,
+        email,
+        isQuote,
+        quoteData,
+        receiver,
+        ref
+      );
       setTimeout(() => {
         setLoading(false);
         setSent(true);

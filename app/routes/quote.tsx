@@ -69,7 +69,7 @@ const QuotePage = () => {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    if(typeof window !== "undefined") {
+    if (typeof window !== "undefined") {
       setIsMobile(window.innerWidth < 1192);
     }
   }, []);
@@ -133,22 +133,7 @@ const QuotePage = () => {
       Message: formData.message,
     };
 
-    const id = await db.addData("Orcamentos", data);    
-
-    sendMail(
-      formData.name,
-      formData.contact,
-      formData.email,
-      formData.message,
-      true,
-      {
-        country: formData.country,
-        entity: formData.company,
-        entity_type: formData.entity,
-        products: selectedProducts.map((product) => `${product.name} (${product.qty})`).join(", "),
-        attachment: formData.file ? `<a href="https://singula.pt/admin/_/#/collections?collection=pbc_2578185338&filter=&sort=-%40rowid&recordId=${id}">Disponível no BackOffice.</a>` : false,
-      }
-    );
+    const result = await db.addData("Orcamentos", data);
 
     await sendMail(
       formData.name,
@@ -160,25 +145,36 @@ const QuotePage = () => {
         country: formData.country,
         entity: formData.company,
         entity_type: formData.entity,
-        products: selectedProducts.map((product) => `${product.name} (${product.qty})`).join(", "),
-        attachment: formData.file ? `<a href="https://singula.pt/admin/_/#/collections?collection=pbc_2578185338&filter=&sort=-%40rowid&recordId=${id}">Disponível no BackOffice.</a>` : false,
-      }
-    );
-
-    await sendMail(
-      formData.name,
-      formData.contact,
-      formData.email,
-      formData.message,
-      true,
-      {
-        country: formData.country,
-        entity: formData.company,
-        entity_type: formData.entity,
-        products: selectedProducts.map((product) => `${product.name} (${product.qty})`).join(", "),
-        attachment: formData.file ? `<a href="https://singula.pt/admin/_/#/collections?collection=pbc_2578185338&filter=&sort=-%40rowid&recordId=${id}">Disponível no BackOffice.</a>` : false,
+        products: selectedProducts
+          .map((product) => `${product.name} (${product.qty})`)
+          .join(", "),
+        attachment: formData.file
+          ? `<a href="https://singula.pt/admin/_/#/collections?collection=pbc_2578185338&filter=&sort=-%40rowid&recordId=${result.id}">Disponível no BackOffice.</a>`
+          : false,
       },
-      formData.email
+      undefined,
+      result.REF
+    );
+
+    await sendMail(
+      formData.name,
+      formData.contact,
+      formData.email,
+      formData.message,
+      true,
+      {
+        country: formData.country,
+        entity: formData.company,
+        entity_type: formData.entity,
+        products: selectedProducts
+          .map((product) => `${product.name} (${product.qty})`)
+          .join(", "),
+        attachment: formData.file
+          ? `<a href="https://singula.pt/admin/_/#/collections?collection=pbc_2578185338&filter=&sort=-%40rowid&recordId=${result.id}">Disponível no BackOffice.</a>`
+          : false,
+      },
+      formData.email,
+      result.REF
     );
   };
 

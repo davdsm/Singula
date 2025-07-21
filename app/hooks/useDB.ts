@@ -10,7 +10,7 @@ const useDB = () => {
     setLoading(true);
     try {
       const docRef = await db.collection(collection).create(data);
-      return docRef.id;
+      return docRef;
     } catch (error) {
       console.error("Error adding data:", error);
       throw error;
