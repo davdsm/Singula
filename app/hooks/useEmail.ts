@@ -1,6 +1,9 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
+import getEmailBody from "~/utils/emails";
 
 const goMail = async (
+  lang: "pt" | "en" | "es" | "fr" | "de",
   name: string,
   contact: string,
   message: string,
@@ -18,633 +21,58 @@ const goMail = async (
 ) => {
   let status: boolean = false;
 
-  const bodyContact = `
- <!DOCTYPE html>
-<html xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office" lang="en">
+  const { bodyReceiver, bodyContact, bodyQuote } = getEmailBody(
+    lang,
+    name,
+    contact,
+    message,
+    email,
+    quoteData,
+    ref
+  );
 
-<head>
-	<title></title>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0"><!--[if mso]>
-<xml><w:WordDocument xmlns:w="urn:schemas-microsoft-com:office:word"><w:DontUseAdvancedTypographyReadingMail/></w:WordDocument>
-<o:OfficeDocumentSettings><o:PixelsPerInch>96</o:PixelsPerInch><o:AllowPNG/></o:OfficeDocumentSettings></xml>
-<![endif]--><!--[if !mso]><!-->
-	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900" rel="stylesheet" type="text/css"><!--<![endif]-->
-	<style>
-		* {
-			box-sizing: border-box;
-		}
+  // Localized subject translations
+  const subjectTranslations = {
+    pt: {
+      userQuote: `#${ref} ${name}, Obrigado pelo seu pedido de orçamento!`,
+      userMessage: `${name}, Obrigado pela sua mensagem.`,
+      adminQuote: `#${ref} 📝 Novo Pedido de Orçamento`,
+      adminMessage: `🔔 Nova Mensagem de Singula.pt!`,
+    },
+    en: {
+      userQuote: `#${ref} ${name}, Thank you for your quote request!`,
+      userMessage: `${name}, Thank you for your message.`,
+      adminQuote: `#${ref} 📝 New Quote Request`,
+      adminMessage: `🔔 New Message from Singula.pt!`,
+    },
+    es: {
+      userQuote: `#${ref} ${name}, ¡Gracias por su solicitud de presupuesto!`,
+      userMessage: `${name}, Gracias por su mensaje.`,
+      adminQuote: `#${ref} 📝 Nueva Solicitud de Presupuesto`,
+      adminMessage: `🔔 Nuevo Mensaje de Singula.pt!`,
+    },
+    fr: {
+      userQuote: `#${ref} ${name}, Merci pour votre demande de devis !`,
+      userMessage: `${name}, Merci pour votre message.`,
+      adminQuote: `#${ref} 📝 Nouvelle Demande de Devis`,
+      adminMessage: `🔔 Nouveau Message de Singula.pt !`,
+    },
+    de: {
+      userQuote: `#${ref} ${name}, Vielen Dank für Ihre Angebotsanfrage!`,
+      userMessage: `${name}, Vielen Dank für Ihre Nachricht.`,
+      adminQuote: `#${ref} 📝 Neue Angebotsanfrage`,
+      adminMessage: `🔔 Neue Nachricht von Singula.pt!`,
+    },
+  };
 
-		body {
-			margin: 0;
-			padding: 0;
-		}
-
-		a[x-apple-data-detectors] {
-			color: inherit !important;
-			text-decoration: inherit !important;
-		}
-
-		#MessageViewBody a {
-			color: inherit;
-			text-decoration: none;
-		}
-
-		p {
-			line-height: inherit
-		}
-
-		.desktop_hide,
-		.desktop_hide table {
-			mso-hide: all;
-			display: none;
-			max-height: 0px;
-			overflow: hidden;
-		}
-
-		.image_block img+div {
-			display: none;
-		}
-
-		sup,
-		sub {
-			font-size: 75%;
-			line-height: 0;
-		}
-
-		@media (max-width:520px) {
-			.desktop_hide table.icons-inner {
-				display: inline-block !important;
-			}
-
-			.icons-inner {
-				text-align: center;
-			}
-
-			.icons-inner td {
-				margin: 0 auto;
-			}
-
-			.mobile_hide {
-				display: none;
-			}
-
-			.row-content {
-				width: 100% !important;
-			}
-
-			.stack .column {
-				width: 100%;
-				display: block;
-			}
-
-			.mobile_hide {
-				min-height: 0;
-				max-height: 0;
-				max-width: 0;
-				overflow: hidden;
-				font-size: 0px;
-			}
-
-			.desktop_hide,
-			.desktop_hide table {
-				display: table !important;
-				max-height: none !important;
-			}
-		}
-	</style><!--[if mso ]><style>sup, sub { font-size: 100% !important; } sup { mso-text-raise:10% } sub { mso-text-raise:-10% }</style> <![endif]-->
-</head>
-
-<body class="body" style="background-color: #FFFFFF; margin: 0; padding: 0; -webkit-text-size-adjust: none; text-size-adjust: none;">
-	<table class="nl-container" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #FFFFFF;">
-		<tbody>
-			<tr>
-				<td>
-					<table class="row row-1" align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
-						<tbody>
-							<tr>
-								<td>
-									<table class="row-content stack" align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-radius: 0; color: #000000; width: 500px; margin: 0 auto;" width="500">
-										<tbody>
-											<tr>
-												<td class="column column-1" width="33.333333333333336%" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; padding-top: 5px; vertical-align: middle;">
-													<table class="image_block block-1" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
-														<tr>
-															<td class="pad" style="width:100%;">
-																<div class="alignment" align="center">
-																	<div style="max-width: 166.667px;"><a href="https://singula.pt/" target="_blank" style="outline:none" tabindex="-1"><img src="https://singula.pt/logo-email.png" style="display: block; height: auto; border: 0; width: 100%;" width="166.667" alt title height="auto"></a></div>
-																</div>
-															</td>
-														</tr>
-													</table>
-												</td>
-											</tr>
-										</tbody>
-									</table>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-					<table class="row row-2" align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
-						<tbody>
-							<tr>
-								<td>
-									<table class="row-content stack" align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-radius: 0; color: #000000; width: 500px; margin: 0 auto;" width="500">
-										<tbody>
-											<tr>
-												<td class="column column-1" width="100%" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; padding-top: 5px; vertical-align: top;">
-													<table class="divider_block block-1" width="100%" border="0" cellpadding="10" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
-														<tr>
-															<td class="pad">
-																<div class="alignment" align="center">
-																	<table border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
-																		<tr>
-																			<td class="divider_inner" style="font-size: 1px; line-height: 1px; border-top: 1px solid #dddddd;"><span style="word-break: break-word;">&#8202;</span></td>
-																		</tr>
-																	</table>
-																</div>
-															</td>
-														</tr>
-													</table>
-													<table class="heading_block block-2" width="100%" border="0" cellpadding="10" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
-														<tr>
-															<td class="pad">
-																<h1 style="margin: 0; color: #1e0e4b; direction: ltr; font-family: 'Poppins', Arial, Helvetica, sans-serif; font-size: 32px; font-weight: 700; letter-spacing: normal; line-height: 1.2; text-align: center; margin-top: 0; margin-bottom: 0; mso-line-height-alt: 38px;">Recebeu uma nova mensagem!</h1>
-															</td>
-														</tr>
-													</table>
-													<table class="paragraph_block block-3" width="100%" border="0" cellpadding="50" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;">
-														<tr>
-															<td class="pad">
-																<div style="color:#444a5b;direction:ltr;font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;font-size:16px;font-weight:400;letter-spacing:0px;line-height:1.2;text-align:left;mso-line-height-alt:19px;">
-																	<p style="margin: 0; margin-bottom: 16px;">Olá Admnistrador, recebeu uma mensagem a partir do website singula.pt</p>
-																	<p style="margin: 0; margin-bottom: 16px;"><strong>Nome</strong>: ${name}<br><strong>Email</strong>: ${email}<br><strong>Contacto</strong>: ${contact}<br><strong>Mensagem</strong>:</p>
-																	<p style="margin: 0; margin-bottom: 16px;">${message}</p>
-																	<p style="margin: 0; margin-bottom: 16px;">&nbsp;</p>
-																	<p style="margin: 0;">&nbsp;</p>
-																</div>
-															</td>
-														</tr>
-													</table>
-													<table class="paragraph_block block-4" width="100%" border="0" cellpadding="50" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;">
-														<tr>
-															<td class="pad">
-																<div style="color:#444a5b;direction:ltr;font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;font-size:16px;font-weight:400;letter-spacing:0px;line-height:1.2;text-align:center;mso-line-height-alt:19px;">
-																	<p style="margin: 0;">Este é um email automático de <strong>singula.pt</strong>.</p>
-																</div>
-															</td>
-														</tr>
-													</table>
-													<table class="divider_block block-5" width="100%" border="0" cellpadding="10" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
-														<tr>
-															<td class="pad">
-																<div class="alignment" align="center">
-																	<table border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
-																		<tr>
-																			<td class="divider_inner" style="font-size: 1px; line-height: 1px; border-top: 1px solid #dddddd;"><span style="word-break: break-word;">&#8202;</span></td>
-																		</tr>
-																	</table>
-																</div>
-															</td>
-														</tr>
-													</table>
-												</td>
-											</tr>
-										</tbody>
-									</table>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				</td>
-			</tr>
-		</tbody>
-	</table><!-- End -->
-</body>
-
-</html>		 
-  `;
-
-  const bodyQuote = `
- <!DOCTYPE html>
-<html xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office" lang="en">
-   <head>
-      <title></title>
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <!--[if mso]>
-      <xml>
-         <w:WordDocument xmlns:w="urn:schemas-microsoft-com:office:word">
-            <w:DontUseAdvancedTypographyReadingMail/>
-         </w:WordDocument>
-         <o:OfficeDocumentSettings>
-            <o:PixelsPerInch>96</o:PixelsPerInch>
-            <o:AllowPNG/>
-         </o:OfficeDocumentSettings>
-      </xml>
-      <![endif]--><!--[if !mso]><!-->
-      <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900" rel="stylesheet" type="text/css">
-      <!--<![endif]-->
-      <style>
-         * {
-         box-sizing: border-box;
-         }
-         body {
-         margin: 0;
-         padding: 0;
-         }
-         a[x-apple-data-detectors] {
-         color: inherit !important;
-         text-decoration: inherit !important;
-         }
-         #MessageViewBody a {
-         color: inherit;
-         text-decoration: none;
-         }
-         p {
-         line-height: inherit
-         }
-         .desktop_hide,
-         .desktop_hide table {
-         mso-hide: all;
-         display: none;
-         max-height: 0px;
-         overflow: hidden;
-         }
-         .image_block img+div {
-         display: none;
-         }
-         sup,
-         sub {
-         font-size: 75%;
-         line-height: 0;
-         }
-         @media (max-width:520px) {
-         .desktop_hide table.icons-inner {
-         display: inline-block !important;
-         }
-         .icons-inner {
-         text-align: center;
-         }
-         .icons-inner td {
-         margin: 0 auto;
-         }
-         .mobile_hide {
-         display: none;
-         }
-         .row-content {
-         width: 100% !important;
-         }
-         .stack .column {
-         width: 100%;
-         display: block;
-         }
-         .mobile_hide {
-         min-height: 0;
-         max-height: 0;
-         max-width: 0;
-         overflow: hidden;
-         font-size: 0px;
-         }
-         .desktop_hide,
-         .desktop_hide table {
-         display: table !important;
-         max-height: none !important;
-         }
-         }
-      </style>
-      <!--[if mso ]>
-      <style>sup, sub { font-size: 100% !important; } sup { mso-text-raise:10% } sub { mso-text-raise:-10% }</style>
-      <![endif]-->
-   </head>
-   <body class="body" style="background-color: #FFFFFF; margin: 0; padding: 0; -webkit-text-size-adjust: none; text-size-adjust: none;">
-      <table class="nl-container" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #FFFFFF;">
-         <tbody>
-            <tr>
-               <td>
-                  <table class="row row-1" align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
-                     <tbody>
-                        <tr>
-                           <td>
-                              <table class="row-content stack" align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-radius: 0; color: #000000; width: 500px; margin: 0 auto;" width="500">
-                                 <tbody>
-                                    <tr>
-                                       <td class="column column-1" width="33.333333333333336%" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; padding-top: 5px; vertical-align: middle;">
-                                          <table class="image_block block-1" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
-                                             <tr>
-                                                <td class="pad" style="width:100%;">
-                                                   <div class="alignment" align="center">
-                                                      <div style="max-width: 166.667px;"><a href="https://singula.pt/" target="_blank" style="outline:none" tabindex="-1"><img src="https://singula.pt/logo-email.png" style="display: block; height: auto; border: 0; width: 100%;" width="166.667" alt title height="auto"></a></div>
-                                                   </div>
-                                                </td>
-                                             </tr>
-                                          </table>
-                                       </td>
-                                    </tr>
-                                 </tbody>
-                              </table>
-                           </td>
-                        </tr>
-                     </tbody>
-                  </table>
-                  <table class="row row-2" align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
-                     <tbody>
-                        <tr>
-                           <td>
-                              <table class="row-content stack" align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-radius: 0; color: #000000; width: 500px; margin: 0 auto;" width="500">
-                                 <tbody>
-                                    <tr>
-                                       <td class="column column-1" width="100%" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; padding-top: 5px; vertical-align: top;">
-                                          <table class="divider_block block-1" width="100%" border="0" cellpadding="10" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
-                                             <tr>
-                                                <td class="pad">
-                                                   <div class="alignment" align="center">
-                                                      <table border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
-                                                         <tr>
-                                                            <td class="divider_inner" style="font-size: 1px; line-height: 1px; border-top: 1px solid #dddddd;"><span style="word-break: break-word;">&#8202;</span></td>
-                                                         </tr>
-                                                      </table>
-                                                   </div>
-                                                </td>
-                                             </tr>
-                                          </table>
-                                          <table class="heading_block block-2" width="100%" border="0" cellpadding="10" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
-                                             <tr>
-                                                <td class="pad">
-                                                   <h1 style="margin: 0; color: #1e0e4b; direction: ltr; font-family: 'Poppins', Arial, Helvetica, sans-serif; font-size: 32px; font-weight: 700; letter-spacing: normal; line-height: 1.2; text-align: center; margin-top: 0; margin-bottom: 0; mso-line-height-alt: 38px;">Pedido de Orçamento!</h1>
-                                                </td>
-                                             </tr>
-                                          </table>
-                                          <table class="paragraph_block block-3" width="100%" border="0" cellpadding="50" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;">
-                                             <tr>
-                                                <td class="pad">
-                                                   <div style="color:#444a5b;direction:ltr;font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;font-size:16px;font-weight:400;letter-spacing:0px;line-height:1.2;text-align:left;mso-line-height-alt:19px;">
-                                                      <p style="margin: 0; margin-bottom: 16px;">Olá Administrador! Recebeu um pedido de orçamento. </p>
-                                                      <p style="margin: 0; margin-bottom: 16px;"><strong>Nome</strong>: ${name}<br><strong>Email</strong>: ${email}<br><strong>Contacto</strong>: ${contact}<br><strong>País</strong>: ${
-    quoteData?.country || ""
-  }<br><strong>Entidade</strong>: ${
-    quoteData?.entity
-  }<br><strong>Tipo Entidade</strong>: ${
-    quoteData?.entity_type
-  }<br><strong>Produtos<strong>: ${
-    quoteData?.products
-  }<br><strong>Mensagem</strong>:</p>
-                                                      <p style="margin: 0; margin-bottom: 16px;">${message}</p>
-                                                      <p style="margin: 0; margin-bottom: 16px;">&nbsp;</p>
-                                                      <p style="margin: 0;">&nbsp;</p>
-<br><strong>Anexo</strong>: ${quoteData?.attachment}
-                                                   </div>
-                                                </td>
-                                             </tr>
-                                          </table>
-                                          <table class="paragraph_block block-4" width="100%" border="0" cellpadding="50" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;">
-                                             <tr>
-                                                <td class="pad">
-                                                   <div style="color:#444a5b;direction:ltr;font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;font-size:16px;font-weight:400;letter-spacing:0px;line-height:1.2;text-align:center;mso-line-height-alt:19px;">
-                                                      <p style="margin: 0;">Este é um email automático de <strong>singula.pt</strong>.</p>
-                                                   </div>
-                                                </td>
-                                             </tr>
-                                          </table>
-                                          <table class="divider_block block-5" width="100%" border="0" cellpadding="10" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
-                                             <tr>
-                                                <td class="pad">
-                                                   <div class="alignment" align="center">
-                                                      <table border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
-                                                         <tr>
-                                                            <td class="divider_inner" style="font-size: 1px; line-height: 1px; border-top: 1px solid #dddddd;"><span style="word-break: break-word;">&#8202;</span></td>
-                                                         </tr>
-                                                      </table>
-                                                   </div>
-                                                </td>
-                                             </tr>
-                                          </table>
-                                       </td>
-                                    </tr>
-                                 </tbody>
-                              </table>
-                           </td>
-                        </tr>
-                     </tbody>
-                  </table>
-               </td>
-            </tr>
-         </tbody>
-      </table>
-      <!-- End -->
-   </body>
-</html>
- 
-  `;
-
-  const bodyReceiver = `
-  <!DOCTYPE html>
-<html xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office" lang="en">
-   <head>
-      <title></title>
-      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <!--[if mso]>
-      <xml>
-         <w:WordDocument xmlns:w="urn:schemas-microsoft-com:office:word">
-            <w:DontUseAdvancedTypographyReadingMail/>
-         </w:WordDocument>
-         <o:OfficeDocumentSettings>
-            <o:PixelsPerInch>96</o:PixelsPerInch>
-            <o:AllowPNG/>
-         </o:OfficeDocumentSettings>
-      </xml>
-      <![endif]--><!--[if !mso]><!-->
-      <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900" rel="stylesheet" type="text/css">
-      <!--<![endif]-->
-      <style>
-         * {
-         box-sizing: border-box;
-         }
-         body {
-         margin: 0;
-         padding: 0;
-         }
-         a[x-apple-data-detectors] {
-         color: inherit !important;
-         text-decoration: inherit !important;
-         }
-         #MessageViewBody a {
-         color: inherit;
-         text-decoration: none;
-         }
-         p {
-         line-height: inherit
-         }
-         .desktop_hide,
-         .desktop_hide table {
-         mso-hide: all;
-         display: none;
-         max-height: 0px;
-         overflow: hidden;
-         }
-         .image_block img+div {
-         display: none;
-         }
-         sup,
-         sub {
-         font-size: 75%;
-         line-height: 0;
-         }
-         @media (max-width:520px) {
-         .desktop_hide table.icons-inner {
-         display: inline-block !important;
-         }
-         .icons-inner {
-         text-align: center;
-         }
-         .icons-inner td {
-         margin: 0 auto;
-         }
-         .mobile_hide {
-         display: none;
-         }
-         .row-content {
-         width: 100% !important;
-         }
-         .stack .column {
-         width: 100%;
-         display: block;
-         }
-         .mobile_hide {
-         min-height: 0;
-         max-height: 0;
-         max-width: 0;
-         overflow: hidden;
-         font-size: 0px;
-         }
-         .desktop_hide,
-         .desktop_hide table {
-         display: table !important;
-         max-height: none !important;
-         }
-         }
-      </style>
-      <!--[if mso ]>
-      <style>sup, sub { font-size: 100% !important; } sup { mso-text-raise:10% } sub { mso-text-raise:-10% }</style>
-      <![endif]-->
-   </head>
-   <body class="body" style="background-color: #FFFFFF; margin: 0; padding: 0; -webkit-text-size-adjust: none; text-size-adjust: none;">
-      <table class="nl-container" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; background-color: #FFFFFF;">
-         <tbody>
-            <tr>
-               <td>
-                  <table class="row row-1" align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
-                     <tbody>
-                        <tr>
-                           <td>
-                              <table class="row-content stack" align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-radius: 0; color: #000000; width: 500px; margin: 0 auto;" width="500">
-                                 <tbody>
-                                    <tr>
-                                       <td class="column column-1" width="33.333333333333336%" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; padding-top: 5px; vertical-align: middle;">
-                                          <table class="image_block block-1" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
-                                             <tr>
-                                                <td class="pad" style="width:100%;">
-                                                   <div class="alignment" align="center">
-                                                      <div style="max-width: 166.667px;"><a href="https://singula.pt/" target="_blank" style="outline:none" tabindex="-1"><img src="https://singula.pt/logo-email.png" style="display: block; height: auto; border: 0; width: 100%;" width="166.667" alt title height="auto"></a></div>
-                                                   </div>
-                                                </td>
-                                             </tr>
-                                          </table>
-                                       </td>
-                                    </tr>
-                                 </tbody>
-                              </table>
-                           </td>
-                        </tr>
-                     </tbody>
-                  </table>
-                  <table class="row row-2" align="center" width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
-                     <tbody>
-                        <tr>
-                           <td>
-                              <table class="row-content stack" align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-radius: 0; color: #000000; width: 500px; margin: 0 auto;" width="500">
-                                 <tbody>
-                                    <tr>
-                                       <td class="column column-1" width="100%" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; font-weight: 400; text-align: left; padding-bottom: 5px; padding-top: 5px; vertical-align: top;">
-                                          <table class="divider_block block-1" width="100%" border="0" cellpadding="10" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
-                                             <tr>
-                                                <td class="pad">
-                                                   <div class="alignment" align="center">
-                                                      <table border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
-                                                         <tr>
-                                                            <td class="divider_inner" style="font-size: 1px; line-height: 1px; border-top: 1px solid #dddddd;"><span style="word-break: break-word;">&#8202;</span></td>
-                                                         </tr>
-                                                      </table>
-                                                   </div>
-                                                </td>
-                                             </tr>
-                                          </table>
-                                          <table class="heading_block block-2" width="100%" border="0" cellpadding="10" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
-                                             <tr>
-                                                <td class="pad">
-                                                   <h1 style="margin: 0; color: #1e0e4b; direction: ltr; font-family: 'Poppins', Arial, Helvetica, sans-serif; font-size: 32px; font-weight: 700; letter-spacing: normal; line-height: 1.2; text-align: center; margin-top: 0; margin-bottom: 0; mso-line-height-alt: 38px;">Recebemos o teu pedido.</h1>
-                                                </td>
-                                             </tr>
-                                          </table>
-                                          <table class="paragraph_block block-3" width="100%" border="0" cellpadding="50" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;">
-                                             <tr>
-                                                <td class="pad">
-                                                   <div style="color:#444a5b;direction:ltr;font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;font-size:16px;font-weight:400;letter-spacing:0px;line-height:1.2;text-align:left;mso-line-height-alt:19px;">
-                                                      <p>
-Olá ${name},<br/>
-Confirmamos que recebemos o teu pedido e já estamos a tratá-lo com a urgência e atenção que merece.
-A nossa equipa vai analisar os detalhes e entrará em contacto contigo em breve. <br/> <br/>
-Se precisares de acrescentar alguma informação, podes sempre responder diretamente a este e-mail.
- <br/> <br/>
-Obrigado por escolheres a Singula. <br/>
-<strong>Obrigado por pensares em metal. <br/> <br/>
-
-A equipa Singula <br/>
-Think Metal</strong>
-</p>
-                                                   </div>
-                                                </td>
-                                             </tr>
-                                          </table>
-                                          <table class="paragraph_block block-4" width="100%" border="0" cellpadding="50" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt; word-break: break-word;">
-                                             <tr>
-                                                <td class="pad"> 
-                                                   <div style="color:#444a5b;direction:ltr;font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;font-size:16px;font-weight:400;letter-spacing:0px;line-height:1.2;text-align:center;mso-line-height-alt:19px;">
-                                                      <p style="margin: 0;">Este é um email automático de <strong>singula.pt</strong>.</p>
-                                                   </div>
-                                                </td>
-                                             </tr>
-                                          </table>
-                                          <table class="divider_block block-5" width="100%" border="0" cellpadding="10" cellspacing="0" role="presentation" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
-                                             <tr>
-                                                <td class="pad">
-                                                   <div class="alignment" align="center">
-                                                      <table border="0" cellpadding="0" cellspacing="0" role="presentation" width="100%" style="mso-table-lspace: 0pt; mso-table-rspace: 0pt;">
-                                                         <tr>
-                                                            <td class="divider_inner" style="font-size: 1px; line-height: 1px; border-top: 1px solid #dddddd;"><span style="word-break: break-word;">&#8202;</span></td>
-                                                         </tr>
-                                                      </table>
-                                                   </div>
-                                                </td>
-                                             </tr>
-                                          </table>
-                                       </td>
-                                    </tr>
-                                 </tbody>
-                              </table>
-                           </td>
-                        </tr>
-                     </tbody>
-                  </table>
-               </td>
-            </tr>
-         </tbody>
-      </table>
-      <!-- End -->
-   </body>
-</html> 
-  `;
+  // Determine subject based on lang, isQuote, and whether it's for the user or admin
+  const subject = receiver
+    ? isQuote
+      ? subjectTranslations[lang].userQuote
+      : subjectTranslations[lang].userMessage
+    : isQuote
+    ? subjectTranslations[lang].adminQuote
+    : subjectTranslations[lang].adminMessage;
 
   await fetch("https://api.davdsm.pt/sendMail", {
     method: "POST",
@@ -660,13 +88,7 @@ Think Metal</strong>
         email: receiver ? receiver : "sales@singula.pt",
         name: receiver ? name : "Administração",
       },
-      subject: receiver
-        ? isQuote
-          ? `#${ref} ${name}, Obrigado pelo seu pedido de orçamento!`
-          : `${name}, Obrigado pela sua mensagem.`
-        : isQuote
-        ? `#${ref} 📝 Novo Pedido de Orçamento`
-        : `🔔 Nova Mensagem de Singula.pt!`,
+      subject: subject,
       message: receiver ? bodyReceiver : isQuote ? bodyQuote : bodyContact,
     }),
   })
@@ -690,6 +112,7 @@ export const useSendMail = () => {
   const [Loading, setLoading] = useState<boolean>(false);
 
   const sendMail = async (
+    lang: "pt" | "en" | "es" | "fr" | "de",
     name: string,
     contact: string,
     email: string,
@@ -709,6 +132,7 @@ export const useSendMail = () => {
       setSent(false);
       setLoading(true);
       await goMail(
+        lang,
         name,
         contact,
         message,

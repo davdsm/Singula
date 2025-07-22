@@ -17,6 +17,7 @@ export const ContactForm = () => {
   const { t } = useTranslation();
   const { sendMail, Loading, Sent } = useSendMail();
   const [Error, setError] = useState<boolean>(false);
+  const { i18n } = useTranslation();
 
   const [formData, setFormData] = useState<FormData>({
     name: "",
@@ -39,10 +40,7 @@ export const ContactForm = () => {
     e.preventDefault();
     setError(false);
 
-    const requiredFields: (keyof FormData)[] = [
-      "name",
-      "email",
-    ];
+    const requiredFields: (keyof FormData)[] = ["name", "email"];
     const emptyField = requiredFields.find((key) => !formData[key].trim());
 
     if (emptyField) {
@@ -50,8 +48,23 @@ export const ContactForm = () => {
       return;
     }
 
-    await sendMail(formData.name, formData.contact, formData.email, formData.message);
-    await sendMail(formData.name, formData.contact, formData.email, formData.message, false, undefined, formData.email);
+    await sendMail(
+      i18n.language as "pt" | "en" | "es" | "fr" | "de",
+      formData.name,
+      formData.contact,
+      formData.email,
+      formData.message
+    );
+    await sendMail(
+      i18n.language as "pt" | "en" | "es" | "fr" | "de",
+      formData.name,
+      formData.contact,
+      formData.email,
+      formData.message,
+      false,
+      undefined,
+      formData.email
+    );
   };
 
   return (
@@ -180,7 +193,9 @@ export const ContactForm = () => {
                   </button>
                 </div>
 
-                <p className="mt-2 text-sm text-gray-400">* campo obrigatório.</p>
+                <p className="mt-2 text-sm text-gray-400">
+                  * campo obrigatório.
+                </p>
 
                 {Error && (
                   <div

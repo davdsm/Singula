@@ -67,6 +67,7 @@ const QuotePage = () => {
   const { sendMail, Sent, Loading: EmailLoading } = useSendMail();
   const db = useDB();
   const [isMobile, setIsMobile] = useState(false);
+  const { i18n } = useTranslation();
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -136,6 +137,7 @@ const QuotePage = () => {
     const result = await db.addData("Orcamentos", data);
 
     await sendMail(
+      i18n.language as "pt" | "en" | "es" | "fr" | "de",
       formData.name,
       formData.contact,
       formData.email,
@@ -157,6 +159,7 @@ const QuotePage = () => {
     );
 
     await sendMail(
+      i18n.language as "pt" | "en" | "es" | "fr" | "de",
       formData.name,
       formData.contact,
       formData.email,

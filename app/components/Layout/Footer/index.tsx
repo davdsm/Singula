@@ -9,7 +9,11 @@ import {
   faInstagram,
 } from "@fortawesome/free-brands-svg-icons";
 
-import { faCheckCircle, faEnvelope, faSpinner } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCheckCircle,
+  faEnvelope,
+  faSpinner,
+} from "@fortawesome/free-solid-svg-icons";
 
 import { DelayedLink } from "~/components/Elements/Link";
 import { Logo } from "~/components/Elements/Logo";
@@ -22,7 +26,8 @@ export const Footer = () => {
   const [Terms, setTerms] = useState<boolean>(false);
   const [Error, setError] = useState<boolean>(false);
   const { sendMail, Sent, Loading } = useSendMail();
-
+  const { i18n } = useTranslation();
+  
   const submitForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError(false);
@@ -32,7 +37,13 @@ export const Footer = () => {
       return;
     }
 
-    sendMail("newsletter", "", Email, `${Email} Subscreveu a newsletter`);
+    sendMail(
+      i18n.language as "pt" | "en" | "es" | "fr" | "de",
+      "newsletter",
+      "",
+      Email,
+      `${Email} Subscreveu a newsletter`
+    );
   };
 
   return (
@@ -208,7 +219,10 @@ export const Footer = () => {
                 </button>
               )}
               {Loading && (
-                <button type="submit" className="absolute right-10 top-16 animate-spin">
+                <button
+                  type="submit"
+                  className="absolute right-10 top-16 animate-spin"
+                >
                   <FontAwesomeIcon
                     icon={faSpinner}
                     className="text-white w-6 h-6"
