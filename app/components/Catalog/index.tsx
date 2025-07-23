@@ -9,17 +9,19 @@ export const CatalogComponent = ({
   text,
   img,
   file,
+  inverted
 }: {
   title: string;
   subtitle: string;
   text: string;
   img: string;
   file: string;
+  inverted: boolean;
 }) => {
   const { t } = useTranslation();
 
   return (
-    <section className="flex justify-between items-start gap-10 px-10 w-full h-full items-center py-40 md:mt-10 flex-col-reverse md:flex-row md:px-40 md:py-40">
+    <section className={`${inverted ? 'flex-col flex-col-reverse md:flex-row-reverse' : 'flex-col flex-col-reverse flex-row-reverse md:flex-row'} flex justify-between items-start gap-10 px-10 w-full h-full items-center pt-40 md:mt-10 md:px-40 md:pt-40`}>
       <div className="w-full md:w-1/2">
         <p className="text-2xl md:text-4xl font-bold text-singula-main text-left">
           {parseTextWithMainColor(subtitle)}
@@ -37,7 +39,7 @@ export const CatalogComponent = ({
           secondText={t("catalog.button.second")}
         />
       </div>
-      <div className="w-full md:w-1/2 flex justify-start md:justify-end items-center">
+      <div className={`${inverted ? 'justify-start' : 'justify-start md:justify-end '} w-full md:w-1/2 flex items-center`}>
         <Image
           src={img}
           alt={t("catalog.image.alt")}

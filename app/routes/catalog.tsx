@@ -1,7 +1,7 @@
 import { MetaFunction } from "@remix-run/node";
 import { CatalogComponent } from "~/components/Catalog";
 import { Loading } from "~/components/Elements/Loading";
-import { usePageContent } from "~/hooks/usePageContent";
+import { useCatalogs } from "~/hooks/useCatalog";
 
 export const meta: MetaFunction = () => {
   return [
@@ -15,20 +15,23 @@ export const meta: MetaFunction = () => {
 };
 
 export const Catalog = () => {
-  const { data, loading } = usePageContent("Pagina_Catalogo");
+  const { catalogs, loading } = useCatalogs();
 
   if (loading) return <Loading />;
-  if (Object.keys(data).length === 0) return <Loading />;  
+  if (catalogs.length === 0) return <Loading />;
 
   return (
-    <main className="overflow-x-hidden">
-      <CatalogComponent
-        subtitle={data["catalog-subtitle"] as string}
-        title={data["catalog-title"] as string}
-        text={data["catalog-text"] as string}
-        img={data["catalog-img"] as string}
-        file={data["catalog-file"] as string}
-      />
+    <main className="overflow-x-hidden pb-40">
+      {catalogs.map((catalog, index) => (
+        <CatalogComponent
+          subtitle={catalog.subtitle}
+          title={catalog.title}
+          text={catalog.text}
+          img={catalog.image}
+          file={catalog.file}
+          inverted={index % 2 !== 0}
+        />
+      ))}
     </main>
   );
 };
