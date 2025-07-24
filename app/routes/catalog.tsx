@@ -24,6 +24,7 @@ export const Catalog = () => {
     <main className="overflow-x-hidden pb-40">
       {catalogs.map((catalog, index) => (
         <CatalogComponent
+        key={`catalog-${catalog.id}`}
           subtitle={catalog.subtitle}
           title={catalog.title}
           text={catalog.text}

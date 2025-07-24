@@ -37,13 +37,14 @@ export const CatalogComponent = ({
           target="_blank"
           firstText={t("catalog.button.first")}
           secondText={t("catalog.button.second")}
+          className="!inline-block"
         />
       </div>
       <div className={`${inverted ? 'justify-start' : 'justify-start md:justify-end '} w-full md:w-1/2 flex items-center`}>
         <Image
           src={img}
           alt={t("catalog.image.alt")}
-          className="w-[70%] h-[30vh] md:h-[40vh] rounded-xl object-contain bg-white p-4 md:p-10"
+          className="w-[70%] h-[30vh] md:h-[40vh] md:max-h-[400px] rounded-xl object-contain bg-white p-4 md:p-10"
         />
       </div>
     </section>
