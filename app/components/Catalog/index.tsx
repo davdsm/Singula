@@ -43,7 +43,7 @@ export const CatalogComponent = ({
         <Image
           src={img}
           alt={t("catalog.image.alt")}
-          className="w-[70%] h-[30vh] md:h-[60vh] rounded-xl object-contain bg-white p-4 md:p-10"
+          className="w-[70%] h-[30vh] md:h-[40vh] rounded-xl object-contain bg-white p-4 md:p-10"
         />
       </div>
     </section>
