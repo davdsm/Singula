@@ -34,7 +34,7 @@ export const Button = ({
       </span>
       <FontAwesomeIcon
         icon={faArrowRight}
-        className="w-4 h-4 text-singula-main transition-colors group-hover:text-white duration-300"
+        className="w-4 h-4 text-singula-main transition-colors group-hover:text-white duration-300 inline-block"
       />
     </DelayedLink>
   );
