@@ -104,5 +104,12 @@
 
   "not-found.title": "404. Encontrar? Só se for estilo.",
   "not-found.description": "Esta página foi dar uma volta. Talvez esteja a tirar selfies com um braseiro ou a filosofar num banco urbano. ",
-  "not-found.home": "Voltar ao Início"
+  "not-found.home": "Voltar ao Início",
+
+  "cookies.title": "Utilizamos Cookies",
+  "cookies.text": "Para melhorar a sua experiência em singula.pt, usamos cookies para análises, personalização e segurança.",
+  "cookies.deny": "Fechar & Rejeitar",
+  "cookies.accept": "Permitir Todos",
+
+  "products.all": "Todos os produtos"
 }

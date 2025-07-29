@@ -125,10 +125,12 @@ export const Search = () => {
               transition={{ duration: 0.3, ease: "easeInOut" }}
               className="max-w-4xl pt-20 mx-auto text-gray-800 flex items-center justify-center flex-col md:flex-row px-4 md:px-0"
             >
-              <h1 className="font-bold text-3xl md:text-5xl">
-                {t("search.results.title")}{" "}
-                <span className="font-extrabold">"{searchString}"</span>{" "}
-              </h1>
+              {searchString !== "all" && (
+                <h1 className="font-bold text-3xl md:text-5xl">
+                  {t("search.results.title")}{" "}
+                  <span className="font-extrabold">"{searchString}"</span>{" "}
+                </h1>
+              )}
             </motion.section>
           )}
 

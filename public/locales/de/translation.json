@@ -104,5 +104,12 @@
 
   "not-found.title": "404. Finden? Nur mit Stil.",
   "not-found.description": "Diese Seite ist spazieren gegangen. Vielleicht macht sie Selfies mit einem Feuerkorb oder philosophiert auf einer urbanen Bank.",
-  "not-found.home": "Zurück zur Startseite"
+  "not-found.home": "Zurück zur Startseite",
+
+  "cookies.title": "Wir verwenden Cookies",
+  "cookies.text": "Um Ihr Erlebnis auf singula.pt zu verbessern, verwenden wir Cookies für Analysen, Personalisierung und Sicherheit.",
+  "cookies.deny": "Schließen & Ablehnen",
+  "cookies.accept": "Alle zulassen",
+
+  "products.all": "Alle Produkte"
 }

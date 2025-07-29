@@ -104,5 +104,12 @@
 
   "not-found.title": "404. Find? Only with style.",
   "not-found.description": "This page has gone for a stroll. Maybe it's taking selfies with a fire pit or philosophizing on an urban bench.",
-  "not-found.home": "Back to Home"
+  "not-found.home": "Back to Home",
+
+  "cookies.title": "We Use Cookies ",
+  "cookies.text": "To improve your experience on singula.pt, we use cookies for analytics, personalization and secure navigation.",
+  "cookies.deny": "Close & Deny",
+  "cookies.accept": "Allow All",
+
+  "products.all": "All Products"
 }

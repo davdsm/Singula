@@ -22,6 +22,7 @@ import { TransitionOverlay } from "./components/Elements/Transition";
 import "./global.css";
 import "./hooks/fontAwesome";
 import { HeaderProvider } from "./context/HeaderContext";
+import { useAnalytics } from "./hooks/useAnalytics";
 
 export const links: LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -42,6 +43,8 @@ export const links: LinksFunction = () => [
 ];
 
 export function Layout({ children }: { children: React.ReactNode }) {
+  useAnalytics();
+
   return (
     <I18nextProvider i18n={i18next}>
       <html lang={i18next.language}>

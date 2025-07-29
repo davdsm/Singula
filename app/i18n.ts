@@ -13,8 +13,8 @@ i18next
     fallbackLng: "en", // Default language
     supportedLngs: ["en", "pt", "es", "fr", "de"], // List of supported languages
     detection: {
-      order: ["cookie", "localStorage", "navigator"],
-      caches: ["cookie"], // Language preference is stored in a cookie
+      order: ["localStorage", "navigator"],
+      caches: ["localStorage"], // Language preference is stored in a cookie
     },
     backend: {
       loadPath: "/locales/{{lng}}/translation.json", // Path to translation files

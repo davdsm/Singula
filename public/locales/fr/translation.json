@@ -104,5 +104,12 @@
 
   "not-found.title": "404. Trouver ? Seulement avec style.",
   "not-found.description": "Cette page est partie faire un tour. Peut-être qu'elle est en train de prendre des selfies avec un brasero ou de philosopher sur un banc urbain.",
-  "not-found.home": "Retour à l'accueil"
+  "not-found.home": "Retour à l'accueil",
+
+  "cookies.title": "Nous utilisons des cookies",
+  "cookies.text": "Pour améliorer votre expérience sur singula.pt, nous utilisons des cookies à des fins d'analyse, de personnalisation et de sécurité.",
+  "cookies.deny": "Fermer & refuser",
+  "cookies.accept": "Autoriser tout",
+
+  "products.all": "Tous les produits"
 }
