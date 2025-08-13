@@ -35,6 +35,13 @@ interface FormData {
   terms: boolean;
 }
 
+declare global {
+  interface Window {
+    fbq?: (...args: any[]) => void;
+    lintrk?: (...args: any[]) => void;
+  }
+}
+
 export const meta: MetaFunction = () => {
   return [
     { title: "Pedido de Orçamento - Singula" },
@@ -179,6 +186,13 @@ const QuotePage = () => {
       formData.email,
       result.REF
     );
+
+    if (window.fbq) {
+      window.fbq("track", "Lead");
+    }
+    if (window.lintrk) {
+      window.lintrk("track", { conversion_id: 22911929 });
+    }
   };
 
   return (

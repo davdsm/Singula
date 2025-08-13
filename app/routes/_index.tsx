@@ -15,13 +15,14 @@ export const Index = () => {
 
 
   if (loading || productsLoading) return <Loading />;
-  if (Object.keys(data).length === 0) return <Loading />;
+  if (Object.keys(data).length === 0) return <Loading />;  
 
   return (
     <main>
       <Hero
         img={data["home-slide-img"][0]}
         text={data["home-slide-text"] as string}
+        imgMobile={data["home-slide-img-mobile"][0]}
       />
       <AboutSection text={data["home-about-text"] as string} />
       <PhotoSlider imgs={data["home-carousel-imgs"] as string[]} />

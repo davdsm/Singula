@@ -1,16 +1,19 @@
-import { useTranslation } from "react-i18next";
 import SplitText from "../Elements/SplitText";
 import { Image } from "../Elements/Image";
-export const Hero = ({ img, text }: { img: string; text: string }) => {
-  const { t } = useTranslation();
-
+export const Hero = ({ img, text, imgMobile }: { img: string; text: string, imgMobile: string }) => {
+  
   return (
     <section className="relative w-full h-[60vh] md:h-[90vh] bg-cover bg-center">
       <div className="absolute inset-0 bg-black z-10 opacity-10"></div>
       <Image
         src={img}
         alt="Singula"
-        className="top-0 left-0 absolute w-full h-full object-cover"
+        className="hidden md:block top-0 left-0 absolute w-full h-full object-cover"
+      />
+       <Image
+        src={imgMobile}
+        alt="Singula"
+        className="block md:hidden top-0 left-0 absolute w-full h-full object-cover"
       />
       <div className="z-20 absolute inset-0 flex items-end justify-left p-10 md:p-20">
         <h1 className="w-full">

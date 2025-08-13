@@ -13,6 +13,13 @@ interface FormData {
   terms: string;
 }
 
+declare global {
+  interface Window {
+    fbq?: (...args: any[]) => void;
+    lintrk?: (...args: any[]) => void;
+  }
+}
+
 export const ContactForm = () => {
   const { t } = useTranslation();
   const { sendMail, Loading, Sent } = useSendMail();
@@ -65,6 +72,13 @@ export const ContactForm = () => {
       undefined,
       formData.email
     );
+
+    if (window.fbq) {
+      window.fbq("track", "Lead");
+    }
+    if (window.lintrk) {
+      window.lintrk("track", { conversion_id: 22911929 });
+    }
   };
 
   return (
