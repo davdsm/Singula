@@ -10,12 +10,11 @@ import { useProducts } from "~/hooks/useProducts";
 export const Index = () => {
   const { data, loading } = usePageContent("Pagina_Inicial");
   const { products, loading: productsLoading } = useProducts({
-    featured: true
-  }); 
-
+    featured: true,
+  });
 
   if (loading || productsLoading) return <Loading />;
-  if (Object.keys(data).length === 0) return <Loading />;  
+  if (Object.keys(data).length === 0) return <Loading />;
 
   return (
     <main>
@@ -25,8 +24,14 @@ export const Index = () => {
         imgMobile={data["home-slide-img-mobile"][0]}
       />
       <AboutSection text={data["home-about-text"] as string} />
-      <PhotoSlider imgs={data["home-carousel-imgs"] as string[]} />
-      <Categories products={products} title={data["home-categories-text"] as string} />
+      <PhotoSlider
+        imgs={data["home-carousel-imgs"] as string[]}
+        productLinks={data["productLinks"] as string[]}
+      />
+      <Categories
+        products={products}
+        title={data["home-categories-text"] as string}
+      />
       <DesignsSlide imgs={data["home-design-imgs"] as string[]} />
     </main>
   );

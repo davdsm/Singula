@@ -44,6 +44,10 @@ export const SearchBar = ({
     }
   }, [searchString]);
 
+  if(searchText.includes("<red>")) {
+    setSearchText(searchText.replaceAll("<red>", "").replaceAll("</red>", ""))
+  }
+
   return (
     <form
       className={`${

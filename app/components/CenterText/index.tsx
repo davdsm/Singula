@@ -9,7 +9,7 @@ export const AboutSection = ({ text }: { text: string }) => {
       initial={{ y: 20, opacity: 0 }}
       whileInView={{ y: 0, opacity: 1 }}
       transition={{ duration: 1, ease: "easeInOut" }}
-      viewport={{ amount: 0.6 }} // 1 = full section must be in view
+      viewport={{ amount: 0.4 }} // 1 = full section must be in view
       className="relative w-full h-1/3 bg-black py-20 md:py-40 mx-auto flex items-center justify-center flex-col"
     >
       <h3 className="text-lg md:text-2xl text-white text-center font-bold w-4/5 md:w-3/5 inline-block md:max-w-[614px]">

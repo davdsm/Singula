@@ -31,9 +31,9 @@ export const CategoryCard = ({
           delay: index ? index / 10 : 0,
         }}
         viewport={{ amount: 0.1, once: true }} */
-        className="w-full md:w-full bg-white p-10 rounded-tl-[1rem] rounded-br-[1rem] rounded-tr-[3rem] rounded-bl-[3rem] md:rounded-tl-3xl md:rounded-tr-[5rem] md:rounded-bl-[5rem] md:rounded-br-3xl"
+        className="w-full md:w-full bg-white p-4 rounded-tl-[1rem] rounded-br-[1rem] rounded-tr-[3rem] rounded-bl-[3rem] md:rounded-tl-3xl md:rounded-tr-[5rem] md:rounded-bl-[5rem] md:rounded-br-3xl"
       >
-        <div className="flex justify-between items-start w-full">
+        <div className="flex justify-between items-start w-full p-6">
           <h5 className="leading-none h-12 text-xl md:text-3xl text-black font-extrabold">{parseTextWithMainColor(title)}</h5>
           <CategoryIcon
             category={design.toLowerCase() as "garden" | "home" | "street"}
@@ -42,11 +42,11 @@ export const CategoryCard = ({
        <Image
           src={image}
           alt={title}
-          className="w-full md:h-[20vw] h-[30vw] object-contain"
+          className="w-full md:h-[20vw] h-[50vw] object-contain"
         />
-        <span className="capitalize text-black font-bold w-full text-center block text-lg">
+       {/*  <span className="capitalize text-black font-bold w-full text-center block text-lg">
           {design} Design
-        </span>
+        </span> */}
       </div>
     </DelayedLink>
   );

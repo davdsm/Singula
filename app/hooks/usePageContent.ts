@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import pb from "~/lib/pocketbase";
+import { ApiProduct } from "./interfaces";
 
 type PageData = Record<string, string | string[]>;
 
@@ -19,9 +20,9 @@ export function usePageContent(collection: string) {
       setError(null);
 
       try {
-        const records = await pb
-          .collection(collection)
-          .getFullList<any>({});
+        const records = await pb.collection(collection).getFullList<any>({
+          expand: "products_on_slide",
+        });
 
         const lang = i18n.language?.toLowerCase() || "en";
         const langKey = `value_${lang}`;
@@ -32,10 +33,12 @@ export function usePageContent(collection: string) {
           const value = item[langKey];
           const image = item.image;
 
-          if (item.image_fr && item.image_fr.length > 0) {            
-            const img =  `${pocketBaseUrl}/api/files/${item.collectionId}/${item.id}/${item[`image_${lang}`]}`;
+          if (item.image_fr && item.image_fr.length > 0) {
+            const img = `${pocketBaseUrl}/api/files/${item.collectionId}/${
+              item.id
+            }/${item[`image_${lang}`]}`;
             mapped[item.section_id] = img;
-          }else if (value) {
+          } else if (value) {
             mapped[item.section_id] = value;
           } else if (Array.isArray(image) && image.length > 0) {
             // Build full URLs for each image
@@ -44,6 +47,16 @@ export function usePageContent(collection: string) {
                 `${pocketBaseUrl}/api/files/${item.collectionId}/${item.id}/${fileName}`
             );
             mapped[item.section_id] = imageUrls;
+          }
+
+          if (
+            item.hasOwnProperty("products_on_slide") &&
+            item["products_on_slide"].length > 0
+          ) {
+            const productsLinks = item.expand.products_on_slide.map(
+              (product: ApiProduct) => `/search?look=${product.name_en}`
+            );
+            mapped["productLinks"] = productsLinks;
           }
         }
 

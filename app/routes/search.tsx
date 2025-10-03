@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { ProductCategoryList } from "~/components/CategoriesList/categoryListProducts";
 import { Image } from "~/components/Elements/Image";
 import { useTranslation } from "react-i18next";
+import { parseTextWithMainColor } from "~/components/utils";
 
 export const loader: LoaderFunction = async ({ request }) => {
   const url = new URL(request.url);
@@ -128,7 +129,7 @@ export const Search = () => {
               {searchString !== "all" && (
                 <h1 className="font-bold text-3xl md:text-5xl">
                   {t("search.results.title")}{" "}
-                  <span className="font-extrabold">"{searchString}"</span>{" "}
+                  <span className="font-extrabold">"{parseTextWithMainColor(searchString ?? "")}"</span>{" "}
                 </h1>
               )}
             </motion.section>
