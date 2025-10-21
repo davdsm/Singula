@@ -124,7 +124,7 @@ export const Header = ({
             initial={{ x: "-100%" }}
             animate={{ x: sidebar ? "0%" : "-100%" }}
             transition={{
-              duration: sidebar ? 1 : 0,
+              duration: sidebar ? 0.5 : 0,
               ease: "easeInOut",
               delay: 0,
             }}
