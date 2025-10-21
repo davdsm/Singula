@@ -25,7 +25,7 @@ export const loader: LoaderFunction = async ({ params }) => {
   const pocketBaseUrl = "https://singula.pt/admin";
 
   const res = await fetch(
-    `${pocketBaseUrl}/api/collections/Produtos/records?sort=order,id&expand=design,subcategory,materiais,cores_recomendado,acabamentos_recomendado,subcategory.category&slug~"${productSlug}"`
+    `${pocketBaseUrl}/api/collections/Produtos/records?perPage=500&sort=order,id&expand=design,subcategory,materiais,cores_recomendado,acabamentos_recomendado,subcategory.category&slug~"${productSlug}"`
   );
 
   const data: ProdutosResponse = await res.json();
