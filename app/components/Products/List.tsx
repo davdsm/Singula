@@ -13,7 +13,7 @@ export const ProductList = ({}) => {
     <>
       {categories && (
         <section className="bg-[#f5f5f5] pb-40">
-          <ul className="flex flex-flow justify-between items-start flex-wrap w-[90%] md:w-[70%] mx-auto gap-4">
+          <ul className="flex flex-flow justify-center md:justify-between items-start flex-wrap w-[90%] md:w-[70%] mx-auto gap-4">
             {categories.map((category, index) => (
               <motion.li
                 key={`prod-cat-${index + 1}`}
@@ -25,7 +25,7 @@ export const ProductList = ({}) => {
                   delay: index / 10,
                 }}
                 viewport={{ amount: 0.2 }}
-                className="transition-bg text-black bg-white border border-white w-[47%] md:w-[32%] rounded-3xl h-[60vw] md:h-[25vw] relative flex justify-center items-center hover:mix-blend-darken transition-600 hover:text-singula-main hover:border-[#D2D2D2]"
+                className="transition-bg text-black bg-white border border-white w-[80%] md:w-[32%] rounded-3xl h-[60vw] md:h-[25vw] relative flex justify-center items-center hover:mix-blend-darken transition-600 hover:text-singula-main hover:border-[#D2D2D2]"
               >
                 <DelayedLink
                   to={`/products/${category.slug}`}

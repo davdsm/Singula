@@ -1,16 +1,24 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useTransitionContext } from "~/context/TransitionContext";
 
 export const TransitionOverlay = () => {
   const { isTransitioning } = useTransitionContext();
 
-  return isTransitioning ? (
-    <motion.div
-      className="transform-gpu fixed inset-0 bg-black z-40 flex items-center justify-center w-[200vw] h-dvh"
-      initial={{ x: "-200vw" }}
-      animate={{ x: "200vw" }}
-      transition={{ duration: 2, delay: 0, ease: "easeInOut" }}
-      exit={{ x: "200vw" }}
-    ></motion.div>
-  ) : null;
+  return (
+    <AnimatePresence mode="wait">
+      {isTransitioning && (
+        <motion.div
+          key="transition-overlay"
+          className="fixed inset-0 bg-black z-40 w-full h-full"
+          initial={{ x: "-100%" }}        // start off-screen to the left
+          animate={{ x: 0 }}              // slide in to cover screen
+          exit={{ x: "100%" }}            // slide out to the right
+          transition={{
+            duration: 0.5,
+            ease: "easeInOut",
+          }}
+        />
+      )}
+    </AnimatePresence>
+  );
 };

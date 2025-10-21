@@ -19,6 +19,7 @@ import { DelayedLink } from "~/components/Elements/Link";
 import { Logo } from "~/components/Elements/Logo";
 import { Image } from "~/components/Elements/Image";
 import { useSendMail } from "~/hooks/useEmail";
+import { useCategories } from "~/hooks/useProductCategories";
 
 export const Footer = () => {
   const { t } = useTranslation();
@@ -27,7 +28,8 @@ export const Footer = () => {
   const [Error, setError] = useState<boolean>(false);
   const { sendMail, Sent, Loading } = useSendMail();
   const { i18n } = useTranslation();
-  
+  const { categories, loading } = useCategories();
+
   const submitForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError(false);
@@ -58,30 +60,18 @@ export const Footer = () => {
         >
           <Logo width={217} height={49} className="invert" />
           <ul className="p-0 list-none m-0">
-            <li className="text-left md:text-left">
-              <DelayedLink
-                to="/search?look=street&design=true"
-                className="bg-black py-2 px-4 text-white w-auto rounded-t-md rounded-br-md text-xl transition-all ease-linear duration-200 hover:text-singula-main"
-              >
-                {t("footer.links.urban")}
-              </DelayedLink>
-            </li>
-            <li className="text-left md:text-left">
-              <DelayedLink
-                to="/search?look=garden&design=true"
-                className="bg-black py-2 px-4 text-white w-auto rounded-br-md rounded-t-md text-xl transition-all ease-linear duration-200 hover:text-singula-main"
-              >
-                {t("footer.links.garden")}
-              </DelayedLink>
-            </li>
-            <li className="text-left md:text-left">
-              <DelayedLink
-                to="/search?look=home&design=true"
-                className="bg-black py-2 px-4 text-white w-auto rounded-br-md rounded-t-md text-xl transition-all ease-linear duration-200 hover:text-singula-main"
-              >
-                {t("footer.links.residential")}
-              </DelayedLink>
-            </li>
+            {categories &&
+              categories.map((category) => (
+                <li key={category.id} className="text-left md:text-left">
+                  <DelayedLink
+                    to="/search?look=street&design=true"
+                    className="bg-black py-2 px-4 text-white w-auto rounded-t-md rounded-br-md text-xl transition-all ease-linear duration-200 hover:text-singula-main"
+                  >
+                    {category.title}
+                  </DelayedLink>
+                </li>
+              ))}
+
             <li className="text-left md:text-left">
               <DelayedLink
                 to="/materials"

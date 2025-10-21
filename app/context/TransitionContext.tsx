@@ -1,4 +1,5 @@
-import { createContext, useContext, useState } from "react";
+import { useLocation } from "@remix-run/react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 type TransitionContextType = {
   startTransition: (navigateFn: () => void) => void;
@@ -21,10 +22,17 @@ export function TransitionProvider({
     setTimeout(() => {
       navigateFn();
     }, 800);
-    setTimeout(() => {
-      setIsTransitioning(false);
-    }, 2000);
   };
+
+  const location = useLocation();
+
+  useEffect(() => {
+    if (isTransitioning) {
+      setTimeout(() => {
+        setIsTransitioning(false);
+      }, 100);
+    }
+  }, [location.pathname]);
 
   return (
     <TransitionContext.Provider value={{ startTransition, isTransitioning }}>
