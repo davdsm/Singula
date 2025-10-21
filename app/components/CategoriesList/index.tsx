@@ -22,7 +22,7 @@ export const CategoriesList = ({
         transition={{ duration: 1, ease: "easeInOut", delay: 0.2 }}
         viewport={{ amount: 0.1 }}
       >
-        <ul className="list-none py-20 px-8 md:w-4/5 md:mx-auto flex justify-start md:justify-center flex-nowrap overflow-x-auto overflow-y-hidden scroll-smooth no-scrollbar gap-6">
+        <ul className="list-none py-20 px-8 md:w-4/5 md:mx-auto flex justify-center flex-nowrap overflow-y-hidden scroll-smooth no-scrollbar gap-6">
           {categories.map((category, index) => (
             <DelayedLink
               key={`category-${index}`}
@@ -32,7 +32,7 @@ export const CategoriesList = ({
               <Image
                 src={category.img}
                 alt={category.title}
-                className="w-20 h-20 object-contain"
+                className="w-20 h-20 object-contain rounded-full"
               />
             </DelayedLink>
           ))}

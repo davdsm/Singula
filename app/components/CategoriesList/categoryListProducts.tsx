@@ -33,13 +33,12 @@ export const ProductCategoryList = ({
                 <motion.li
                   key={`prod-cat-${index + 1}`}
                   initial={{ y: 30, opacity: 0 }}
-                  whileInView={{ y: 0, opacity: 1 }}
+                  animate={{ y: 0, opacity: 1 }}
                   transition={{
                     duration: 1,
                     ease: "easeInOut",
-                    delay: index / 10,
+                    delay: index / 20,
                   }}
-                  viewport={{ amount: 0.2 }}
                   className="transition-bg text-black bg-white border border-white w-[47%] md:w-[32%] rounded-3xl h-[60vw] md:h-[25vw] relative flex justify-center items-center hover:mix-blend-darken transition-600 hover:text-singula-main hover:border-[#D2D2D2]"
                 >
                   <DelayedLink

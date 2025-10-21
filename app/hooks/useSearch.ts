@@ -65,6 +65,7 @@ export const useSearch = ({ searchString }: { searchString: string }) => {
         expand: "design,subcategory,subcategory.category",
         filter: filter,
         sort: "-featured,order,name_pt",
+        perPage: "500", 
       });
 
       return `${baseUrl}?${params.toString()}`;

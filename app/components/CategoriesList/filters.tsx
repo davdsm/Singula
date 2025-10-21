@@ -26,7 +26,7 @@ export const Filters = ({
       viewport={{ amount: 0.1 }}
       className="pb-10 text-center flex justify-center items-center"
     >
-      <ul className="flex justify-center items-center">
+      <ul className="flex justify-start md:justify-center items-center overflow-x-auto px-4 no-scrollbar">
         <li>
           <button
             onClick={clearFilters}
@@ -52,7 +52,7 @@ export const Filters = ({
                   selectedSlug === filter.slug
                     ? "text-white bg-black"
                     : "text-black bg-transparent"
-                } font-bold p-2 px-4 border border-black rounded-full mx-2 text-lg`}
+                } font-bold p-2 px-4 border border-black rounded-full mx-2 text-md md:text-lg overflow-auto whitespace-nowrap`}
               >
                 {filter.title}
               </button>
