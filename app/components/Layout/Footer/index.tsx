@@ -64,7 +64,7 @@ export const Footer = () => {
               categories.map((category) => (
                 <li key={category.id} className="text-left md:text-left">
                   <DelayedLink
-                    to="/search?look=street&design=true"
+                    to={`/products/${category.slug}`}
                     className="bg-black py-2 px-4 text-white w-auto rounded-t-md rounded-br-md text-xl transition-all ease-linear duration-200 hover:text-singula-main"
                   >
                     {category.title}
@@ -246,7 +246,7 @@ export const Footer = () => {
           <div className="social w-full">
             <div className="flex space-x-8 justify-center md:justify-end">
               <a
-                href="https://facebook.com"
+                href="https://www.facebook.com/profile.php?id=61578045609147"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-6 h-6 text-2xl flex items-center justify-center rounded-full text-black hover:text-singula-main transition-colors duration-300"
@@ -256,7 +256,7 @@ export const Footer = () => {
               </a>
 
               <a
-                href="https://linkedin.com"
+                href="https://www.linkedin.com/company/singula-portugal/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mx-4 w-6 h-6 text-2xl flex items-center justify-center rounded-full text-black hover:text-singula-main transition-colors duration-300"
@@ -266,7 +266,7 @@ export const Footer = () => {
               </a>
 
               <a
-                href="https://instagram.com"
+                href="https://www.instagram.com/singula.pt/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-6 h-6 text-2xl flex items-center justify-center rounded-full text-black hover:text-singula-main transition-colors duration-300"
