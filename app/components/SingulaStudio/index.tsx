@@ -20,7 +20,7 @@ export const SingulaStudio = ({
   }[]
 }) => {
   return (
-    <section id="singula-studio" className="px-10 py-20 md:px-60 md:py-40">
+    <section id="singula-studio" className="px-10 py-20 md:px-10 md:py-40 max-w-5xl mx-auto">
       <motion.header
         initial={{ y: 30, opacity: 0 }}
         whileInView={{ y: 0, opacity: 1 }}

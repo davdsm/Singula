@@ -53,7 +53,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
           <meta charSet="utf-8" />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <meta name="theme-color" content="#000000" />
-          <title>Singula - Design que se vê, Design que se sente.</title>
+          <title>Singula - Think Metal</title>
           <meta
             name="title"
             content="Singula - Design que se vê, Design que se sente."
