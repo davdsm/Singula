@@ -56,7 +56,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
           <title>Singula - Think Metal</title>
           <meta
             name="title"
-            content="Singula - Design que se vê, Design que se sente."
+            content="Singula - Think Metal"
           />
           <meta
             name="description"
@@ -66,7 +66,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
           <meta property="og:url" content="https://singula.pt/" />
           <meta
             property="og:title"
-            content="Singula - Design que se vê, Design que se sente."
+            content="Singula - Think Metal"
           />
           <meta
             property="og:description"
@@ -77,7 +77,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
           <meta property="twitter:url" content="https://singula.pt/cover.png" />
           <meta
             property="twitter:title"
-            content="Singula - Design que se vê, Design que se sente."
+            content="Singula - Think Metal"
           />
           <meta
             property="twitter:description"
