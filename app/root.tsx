@@ -54,34 +54,25 @@ export function Layout({ children }: { children: React.ReactNode }) {
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <meta name="theme-color" content="#000000" />
           <title>Singula - Think Metal</title>
-          <meta
-            name="title"
-            content="Singula - Think Metal"
-          />
+          <meta name="title" content="Singula - Think Metal" />
           <meta
             name="description"
-            content="Na Singula, o metal ganha alma. E o design ganha ousadia.Seja no meio da cidade, num jardim ou à porta de casa. Desenhamos cada linha como se fosse um guião. Mas sem finais previsíveis.Só entradas de impacto e formas com destino."
+            content="A SINGULA cria peças de mobiliário urbano, para jardim e para casa com design arrojado que elevam cada espaço ao nível da elegância."
           />
           <meta property="og:type" content="website" />
           <meta property="og:url" content="https://singula.pt/" />
-          <meta
-            property="og:title"
-            content="Singula - Think Metal"
-          />
+          <meta property="og:title" content="Singula - Think Metal" />
           <meta
             property="og:description"
-            content="Na Singula, o metal ganha alma. E o design ganha ousadia.Seja no meio da cidade, num jardim ou à porta de casa. Desenhamos cada linha como se fosse um guião. Mas sem finais previsíveis.Só entradas de impacto e formas com destino."
+            content="A SINGULA cria peças de mobiliário urbano, para jardim e para casa com design arrojado que elevam cada espaço ao nível da elegância."
           />
           <meta property="og:image" content="https://singula.pt/cover.png" />
           <meta property="twitter:card" content="summary_large_image" />
           <meta property="twitter:url" content="https://singula.pt/cover.png" />
-          <meta
-            property="twitter:title"
-            content="Singula - Think Metal"
-          />
+          <meta property="twitter:title" content="Singula - Think Metal" />
           <meta
             property="twitter:description"
-            content="Na Singula, o metal ganha alma. E o design ganha ousadia.Seja no meio da cidade, num jardim ou à porta de casa. Desenhamos cada linha como se fosse um guião. Mas sem finais previsíveis.Só entradas de impacto e formas com destino."
+            content="A SINGULA cria peças de mobiliário urbano, para jardim e para casa com design arrojado que elevam cada espaço ao nível da elegância."
           />
           <meta
             property="twitter:image"
