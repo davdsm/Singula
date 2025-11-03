@@ -266,7 +266,7 @@ export const Footer = () => {
               </a>
 
               <a
-                href="https://www.instagram.com/singula.pt/"
+                href="https://www.instagram.com/singula_oficial/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-6 h-6 text-2xl flex items-center justify-center rounded-full text-black hover:text-singula-main transition-colors duration-300"
