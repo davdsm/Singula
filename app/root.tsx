@@ -66,9 +66,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
             property="og:description"
             content="A SINGULA cria peças de mobiliário urbano, para jardim e para casa com design arrojado que elevam cada espaço ao nível da elegância."
           />
-          <meta property="og:image" content="https://singula.pt/cover.png" />
+          <meta property="og:image" content="https://singula.pt/cover.jpeg" />
           <meta property="twitter:card" content="summary_large_image" />
-          <meta property="twitter:url" content="https://singula.pt/cover.png" />
+          <meta property="twitter:url" content="https://singula.pt/cover.jpeg" />
           <meta property="twitter:title" content="Singula - Think Metal" />
           <meta
             property="twitter:description"
@@ -76,7 +76,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
           />
           <meta
             property="twitter:image"
-            content="https://singula.pt/cover.png"
+            content="https://singula.pt/cover.jpeg"
           />
           <Meta />
           <Links />
