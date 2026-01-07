@@ -116,9 +116,8 @@ export const ProductGallery = ({ product }: { product: Product }) => {
           </motion.span>
         ))}
       </div>
-      <h1>AQUI</h1>
       {product.SegundaMeio && product.SegundaMeio.length > 0 && (
-        <div className="flex flex-col justify-center items-baseline mx-auto w-full md:flex-row gap-[100px]">
+        <div className="mt-20 flex flex-col justify-center items-baseline mx-auto w-full md:flex-row gap-[100px]">
           {product.SegundaMeio.map((imagem: string, index: number) => (
             <motion.span
               key={`segunda-meio-span-${index}`}
