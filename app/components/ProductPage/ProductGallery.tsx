@@ -26,7 +26,7 @@ export const ProductGallery = ({ product }: { product: Product }) => {
           >
             <Image
               key={`imagem-${imagem}`}
-              className={`w-full object-contain ${
+              className={`rounded-lg w-full object-contain ${
                 product.PrimeiraImagem!.length > 1 && "aspect-square"
               } w-full ${
                 product.PrimeiraImagem?.length === 1
@@ -90,7 +90,7 @@ export const ProductGallery = ({ product }: { product: Product }) => {
           >
             <Image
               key={`imagem-${imagem}`}
-              className={`w-full object-contain ${
+              className={`rounded-lg w-full object-contain ${
                 product.ImagemMeio!.length > 1 && "aspect-square"
               } w-full ${
                 product.ImagemMeio?.length === 1
@@ -116,7 +116,7 @@ export const ProductGallery = ({ product }: { product: Product }) => {
           </motion.span>
         ))}
       </div>
-
+      <h1>AQUI</h1>
       {product.SegundaMeio && product.SegundaMeio.length > 0 && (
         <div className="flex flex-col justify-center items-baseline mx-auto w-full md:flex-row gap-[100px]">
           {product.SegundaMeio.map((imagem: string, index: number) => (
@@ -130,7 +130,7 @@ export const ProductGallery = ({ product }: { product: Product }) => {
             >
               <Image
                 key={`imagem-${imagem}`}
-                className={`w-full object-contain ${
+                className={`rounded-2xl w-full object-contain ${
                   product.SegundaMeio!.length > 1 && "aspect-square"
                 } w-full ${
                   product.SegundaMeio?.length === 1
@@ -157,7 +157,6 @@ export const ProductGallery = ({ product }: { product: Product }) => {
           ))}
         </div>
       )}
-      
 
       <motion.p
         initial={{ y: 30, opacity: 0 }}

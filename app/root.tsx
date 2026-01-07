@@ -68,7 +68,10 @@ export function Layout({ children }: { children: React.ReactNode }) {
           />
           <meta property="og:image" content="https://singula.pt/cover.jpeg" />
           <meta property="twitter:card" content="summary_large_image" />
-          <meta property="twitter:url" content="https://singula.pt/cover.jpeg" />
+          <meta
+            property="twitter:url"
+            content="https://singula.pt/cover.jpeg"
+          />
           <meta property="twitter:title" content="Singula - Think Metal" />
           <meta
             property="twitter:description"
