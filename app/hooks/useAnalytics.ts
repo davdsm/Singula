@@ -11,10 +11,23 @@ declare global {
   }
 }
 
+// Google Ads conversion tracking
+// Use this function on conversion pages (e.g., thank you pages, form submissions)
+export const trackGoogleAdsConversion = (value?: number, currency?: string) => {
+  if (typeof window !== "undefined" && window.gtag) {
+    window.gtag("event", "conversion", {
+      send_to: "AW-17669266850/Cb60CLLJ9rAbEKK7rulB",
+      value: value ?? 1.0,
+      currency: currency ?? "EUR",
+    });
+  }
+};
+
 export const useAnalytics = () => {
   useEffect(() => {
-    // Google Analytics (G-B178JV87VV)
+    // Google Analytics (G-B178JV87VV) + Google Ads (AW-17669266850)
     const gaId = "G-B178JV87VV";
+    const gadsId = "AW-17669266850";
     if (!document.getElementById("google-analytics")) {
       const gaScript = document.createElement("script");
       gaScript.id = "google-analytics";
@@ -29,6 +42,7 @@ export const useAnalytics = () => {
     };
     window.gtag("js", new Date());
     window.gtag("config", gaId);
+    window.gtag("config", gadsId);
 
     // Facebook Pixel
     const loadFB = (f: Window, b: Document, e: string, v: string) => {
