@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
+import { trackGoogleAdsConversion } from "~/hooks/useAnalytics";
 import {
   Listbox,
   ListboxButton,
@@ -187,12 +188,16 @@ const QuotePage = () => {
       result.REF
     );
 
+
+
     if (window.fbq) {
       window.fbq("track", "Lead");
     }
     if (window.lintrk) {
       window.lintrk("track", { conversion_id: 22911929 });
     }
+
+    trackGoogleAdsConversion();
   };
 
   return (
