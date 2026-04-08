@@ -1,1 +1,2 @@
+api/data/auxiliary.db filter=lfs diff=lfs merge=lfs -text
 *.db filter=lfs diff=lfs merge=lfs -text
