@@ -3,6 +3,7 @@
   "menu.products": "Productos",
   "menu.materials": "Materiales",
   "menu.catalog": "Catálogo",
+  "menu.quote": "Cotización",
   "menu.contacts": "Contactos",
   "menu.search": "Buscar",
 
@@ -86,10 +87,16 @@
   "quote.entity-private": "Privada",
   "quote.entity-person": "Particular",
   "quote.products": "Productos",
+  "quote.productsSelected": "Productos seleccionados",
   "quote.choose-products": "Seleccionar productos",
+  "quote.cart.empty": "El carrito está vacío. Selecciona productos para continuar.",
+  "quote.cart.selectProducts": "Seleccionar productos",
   "quote.product": "Producto",
   "quote.qty": "Cantidad",
+  "quote.cart.itemsCount": "{{count}} artículos en el carrito",
+  "quote.cart.addMore": "Añadir más productos",
   "quote.message": "Tu mensaje",
+  "quote.cart.required": "Selecciona al menos un producto antes de enviar.",
   "quote.file": "Adjuntar Archivo",
   "quote.quote": "Presupuesto",
   "quote.send": "Enviar Solicitud",
@@ -98,6 +105,9 @@
 
   "quote.open.list": "Abrir Lista de Productos",
   "quote.close.list": "Cerrar Lista de Productos",
+
+  "quote.success.title": "Solicitud de presupuesto enviada",
+  "quote.success.message": "Gracias por solicitar un presupuesto. Nos pondremos en contacto pronto con más información.",
 
   "search.results.title": "Resultados de búsqueda para:",
   "search.results.no-results": "No se encontraron resultados",

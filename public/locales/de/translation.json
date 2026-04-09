@@ -3,6 +3,7 @@
   "menu.products": "Produkte",
   "menu.materials": "Materialien",
   "menu.catalog": "Katalog",
+  "menu.quote": "Angebot",
   "menu.contacts": "Kontakt",
   "menu.search": "Suchen",
 
@@ -86,10 +87,16 @@
   "quote.entity-private": "Privat",
   "quote.entity-person": "Privatperson",
   "quote.products": "Produkte",
+  "quote.productsSelected": "Ausgewählte Produkte",
   "quote.choose-products": "Produkte auswählen",
+  "quote.cart.empty": "Der Warenkorb ist leer. Wählen Sie Produkte aus, um fortzufahren.",
+  "quote.cart.selectProducts": "Produkte auswählen",
   "quote.product": "Produkt",
   "quote.qty": "Menge",
+  "quote.cart.itemsCount": "{{count}} Artikel im Warenkorb",
+  "quote.cart.addMore": "Weitere Produkte hinzufügen",
   "quote.message": "Ihre Nachricht",
+  "quote.cart.required": "Bitte fügen Sie vor dem Senden mindestens ein Produkt hinzu.",
   "quote.file": "Datei anhängen",
   "quote.quote": "Angebot",
   "quote.send": "Anfrage senden",
@@ -98,6 +105,9 @@
 
   "quote.open.list": "Produktliste öffnen",
   "quote.close.list": "Produktliste schließen",
+
+  "quote.success.title": "Angebotsanfrage gesendet",
+  "quote.success.message": "Vielen Dank für Ihre Angebotsanfrage. Wir werden uns in Kürze mit weiteren Informationen bei Ihnen melden.",
 
   "search.results.title": "Suchergebnisse für:",
   "search.results.no-results": "Keine Ergebnisse gefunden",

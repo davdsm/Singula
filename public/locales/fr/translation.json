@@ -3,6 +3,7 @@
   "menu.products": "Produits",
   "menu.materials": "Matériaux",
   "menu.catalog": "Catalogue",
+  "menu.quote": "Devis",
   "menu.contacts": "Contacts",
   "menu.search": "Rechercher",
 
@@ -86,10 +87,16 @@
   "quote.entity-private": "Privée",
   "quote.entity-person": "Particulier",
   "quote.products": "Produits",
+  "quote.productsSelected": "Produits sélectionnés",
   "quote.choose-products": "Sélectionner les produits",
+  "quote.cart.empty": "Le panier est vide. Sélectionnez des produits pour continuer.",
+  "quote.cart.selectProducts": "Sélectionner des produits",
   "quote.product": "Produit",
   "quote.qty": "Quantité",
+  "quote.cart.itemsCount": "{{count}} articles dans le panier",
+  "quote.cart.addMore": "Ajouter plus de produits",
   "quote.message": "Votre message",
+  "quote.cart.required": "Veuillez ajouter au moins un produit avant l’envoi.",
   "quote.file": "Joindre un fichier",
   "quote.quote": "Devis",
   "quote.send": "Envoyer la demande",
@@ -98,6 +105,9 @@
 
   "quote.open.list": "Ouvrir la liste des produits",
   "quote.close.list": "Fermer la liste des produits",
+
+  "quote.success.title": "Demande de devis envoyée",
+  "quote.success.message": "Merci pour votre demande de devis. Nous vous contacterons bientôt avec plus d'informations.",
 
   "search.results.title": "Résultats de recherche pour:",
   "search.results.no-results": "Aucun résultat trouvé",

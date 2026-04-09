@@ -3,6 +3,7 @@
   "menu.products": "Products",
   "menu.materials": "Materials",
   "menu.catalog": "Catalog",
+  "menu.quote": "Quote",
   "menu.contacts": "Contacts",
   "menu.search": "Search",
 
@@ -86,10 +87,16 @@
   "quote.entity-private": "Private",
   "quote.entity-person": "Individual",
   "quote.products": "Products",
+  "quote.productsSelected": "Selected products",
   "quote.choose-products": "Select products",
+  "quote.cart.empty": "Your cart is empty. Select products to continue.",
+  "quote.cart.selectProducts": "Select products",
   "quote.product": "Product",
   "quote.qty": "Quantity",
+  "quote.cart.itemsCount": "{{count}} items in cart",
+  "quote.cart.addMore": "Add more products",
   "quote.message": "Your message",
+  "quote.cart.required": "Please add at least one product before submitting.",
   "quote.file": "Attach File",
   "quote.quote": "Quote",
   "quote.send": "Send Request",
@@ -98,6 +105,9 @@
 
   "quote.open.list": "Open Product List",
   "quote.close.list": "Close Product List",
+
+  "quote.success.title": "Quote Request Sent",
+  "quote.success.message": "Thank you for your quote request. We will contact you shortly with more information.",
 
   "search.results.title": "Search Results for:",
   "search.results.no-results": "No results found",
