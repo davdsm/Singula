@@ -17,6 +17,8 @@ type CarouselProps = {
   plugins?: CarouselPlugin
   orientation?: "horizontal" | "vertical"
   setApi?: (api: CarouselApi) => void
+  /** Applied to the Embla viewport (default clips with overflow-hidden). */
+  viewportClassName?: string
 }
 
 type CarouselContextProps = {
@@ -50,6 +52,7 @@ const Carousel = React.forwardRef<
       opts,
       setApi,
       plugins,
+      viewportClassName,
       className,
       children,
       ...props
@@ -124,6 +127,7 @@ const Carousel = React.forwardRef<
           carouselRef,
           api: api,
           opts,
+          viewportClassName,
           orientation:
             orientation || (opts?.axis === "y" ? "vertical" : "horizontal"),
           scrollPrev,
@@ -152,10 +156,13 @@ const CarouselContent = React.forwardRef<
   HTMLDivElement,
   React.HTMLAttributes<HTMLDivElement>
 >(({ className, ...props }, ref) => {
-  const { carouselRef, orientation } = useCarousel()
+  const { carouselRef, orientation, viewportClassName } = useCarousel()
 
   return (
-    <div ref={carouselRef} className="overflow-hidden">
+    <div
+      ref={carouselRef}
+      className={cn("overflow-hidden", viewportClassName)}
+    >
       <div
         ref={ref}
         className={cn(
@@ -204,7 +211,7 @@ const CarouselPrevious = React.forwardRef<
       variant={variant}
       size={size}
       className={cn(
-        "absolute  h-8 w-8 rounded-full",
+        "absolute h-8 w-8 rounded-full text-black border-black bg-white hover:bg-black/5",
         orientation === "horizontal"
           ? "-left-12 top-1/2 -translate-y-1/2"
           : "-top-12 left-1/2 -translate-x-1/2 rotate-90",
@@ -233,7 +240,7 @@ const CarouselNext = React.forwardRef<
       variant={variant}
       size={size}
       className={cn(
-        "absolute h-8 w-8 rounded-full",
+        "absolute h-8 w-8 rounded-full text-black border-black bg-white hover:bg-black/5",
         orientation === "horizontal"
           ? "-right-12 top-1/2 -translate-y-1/2"
           : "-bottom-12 left-1/2 -translate-x-1/2 rotate-90",

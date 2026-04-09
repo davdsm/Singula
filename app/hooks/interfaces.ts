@@ -36,6 +36,7 @@ export interface Material {
 }
 
 export interface MaterialFormatted {
+  id: string;
   name: string;
   text: string;
   image: string;
@@ -57,6 +58,7 @@ export interface Color {
 }
 
 export interface FormattedColor {
+  id: string;
   image: string;
   name: string;
 }
@@ -117,6 +119,51 @@ export interface Product {
   materiais: MaterialFormatted[];
   cores_recomendado: FormattedColor[];
   acabamentos_recomendado: AcabamentoFormatted[];
+}
+
+export interface Subproduct {
+  id: string;
+  productId: string;
+  name: string;
+  image: string | null;
+  reference?: string | null;
+  order: number;
+  active: boolean;
+}
+
+export interface VariationOption {
+  id: string;
+  productId: string;
+  subproductId: string | null;
+  image: string | null;
+  reference: string;
+  price: number | null;
+  priceVisible: boolean;
+  materials: Array<{ id: string; name: string }>;
+  ralColors: Array<{ id: string; name: string }>;
+  order: number;
+  active: boolean;
+}
+
+export interface AddToCartPayload {
+  productId: string;
+  productSlug: string;
+  subproductId: string | null;
+  variationId: string;
+  variationReference: string;
+  selectedMaterialIds: string[];
+  selectedRalIds: string[];
+  unitPrice: number | null;
+  priceVisible: boolean;
+  quantity: number;
+}
+
+export interface CartItem extends AddToCartPayload {
+  id: string;
+  productName: string;
+  subproductName: string | null;
+  variationImage: string | null;
+  addedAt: number;
 }
 
 // Original item interface (before formatting)

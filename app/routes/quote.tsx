@@ -4,25 +4,13 @@ import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
 import { trackGoogleAdsConversion } from "~/hooks/useAnalytics";
-import {
-  Listbox,
-  ListboxButton,
-  ListboxOption,
-  ListboxOptions,
-} from "@headlessui/react";
-import { useProducts } from "~/hooks/useProducts";
 import { Image } from "~/components/Elements/Image";
 import { MetaFunction } from "@remix-run/react";
 import useCountries from "~/hooks/useCountries";
 import { useSendMail } from "~/hooks/useEmail";
 import useDB from "~/hooks/useDB";
-
-interface Option {
-  id: string;
-  name: string;
-  img: string;
-  qty: string;
-}
+import { DelayedLink } from "~/components/Elements/Link";
+import { useCart } from "~/hooks/useCart";
 
 interface FormData {
   name: string;
@@ -45,7 +33,7 @@ declare global {
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "Pedido de Orçamento - Singula" },
+    { title: "Pedido de Cotação - Singula" },
     {
       name: "description",
       content:
@@ -67,37 +55,20 @@ const QuotePage = () => {
     terms: false,
   });
 
-  const [selectedProducts, setSelectedProducts] = useState<Option[]>([]);
   const [Error, setError] = useState<boolean>(false);
-  const { products } = useProducts({});
+  const [cartError, setCartError] = useState<boolean>(false);
   const { Countries, Loading } = useCountries();
   const { t } = useTranslation();
-  const { sendMail, Sent, Loading: EmailLoading } = useSendMail();
+  const { sendMail, Sent, setSent, Loading: EmailLoading } = useSendMail();
   const db = useDB();
-  const [isMobile, setIsMobile] = useState(false);
   const { i18n } = useTranslation();
+  const { items: cartItems, removeItem, updateQuantity, clearCart } = useCart();
+  const quoteLang = i18n.language as "pt" | "en" | "es" | "fr" | "de";
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      setIsMobile(window.innerWidth < 1192);
-    }
+    // Keep top of form visible when navigating to checkout.
+    window.scrollTo({ top: 0, behavior: "auto" });
   }, []);
-
-  const options: Option[] = [];
-
-  if (products.length > 0) {
-    products.forEach((product) => {
-      options.push({
-        id: product.id,
-        img: product.ImagemPrincipal || "",
-        qty: "",
-        name: product.name
-          .replaceAll("<red>", "")
-          .replaceAll("</red>", "")
-          .toUpperCase(),
-      });
-    });
-  }
 
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -108,9 +79,171 @@ const QuotePage = () => {
     });
   };
 
+  const escapeHtml = (value: string) =>
+    value
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#039;");
+  const sanitizeProductName = (value: string) =>
+    value.replaceAll("<red>", "").replaceAll("</red>", "").trim();
+
+  const formatCurrency = (value: number) =>
+    new Intl.NumberFormat(i18n.language || "pt-PT", {
+      style: "currency",
+      currency: "EUR",
+      minimumFractionDigits: 2,
+    }).format(value);
+
+  const buildQuoteTableHtml = () => {
+    const headers = {
+      pt: {
+        product: "Produto",
+        subproduct: "Subproduto",
+        variation: "Variação",
+        reference: "Referência",
+        unitPrice: "Preço Unit.",
+        qty: "Qtd.",
+        total: "Total",
+        onRequest: "Sob consulta",
+      },
+      en: {
+        product: "Product",
+        subproduct: "Subproduct",
+        variation: "Variation",
+        reference: "Reference",
+        unitPrice: "Unit Price",
+        qty: "Qty.",
+        total: "Total",
+        onRequest: "On request",
+      },
+      es: {
+        product: "Producto",
+        subproduct: "Subproducto",
+        variation: "Variación",
+        reference: "Referencia",
+        unitPrice: "Precio Unit.",
+        qty: "Cant.",
+        total: "Total",
+        onRequest: "A consultar",
+      },
+      fr: {
+        product: "Produit",
+        subproduct: "Sous-produit",
+        variation: "Variation",
+        reference: "Référence",
+        unitPrice: "Prix Unit.",
+        qty: "Qté.",
+        total: "Total",
+        onRequest: "Sur demande",
+      },
+      de: {
+        product: "Produkt",
+        subproduct: "Unterprodukt",
+        variation: "Variation",
+        reference: "Referenz",
+        unitPrice: "Stückpreis",
+        qty: "Menge",
+        total: "Gesamt",
+        onRequest: "Auf Anfrage",
+      },
+    }[quoteLang];
+
+    const rows = cartItems
+      .map((item) => {
+        const hasPrice = item.priceVisible && item.unitPrice !== null;
+        const unitPrice = hasPrice ? formatCurrency(item.unitPrice as number) : headers.onRequest;
+        const total = hasPrice
+          ? formatCurrency((item.unitPrice as number) * item.quantity)
+          : headers.onRequest;
+        return `<tr>
+          <td style="padding:8px;border:1px solid #dddddd;">${escapeHtml(
+            sanitizeProductName(item.productName)
+          )}</td>
+          <td style="padding:8px;border:1px solid #dddddd;">${escapeHtml(
+            item.subproductName || "-"
+          )}</td>
+          <td style="padding:8px;border:1px solid #dddddd;">${escapeHtml(
+            item.variationReference
+          )}</td>
+          <td style="padding:8px;border:1px solid #dddddd;">${escapeHtml(
+            item.variationReference
+          )}</td>
+          <td style="padding:8px;border:1px solid #dddddd;">${unitPrice}</td>
+          <td style="padding:8px;border:1px solid #dddddd;">${item.quantity}</td>
+          <td style="padding:8px;border:1px solid #dddddd;">${total}</td>
+        </tr>`;
+      })
+      .join("");
+
+    return `<table style="width:100%;border-collapse:collapse;font-size:14px;margin:8px 0 0 0;">
+      <thead>
+        <tr style="background:#f5f5f5;">
+          <th style="padding:8px;border:1px solid #dddddd;text-align:left;">${headers.product}</th>
+          <th style="padding:8px;border:1px solid #dddddd;text-align:left;">${headers.subproduct}</th>
+          <th style="padding:8px;border:1px solid #dddddd;text-align:left;">${headers.variation}</th>
+          <th style="padding:8px;border:1px solid #dddddd;text-align:left;">${headers.reference}</th>
+          <th style="padding:8px;border:1px solid #dddddd;text-align:left;">${headers.unitPrice}</th>
+          <th style="padding:8px;border:1px solid #dddddd;text-align:left;">${headers.qty}</th>
+          <th style="padding:8px;border:1px solid #dddddd;text-align:left;">${headers.total}</th>
+        </tr>
+      </thead>
+      <tbody>${rows}</tbody>
+    </table>`;
+  };
+
+  const buildQuoteSummaryHtml = () => {
+    const labels = {
+      pt: { items: "Itens", units: "Unidades", subtotal: "Subtotal", pending: "Linhas sob consulta" },
+      en: { items: "Items", units: "Units", subtotal: "Subtotal", pending: "On-request lines" },
+      es: { items: "Ítems", units: "Unidades", subtotal: "Subtotal", pending: "Líneas a consultar" },
+      fr: { items: "Articles", units: "Unités", subtotal: "Sous-total", pending: "Lignes sur demande" },
+      de: { items: "Positionen", units: "Einheiten", subtotal: "Zwischensumme", pending: "Positionen auf Anfrage" },
+    }[quoteLang];
+
+    const totalUnits = cartItems.reduce((acc, item) => acc + item.quantity, 0);
+    const subtotal = cartItems.reduce((acc, item) => {
+      if (!item.priceVisible || item.unitPrice === null) return acc;
+      return acc + item.unitPrice * item.quantity;
+    }, 0);
+    const pendingCount = cartItems.filter(
+      (item) => !item.priceVisible || item.unitPrice === null
+    ).length;
+
+    return `<div style="font-size:14px;line-height:1.6;">
+      <div><strong>${labels.items}:</strong> ${cartItems.length}</div>
+      <div><strong>${labels.units}:</strong> ${totalUnits}</div>
+      <div><strong>${labels.subtotal}:</strong> ${formatCurrency(subtotal)}</div>
+      <div><strong>${labels.pending}:</strong> ${pendingCount}</div>
+    </div>`;
+  };
+
+  const buildBackofficeOrderDetails = () => {
+    const details = cartItems
+      .map((item, index) => {
+        const unitPrice =
+          item.priceVisible && item.unitPrice !== null
+            ? formatCurrency(item.unitPrice)
+            : "Sob consulta";
+        return [
+          `${index + 1}. Produto: ${sanitizeProductName(item.productName)}`,
+          `   Subproduto: ${item.subproductName || "-"}`,
+          `   Variação: ${item.variationReference}`,
+          `   Referência: ${item.variationReference}`,
+          `   Quantidade: ${item.quantity}`,
+          `   Preço unitário: ${unitPrice}`,
+        ].join("\n");
+      })
+      .join("\n\n");
+
+    return `DETALHES DA ENCOMENDA\n\n${details}`;
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError(false);
+    setCartError(false);
 
     const requiredFields: (keyof FormData)[] = [
       "name",
@@ -128,6 +261,11 @@ const QuotePage = () => {
       return;
     }
 
+    if (cartItems.length === 0) {
+      setCartError(true);
+      return;
+    }
+
     window.scrollTo({ top: 0, behavior: "smooth" });
 
     const data = {
@@ -137,15 +275,18 @@ const QuotePage = () => {
       Country: formData.country,
       Entity: formData.company,
       Entity_Type: formData.entity,
-      Products: selectedProducts.map((product) => product.id),
+      Products: [...new Set(cartItems.map((item) => item.productId))],
       File: formData.file,
-      Message: formData.message,
+      Message: formData.message
+        ? `${formData.message}\n\n--------------------\n${buildBackofficeOrderDetails()}`
+        : buildBackofficeOrderDetails(),
     };
 
     const result = await db.addData("Orcamentos", data);
+    const orderAt = new Date();
 
-    await sendMail(
-      i18n.language as "pt" | "en" | "es" | "fr" | "de",
+    const mailToSales = await sendMail(
+      quoteLang,
       formData.name,
       formData.contact,
       formData.email,
@@ -155,19 +296,24 @@ const QuotePage = () => {
         country: formData.country,
         entity: formData.company,
         entity_type: formData.entity,
-        products: selectedProducts
-          .map((product) => `${product.name} (${product.qty})`)
+        products: cartItems
+          .map(
+            (item) => `${item.variationReference} (${item.quantity})`
+          )
           .join(", "),
+        productsTable: buildQuoteTableHtml(),
+        productsSummary: buildQuoteSummaryHtml(),
         attachment: formData.file
           ? `<a href="https://singula.pt/admin/_/#/collections?collection=pbc_2578185338&filter=&sort=-%40rowid&recordId=${result.id}">Disponível no BackOffice.</a>`
           : false,
       },
       undefined,
-      result.REF
+      result.REF,
+      orderAt
     );
 
-    await sendMail(
-      i18n.language as "pt" | "en" | "es" | "fr" | "de",
+    const mailToUser = await sendMail(
+      quoteLang,
       formData.name,
       formData.contact,
       formData.email,
@@ -177,18 +323,30 @@ const QuotePage = () => {
         country: formData.country,
         entity: formData.company,
         entity_type: formData.entity,
-        products: selectedProducts
-          .map((product) => `${product.name} (${product.qty})`)
+        products: cartItems
+          .map(
+            (item) => `${item.variationReference} (${item.quantity})`
+          )
           .join(", "),
+        productsTable: buildQuoteTableHtml(),
+        productsSummary: buildQuoteSummaryHtml(),
         attachment: formData.file
           ? `<a href="https://singula.pt/admin/_/#/collections?collection=pbc_2578185338&filter=&sort=-%40rowid&recordId=${result.id}">Disponível no BackOffice.</a>`
           : false,
       },
       formData.email,
-      result.REF
+      result.REF,
+      orderAt
     );
+    const mailsOk = mailToSales && mailToUser;
+    setSent(mailsOk);
 
-
+    if (!mailsOk) {
+      console.error(
+        "[quote] Email API failed (sales or user). Check browser console and api.davdsm.pt / davdsmKey."
+      );
+      return;
+    }
 
     if (window.fbq) {
       window.fbq("track", "Lead");
@@ -198,6 +356,7 @@ const QuotePage = () => {
     }
 
     trackGoogleAdsConversion();
+    clearCart();
   };
 
   return (
@@ -280,21 +439,14 @@ const QuotePage = () => {
                     className="font-sans font-regular text-[12px] md:text-sm rounded-lg block w-full p-2 outline-none bg-[#f5f5f5] text-black"
                     name="country"
                     onChange={handleChange}
-                    defaultValue=""
+                    value={formData.country}
                   >
-                    <option
-                      selected={formData.country === "" ? true : false}
-                      disabled
-                    >
+                    <option disabled value="">
                       {t("quote.entity-choose")}
                     </option>
                     {!Loading &&
                       Countries.map((country) => (
-                        <option
-                          key={country}
-                          value={country}
-                          selected={formData.country === country ? true : false}
-                        >
+                        <option key={country} value={country}>
                           {country}
                         </option>
                       ))}
@@ -328,30 +480,18 @@ const QuotePage = () => {
                     className="font-sans font-regular text-[12px] md:text-sm rounded-lg block w-full p-2 outline-none bg-[#f5f5f5] text-black"
                     name="entity"
                     onChange={handleChange}
-                    defaultValue=""
+                    value={formData.entity}
                   >
-                    <option
-                      selected={formData.entity === "" ? true : false}
-                      disabled
-                    >
+                    <option disabled value="">
                       {t("quote.entity-choose")}
                     </option>
-                    <option
-                      selected={formData.entity === "Public" ? true : false}
-                      value="Public"
-                    >
+                    <option value="Public">
                       {t("quote.entity-public")}
                     </option>
-                    <option
-                      selected={formData.entity === "Private" ? true : false}
-                      value="Private"
-                    >
+                    <option value="Private">
                       {t("quote.entity-private")}
                     </option>
-                    <option
-                      selected={formData.entity === "Particular" ? true : false}
-                      value="Particular"
-                    >
+                    <option value="Particular">
                       {t("quote.entity-person")}
                     </option>
                   </select>
@@ -363,145 +503,125 @@ const QuotePage = () => {
                     htmlFor="phone-input"
                     className="block mb-2 text-sm font-medium text-black"
                   >
-                    {t("quote.products")}
+                    {t("quote.productsSelected", { defaultValue: "Produtos selecionados" })}
                   </label>
-                  <Listbox
-                    value={selectedProducts}
-                    onChange={(products: Option[]) => {
-                      setSelectedProducts(
-                        products.map((product) => {
-                          const existing = selectedProducts.find(
-                            (p) => p.id === product.id
-                          );
-                          return existing ? existing : { ...product, qty: "1" };
-                        })
-                      );
-                    }}
-                    multiple
-                  >
-                    {({ open }) => (
-                      <div className="relative">
-                        <ListboxButton className="font-sans font-regular w-full bg-[#f5f5f5] text-left rounded-lg p-2 text-[12px] md:text-sm outline-none ">
-                          {selectedProducts.length === 0
-                            ? t("quote.choose-products")
-                            : ""}
-                          {selectedProducts.length > 0 &&
-                            (open
-                              ? t("quote.close.list")
-                              : t("quote.open.list"))}
-                        </ListboxButton>
-
-                        {open && (
-                          <ListboxOptions className="outline-none absolute mt-1 w-full rounded-md bg-white shadow-lg z-10 max-h-60 overflow-auto text-sm border border-gray-300">
-                            {options.map((option) => (
-                              <ListboxOption
-                                key={option.id}
-                                value={option}
-                                className={({ selected }) =>
-                                  `cursor-pointer flex items-center justify-start select-none relative px-4 py-2 ${
-                                    selected
-                                      ? "bg-singula-main text-white"
-                                      : "text-gray-900"
-                                  }`
-                                }
-                              >
-                                <Image
-                                  className="w-12 h-12 mr-4"
-                                  src={option.img}
-                                  alt={option.name}
-                                />
-                                <span>{option.name}</span>
-                              </ListboxOption>
-                            ))}
-                          </ListboxOptions>
-                        )}
-                      </div>
-                    )}
-                  </Listbox>
+                  {cartItems.length === 0 ? (
+                    <div className="bg-[#f5f5f5] rounded-lg p-4 flex flex-col md:flex-row gap-3 md:items-center md:justify-between">
+                      <p className="text-sm text-gray-700">
+                        {t("quote.cart.empty", {
+                          defaultValue:
+                            "O carrinho está vazio. Selecione produtos para continuar.",
+                        })}
+                      </p>
+                      <DelayedLink
+                        to="/products"
+                        className="inline-flex items-center justify-center rounded-full bg-singula-main text-white text-sm uppercase font-bold px-5 py-2 hover:bg-singula-mainDarker transition-colors"
+                      >
+                        {t("quote.cart.selectProducts", {
+                          defaultValue: "Selecionar produtos",
+                        })}
+                      </DelayedLink>
+                    </div>
+                  ) : (
+                    <div className="flex items-center justify-between bg-[#f5f5f5] p-3 rounded-lg">
+                      <p className="text-sm text-gray-700">
+                        {t("quote.cart.itemsCount", {
+                          defaultValue: "{{count}} itens no carrinho",
+                          count: cartItems.length,
+                        })}
+                      </p>
+                      <DelayedLink
+                        to="/products"
+                        className="text-sm text-singula-main underline underline-offset-2"
+                      >
+                        {t("quote.cart.addMore", { defaultValue: "Adicionar mais produtos" })}
+                      </DelayedLink>
+                    </div>
+                  )}
                 </div>
               </div>
-              <div className="products">
-                <ul className="list-none p-0">
-                  {selectedProducts.map((product) => (
-                    <li
-                      className="flex items-center justify-between mb-2 w-full gap-8"
-                      key={product.id}
-                    >
-                      <div className="w-full">
-                        <label
-                          htmlFor="number-input"
-                          className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                        >
-                          {t("quote.product")}
-                        </label>
-                        <div className="flex items-center justify-between bg-[#f5f5f5] p-2 rounded-lg">
-                          <div className="flex items-center">
+              <div className="products overflow-x-auto">
+                <table className="w-full min-w-[760px] text-black border border-[#E5E5E5] rounded-xl overflow-hidden">
+                  <thead className="bg-[#F5F5F5]">
+                    <tr>
+                      <th className="text-left px-3 py-2 text-xs uppercase">
+                        {t("quote.photo", { defaultValue: "Foto" })}
+                      </th>
+                      <th className="text-left px-3 py-2 text-xs uppercase">
+                        {t("quote.product", { defaultValue: "Produto" })}
+                      </th>
+                      <th className="text-left px-3 py-2 text-xs uppercase">
+                        {t("quote.subproduct", { defaultValue: "Subproduto" })}
+                      </th>
+                      <th className="text-left px-3 py-2 text-xs uppercase">
+                        {t("quote.variation", { defaultValue: "Variação" })}
+                      </th>
+                      <th className="text-left px-3 py-2 text-xs uppercase">
+                        {t("quote.qty", { defaultValue: "Quantidade" })}
+                      </th>
+                      <th className="text-left px-3 py-2 text-xs uppercase">
+                        {t("quote.remove", { defaultValue: "Remover" })}
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {cartItems.map((item) => (
+                      <tr key={item.id} className="border-t border-[#EFEFEF]">
+                        <td className="px-3 py-2">
+                          {item.variationImage ? (
                             <Image
-                              src={product.img}
-                              alt={product.name}
-                              className="w-8 h-8 mr-4 mix-blend-darken"
+                              src={item.variationImage}
+                              alt={item.variationReference}
+                              className="w-10 h-10 rounded object-cover"
                             />
-                            <span className="md:font-bold text-[8px] md:text-sm text-black font-sans font-regular">
-                              {product.name?.toUpperCase()}
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="w-1/5 md:w-2/5">
-                        <label
-                          htmlFor="number-input"
-                          className="block mb-2 text-xs md:text-sm font-medium text-black font-sans font-regular"
-                        >
-                          {t("quote.qty")}
-                        </label>
-                        <input
-                          type={isMobile ? "text" : "number"}
-                          id="number-input"
-                          aria-describedby="helper-text-explanation"
-                          className="font-sans font-regular block w-full p-4 rounded-lg text-xs outline-none placeholder-gray-400 bg-[#f5f5f5] text-black"
-                          placeholder="1"
-                          value={product.qty}
-                          onChange={(e) => {
-                            setSelectedProducts((prev) =>
-                              prev.map((p) =>
-                                p.id === product.id
-                                  ? { ...p, qty: e.target.value }
-                                  : p
-                              )
-                            );
-                          }}
-                          required
-                        />
-                      </div>
-
-                      <button
-                        type="button"
-                        className="w-1/5 h-full p-4 text-red-500 hover:text-red-700 text-center mt-6 flex items-center justify-center"
-                        onClick={() =>
-                          setSelectedProducts(
-                            selectedProducts.filter((p) => p.id !== product.id)
-                          )
-                        }
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          strokeWidth="1.5"
-                          stroke="currentColor"
-                          className="w-4 h-4 black"
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"
+                          ) : (
+                            <span className="w-10 h-10 rounded bg-gray-200 inline-block" />
+                          )}
+                        </td>
+                        <td className="px-3 py-2 text-sm font-semibold">
+                          {sanitizeProductName(item.productName)}
+                        </td>
+                        <td className="px-3 py-2 text-sm">
+                          {item.subproductName || "-"}
+                        </td>
+                        <td className="px-3 py-2 text-sm">{item.variationReference}</td>
+                        <td className="px-3 py-2">
+                          <input
+                            type="number"
+                            min={1}
+                            value={item.quantity}
+                            onChange={(e) => updateQuantity(item.id, Number(e.target.value) || 1)}
+                            className="font-sans font-regular w-20 p-2 rounded-lg text-xs outline-none bg-[#f5f5f5] text-black border border-[#D2D2D2]"
+                            required
                           />
-                        </svg>
-                      </button>
-                    </li>
-                  ))}
-                </ul>
+                        </td>
+                        <td className="px-3 py-2">
+                          <button
+                            type="button"
+                            className="text-red-500 hover:text-red-700 inline-flex items-center"
+                            onClick={() => removeItem(item.id)}
+                            aria-label={t("quote.remove", { defaultValue: "Remover" })}
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              fill="none"
+                              viewBox="0 0 24 24"
+                              strokeWidth="1.5"
+                              stroke="currentColor"
+                              className="w-4 h-4"
+                            >
+                              <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"
+                              />
+                            </svg>
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
               <div>
                 <label
@@ -593,6 +713,17 @@ const QuotePage = () => {
                   {t("quote.fields")}
                 </div>
               )}
+              {cartError && (
+                <div
+                  className="my-4 p-4 text-lg text-rose-500 rounded-lg bg-rose-950 w-auto"
+                  role="alert"
+                >
+                  <span className="font-bold">Atenção!</span>{" "}
+                  {t("quote.cart.required", {
+                    defaultValue: "Selecione pelo menos um produto antes de enviar.",
+                  })}
+                </div>
+              )}
             </form>
             <p className="mt-2 text-sm text-gray-400">* {t("quote.field")}.</p>
           </div>
@@ -608,12 +739,9 @@ const QuotePage = () => {
         >
           <div className="relative bg-white flex items-start justify-center flex-col text-left w-full rounded-lg md:rounded-r-2xl p-4 md:p-12">
             <h2 className="text-black text-2xl font-bold">
-              Pedido de Orçamento Enviado
+              {t("quote.success.title")}
             </h2>
-            <p className="text-gray-400">
-              Obrigado por solicitar um orçamento. Entraremos em contato
-              brevemente com mais informações.
-            </p>
+            <p className="text-gray-400">{t("quote.success.message")}</p>
           </div>
         </motion.div>
       )}

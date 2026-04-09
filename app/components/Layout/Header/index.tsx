@@ -10,6 +10,8 @@ import { useEffect, useState } from "react";
 import { useUrlParams } from "~/hooks/useUrlParams";
 import { useHeader } from "~/context/HeaderContext";
 import CookieConsent from "./CookieConsent";
+import { DelayedLink } from "~/components/Elements/Link";
+import { useCart } from "~/hooks/useCart";
 
 export const Header = ({
   logo = true,
@@ -28,6 +30,7 @@ export const Header = ({
   const [appear, setAppear] = useState(true);
   const [Cookies, setCookies] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const { totalUnits } = useCart();
 
   useUrlParams();
   const { showHeader, setShowHeader, delayMenu, setDelayMenu } = useHeader();
@@ -76,6 +79,10 @@ export const Header = ({
       link: "/catalog",
     },
     {
+      key: "menu.quote",
+      link: "/quote",
+    },
+    {
       key: "menu.contacts",
       link: "/contacts",
     },
@@ -108,6 +115,30 @@ export const Header = ({
             {menu && <Menu list={menuList} />}
             <div className="w-full md:w-[40%] flex items-center justify-end">
               {searchbar && <SearchBar showMobile={false} />}
+              <DelayedLink
+                to="/quote"
+                className="relative inline-flex items-center justify-center text-white hover:text-singula-main transition-colors ml-4 mr-0"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-5 h-5"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="m21 7.5-9-5.25L3 7.5m18 0-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9"
+                  />
+                </svg>
+                {totalUnits > 0 && (
+                  <span className="absolute -top-2 -right-3 min-w-[18px] h-[18px] px-1 rounded-full bg-singula-main text-white text-[10px] font-bold leading-[18px] text-center">
+                    {totalUnits}
+                  </span>
+                )}
+              </DelayedLink>
               {whatsApp && <WhatsApp />}
               {lang && <LanguageSelector />}
               {menu && (

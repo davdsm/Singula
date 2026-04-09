@@ -7,15 +7,27 @@ import {
   CarouselPrevious,
   type CarouselApi,
 } from "~/components/ui/carousel";
+import type { EmblaOptionsType } from "embla-carousel";
 
 interface CarouselProps {
   items: React.ReactNode[];
   arrows?: boolean;
   className?: string;
   itemClassName?: string;
+  /** Inline slide sizing (e.g. `{ flex: "0 0 90vw" }`) — wins over Tailwind if anything conflicts. */
+  itemStyle?: React.CSSProperties;
   loop?: boolean;
   autoplay?: boolean;
   autoplayInterval?: number; // in seconds
+  /** Merged into Embla options (align / loop still default unless overridden). */
+  emblaOpts?: Partial<EmblaOptionsType>;
+  /** Embla viewport; use e.g. `overflow-visible` to show adjacent slides past the viewport box. */
+  viewportClassName?: string;
+  /**
+   * When true, arrows sit inside the carousel edges (with z-index).
+   * Default places them outside (-left-12 / -right-12), which clips on full-bleed w-screen layouts.
+   */
+  arrowsInset?: boolean;
 }
 
 export const CarouselComponent = ({
@@ -23,9 +35,13 @@ export const CarouselComponent = ({
   arrows,
   className,
   itemClassName,
+  itemStyle,
   loop = false,
   autoplay = false,
   autoplayInterval = 3,
+  emblaOpts,
+  viewportClassName,
+  arrowsInset = false,
 }: CarouselProps) => {
   const [api, setApi] = useState<CarouselApi | null>(null);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
@@ -70,9 +86,10 @@ export const CarouselComponent = ({
 
   return (
     <Carousel
-      opts={{ align: "center", loop }}
+      opts={{ align: "center", loop, ...emblaOpts }}
       setApi={setApi}
-      className={`carousel w-full mx-auto ${className} transform-gpu`}
+      viewportClassName={viewportClassName}
+      className={`carousel w-full mx-auto ${className}`}
       onMouseEnter={() => setStopped(true)}
       onMouseLeave={() => setStopped(false)}
     >
@@ -80,6 +97,7 @@ export const CarouselComponent = ({
         {items.map((item, index) => (
           <CarouselItem
             key={index}
+            style={itemStyle}
             className={
               itemClassName
                 ? itemClassName
@@ -93,8 +111,20 @@ export const CarouselComponent = ({
 
       {arrows && (
         <>
-          <CarouselPrevious />
-          <CarouselNext />
+          <CarouselPrevious
+            className={
+              arrowsInset
+                ? "left-2 top-1/2 z-30 -translate-y-1/2 shadow-md sm:left-4"
+                : undefined
+            }
+          />
+          <CarouselNext
+            className={
+              arrowsInset
+                ? "right-2 top-1/2 z-30 -translate-y-1/2 shadow-md sm:right-4"
+                : undefined
+            }
+          />
         </>
       )}
     </Carousel>

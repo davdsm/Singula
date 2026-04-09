@@ -22,6 +22,11 @@ export const Index = () => {
         img={data["home-slide-img"][0]}
         text={data["home-slide-text"] as string}
         imgMobile={data["home-slide-img-mobile"][0]}
+        videoSrc={
+          typeof data["home-hero-video"] === "string"
+            ? (data["home-hero-video"] as string)
+            : undefined
+        }
       />
       <AboutSection text={data["home-about-text"] as string} />
       <PhotoSlider

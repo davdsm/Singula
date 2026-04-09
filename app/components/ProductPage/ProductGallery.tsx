@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { parseTextWithMainColor } from "../utils";
 import { Image } from "../Elements/Image";
+import { CarouselComponent } from "../Elements/Carousel";
 import { Product } from "~/hooks/interfaces";
 import { Trans } from "react-i18next";
 
@@ -13,7 +14,7 @@ export const ProductGallery = ({ product }: { product: Product }) => {
     product.RefSegundaMeio?.trim().split(",");
 
   return (
-    <section className="relative bg-white pt-8 md:pt-12 px-4 md:px-20 overflow-hidden">
+    <section className="relative bg-white pt-8 md:pt-12 px-4 md:px-20 overflow-x-visible overflow-y-visible">
       <div className="mx-auto flex justify-center items-center w-full md:w-4/5 flex justify-center items-start flex-col md:flex-row gap-[20px] md:gap-[100px]">
         {product.PrimeiraImagem?.map((imagem: string, index: number) => (
           <motion.span
@@ -117,43 +118,67 @@ export const ProductGallery = ({ product }: { product: Product }) => {
         ))}
       </div>
       {product.SegundaMeio && product.SegundaMeio.length > 0 && (
-        <div className="mt-20 flex flex-col justify-center items-baseline mx-auto w-full md:flex-row gap-[100px]">
-          {product.SegundaMeio.map((imagem: string, index: number) => (
-            <motion.span
-              key={`segunda-meio-span-${index}`}
-              initial={{ x: 30, opacity: 0 }}
-              whileInView={{ x: 0, opacity: 1 }}
-              transition={{ duration: 1, ease: "easeInOut", delay: index / 2 }}
-              viewport={{ amount: 0.1 }}
-              className="relative"
-            >
-              <Image
-                key={`imagem-${imagem}`}
-                className={`rounded-2xl w-full object-contain ${
-                  product.SegundaMeio!.length > 1 && "aspect-square"
-                } w-full ${
-                  product.SegundaMeio?.length === 1
-                    ? "md:max-h-[60vw]"
-                    : "md:max-h-[50vw]"
-                }`}
-                src={imagem || ""}
-                alt={product.name}
-              />
-              <span
-                className={`block pt-2 w-full text-center text-black font-bold text-lg opacity-25
-              ${product.SegundaMeio?.length === 1 && "-bottom-6 md:-bottom-2"}
-              ${product.SegundaMeio?.length === 2 && "-bottom-2"}
-              ${
-                product.SegundaMeio &&
-                product.SegundaMeio.length >= 3 &&
-                "-bottom-8"
-              }
-              `}
+        <div className="mt-20 mx-auto w-full max-w-screen">
+          {product.SegundaMeio.length === 1 ? (
+            <div className="flex flex-col justify-center items-baseline mx-auto w-full md:flex-row gap-[100px]">
+              <motion.span
+                key="segunda-meio-single"
+                initial={{ x: 30, opacity: 0 }}
+                whileInView={{ x: 0, opacity: 1 }}
+                transition={{ duration: 1, ease: "easeInOut", delay: 0 }}
+                viewport={{ amount: 0.1 }}
+                className="relative w-full"
               >
-                {thirdRefs?.[index] ?? ""}
-              </span>
-            </motion.span>
-          ))}
+                <Image
+                  className="rounded-2xl w-full object-contain md:max-h-[60vw]"
+                  src={product.SegundaMeio[0] || ""}
+                  alt={product.name}
+                />
+                <span className="block pt-2 w-full text-center text-black font-bold text-lg opacity-25 -bottom-6 md:-bottom-2">
+                  {thirdRefs?.[0] ?? ""}
+                </span>
+              </motion.span>
+            </div>
+          ) : (
+            <motion.div
+              initial={{ y: 20, opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.8, ease: "easeInOut" }}
+              viewport={{ amount: 0.15 }}
+              className="relative w-screen max-w-screen ml-[calc(50%-50vw)] overflow-hidden"
+            >
+              <CarouselComponent
+                loop
+                arrows
+                arrowsInset
+                className="w-full max-w-screen min-w-0"
+                viewportClassName="!overflow-visible"
+                emblaOpts={{ align: "center", containScroll: false }}
+                itemStyle={{
+                  flex: "0 0 90vw",
+                  width: "90vw",
+                  minWidth: "90vw",
+                  maxWidth: "90vw",
+                }}
+                itemClassName="min-w-[90vw] basis-[90vw] max-w-[90vw] shrink-0 pl-3 md:pl-4"
+                items={product.SegundaMeio.map((imagem: string, index: number) => (
+                  <div
+                    key={`segunda-meio-slide-${index}`}
+                    className="relative w-full flex flex-col items-center"
+                  >
+                    <Image
+                      className="rounded-2xl w-full object-contain max-h-[55vh] md:max-h-[60vw]"
+                      src={imagem || ""}
+                      alt={`${product.name} — ${index + 1}`}
+                    />
+                    <span className="block pt-2 w-full text-center text-black font-bold text-lg opacity-25">
+                      {thirdRefs?.[index] ?? ""}
+                    </span>
+                  </div>
+                ))}
+              />
+            </motion.div>
+          )}
         </div>
       )}
 

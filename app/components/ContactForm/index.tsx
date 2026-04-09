@@ -22,7 +22,7 @@ declare global {
 
 export const ContactForm = () => {
   const { t } = useTranslation();
-  const { sendMail, Loading, Sent } = useSendMail();
+  const { sendMail, Loading, Sent, setSent } = useSendMail();
   const [Error, setError] = useState<boolean>(false);
   const { i18n } = useTranslation();
 
@@ -55,14 +55,8 @@ export const ContactForm = () => {
       return;
     }
 
-    await sendMail(
-      i18n.language as "pt" | "en" | "es" | "fr" | "de",
-      formData.name,
-      formData.contact,
-      formData.email,
-      formData.message
-    );
-    await sendMail(
+    const orderAt = new Date();
+    const toAdmin = await sendMail(
       i18n.language as "pt" | "en" | "es" | "fr" | "de",
       formData.name,
       formData.contact,
@@ -70,8 +64,23 @@ export const ContactForm = () => {
       formData.message,
       false,
       undefined,
-      formData.email
+      undefined,
+      undefined,
+      orderAt
     );
+    const toUser = await sendMail(
+      i18n.language as "pt" | "en" | "es" | "fr" | "de",
+      formData.name,
+      formData.contact,
+      formData.email,
+      formData.message,
+      false,
+      undefined,
+      formData.email,
+      undefined,
+      orderAt
+    );
+    setSent(toAdmin && toUser);
 
     if (window.fbq) {
       window.fbq("track", "Lead");

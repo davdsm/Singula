@@ -94,7 +94,7 @@ export const ProductPage = () => {
   if (loading || !subcategoryTreated) return <Loading />;
 
   return (
-    <main className="bg-white overflow-x-hidden">
+    <main className="bg-white overflow-x-visible">
       <div className="pt-32 md:pt-36">
         <ProductHero
           product={productFinal[0]}

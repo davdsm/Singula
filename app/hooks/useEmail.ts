@@ -14,13 +14,14 @@ const goMail = async (
     entity: string;
     entity_type: string;
     products: string;
+    productsTable?: string;
+    productsSummary?: string;
     attachment: string | false;
   },
   receiver?: string,
-  ref?: string
-) => {
-  let status: boolean = false;
-
+  ref?: string,
+  orderDate?: Date
+): Promise<boolean> => {
   const { bodyReceiver, bodyContact, bodyQuote } = getEmailBody(
     lang,
     name,
@@ -28,15 +29,15 @@ const goMail = async (
     message,
     email,
     quoteData,
-    ref
+    ref,
+    orderDate
   );
 
-  // Localized subject translations
   const subjectTranslations = {
     pt: {
-      userQuote: `#${ref} ${name}, Obrigado pelo seu pedido de orçamento!`,
+      userQuote: `#${ref} ${name}, Obrigado pelo seu pedido de cotação!`,
       userMessage: `${name}, Obrigado pela sua mensagem.`,
-      adminQuote: `#${ref} 📝 Novo Pedido de Orçamento`,
+      adminQuote: `#${ref} 📝 Novo Pedido de Cotação`,
       adminMessage: `🔔 Nova Mensagem de Singula.pt!`,
     },
     en: {
@@ -65,46 +66,50 @@ const goMail = async (
     },
   };
 
-  // Determine subject based on lang, isQuote, and whether it's for the user or admin
   const subject = receiver
     ? isQuote
       ? subjectTranslations[lang].userQuote
       : subjectTranslations[lang].userMessage
     : isQuote
-    ? subjectTranslations[lang].adminQuote
-    : subjectTranslations[lang].adminMessage;
+      ? subjectTranslations[lang].adminQuote
+      : subjectTranslations[lang].adminMessage;
 
-  await fetch("https://api.davdsm.pt/sendMail", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      davdsmKey: "d41d8cd98f00b204e9800998ecf8427e",
-      replyTo: email,
-    },
-    body: JSON.stringify({
-      sender: "Singula",
-      senderEmail: "design@singula.pt",
-      receiver: {
-        email: receiver ? receiver : "sales@singula.pt",
-        name: receiver ? name : "Administração",
+  try {
+    const response = await fetch("https://api.davdsm.pt/sendMail", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        davdsmKey: "d41d8cd98f00b204e9800998ecf8427e",
+        replyTo: email,
       },
-      subject: subject,
-      message: receiver ? bodyReceiver : isQuote ? bodyQuote : bodyContact,
-    }),
-  })
-    .then((response) => {
-      console.log("✈️ Email 1 Enviado? - ", response.body);
-      console.log("---------------------------------------------------");
-      console.log("");
-      status = true;
-    })
-    .catch((response) => {
-      console.log("✈️ Email 1 Não Enviado? - ", response.body);
-      console.log("---------------------------------------------------");
-      console.log("");
-      status = false;
+      body: JSON.stringify({
+        sender: "Singula",
+        senderEmail: "design@singula.pt",
+        receiver: {
+          email: receiver ? receiver : "sales@singula.pt",
+          name: receiver ? name : "Administração",
+        },
+        subject,
+        message: receiver ? bodyReceiver : isQuote ? bodyQuote : bodyContact,
+      }),
     });
-  return status;
+
+    if (!response.ok) {
+      const detail = await response.text().catch(() => "");
+      console.error(
+        "[sendMail] API error:",
+        response.status,
+        response.statusText,
+        detail
+      );
+      return false;
+    }
+
+    return true;
+  } catch (err) {
+    console.error("[sendMail] Network or fetch error:", err);
+    return false;
+  }
 };
 
 export const useSendMail = () => {
@@ -123,15 +128,17 @@ export const useSendMail = () => {
       entity: string;
       entity_type: string;
       products: string;
+      productsTable?: string;
+      productsSummary?: string;
       attachment: string | false;
     },
     receiver?: string,
-    ref?: string
-  ) => {
-    if (!Sent) {
-      setSent(false);
-      setLoading(true);
-      await goMail(
+    ref?: string,
+    orderDate?: Date
+  ): Promise<boolean> => {
+    setLoading(true);
+    try {
+      return await goMail(
         lang,
         name,
         contact,
@@ -140,14 +147,13 @@ export const useSendMail = () => {
         isQuote,
         quoteData,
         receiver,
-        ref
+        ref,
+        orderDate
       );
-      setTimeout(() => {
-        setLoading(false);
-        setSent(true);
-      }, 2000);
+    } finally {
+      setLoading(false);
     }
   };
 
-  return { sendMail, Sent, Loading };
+  return { sendMail, Sent, setSent, Loading };
 };

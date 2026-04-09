@@ -40,6 +40,13 @@ export function usePageContent(collection: string) {
             mapped[item.section_id] = img;
           } else if (value) {
             mapped[item.section_id] = value;
+          } else if (item.video) {
+            const fileName = Array.isArray(item.video)
+              ? item.video[0]
+              : item.video;
+            if (fileName) {
+              mapped[item.section_id] = `${pocketBaseUrl}/api/files/${item.collectionId}/${item.id}/${fileName}`;
+            }
           } else if (Array.isArray(image) && image.length > 0) {
             // Build full URLs for each image
             const imageUrls = image.map(

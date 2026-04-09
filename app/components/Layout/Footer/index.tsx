@@ -26,11 +26,11 @@ export const Footer = () => {
   const [Email, setEmail] = useState<string>("");
   const [Terms, setTerms] = useState<boolean>(false);
   const [Error, setError] = useState<boolean>(false);
-  const { sendMail, Sent, Loading } = useSendMail();
+  const { sendMail, Sent, setSent, Loading } = useSendMail();
   const { i18n } = useTranslation();
   const { categories, loading } = useCategories();
 
-  const submitForm = (e: React.FormEvent<HTMLFormElement>) => {
+  const submitForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError(false);
 
@@ -39,13 +39,14 @@ export const Footer = () => {
       return;
     }
 
-    sendMail(
+    const ok = await sendMail(
       i18n.language as "pt" | "en" | "es" | "fr" | "de",
       "newsletter",
       "",
       Email,
       `${Email} Subscreveu a newsletter`
     );
+    setSent(ok);
   };
 
   return (

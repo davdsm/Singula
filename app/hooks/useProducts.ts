@@ -28,6 +28,7 @@ export const formatApiProductsIntoProducts = (
 
   const formatColors = (colors: Color[]): FormattedColor[] => {
     return colors.map((color) => ({
+      id: color.id,
       name: (color as any)[`name_${lang}`],
       image: `${pocketBaseUrl}/api/files/${color.collectionId}/${color.id}/${color.image}`,
     }));

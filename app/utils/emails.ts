@@ -1,3 +1,11 @@
+const localeByLang: Record<"pt" | "en" | "es" | "fr" | "de", string> = {
+  pt: "pt-PT",
+  en: "en-GB",
+  es: "es-ES",
+  fr: "fr-FR",
+  de: "de-DE",
+};
+
 export const getEmailBody = (
   lang: "pt" | "en" | "es" | "fr" | "de",
   name: string,
@@ -9,21 +17,31 @@ export const getEmailBody = (
     entity: string;
     entity_type: string;
     products: string;
+    productsTable?: string;
+    productsSummary?: string;
     attachment: string | false;
   },
-  ref?: string
+  ref?: string,
+  orderDate?: Date
 ): {
   bodyReceiver: string;
   bodyQuote: string;
   bodyContact: string;
 } => {
+  const at = orderDate ?? new Date();
+  const orderDateFormatted = new Intl.DateTimeFormat(localeByLang[lang], {
+    dateStyle: "long",
+    timeStyle: "short",
+    timeZone: "Europe/Lisbon",
+  }).format(at);
+
   // Language translations
   const translations = {
     pt: {
       newMessageTitle: "Recebeu uma nova mensagem!",
       adminGreeting: "Olá Admnistrador, recebeu uma mensagem a partir do website singula.pt",
-      quoteRequestTitle: "Pedido de Orçamento!",
-      quoteAdminGreeting: "Olá Administrador! Recebeu um pedido de orçamento.",
+      quoteRequestTitle: "Pedido de Cotação!",
+      quoteAdminGreeting: "Olá Administrador! Recebeu um pedido de cotação.",
       receivedRequestTitle: "Recebemos o teu pedido.",
       userGreeting: (name: string) => `Olá ${name},`,
       confirmationMessage: "Confirmamos que recebemos o teu pedido e já estamos a tratá-lo com a urgência e atenção que merece.\nA nossa equipa vai analisar os detalhes e entrará em contacto contigo em breve.",
@@ -40,9 +58,12 @@ export const getEmailBody = (
         entity: "Entidade",
         entityType: "Tipo Entidade",
         products: "Produtos",
+        productsDetails: "Detalhes dos produtos",
+        orderSummary: "Resumo da encomenda",
         message: "Mensagem",
         attachment: "Anexo",
-        reference: "Referência Pedido"
+        reference: "Referência Pedido",
+        orderDate: "Data do pedido"
       }
     },
     en: {
@@ -66,9 +87,12 @@ export const getEmailBody = (
         entity: "Entity",
         entityType: "Entity Type",
         products: "Products",
+        productsDetails: "Product details",
+        orderSummary: "Order summary",
         message: "Message",
         attachment: "Attachment",
-        reference: "Request Reference"
+        reference: "Request Reference",
+        orderDate: "Order date"
       }
     },
     es: {
@@ -92,9 +116,12 @@ export const getEmailBody = (
         entity: "Entidad",
         entityType: "Tipo de Entidad",
         products: "Productos",
+        productsDetails: "Detalle de productos",
+        orderSummary: "Resumen del pedido",
         message: "Mensaje",
         attachment: "Adjunto",
-        reference: "Referencia de Solicitud"
+        reference: "Referencia de Solicitud",
+        orderDate: "Fecha del pedido"
       }
     },
     fr: {
@@ -118,9 +145,12 @@ export const getEmailBody = (
         entity: "Entité",
         entityType: "Type d'Entité",
         products: "Produits",
+        productsDetails: "Détails des produits",
+        orderSummary: "Résumé de la commande",
         message: "Message",
         attachment: "Pièce jointe",
-        reference: "Référence de Demande"
+        reference: "Référence de Demande",
+        orderDate: "Date de la commande"
       }
     },
     de: {
@@ -144,9 +174,12 @@ export const getEmailBody = (
         entity: "Unternehmen",
         entityType: "Unternehmenstyp",
         products: "Produkte",
+        productsDetails: "Produktdetails",
+        orderSummary: "Bestellübersicht",
         message: "Nachricht",
         attachment: "Anhang",
-        reference: "Anfrage-Referenz"
+        reference: "Anfrage-Referenz",
+        orderDate: "Bestelldatum"
       }
     }
   };
@@ -357,6 +390,7 @@ export const getEmailBody = (
         <td class="pad">
           <div style="color:#444a5b;direction:ltr;font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;font-size:16px;font-weight:400;letter-spacing:0px;line-height:1.2;text-align:left;mso-line-height-alt:19px;">
             <p style="margin: 0; margin-bottom: 16px;">${t.adminGreeting}</p>
+            <p style="margin: 0; margin-bottom: 16px;"><strong>${t.fields.orderDate}</strong>: ${orderDateFormatted}</p>
             <p style="margin: 0; margin-bottom: 16px;">
               <strong>${t.fields.name}</strong>: ${name}<br>
               <strong>${t.fields.email}</strong>: ${email}<br>
@@ -379,6 +413,7 @@ export const getEmailBody = (
         <td class="pad">
           <div style="color:#444a5b;direction:ltr;font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;font-size:16px;font-weight:400;letter-spacing:0px;line-height:1.2;text-align:left;mso-line-height-alt:19px;">
             <p style="margin: 0; margin-bottom: 16px;">${t.quoteAdminGreeting}</p>
+            <p style="margin: 0; margin-bottom: 16px;"><strong>${t.fields.orderDate}</strong>: ${orderDateFormatted}</p>
             <p style="margin: 0; margin-bottom: 16px;">
               <strong>${t.fields.name}</strong>: ${name}<br>
               <strong>${t.fields.email}</strong>: ${email}<br>
@@ -386,10 +421,19 @@ export const getEmailBody = (
               <strong>${t.fields.country}</strong>: ${quoteData?.country || ''}<br>
               <strong>${t.fields.entity}</strong>: ${quoteData?.entity || ''}<br>
               <strong>${t.fields.entityType}</strong>: ${quoteData?.entity_type || ''}<br>
-              <strong>${t.fields.products}</strong>: ${quoteData?.products || ''}<br>
               <strong>${t.fields.message}</strong>:
             </p>
             <p style="margin: 0; margin-bottom: 16px;">${message}</p>
+            ${
+              quoteData?.productsTable
+                ? `<p style="margin: 0; margin-bottom: 8px;"><strong>${t.fields.productsDetails}</strong>:</p>${quoteData.productsTable}`
+                : `<p style="margin: 0; margin-bottom: 16px;"><strong>${t.fields.products}</strong>: ${quoteData?.products || ''}</p>`
+            }
+            ${
+              quoteData?.productsSummary
+                ? `<p style="margin: 0; margin-top: 16px; margin-bottom: 8px;"><strong>${t.fields.orderSummary}</strong>:</p>${quoteData.productsSummary}`
+                : ""
+            }
             ${quoteData?.attachment ? `<p style="margin: 0; margin-bottom: 16px;"><strong>${t.fields.attachment}</strong>: ${quoteData.attachment}</p>` : ''}
             ${ref ? `<p style="margin: 0; margin-bottom: 16px;"><strong>${t.fields.reference}</strong>: #${ref}</p>` : ''}
           </div>
@@ -407,8 +451,19 @@ export const getEmailBody = (
           <div style="color:#444a5b;direction:ltr;font-family:Arial, 'Helvetica Neue', Helvetica, sans-serif;font-size:16px;font-weight:400;letter-spacing:0px;line-height:1.2;text-align:left;mso-line-height-alt:19px;">
             <p style="margin: 0; margin-bottom: 16px;">
               ${t.userGreeting(name)}<br><br>
+              <strong>${t.fields.orderDate}</strong>: ${orderDateFormatted}<br><br>
               ${t.confirmationMessage.replace(/\n/g, '<br>')}<br><br>
               ${t.additionalInfoMessage}<br><br>
+              ${
+                quoteData?.productsTable
+                  ? `<strong>${t.fields.productsDetails}</strong><br><br>${quoteData.productsTable}<br><br>`
+                  : ""
+              }
+              ${
+                quoteData?.productsSummary
+                  ? `<strong>${t.fields.orderSummary}</strong><br><br>${quoteData.productsSummary}<br><br>`
+                  : ""
+              }
               ${t.thankYouMessage}<br>
               <strong>${t.thinkMetal}</strong><br><br>
               ${ref ? `<strong>${t.fields.reference}</strong>: #${ref}<br><br>` : ''}
