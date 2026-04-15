@@ -14,8 +14,9 @@ export const ProductMaterialsSection = ({ product }: { product: Product }) => {
         <div className="max-w-7xl mx-auto relative z-10">
           <div className="mb-12 md:mb-16">
             <div className="px-8 md:px-16 flex flex-col items-center justify-center">
+              <ProductVariantConfigurator product={product} />
               {product.ImagemBottom && (
-                <div className="w-full max-w-4xl flex justify-center mb-8 flex-col">
+                <div className="w-full max-w-4xl flex justify-center mt-10 mb-8 flex-col">
                   {product.ImagemBottom?.map((imagem: string) => (
                     <Image
                       key={`imagem-${imagem}`}
@@ -30,7 +31,6 @@ export const ProductMaterialsSection = ({ product }: { product: Product }) => {
                   ))}
                 </div>
               )}
-              <ProductVariantConfigurator product={product} />
               <motion.div
                 initial={{ y: 30, opacity: 0 }}
                 whileInView={{ y: 0, opacity: 1 }}

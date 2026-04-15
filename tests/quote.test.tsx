@@ -75,15 +75,47 @@ describe("QuotePage cart checkout UI", () => {
     expect(screen.getByText("Selecionar produtos")).toBeInTheDocument();
     expect(screen.getByText("Selecionar produtos").closest("a")).toHaveAttribute(
       "href",
-      "/products"
+      "/search?look=all"
     );
+  });
+
+  it("shows composite configuration text when variationId is null but line is configured", () => {
+    mockUseCart.mockReturnValue({
+      items: [
+        {
+          id: "p1:s1:none:m1:r1",
+          productId: "p1",
+          productSlug: "bench",
+          subproductId: "s1",
+          variationId: null,
+          variationReference: "B-100 · Oak · RAL 9010",
+          selectedMaterialIds: ["m1"],
+          selectedRalIds: ["r1"],
+          unitPrice: null,
+          priceVisible: false,
+          quantity: 1,
+          productName: "Bench",
+          subproductName: "Type A",
+          variationImage: null,
+          addedAt: Date.now(),
+        },
+      ],
+      removeItem: vi.fn(),
+      updateQuantity: vi.fn(),
+      clearCart: vi.fn(),
+    });
+
+    render(<QuotePage />);
+
+    expect(screen.getByText("B-100 · Oak · RAL 9010")).toBeInTheDocument();
+    expect(screen.queryByText("Sem versão")).not.toBeInTheDocument();
   });
 
   it("renders cart item row and responsive classes", () => {
     mockUseCart.mockReturnValue({
       items: [
         {
-          id: "p1:none:v1",
+          id: "p1:none:v1:none:none",
           productId: "p1",
           productSlug: "chair",
           subproductId: null,

@@ -111,8 +111,11 @@ export const formatApiProductsIntoProducts = (
     materiais: item.expand?.materiais
       ? formatMateriais(item.expand!.materiais!)
       : [],
-    cores_recomendado: item.expand?.cores_recomendado
-      ? formatColors(item.expand?.cores_recomendado)
+    materiaisDisponiveis: item.expand?.materiais_disponiveis
+      ? formatMateriais(item.expand.materiais_disponiveis)
+      : [],
+    ralDisponiveis: item.expand?.ral_disponiveis
+      ? formatColors(item.expand.ral_disponiveis)
       : [],
     acabamentos_recomendado: item.expand?.acabamentos_recomendado
       ? formatAcabamento(item.expand?.acabamentos_recomendado)
@@ -157,7 +160,7 @@ export const useProducts = ({
           : "";
 
         const res = await fetch(
-          `${pocketBaseUrl}/api/collections/Produtos/records?perPage=500&sort=order,id&expand=design,subcategory,materiais,cores_recomendado,acabamentos_recomendado,subcategory.category${filterQuery}`
+          `${pocketBaseUrl}/api/collections/Produtos/records?perPage=500&sort=order,id&expand=design,subcategory,materiais,materiais_disponiveis,ral_disponiveis,acabamentos_recomendado,subcategory.category${filterQuery}`
         );
 
         const data = await res.json();

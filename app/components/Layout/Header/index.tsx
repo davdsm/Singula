@@ -79,10 +79,6 @@ export const Header = ({
       link: "/catalog",
     },
     {
-      key: "menu.quote",
-      link: "/quote",
-    },
-    {
       key: "menu.contacts",
       link: "/contacts",
     },

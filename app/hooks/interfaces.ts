@@ -117,7 +117,10 @@ export interface Product {
   Model_DWG: string | null;
   subcategory: Subcategory | null;
   materiais: MaterialFormatted[];
-  cores_recomendado: FormattedColor[];
+  /** PDP configurator: materials allowed for this product (expand `materiais_disponiveis`). */
+  materiaisDisponiveis: MaterialFormatted[];
+  /** PDP configurator: RAL colors allowed for this product (expand `ral_disponiveis`). */
+  ralDisponiveis: FormattedColor[];
   acabamentos_recomendado: AcabamentoFormatted[];
 }
 
@@ -131,25 +134,12 @@ export interface Subproduct {
   active: boolean;
 }
 
-export interface VariationOption {
-  id: string;
-  productId: string;
-  subproductId: string | null;
-  image: string | null;
-  reference: string;
-  price: number | null;
-  priceVisible: boolean;
-  materials: Array<{ id: string; name: string }>;
-  ralColors: Array<{ id: string; name: string }>;
-  order: number;
-  active: boolean;
-}
-
 export interface AddToCartPayload {
   productId: string;
   productSlug: string;
   subproductId: string | null;
-  variationId: string;
+  /** Null when quoting the base product (no Variacoes row). */
+  variationId: string | null;
   variationReference: string;
   selectedMaterialIds: string[];
   selectedRalIds: string[];
@@ -164,6 +154,8 @@ export interface CartItem extends AddToCartPayload {
   subproductName: string | null;
   variationImage: string | null;
   addedAt: number;
+  /** Human-readable "Material — RAL" for emails; absent on older cart rows. */
+  materialRalLabel?: string | null;
 }
 
 // Original item interface (before formatting)
@@ -251,14 +243,14 @@ export interface ApiProduct {
   // Relation fields
   subcategory: string;
   materiais: Material[];
-  cores_recomendado: string[];
   acabamentos_recomendado: string[];
 
   // Expanded relations
   expand?: {
     subcategory?: Subcategory;
     materiais?: Material[];
-    cores_recomendado?: Color[];
+    materiais_disponiveis?: Material[];
+    ral_disponiveis?: Color[];
     acabamentos_recomendado?: Acabamento[];
     design?: {
       slug: string

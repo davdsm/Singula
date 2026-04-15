@@ -11,6 +11,68 @@ import { useSendMail } from "~/hooks/useEmail";
 import useDB from "~/hooks/useDB";
 import { DelayedLink } from "~/components/Elements/Link";
 import { useCart } from "~/hooks/useCart";
+import type { CartItem } from "~/hooks/interfaces";
+
+const isPlainBaseQuoteLine = (item: CartItem) =>
+  item.variationId == null &&
+  item.subproductId == null &&
+  item.selectedMaterialIds.length === 0 &&
+  item.selectedRalIds.length === 0;
+
+const matRalSummaryPlain = (item: CartItem) => {
+  if (item.variationId == null) {
+    // Composite lines encode material/RAL labels in variationReference; plain base has no extras.
+    return "";
+  }
+  const bits: string[] = [];
+  if (item.selectedMaterialIds.length) {
+    bits.push(`Material: ${item.selectedMaterialIds.join(", ")}`);
+  }
+  if (item.selectedRalIds.length) {
+    bits.push(`RAL: ${item.selectedRalIds.join(", ")}`);
+  }
+  return bits.join(" · ");
+};
+
+/** One line for emails: subproduct + material/colour (and legacy variation extras). */
+const formatEmailCartConfigurationPlain = (item: CartItem): string => {
+  const sub = (item.subproductName || "").trim();
+  const matRal = (item.materialRalLabel || "").trim();
+  let tail = matRal;
+  if (!tail) {
+    if (item.variationId != null) {
+      tail = (item.variationReference || "").trim();
+      const extra = matRalSummaryPlain(item);
+      if (extra) tail = tail ? `${tail} · ${extra}` : extra;
+    } else if (!isPlainBaseQuoteLine(item)) {
+      tail = (item.variationReference || "").trim();
+    }
+  }
+  if (sub && tail) return `${sub} — ${tail}`;
+  if (sub) return sub;
+  if (tail) return tail;
+  return "—";
+};
+
+/** Prefix order reference before the configuration line in quote emails (admin + user). */
+const formatEmailCartConfigurationWithOrderRef = (
+  orderRef: string | undefined,
+  item: CartItem
+): string => {
+  const r = (orderRef ?? "").trim();
+  const base = formatEmailCartConfigurationPlain(item);
+  if (!r || base === "—") return base;
+  return `${r} - ${base}`;
+};
+
+const formatEmailSubproductWithOrderRef = (
+  orderRef: string | undefined,
+  item: CartItem
+): string => {
+  const sub = (item.subproductName || "-").trim() || "-";
+  const r = (orderRef ?? "").trim();
+  return r ? `${r} - ${sub}` : sub;
+};
 
 interface FormData {
   name: string;
@@ -96,53 +158,61 @@ const QuotePage = () => {
       minimumFractionDigits: 2,
     }).format(value);
 
-  const buildQuoteTableHtml = () => {
+  const quoteEmailImageSrc = (url: string | null) => {
+    const u = (url || "").trim();
+    if (!u) return "";
+    if (u.startsWith("http://") || u.startsWith("https://")) return u;
+    if (u.startsWith("//")) return `https:${u}`;
+    return u.startsWith("/") ? `https://singula.pt${u}` : `https://singula.pt/${u}`;
+  };
+
+  const buildQuoteTableHtml = (orderRef: string) => {
     const headers = {
       pt: {
+        image: "Imagem",
         product: "Produto",
         subproduct: "Subproduto",
         variation: "Variação",
-        reference: "Referência",
-        unitPrice: "Preço Unit.",
+        unitPrice: "Preço unit.",
         qty: "Qtd.",
         total: "Total",
         onRequest: "Sob consulta",
       },
       en: {
+        image: "Image",
         product: "Product",
         subproduct: "Subproduct",
         variation: "Variation",
-        reference: "Reference",
-        unitPrice: "Unit Price",
+        unitPrice: "Unit price",
         qty: "Qty.",
         total: "Total",
         onRequest: "On request",
       },
       es: {
+        image: "Imagen",
         product: "Producto",
         subproduct: "Subproducto",
         variation: "Variación",
-        reference: "Referencia",
-        unitPrice: "Precio Unit.",
+        unitPrice: "Precio unit.",
         qty: "Cant.",
         total: "Total",
         onRequest: "A consultar",
       },
       fr: {
+        image: "Image",
         product: "Produit",
         subproduct: "Sous-produit",
         variation: "Variation",
-        reference: "Référence",
-        unitPrice: "Prix Unit.",
+        unitPrice: "Prix unit.",
         qty: "Qté.",
         total: "Total",
         onRequest: "Sur demande",
       },
       de: {
+        image: "Bild",
         product: "Produkt",
         subproduct: "Unterprodukt",
         variation: "Variation",
-        reference: "Referenz",
         unitPrice: "Stückpreis",
         qty: "Menge",
         total: "Gesamt",
@@ -152,87 +222,83 @@ const QuotePage = () => {
 
     const rows = cartItems
       .map((item) => {
-        const hasPrice = item.priceVisible && item.unitPrice !== null;
-        const unitPrice = hasPrice ? formatCurrency(item.unitPrice as number) : headers.onRequest;
-        const total = hasPrice
-          ? formatCurrency((item.unitPrice as number) * item.quantity)
-          : headers.onRequest;
+        const imgSrc = quoteEmailImageSrc(item.variationImage);
+        const imgCell = imgSrc
+          ? `<img src="${escapeHtml(imgSrc)}" alt="" width="96" height="96" style="display:block;width:96px;height:96px;object-fit:contain;border-radius:10px;" />`
+          : `<span style="display:inline-block;width:96px;height:96px;border-radius:10px;background:#e5e7eb;"></span>`;
+        const subCell = escapeHtml(item.subproductName || "-");
+        const baseVariationLabelByLang = {
+          pt: "Sem versão",
+          en: "No version",
+          es: "Sin versión",
+          fr: "Sans version",
+          de: "Ohne Version",
+        } as const;
+        const variationMain =
+          item.variationId != null
+            ? item.variationReference
+            : isPlainBaseQuoteLine(item)
+              ? baseVariationLabelByLang[quoteLang]
+              : item.variationReference;
+        const variationExtra = matRalSummaryPlain(item);
+        const variationCell = variationExtra
+          ? `${escapeHtml(variationMain)}<br /><span style="display:block;margin-top:4px;font-size:12px;color:#6b7280;">${escapeHtml(variationExtra)}</span>`
+          : escapeHtml(variationMain);
+        const unitPriceCell =
+          item.priceVisible && item.unitPrice !== null
+            ? formatCurrency(item.unitPrice)
+            : headers.onRequest;
+        const totalCell =
+          item.priceVisible && item.unitPrice !== null
+            ? formatCurrency(item.unitPrice * item.quantity)
+            : headers.onRequest;
         return `<tr>
-          <td style="padding:8px;border:1px solid #dddddd;">${escapeHtml(
+          <td style="padding:12px;border-top:1px solid #efefef;vertical-align:middle;">${imgCell}</td>
+          <td style="padding:12px;border-top:1px solid #efefef;vertical-align:middle;font-size:15px;font-weight:600;color:#111827;">${escapeHtml(
             sanitizeProductName(item.productName)
           )}</td>
-          <td style="padding:8px;border:1px solid #dddddd;">${escapeHtml(
-            item.subproductName || "-"
-          )}</td>
-          <td style="padding:8px;border:1px solid #dddddd;">${escapeHtml(
-            item.variationReference
-          )}</td>
-          <td style="padding:8px;border:1px solid #dddddd;">${escapeHtml(
-            item.variationReference
-          )}</td>
-          <td style="padding:8px;border:1px solid #dddddd;">${unitPrice}</td>
-          <td style="padding:8px;border:1px solid #dddddd;">${item.quantity}</td>
-          <td style="padding:8px;border:1px solid #dddddd;">${total}</td>
+          <td style="padding:12px;border-top:1px solid #efefef;vertical-align:middle;font-size:14px;color:#111827;">${subCell}</td>
+          <td style="padding:12px;border-top:1px solid #efefef;vertical-align:middle;font-size:14px;color:#111827;">${variationCell}</td>
+          <td style="padding:12px;border-top:1px solid #efefef;vertical-align:middle;font-size:14px;color:#111827;">${escapeHtml(unitPriceCell)}</td>
+          <td style="padding:12px;border-top:1px solid #efefef;vertical-align:middle;font-size:14px;color:#111827;">${item.quantity}</td>
+          <td style="padding:12px;border-top:1px solid #efefef;vertical-align:middle;font-size:14px;color:#111827;">${escapeHtml(totalCell)}</td>
         </tr>`;
       })
       .join("");
 
-    return `<table style="width:100%;border-collapse:collapse;font-size:14px;margin:8px 0 0 0;">
+    return `<table style="width:100%;min-width:760px;border:1px solid #e5e5e5;border-radius:12px;overflow:hidden;border-collapse:separate;border-spacing:0;font-size:14px;margin:12px 0 0 0;color:#111827;">
       <thead>
         <tr style="background:#f5f5f5;">
-          <th style="padding:8px;border:1px solid #dddddd;text-align:left;">${headers.product}</th>
-          <th style="padding:8px;border:1px solid #dddddd;text-align:left;">${headers.subproduct}</th>
-          <th style="padding:8px;border:1px solid #dddddd;text-align:left;">${headers.variation}</th>
-          <th style="padding:8px;border:1px solid #dddddd;text-align:left;">${headers.reference}</th>
-          <th style="padding:8px;border:1px solid #dddddd;text-align:left;">${headers.unitPrice}</th>
-          <th style="padding:8px;border:1px solid #dddddd;text-align:left;">${headers.qty}</th>
-          <th style="padding:8px;border:1px solid #dddddd;text-align:left;">${headers.total}</th>
+          <th style="padding:10px 12px;text-align:left;font-size:12px;text-transform:uppercase;">${headers.image}</th>
+          <th style="padding:10px 12px;text-align:left;font-size:12px;text-transform:uppercase;">${headers.product}</th>
+          <th style="padding:10px 12px;text-align:left;font-size:12px;text-transform:uppercase;">${headers.subproduct}</th>
+          <th style="padding:10px 12px;text-align:left;font-size:12px;text-transform:uppercase;">${headers.variation}</th>
+          <th style="padding:10px 12px;text-align:left;font-size:12px;text-transform:uppercase;">${headers.unitPrice}</th>
+          <th style="padding:10px 12px;text-align:left;font-size:12px;text-transform:uppercase;">${headers.qty}</th>
+          <th style="padding:10px 12px;text-align:left;font-size:12px;text-transform:uppercase;">${headers.total}</th>
         </tr>
       </thead>
       <tbody>${rows}</tbody>
     </table>`;
   };
 
-  const buildQuoteSummaryHtml = () => {
-    const labels = {
-      pt: { items: "Itens", units: "Unidades", subtotal: "Subtotal", pending: "Linhas sob consulta" },
-      en: { items: "Items", units: "Units", subtotal: "Subtotal", pending: "On-request lines" },
-      es: { items: "Ítems", units: "Unidades", subtotal: "Subtotal", pending: "Líneas a consultar" },
-      fr: { items: "Articles", units: "Unités", subtotal: "Sous-total", pending: "Lignes sur demande" },
-      de: { items: "Positionen", units: "Einheiten", subtotal: "Zwischensumme", pending: "Positionen auf Anfrage" },
-    }[quoteLang];
-
-    const totalUnits = cartItems.reduce((acc, item) => acc + item.quantity, 0);
-    const subtotal = cartItems.reduce((acc, item) => {
-      if (!item.priceVisible || item.unitPrice === null) return acc;
-      return acc + item.unitPrice * item.quantity;
-    }, 0);
-    const pendingCount = cartItems.filter(
-      (item) => !item.priceVisible || item.unitPrice === null
-    ).length;
-
-    return `<div style="font-size:14px;line-height:1.6;">
-      <div><strong>${labels.items}:</strong> ${cartItems.length}</div>
-      <div><strong>${labels.units}:</strong> ${totalUnits}</div>
-      <div><strong>${labels.subtotal}:</strong> ${formatCurrency(subtotal)}</div>
-      <div><strong>${labels.pending}:</strong> ${pendingCount}</div>
-    </div>`;
-  };
-
   const buildBackofficeOrderDetails = () => {
     const details = cartItems
       .map((item, index) => {
-        const unitPrice =
-          item.priceVisible && item.unitPrice !== null
-            ? formatCurrency(item.unitPrice)
-            : "Sob consulta";
+        const hasPrice = item.priceVisible && item.unitPrice !== null;
+        const unitPrice = hasPrice
+          ? formatCurrency(item.unitPrice as number)
+          : "Sob consulta";
+        const lineTotal = hasPrice
+          ? formatCurrency((item.unitPrice as number) * item.quantity)
+          : "Sob consulta";
+        const lineCfg = formatEmailCartConfigurationPlain(item);
         return [
           `${index + 1}. Produto: ${sanitizeProductName(item.productName)}`,
-          `   Subproduto: ${item.subproductName || "-"}`,
-          `   Variação: ${item.variationReference}`,
-          `   Referência: ${item.variationReference}`,
-          `   Quantidade: ${item.quantity}`,
+          `   Subproduto — material e cor: ${lineCfg}`,
           `   Preço unitário: ${unitPrice}`,
+          `   Quantidade: ${item.quantity}`,
+          `   Total: ${lineTotal}`,
         ].join("\n");
       })
       .join("\n\n");
@@ -297,12 +363,18 @@ const QuotePage = () => {
         entity: formData.company,
         entity_type: formData.entity,
         products: cartItems
-          .map(
-            (item) => `${item.variationReference} (${item.quantity})`
-          )
+          .map((item) => {
+            const base = sanitizeProductName(item.productName);
+            const cfg = formatEmailCartConfigurationWithOrderRef(
+              result.REF,
+              item
+            );
+            return cfg !== "—"
+              ? `${base} — ${cfg} × ${item.quantity}`
+              : `${base} × ${item.quantity}`;
+          })
           .join(", "),
-        productsTable: buildQuoteTableHtml(),
-        productsSummary: buildQuoteSummaryHtml(),
+        productsTable: buildQuoteTableHtml(result.REF ?? ""),
         attachment: formData.file
           ? `<a href="https://singula.pt/admin/_/#/collections?collection=pbc_2578185338&filter=&sort=-%40rowid&recordId=${result.id}">Disponível no BackOffice.</a>`
           : false,
@@ -324,12 +396,18 @@ const QuotePage = () => {
         entity: formData.company,
         entity_type: formData.entity,
         products: cartItems
-          .map(
-            (item) => `${item.variationReference} (${item.quantity})`
-          )
+          .map((item) => {
+            const base = sanitizeProductName(item.productName);
+            const cfg = formatEmailCartConfigurationWithOrderRef(
+              result.REF,
+              item
+            );
+            return cfg !== "—"
+              ? `${base} — ${cfg} × ${item.quantity}`
+              : `${base} × ${item.quantity}`;
+          })
           .join(", "),
-        productsTable: buildQuoteTableHtml(),
-        productsSummary: buildQuoteSummaryHtml(),
+        productsTable: buildQuoteTableHtml(result.REF ?? ""),
         attachment: formData.file
           ? `<a href="https://singula.pt/admin/_/#/collections?collection=pbc_2578185338&filter=&sort=-%40rowid&recordId=${result.id}">Disponível no BackOffice.</a>`
           : false,
@@ -358,6 +436,11 @@ const QuotePage = () => {
     trackGoogleAdsConversion();
     clearCart();
   };
+
+  const cartGrandTotal = cartItems.reduce((acc, item) => {
+    if (!item.priceVisible || item.unitPrice === null) return acc;
+    return acc + item.unitPrice * item.quantity;
+  }, 0);
 
   return (
     <main className="bg-white overflow-x-hidden">
@@ -514,7 +597,7 @@ const QuotePage = () => {
                         })}
                       </p>
                       <DelayedLink
-                        to="/products"
+                        to="/search?look=all"
                         className="inline-flex items-center justify-center rounded-full bg-singula-main text-white text-sm uppercase font-bold px-5 py-2 hover:bg-singula-mainDarker transition-colors"
                       >
                         {t("quote.cart.selectProducts", {
@@ -531,7 +614,7 @@ const QuotePage = () => {
                         })}
                       </p>
                       <DelayedLink
-                        to="/products"
+                        to="/search?look=all"
                         className="text-sm text-singula-main underline underline-offset-2"
                       >
                         {t("quote.cart.addMore", { defaultValue: "Adicionar mais produtos" })}
@@ -557,7 +640,13 @@ const QuotePage = () => {
                         {t("quote.variation", { defaultValue: "Variação" })}
                       </th>
                       <th className="text-left px-3 py-2 text-xs uppercase">
+                        {t("quote.unitPrice", { defaultValue: "Preço unit." })}
+                      </th>
+                      <th className="text-left px-3 py-2 text-xs uppercase">
                         {t("quote.qty", { defaultValue: "Quantidade" })}
+                      </th>
+                      <th className="text-left px-3 py-2 text-xs uppercase">
+                        {t("quote.total", { defaultValue: "Total" })}
                       </th>
                       <th className="text-left px-3 py-2 text-xs uppercase">
                         {t("quote.remove", { defaultValue: "Remover" })}
@@ -571,7 +660,7 @@ const QuotePage = () => {
                           {item.variationImage ? (
                             <Image
                               src={item.variationImage}
-                              alt={item.variationReference}
+                              alt={sanitizeProductName(item.productName)}
                               className="w-10 h-10 rounded object-cover"
                             />
                           ) : (
@@ -584,7 +673,27 @@ const QuotePage = () => {
                         <td className="px-3 py-2 text-sm">
                           {item.subproductName || "-"}
                         </td>
-                        <td className="px-3 py-2 text-sm">{item.variationReference}</td>
+                        <td className="px-3 py-2 text-sm">
+                          <span className="font-medium block">
+                            {item.variationId != null
+                              ? item.variationReference
+                              : isPlainBaseQuoteLine(item)
+                                ? t("quote.cart.baseProduct", {
+                                    defaultValue: "Sem versão",
+                                  })
+                                : item.variationReference}
+                          </span>
+                          {matRalSummaryPlain(item) ? (
+                            <span className="text-xs text-gray-600 block mt-0.5">
+                              {matRalSummaryPlain(item)}
+                            </span>
+                          ) : null}
+                        </td>
+                        <td className="px-3 py-2 text-sm whitespace-nowrap">
+                          {item.priceVisible && item.unitPrice !== null
+                            ? formatCurrency(item.unitPrice)
+                            : t("quote.onRequest", { defaultValue: "Sob consulta" })}
+                        </td>
                         <td className="px-3 py-2">
                           <input
                             type="number"
@@ -594,6 +703,11 @@ const QuotePage = () => {
                             className="font-sans font-regular w-20 p-2 rounded-lg text-xs outline-none bg-[#f5f5f5] text-black border border-[#D2D2D2]"
                             required
                           />
+                        </td>
+                        <td className="px-3 py-2 text-sm whitespace-nowrap">
+                          {item.priceVisible && item.unitPrice !== null
+                            ? formatCurrency(item.unitPrice * item.quantity)
+                            : t("quote.onRequest", { defaultValue: "Sob consulta" })}
                         </td>
                         <td className="px-3 py-2">
                           <button
@@ -623,6 +737,14 @@ const QuotePage = () => {
                   </tbody>
                 </table>
               </div>
+              <div className="flex justify-end mt-3">
+                <div className="text-sm md:text-base text-black font-semibold">
+                  {t("quote.total", { defaultValue: "Total" })}:{" "}
+                  <span className="ml-1">
+                    {formatCurrency(cartGrandTotal)}
+                  </span>
+                </div>
+              </div>
               <div>
                 <label
                   htmlFor="message"
@@ -637,7 +759,7 @@ const QuotePage = () => {
                   value={formData.message}
                   onChange={handleChange}
                   className="font-sans outline-none block p-2.5 w-full text-sm rounded-lg border border-gray-300 placeholder-gray-400 bg-[#f5f5f5] text-black"
-                  placeholder="Deixe aqui a sua mensagem (Escrever referência do produto)"
+                  placeholder="Deixe aqui a sua mensagem"
                 ></textarea>
               </div>
               <div className="w-full pt-4 ">

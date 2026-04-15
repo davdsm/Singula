@@ -79,6 +79,69 @@ export const ProductGallery = ({ product }: { product: Product }) => {
         </div>
       )}
 
+      {product.SegundaMeio && product.SegundaMeio.length > 0 && (
+        <div className="mt-10 md:mt-16 mx-auto w-full max-w-screen">
+          {product.SegundaMeio.length === 1 ? (
+            <div className="flex flex-col justify-center items-baseline mx-auto w-full md:flex-row gap-[100px]">
+              <motion.span
+                key="segunda-meio-single"
+                initial={{ x: 30, opacity: 0 }}
+                whileInView={{ x: 0, opacity: 1 }}
+                transition={{ duration: 1, ease: "easeInOut", delay: 0 }}
+                viewport={{ amount: 0.1 }}
+                className="relative w-full"
+              >
+                <Image
+                  className="rounded-2xl w-full object-contain md:max-h-[60vw]"
+                  src={product.SegundaMeio[0] || ""}
+                  alt={product.name}
+                />
+                <span className="block pt-2 w-full text-center text-black font-bold text-lg opacity-25 -bottom-6 md:-bottom-2">
+                  {thirdRefs?.[0] ?? ""}
+                </span>
+              </motion.span>
+            </div>
+          ) : (
+            <motion.div
+              initial={{ y: 20, opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.8, ease: "easeInOut" }}
+              viewport={{ amount: 0.15 }}
+              className="relative w-full max-w-[min(100vw,1280px)] mx-auto px-4 md:px-8 overflow-visible"
+            >
+              <CarouselComponent
+                loop
+                autoplay
+                autoplayInterval={5}
+                arrows
+                arrowsInset
+                viewportClassName="overflow-visible"
+                className="w-full min-w-0"
+                emblaOpts={{ align: "start", containScroll: "trimSnaps" }}
+                itemClassName="min-w-0 shrink-0 grow-0 pl-2 md:pl-3 basis-full md:basis-1/2 lg:basis-1/3"
+                items={product.SegundaMeio.map((imagem: string, index: number) => (
+                  <div
+                    key={`segunda-meio-slide-${index}`}
+                    className="relative w-full h-[80vh] flex flex-col items-center pr-2 md:pr-3"
+                  >
+                    <div className="min-h-0 flex-1 w-full relative">
+                      <Image
+                        className="rounded-2xl absolute inset-0 h-full w-full object-cover"
+                        src={imagem || ""}
+                        alt={`${product.name} — ${index + 1}`}
+                      />
+                    </div>
+                    <span className="shrink-0 block pt-2 w-full text-center text-black font-bold text-lg opacity-25">
+                      {thirdRefs?.[index] ?? ""}
+                    </span>
+                  </div>
+                ))}
+              />
+            </motion.div>
+          )}
+        </div>
+      )}
+
       <div className="flex flex-col justify-center items-baseline mx-auto w-full mx-auto flex justify-center items-start flex-col md:flex-row gap-[20px] md:gap-[100px]">
         {product.ImagemMeio?.map((imagem: string, index: number) => (
           <motion.span
@@ -117,70 +180,6 @@ export const ProductGallery = ({ product }: { product: Product }) => {
           </motion.span>
         ))}
       </div>
-      {product.SegundaMeio && product.SegundaMeio.length > 0 && (
-        <div className="mt-20 mx-auto w-full max-w-screen">
-          {product.SegundaMeio.length === 1 ? (
-            <div className="flex flex-col justify-center items-baseline mx-auto w-full md:flex-row gap-[100px]">
-              <motion.span
-                key="segunda-meio-single"
-                initial={{ x: 30, opacity: 0 }}
-                whileInView={{ x: 0, opacity: 1 }}
-                transition={{ duration: 1, ease: "easeInOut", delay: 0 }}
-                viewport={{ amount: 0.1 }}
-                className="relative w-full"
-              >
-                <Image
-                  className="rounded-2xl w-full object-contain md:max-h-[60vw]"
-                  src={product.SegundaMeio[0] || ""}
-                  alt={product.name}
-                />
-                <span className="block pt-2 w-full text-center text-black font-bold text-lg opacity-25 -bottom-6 md:-bottom-2">
-                  {thirdRefs?.[0] ?? ""}
-                </span>
-              </motion.span>
-            </div>
-          ) : (
-            <motion.div
-              initial={{ y: 20, opacity: 0 }}
-              whileInView={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.8, ease: "easeInOut" }}
-              viewport={{ amount: 0.15 }}
-              className="relative w-screen max-w-screen ml-[calc(50%-50vw)] overflow-hidden"
-            >
-              <CarouselComponent
-                loop
-                arrows
-                arrowsInset
-                className="w-full max-w-screen min-w-0"
-                viewportClassName="!overflow-visible"
-                emblaOpts={{ align: "center", containScroll: false }}
-                itemStyle={{
-                  flex: "0 0 90vw",
-                  width: "90vw",
-                  minWidth: "90vw",
-                  maxWidth: "90vw",
-                }}
-                itemClassName="min-w-[90vw] basis-[90vw] max-w-[90vw] shrink-0 pl-3 md:pl-4"
-                items={product.SegundaMeio.map((imagem: string, index: number) => (
-                  <div
-                    key={`segunda-meio-slide-${index}`}
-                    className="relative w-full flex flex-col items-center"
-                  >
-                    <Image
-                      className="rounded-2xl w-full object-contain max-h-[55vh] md:max-h-[60vw]"
-                      src={imagem || ""}
-                      alt={`${product.name} — ${index + 1}`}
-                    />
-                    <span className="block pt-2 w-full text-center text-black font-bold text-lg opacity-25">
-                      {thirdRefs?.[index] ?? ""}
-                    </span>
-                  </div>
-                ))}
-              />
-            </motion.div>
-          )}
-        </div>
-      )}
 
       <motion.p
         initial={{ y: 30, opacity: 0 }}

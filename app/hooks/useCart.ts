@@ -8,14 +8,26 @@ type CartDisplayData = {
   productName: string;
   subproductName?: string | null;
   variationImage?: string | null;
+  /** e.g. `Oak — RAL 9010`; shown in quote emails. */
+  materialRalLabel?: string | null;
 };
 
 const canUseWindow = () => typeof window !== "undefined";
 const sanitizeProductName = (value: string) =>
   value.replaceAll("<red>", "").replaceAll("</red>", "").trim();
 
-const buildCartItemId = (payload: AddToCartPayload) =>
-  [payload.productId, payload.subproductId ?? "none", payload.variationId].join(":");
+const buildCartItemId = (payload: AddToCartPayload) => {
+  const matSeg =
+    [...payload.selectedMaterialIds].sort().join("|") || "none";
+  const ralSeg = [...payload.selectedRalIds].sort().join("|") || "none";
+  return [
+    payload.productId,
+    payload.subproductId ?? "none",
+    payload.variationId ?? "none",
+    matSeg,
+    ralSeg,
+  ].join(":");
+};
 
 const readCartFromStorage = (): CartItem[] => {
   if (!canUseWindow()) return [];
@@ -78,6 +90,8 @@ export const useCart = () => {
                   selectedRalIds: payload.selectedRalIds,
                   unitPrice: payload.unitPrice,
                   priceVisible: payload.priceVisible,
+                  materialRalLabel:
+                    displayData.materialRalLabel ?? item.materialRalLabel ?? null,
                 }
               : item
           )
@@ -89,6 +103,7 @@ export const useCart = () => {
               productName: sanitizeProductName(displayData.productName),
               subproductName: displayData.subproductName ?? null,
               variationImage: displayData.variationImage ?? null,
+              materialRalLabel: displayData.materialRalLabel ?? null,
               addedAt: Date.now(),
             },
           ];

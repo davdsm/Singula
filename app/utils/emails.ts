@@ -429,11 +429,6 @@ export const getEmailBody = (
                 ? `<p style="margin: 0; margin-bottom: 8px;"><strong>${t.fields.productsDetails}</strong>:</p>${quoteData.productsTable}`
                 : `<p style="margin: 0; margin-bottom: 16px;"><strong>${t.fields.products}</strong>: ${quoteData?.products || ''}</p>`
             }
-            ${
-              quoteData?.productsSummary
-                ? `<p style="margin: 0; margin-top: 16px; margin-bottom: 8px;"><strong>${t.fields.orderSummary}</strong>:</p>${quoteData.productsSummary}`
-                : ""
-            }
             ${quoteData?.attachment ? `<p style="margin: 0; margin-bottom: 16px;"><strong>${t.fields.attachment}</strong>: ${quoteData.attachment}</p>` : ''}
             ${ref ? `<p style="margin: 0; margin-bottom: 16px;"><strong>${t.fields.reference}</strong>: #${ref}</p>` : ''}
           </div>
@@ -457,11 +452,6 @@ export const getEmailBody = (
               ${
                 quoteData?.productsTable
                   ? `<strong>${t.fields.productsDetails}</strong><br><br>${quoteData.productsTable}<br><br>`
-                  : ""
-              }
-              ${
-                quoteData?.productsSummary
-                  ? `<strong>${t.fields.orderSummary}</strong><br><br>${quoteData.productsSummary}<br><br>`
                   : ""
               }
               ${t.thankYouMessage}<br>

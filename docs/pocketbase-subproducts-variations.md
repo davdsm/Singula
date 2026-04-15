@@ -1,63 +1,54 @@
-# PocketBase setup for product subproducts and variations
+# PocketBase: subproducts and PDP configurator
 
 Apply these changes in your PocketBase admin.
 
-## 1) Collection: `Subprodutos`
+## 1) Collection: `Produtos` (configurator fields)
 
-Create collection `Subprodutos` with:
+Add relations on **`Produtos`**:
 
-- `product` (relation -> `Produtos`, max select: 1, required)
-- `name_pt` (text, required)
-- `name_en` (text)
-- `name_es` (text)
-- `name_fr` (text)
-- `name_de` (text)
-- `image` (file, max select: 1, optional)
+- **`materiais_disponiveis`** (relation → `Materiais`, max select: many) — materials the customer can choose on the PDP for this product.
+- **`ral_disponiveis`** (relation → `Cores_Ral`, max select: many) — RAL colors available for this product on the PDP.
+
+**Deprecated / remove from PDP (and from this product schema when ready):**
+
+- **`cores_recomendado`** — no longer used by the storefront; RAL choice moved into the configurator via `ral_disponiveis`.
+
+List/read rules must allow the site to **`expand=materiais_disponiveis,ral_disponiveis`** (plus existing expands) on `Produtos`.
+
+## 2) Collection: `Subprodutos`
+
+Unchanged intent: each row is a variant “type” (e.g. bench, chair, table) for a product.
+
+- `product` (relation → `Produtos`, max select: 1, required)
+- `name_pt` (text, required) + other locale names
+- `image` (file, optional)
 - `reference` (text)
 - `order` (number)
 - `active` (bool, default `true`)
 
-Recommended list rule (read from public website):
+Recommended list rule: `active = true`
 
-- `active = true`
+Legacy field aliases still accepted by the API client if present: `products` instead of `product`, `ref` instead of `reference`.
 
-## 2) Collection: `Variacoes`
+## 3) Collection: `Variacoes` (legacy)
 
-Create collection `Variacoes` with:
+The **PDP configurator no longer reads `Variacoes`**. Quote lines are **composite**: subproduct + material + RAL chosen from product-level lists, without matching a variation row.
 
-- `product` (relation -> `Produtos`, max select: 1, required)
-- `subproduct` (relation -> `Subprodutos`, max select: 1, optional)
-- `image` (file, max select: 1, optional)
-- `reference` (text, required)
-- `price` (number, optional)
-- `price_visible` (bool, default `false`)
-- `materials` (relation -> `Materiais`, max select: many)
-- `ral_colors` (relation -> `Cores_Ral`, max select: many)
-- `order` (number)
-- `active` (bool, default `true`)
+You may keep the collection for data history or other tools; the storefront does not fetch it for product configuration.
 
-Recommended list rule (read from public website):
+## 4) PDP flow
 
-- `active = true`
+1. User picks a **subproduct** (if the product has any).
+2. User picks **material** from `materiais_disponiveis`.
+3. User picks **RAL** from `ral_disponiveis`.
+4. **Add to quote** sends a cart line with those ids (no `Variacoes` id).
 
-## 3) Data rules used by frontend
+If there are **no subproducts** and **no** material/RAL lists: **Add to quote** for the base product only.
 
-- If a product has one or more `Subprodutos`, users must select:
-  1) subproduct
-  2) one variation linked to that subproduct (`Variacoes.subproduct` filled)
-- If a product has no subproducts, users select directly from variations where
-  `Variacoes.subproduct` is empty.
+If there are **no subproducts** but **lists exist**: material and RAL are **required** when their lists are non-empty.
 
-Note: current frontend also accepts legacy aliases already present in your data:
-- `Subprodutos.products` (instead of `product`)
-- `Subprodutos.ref` / `Variacoes.ref` (instead of `reference`)
-- `Variacoes.ral` (instead of `ral_colors`)
+## 5) Seed examples
 
-## 4) Seed examples to test
-
-- Product A:
-  - 2 subproducts
-  - each subproduct has 2+ variations
-- Product B:
-  - no subproducts
-  - 2+ direct variations (`subproduct` empty)
+- Product with 3 subproducts, `materiais_disponiveis` + `ral_disponiveis` filled.
+- Product with no subproducts, only lists → configurator shows material + RAL then add.
+- Product with nothing → simple “add to quote” only.

@@ -26,6 +26,11 @@ export const ProductMaterials = ({ product }: { product: Product }) => {
     setModalContent(null);
   };
 
+  const finishings = product.acabamento
+    .split(",")
+    .map((s) => s.trim())
+    .filter(Boolean);
+
   return (
     <>
       <section className="relative bg-white pt-8 md:pt-12 px-4 md:px-40 overflow-hidden">
@@ -58,21 +63,24 @@ export const ProductMaterials = ({ product }: { product: Product }) => {
                 </div>
               </div>
 
-              <div className="mb-6 md:mb-8">
-                <h3 className="text-xl md:text-2xl lg:text-3xl font-bold mb-4 md:mb-6 uppercase tracking-wider">
-                  {t("product.materials.finishes.title")}
-                </h3>
+              {finishings.length > 0 && (
+                <div className="mb-6 md:mb-8">
+                  <h3 className="text-xl md:text-2xl lg:text-3xl font-bold mb-4 md:mb-6 uppercase tracking-wider">
+                    {t("product.materials.finishes.title")}
+                  </h3>
 
-                <div className="space-y-3 md:space-y-4">
-                  {product.acabamento
-                    .split(",")
-                    .map((acab: string, index: number) => (
-                      <UnifiedHoverItem key={`finish-${index}`} isClickable={false}>
+                  <div className="space-y-3 md:space-y-4">
+                    {finishings.map((acab: string, index: number) => (
+                      <UnifiedHoverItem
+                        key={`finish-${index}-${acab}`}
+                        isClickable={false}
+                      >
                         <span>{acab}</span>
                       </UnifiedHoverItem>
                     ))}
+                  </div>
                 </div>
-              </div>
+              )}
 
               {/* {product.pesos.length > 0 && (
                 <div>
@@ -96,13 +104,13 @@ export const ProductMaterials = ({ product }: { product: Product }) => {
               whileInView={{ x: 0, opacity: 1 }}
               transition={{ duration: 1, ease: "easeOut", delay: 0.4 }}
               viewport={{ amount: 0.2 }}
-              className="flex items-center flex-1 order-2"
+              className="flex-1 order-2 w-full"
             >
-              <div className="w-full h-full">
+              <div className="relative h-72 w-full sm:h-80 md:h-96 lg:h-full lg:min-h-[58vh]">
                 <Image
                   src={product.banner || ""}
                   alt={t("product.materials.context.alt")}
-                  className="w-full h-48 sm:h-64 md:h-full object-center lg:h-full object-cover rounded-2xl "
+                  className="absolute inset-0 h-full w-full object-cover object-center rounded-2xl"
                 />
               </div>
             </motion.div>
