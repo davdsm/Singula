@@ -122,11 +122,11 @@ export const ProductGallery = ({ product }: { product: Product }) => {
                 items={product.SegundaMeio.map((imagem: string, index: number) => (
                   <div
                     key={`segunda-meio-slide-${index}`}
-                    className="relative w-full h-[80vh] flex flex-col items-center pr-2 md:pr-3"
+                    className="relative w-full h-[68vh] flex flex-col items-center pr-2 md:pr-3"
                   >
                     <div className="min-h-0 flex-1 w-full relative">
                       <Image
-                        className="rounded-2xl absolute inset-0 h-full w-full object-cover"
+                        className="rounded-2xl border border-[#F5F5F5] absolute inset-0 h-full w-full object-cover"
                         src={imagem || ""}
                         alt={`${product.name} — ${index + 1}`}
                       />

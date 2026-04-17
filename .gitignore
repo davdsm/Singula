@@ -8,5 +8,6 @@ node_modules
 .netlify
 
 # Ignore storage and backups folder
+api/
 api/data/storage/
 api/data/backups/

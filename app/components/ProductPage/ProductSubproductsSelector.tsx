@@ -35,6 +35,7 @@ export const ProductSubproductsSelector = ({
       }))}
       selectedId={selectedSubproductId}
       onSelect={onSelect}
+      imageFit="contain"
     />
   );
 };

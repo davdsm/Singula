@@ -6,6 +6,8 @@ const CART_UPDATED_EVENT = "singula:cart-updated";
 
 type CartDisplayData = {
   productName: string;
+  /** Canonical PDP path (e.g. `/products/exterior_comfort/conjunto_nero`). */
+  productPath?: string | null;
   subproductName?: string | null;
   variationImage?: string | null;
   /** e.g. `Oak — RAL 9010`; shown in quote emails. */
@@ -90,6 +92,7 @@ export const useCart = () => {
                   selectedRalIds: payload.selectedRalIds,
                   unitPrice: payload.unitPrice,
                   priceVisible: payload.priceVisible,
+                  productPath: displayData.productPath ?? item.productPath ?? null,
                   materialRalLabel:
                     displayData.materialRalLabel ?? item.materialRalLabel ?? null,
                 }
@@ -101,6 +104,7 @@ export const useCart = () => {
               ...payload,
               id: nextId,
               productName: sanitizeProductName(displayData.productName),
+              productPath: displayData.productPath ?? null,
               subproductName: displayData.subproductName ?? null,
               variationImage: displayData.variationImage ?? null,
               materialRalLabel: displayData.materialRalLabel ?? null,

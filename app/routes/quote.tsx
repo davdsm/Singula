@@ -11,6 +11,7 @@ import { useSendMail } from "~/hooks/useEmail";
 import useDB from "~/hooks/useDB";
 import { DelayedLink } from "~/components/Elements/Link";
 import { useCart } from "~/hooks/useCart";
+import { useProducts } from "~/hooks/useProducts";
 import type { CartItem } from "~/hooks/interfaces";
 
 const isPlainBaseQuoteLine = (item: CartItem) =>
@@ -125,6 +126,7 @@ const QuotePage = () => {
   const db = useDB();
   const { i18n } = useTranslation();
   const { items: cartItems, removeItem, updateQuantity, clearCart } = useCart();
+  const { products: catalogProducts } = useProducts({});
   const quoteLang = i18n.language as "pt" | "en" | "es" | "fr" | "de";
 
   useEffect(() => {
@@ -164,6 +166,14 @@ const QuotePage = () => {
     if (u.startsWith("http://") || u.startsWith("https://")) return u;
     if (u.startsWith("//")) return `https:${u}`;
     return u.startsWith("/") ? `https://singula.pt${u}` : `https://singula.pt/${u}`;
+  };
+
+  const getCartItemProductHref = (item: CartItem) => {
+    const savedPath = item.productPath?.trim();
+    if (savedPath) return savedPath;
+    const fromCatalog = catalogProducts.find((p) => p.slug === item.productSlug)?.link;
+    if (fromCatalog) return fromCatalog;
+    return `/products/${item.productSlug}`;
   };
 
   const buildQuoteTableHtml = (orderRef: string) => {
@@ -443,7 +453,7 @@ const QuotePage = () => {
   }, 0);
 
   return (
-    <main className="bg-white overflow-x-hidden">
+    <main className="bg-white overflow-x-hidden font-[Arial] text-[13px] md:text-[14px]">
       {!EmailLoading && !Sent && (
         <motion.section
           initial={{ y: 10, opacity: 0 }}
@@ -624,31 +634,31 @@ const QuotePage = () => {
                 </div>
               </div>
               <div className="products overflow-x-auto">
-                <table className="w-full min-w-[760px] text-black border border-[#E5E5E5] rounded-xl overflow-hidden">
+                <table className="w-full min-w-[760px] text-black border border-[#E5E5E5] text-[12px]">
                   <thead className="bg-[#F5F5F5]">
                     <tr>
-                      <th className="text-left px-3 py-2 text-xs uppercase">
+                      <th className="text-left px-3 py-2 text-[10px] uppercase">
                         {t("quote.photo", { defaultValue: "Foto" })}
                       </th>
-                      <th className="text-left px-3 py-2 text-xs uppercase">
+                      <th className="text-left px-3 py-2 text-[10px] uppercase">
                         {t("quote.product", { defaultValue: "Produto" })}
                       </th>
-                      <th className="text-left px-3 py-2 text-xs uppercase">
+                      <th className="text-left px-3 py-2 text-[10px] uppercase">
                         {t("quote.subproduct", { defaultValue: "Subproduto" })}
                       </th>
-                      <th className="text-left px-3 py-2 text-xs uppercase">
+                      <th className="text-left px-3 py-2 text-[10px] uppercase">
                         {t("quote.variation", { defaultValue: "Variação" })}
                       </th>
-                      <th className="text-left px-3 py-2 text-xs uppercase">
+                      <th className="text-left px-3 py-2 text-[10px] uppercase">
                         {t("quote.unitPrice", { defaultValue: "Preço unit." })}
                       </th>
-                      <th className="text-left px-3 py-2 text-xs uppercase">
+                      <th className="text-left px-3 py-2 text-[10px] uppercase">
                         {t("quote.qty", { defaultValue: "Quantidade" })}
                       </th>
-                      <th className="text-left px-3 py-2 text-xs uppercase">
+                      <th className="text-left px-3 py-2 text-[10px] uppercase">
                         {t("quote.total", { defaultValue: "Total" })}
                       </th>
-                      <th className="text-left px-3 py-2 text-xs uppercase">
+                      <th className="text-left px-3 py-2 text-[10px] uppercase">
                         {t("quote.remove", { defaultValue: "Remover" })}
                       </th>
                     </tr>
@@ -657,23 +667,30 @@ const QuotePage = () => {
                     {cartItems.map((item) => (
                       <tr key={item.id} className="border-t border-[#EFEFEF]">
                         <td className="px-3 py-2">
-                          {item.variationImage ? (
-                            <Image
-                              src={item.variationImage}
-                              alt={sanitizeProductName(item.productName)}
-                              className="w-10 h-10 rounded object-cover"
-                            />
-                          ) : (
-                            <span className="w-10 h-10 rounded bg-gray-200 inline-block" />
-                          )}
+                          <DelayedLink to={getCartItemProductHref(item)}>
+                            {item.variationImage ? (
+                              <Image
+                                src={item.variationImage}
+                                alt={sanitizeProductName(item.productName)}
+                                className="w-10 h-10 rounded object-contain"
+                              />
+                            ) : (
+                              <span className="w-10 h-10 rounded bg-gray-200 inline-block" />
+                            )}
+                          </DelayedLink>
                         </td>
-                        <td className="px-3 py-2 text-sm font-semibold">
-                          {sanitizeProductName(item.productName)}
+                        <td className="px-3 py-2 text-[12px] font-semibold">
+                          <DelayedLink
+                            to={getCartItemProductHref(item)}
+                            className="hover:underline underline-offset-2"
+                          >
+                            {sanitizeProductName(item.productName)}
+                          </DelayedLink>
                         </td>
-                        <td className="px-3 py-2 text-sm">
+                        <td className="px-3 py-2 text-[12px]">
                           {item.subproductName || "-"}
                         </td>
-                        <td className="px-3 py-2 text-sm">
+                        <td className="px-3 py-2 text-[12px]">
                           <span className="font-medium block">
                             {item.variationId != null
                               ? item.variationReference
@@ -684,12 +701,12 @@ const QuotePage = () => {
                                 : item.variationReference}
                           </span>
                           {matRalSummaryPlain(item) ? (
-                            <span className="text-xs text-gray-600 block mt-0.5">
+                            <span className="text-[11px] text-gray-600 block mt-0.5">
                               {matRalSummaryPlain(item)}
                             </span>
                           ) : null}
                         </td>
-                        <td className="px-3 py-2 text-sm whitespace-nowrap">
+                        <td className="px-3 py-2 text-[12px] whitespace-nowrap">
                           {item.priceVisible && item.unitPrice !== null
                             ? formatCurrency(item.unitPrice)
                             : t("quote.onRequest", { defaultValue: "Sob consulta" })}
@@ -700,11 +717,11 @@ const QuotePage = () => {
                             min={1}
                             value={item.quantity}
                             onChange={(e) => updateQuantity(item.id, Number(e.target.value) || 1)}
-                            className="font-sans font-regular w-20 p-2 rounded-lg text-xs outline-none bg-[#f5f5f5] text-black border border-[#D2D2D2]"
+                            className="font-sans font-regular w-16 p-1.5 rounded-lg text-[12px] outline-none bg-[#f5f5f5] text-black border border-[#D2D2D2]"
                             required
                           />
                         </td>
-                        <td className="px-3 py-2 text-sm whitespace-nowrap">
+                        <td className="px-3 py-2 text-[12px] whitespace-nowrap">
                           {item.priceVisible && item.unitPrice !== null
                             ? formatCurrency(item.unitPrice * item.quantity)
                             : t("quote.onRequest", { defaultValue: "Sob consulta" })}

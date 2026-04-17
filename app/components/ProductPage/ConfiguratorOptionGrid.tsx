@@ -15,6 +15,8 @@ type ConfiguratorOptionGridProps = {
   onSelect: (id: string) => void;
   /** Tight grid and small tiles (e.g. RAL swatches), up to 8 per row on large screens. */
   density?: "default" | "compact";
+  /** Image fit mode per option card. */
+  imageFit?: "cover" | "contain";
 };
 
 /**
@@ -26,6 +28,7 @@ export function ConfiguratorOptionGrid({
   selectedId,
   onSelect,
   density = "default",
+  imageFit = "cover",
 }: ConfiguratorOptionGridProps) {
   if (options.length === 0) return null;
 
@@ -65,8 +68,8 @@ export function ConfiguratorOptionGrid({
                     alt={opt.name}
                     className={
                       compact
-                        ? "w-full aspect-square max-h-14 sm:max-h-16 object-cover"
-                        : "w-full h-32 md:h-44 object-cover"
+                        ? `w-full aspect-square max-h-14 sm:max-h-16 ${imageFit === "contain" ? "object-contain" : "object-cover"}`
+                        : `w-full h-32 md:h-44 ${imageFit === "contain" ? "object-contain" : "object-cover"}`
                     }
                   />
                 ) : (
@@ -91,7 +94,9 @@ export function ConfiguratorOptionGrid({
                   {opt.detail ? (
                     <p
                       className={`text-gray-500 mt-0.5 uppercase line-clamp-1 ${
-                        compact ? "text-[8px] sm:text-[9px]" : "text-xs md:text-sm mt-1"
+                        compact
+                          ? "text-[8px] sm:text-[9px] font-[Arial]"
+                          : "text-xs md:text-sm mt-1 font-[Arial]"
                       }`}
                     >
                       {opt.detail}

@@ -151,6 +151,8 @@ export interface AddToCartPayload {
 export interface CartItem extends AddToCartPayload {
   id: string;
   productName: string;
+  /** Canonical PDP URL with subcategory + product slug when known. */
+  productPath?: string | null;
   subproductName: string | null;
   variationImage: string | null;
   addedAt: number;

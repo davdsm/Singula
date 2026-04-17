@@ -58,6 +58,9 @@ export const ProductVariantConfigurator = ({
     .replaceAll("<red>", "")
     .replaceAll("</red>", "")
     .trim();
+  const productPath = product.subcategory?.slug
+    ? `/products/${product.subcategory.slug}/${product.slug}`
+    : `/products/${product.slug}`;
 
   const materiaisOpts = useMemo(
     () => toCardOptions(product.materiaisDisponiveis),
@@ -166,6 +169,7 @@ export const ProductVariantConfigurator = ({
 
     addItem(payload, {
       productName: sanitizedProductName,
+      productPath,
       subproductName: selectedSubproduct?.name ?? null,
       variationImage:
         selectedSubproduct?.image ?? product.ImagemPrincipal ?? null,
@@ -192,6 +196,7 @@ export const ProductVariantConfigurator = ({
     };
     addItem(payload, {
       productName: sanitizedProductName,
+      productPath,
       subproductName: null,
       variationImage: product.ImagemPrincipal,
     });
@@ -355,7 +360,7 @@ export const ProductVariantConfigurator = ({
               density="compact"
               title={formatStepTitle(
                 ralTitleIndex,
-                t("product.variants.stepRal", { defaultValue: "Cor RAL" })
+                t("product.variants.stepRal", { defaultValue: "Cor" })
               )}
               options={ralOpts}
               selectedId={selectedRalId || null}

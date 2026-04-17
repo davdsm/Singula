@@ -82,7 +82,7 @@
   "product.variants.addedToQuote": "Adicionado ao pedido de cotação.",
   "product.variants.none": "Este produto pode ser pedido por cotação sem escolha de versão.",
   "product.variants.stepMaterial": "Material",
-  "product.variants.stepRal": "Cor RAL",
+  "product.variants.stepRal": "Cor",
   "product.variants.chooseSubproduct": "Escolha o Produto",
   "product.variants.selectSubproductFirst": "Selecione primeiro um subproduto para continuar.",
   "product.variants.stepsHint": "Siga os passos por ordem: versão, material e cor.",
