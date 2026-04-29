@@ -358,6 +358,7 @@ export const ProductVariantConfigurator = ({
           {showRalStep && (
             <ConfiguratorOptionGrid
               density="compact"
+              imageFit="cover"
               title={formatStepTitle(
                 ralTitleIndex,
                 t("product.variants.stepRal", { defaultValue: "Cor" })

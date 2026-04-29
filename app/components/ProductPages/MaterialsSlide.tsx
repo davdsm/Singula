@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { CarouselComponent } from "../Elements/Carousel";
 import { Image } from "../Elements/Image";
 
 import "./index.scss";
@@ -48,29 +47,30 @@ export const MaterialsSlide = ({
       transition={{ duration: 1, ease: "easeInOut", delay: 0.4 }}
       viewport={{ amount: 0.3 }}
       id="material-slider"
-      className="overflow-hidden pb-20"
+      className="pb-20 px-6 md:px-20"
     >
-      <CarouselComponent
-        itemClassName="w-[50px] basis-1/2 md:basis-1/6"
-        className="w-full"
-        loop={true}
-        autoplay
-        items={list.map((item, index) => (
+      <ul className="list-none p-0 m-0 flex flex-row justify-between align-start flex-wrap w-full">
+        {list.map((item, index) => (
+          <li key={`material-${index}`} className="w-[23%] md:w-[18%] pb-8">
           <button
-            key={`material-${index}`}
             type="button"
-            className="text-center flex justify-center flex-col items-center w-full"
+            className="text-center flex justify-center flex-col items-center w-full transition-colors"
             onClick={() => handleMaterialButton(item)}
           >
-            <Image
-              src={item.image || ""}
-              alt={item.name}
-              className="rounded-full w-[100px] h-[100px] md:w-[60px] md:h-[60px] object-cover"
-            />
-            <p className="text-md md:text-lg text-white py-2">{item.name}</p>
+            <div className="w-full h-[5rem] md:h-[10rem] rounded-2xl overflow-hidden">
+              <Image
+                src={item.image || ""}
+                alt={item.name}
+                className="w-full h-full block object-cover"
+              />
+            </div>
+            <p className="text-md md:text-xl text-black w-full text-center py-4">
+              {item.name}
+            </p>
           </button>
+          </li>
         ))}
-      />
+      </ul>
     </motion.div>
   );
 };

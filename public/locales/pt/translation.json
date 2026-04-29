@@ -40,7 +40,7 @@
   "footer.newsletter.placeholder": "Subscrever a Newsletter",
   "footer.newsletter.terms": "Li e aceito a política de privacidade.",
 
-  "ral.title": "CORES RAL",
+  "ral.title": "CORES",
   "ral.subtitle": "recomendamos",
 
   "hpl.title": "COMPACTO HPL",
@@ -88,7 +88,7 @@
   "product.variants.stepsHint": "Siga os passos por ordem: versão, material e cor.",
   "product.variants.selectMaterialFirst": "Escolha um material para ver as cores disponíveis.",
   "product.variants.materials": "Material",
-  "product.variants.ral": "RAL",
+  "product.variants.ral": "Cor",
   "product.variants.viewCart": "Ver cotação",
 
   "quote.title": "Pedido de Cotação",

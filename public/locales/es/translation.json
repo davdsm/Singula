@@ -40,7 +40,7 @@
   "footer.newsletter.placeholder": "Suscribirse al Boletín",
   "footer.newsletter.terms": "He leído y acepto la política de privacidad.",
 
-  "ral.title": "COLORES RAL",
+  "ral.title": "COLORES",
   "ral.subtitle": "recomendados",
 
   "hpl.title": "COMPACTO HPL",
@@ -82,13 +82,13 @@
   "product.variants.addedToQuote": "Añadido a su solicitud de presupuesto.",
   "product.variants.none": "Este producto puede solicitarse en presupuesto sin elegir una versión.",
   "product.variants.stepMaterial": "Material",
-  "product.variants.stepRal": "Color RAL",
+  "product.variants.stepRal": "Color",
   "product.variants.chooseSubproduct": "Elija el producto",
   "product.variants.selectSubproductFirst": "Elija primero un subproducto para continuar.",
   "product.variants.stepsHint": "Siga los pasos en orden: versión, material y color.",
   "product.variants.selectMaterialFirst": "Elija un material para ver los colores disponibles.",
   "product.variants.materials": "Material",
-  "product.variants.ral": "RAL",
+  "product.variants.ral": "Color",
   "product.variants.viewCart": "Ver carrito",
 
   "quote.title": "Solicitud de Presupuesto",

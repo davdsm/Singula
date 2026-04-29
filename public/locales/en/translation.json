@@ -40,7 +40,7 @@
   "footer.newsletter.placeholder": "Subscribe to Newsletter",
   "footer.newsletter.terms": "I have read and accept the privacy policy.",
 
-  "ral.title": "RAL COLORS",
+  "ral.title": "COLORS",
   "ral.subtitle": "recommended",
 
   "hpl.title": "HPL COMPACT",
@@ -82,13 +82,13 @@
   "product.variants.addedToQuote": "Added to your quote request.",
   "product.variants.none": "This product can be requested for a quote without choosing a version.",
   "product.variants.stepMaterial": "Material",
-  "product.variants.stepRal": "RAL colour",
+  "product.variants.stepRal": "Colour",
   "product.variants.chooseSubproduct": "Choose the product",
   "product.variants.selectSubproductFirst": "Choose a subproduct first to continue.",
   "product.variants.stepsHint": "Follow the steps in order: version, material, then colour.",
   "product.variants.selectMaterialFirst": "Choose a material to see available colours.",
   "product.variants.materials": "Material",
-  "product.variants.ral": "RAL",
+  "product.variants.ral": "Colour",
   "product.variants.viewCart": "View cart",
 
   "quote.title": "Quote Request",

@@ -1,20 +1,10 @@
 import { motion } from "framer-motion";
-import { MaterialsSlide } from "./MaterialsSlide";
 import { parseTextWithMainColor } from "../utils";
 
 export const About = ({
-  setModalContent,
   text,
-  list,
 }: {
-  setModalContent: (content: { title: string; img?: string; text: string }) => void;
   text: string;
-  list: {
-    slug: string;
-    name: string;
-    text: string;
-    image?: string;
-  }[];
 }) => {
   return (
     <section className="bg-black">
@@ -27,7 +17,6 @@ export const About = ({
       >
         {parseTextWithMainColor(text)}
       </motion.h2>
-      <MaterialsSlide list={list} setModalContent={setModalContent} />
     </section>
   );
 };

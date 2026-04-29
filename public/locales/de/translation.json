@@ -40,7 +40,7 @@
   "footer.newsletter.placeholder": "Newsletter abonnieren",
   "footer.newsletter.terms": "Ich habe die Datenschutzrichtlinie gelesen und akzeptiere sie.",
 
-  "ral.title": "RAL-FARBEN",
+  "ral.title": "FARBEN",
   "ral.subtitle": "empfohlen",
 
   "hpl.title": "HPL-KOMPAKT",
@@ -82,13 +82,13 @@
   "product.variants.addedToQuote": "Zur Angebotsanfrage hinzugefügt.",
   "product.variants.none": "Dieses Produkt kann ohne Versionswahl angefragt werden.",
   "product.variants.stepMaterial": "Material",
-  "product.variants.stepRal": "RAL-Farbe",
+  "product.variants.stepRal": "Farbe",
   "product.variants.chooseSubproduct": "Wählen Sie das Produkt",
   "product.variants.selectSubproductFirst": "Wählen Sie zuerst ein Unterprodukt.",
   "product.variants.stepsHint": "Folgen Sie der Reihenfolge: Version, Material, dann Farbe.",
   "product.variants.selectMaterialFirst": "Wählen Sie ein Material, um die verfügbaren Farben zu sehen.",
   "product.variants.materials": "Material",
-  "product.variants.ral": "RAL",
+  "product.variants.ral": "Farbe",
   "product.variants.viewCart": "Warenkorb ansehen",
 
   "quote.title": "Angebotsanfrage",

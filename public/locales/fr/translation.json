@@ -40,7 +40,7 @@
   "footer.newsletter.placeholder": "S’abonner à la newsletter",
   "footer.newsletter.terms": "J’ai lu et j’accepte la politique de confidentialité.",
 
-  "ral.title": "COULEURS RAL",
+  "ral.title": "COULEURS",
   "ral.subtitle": "recommandées",
 
   "hpl.title": "COMPACT HPL",
@@ -82,13 +82,13 @@
   "product.variants.addedToQuote": "Ajouté à votre demande de devis.",
   "product.variants.none": "Ce produit peut être demandé en devis sans choisir de version.",
   "product.variants.stepMaterial": "Matériau",
-  "product.variants.stepRal": "Couleur RAL",
+  "product.variants.stepRal": "Couleur",
   "product.variants.chooseSubproduct": "Choisissez le produit",
   "product.variants.selectSubproductFirst": "Choisissez d'abord un sous-produit pour continuer.",
   "product.variants.stepsHint": "Suivez les étapes dans l’ordre : version, matériau, puis couleur.",
   "product.variants.selectMaterialFirst": "Choisissez un matériau pour voir les couleurs disponibles.",
   "product.variants.materials": "Matériau",
-  "product.variants.ral": "RAL",
+  "product.variants.ral": "Couleur",
   "product.variants.viewCart": "Voir le panier",
 
   "quote.title": "Demande de Devis",

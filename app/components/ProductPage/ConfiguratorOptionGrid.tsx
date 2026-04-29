@@ -28,7 +28,7 @@ export function ConfiguratorOptionGrid({
   selectedId,
   onSelect,
   density = "default",
-  imageFit = "cover",
+  imageFit = "contain",
 }: ConfiguratorOptionGridProps) {
   if (options.length === 0) return null;
 
@@ -95,8 +95,8 @@ export function ConfiguratorOptionGrid({
                     <p
                       className={`text-gray-500 mt-0.5 uppercase line-clamp-1 ${
                         compact
-                          ? "text-[8px] sm:text-[9px] font-[Arial]"
-                          : "text-xs md:text-sm mt-1 font-[Arial]"
+                          ? "text-[10px] sm:text-[11px] font-[Arial]"
+                          : "text-sm md:text-base mt-1 font-[Arial]"
                       }`}
                     >
                       {opt.detail}
