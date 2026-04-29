@@ -49,9 +49,9 @@ export const MaterialsSlide = ({
       id="material-slider"
       className="pb-20 px-6 md:px-20"
     >
-      <ul className="list-none p-0 m-0 flex flex-row justify-between align-start flex-wrap w-full">
+      <ul className="list-none p-0 m-0 grid grid-cols-4 md:grid-cols-5 gap-x-[2.66%] md:gap-x-[2.5%] w-full">
         {list.map((item, index) => (
-          <li key={`material-${index}`} className="w-[23%] md:w-[18%] pb-8">
+          <li key={`material-${index}`} className="pb-8">
           <button
             type="button"
             className="text-center flex justify-center flex-col items-center w-full transition-colors"
