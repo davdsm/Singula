@@ -102,12 +102,13 @@ export const ProductGallery = ({ product }: { product: Product }) => {
               </motion.span>
             </div>
           ) : (
-            <div className="relative left-1/2 -translate-x-1/2 w-screen overflow-hidden">
             <motion.div
               initial={{ y: 20, opacity: 0 }}
               whileInView={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.8, ease: "easeInOut" }}
               viewport={{ amount: 0.15 }}
+              className="relative w-screen overflow-hidden"
+              style={{ left: "50%", marginLeft: "-50vw" }}
             >
               <CarouselComponent
                 loop
@@ -137,7 +138,6 @@ export const ProductGallery = ({ product }: { product: Product }) => {
                 ))}
               />
             </motion.div>
-            </div>
           )}
         </div>
       )}
