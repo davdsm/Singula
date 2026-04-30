@@ -116,8 +116,8 @@ export const ProductGallery = ({ product }: { product: Product }) => {
                 arrows
                 arrowsInset
                 className="w-full min-w-0"
-                emblaOpts={{ align: "center", containScroll: false }}
-                itemClassName="min-w-0 shrink-0 grow-0 pl-2 md:pl-3 basis-[85%] md:basis-[45%] lg:basis-[40%]"
+                emblaOpts={{ align: "center", loop: true, containScroll: false }}
+                itemClassName="min-w-0 shrink-0 grow-0 pl-2 md:pl-3 basis-4/5 md:basis-1/2 lg:basis-1/3"
                 items={product.SegundaMeio.map((imagem: string, index: number) => (
                   <div
                     key={`segunda-meio-slide-${index}`}
