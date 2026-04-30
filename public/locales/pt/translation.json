@@ -85,7 +85,7 @@
   "product.variants.stepRal": "Cor",
   "product.variants.chooseSubproduct": "Escolha o Produto",
   "product.variants.selectSubproductFirst": "Selecione primeiro um subproduto para continuar.",
-  "product.variants.stepsHint": "Siga os passos por ordem: versão, material e cor.",
+  "product.variants.stepsHint": "Siga os passos.",
   "product.variants.selectMaterialFirst": "Escolha um material para ver as cores disponíveis.",
   "product.variants.materials": "Material",
   "product.variants.ral": "Cor",

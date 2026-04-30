@@ -297,14 +297,14 @@ export const ProductVariantConfigurator = ({
   const ralTitleIndex = materialTitleIndex + (hasMaterialList ? 1 : 0);
 
   return (
-    <section className="w-full mt-12">
+    <section className="w-full mt-12" style={{ fontFamily: 'Arial, sans-serif' }}>
       <h2 className="text-black text-2xl md:text-3xl font-bold mb-2 uppercase">
         {t("product.variants.title", { defaultValue: "Configurar produto" })}
       </h2>
       {stepCount > 1 && (
         <p className="text-gray-500 text-sm md:text-base mb-8">
           {t("product.variants.stepsHint", {
-            defaultValue: "Siga os passos por ordem: versão, material e cor.",
+            defaultValue: "Siga os passos.",
           })}
         </p>
       )}

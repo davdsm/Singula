@@ -85,7 +85,7 @@
   "product.variants.stepRal": "Colour",
   "product.variants.chooseSubproduct": "Choose the product",
   "product.variants.selectSubproductFirst": "Choose a subproduct first to continue.",
-  "product.variants.stepsHint": "Follow the steps in order: version, material, then colour.",
+  "product.variants.stepsHint": "Follow the steps.",
   "product.variants.selectMaterialFirst": "Choose a material to see available colours.",
   "product.variants.materials": "Material",
   "product.variants.ral": "Colour",

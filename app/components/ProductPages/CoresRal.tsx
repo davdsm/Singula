@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
-import { Trans, useTranslation } from "react-i18next";
+import { Trans } from "react-i18next";
 import { parseTextWithMainColor } from "../utils";
 import { Image } from "../Elements/Image";
 
@@ -13,7 +12,6 @@ export const CoresRal = ({
   text: string;
   colors: { image: string; name: string; slug: string }[];
 }) => {
-  const { t } = useTranslation();
   return (
     <section id="ral-colors" className="bg-white w-[90%] m-auto py-20 px-8 md:px-40 md:pt-40 md:w-full">
       <motion.div
@@ -25,7 +23,6 @@ export const CoresRal = ({
         <header>
           <h3 className="text-4xl md:text-6xl font-bold text-black text-center">
             {parseTextWithMainColor(title)}
-            <span className="text-lg md:text-2xl">{t("ral.subtitle")}</span>
           </h3>
           <p className="text-md mx-auto md:text-lg text-black py-10 md:w-2/3">
             <Trans>{parseTextWithMainColor(text)}</Trans>
