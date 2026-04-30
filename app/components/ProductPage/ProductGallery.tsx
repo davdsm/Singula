@@ -51,7 +51,8 @@ export const ProductGallery = ({ product }: { product: Product }) => {
         breakpoint: 768,
         settings: {
           slidesToShow: 1,
-          centerPadding: "12vw",
+          centerMode: false,
+          centerPadding: "0",
         },
       },
     ],
