@@ -147,7 +147,7 @@ export const ProductGallery = ({ product }: { product: Product }) => {
                           >
                             <div className="min-h-0 flex-1 w-full relative">
                               <Image
-                                className="rounded-2xl border border-[#d9d9d9] absolute inset-0 h-full w-full object-contain"
+                                className="rounded-2xl border border-[#d9d9d9] absolute inset-0 h-full w-full object-cover"
                                 src={imagem || ""}
                                 alt={`${product.name} — ${imageIdx + 1}`}
                               />
