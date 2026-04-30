@@ -107,7 +107,7 @@ export const ProductGallery = ({ product }: { product: Product }) => {
               whileInView={{ y: 0, opacity: 1 }}
               transition={{ duration: 0.8, ease: "easeInOut" }}
               viewport={{ amount: 0.15 }}
-              className="relative w-full max-w-[min(100vw,1280px)] mx-auto px-4 md:px-8 overflow-visible"
+              className="relative left-1/2 -translate-x-1/2 w-screen overflow-hidden"
             >
               <CarouselComponent
                 loop
@@ -115,10 +115,9 @@ export const ProductGallery = ({ product }: { product: Product }) => {
                 autoplayInterval={5}
                 arrows
                 arrowsInset
-                viewportClassName="overflow-visible"
                 className="w-full min-w-0"
-                emblaOpts={{ align: "start", containScroll: "trimSnaps" }}
-                itemClassName="min-w-0 shrink-0 grow-0 pl-2 md:pl-3 basis-full md:basis-1/2 lg:basis-1/3"
+                emblaOpts={{ align: "center", containScroll: false }}
+                itemClassName="min-w-0 shrink-0 grow-0 pl-2 md:pl-3 basis-[85%] md:basis-[45%] lg:basis-[40%]"
                 items={product.SegundaMeio.map((imagem: string, index: number) => (
                   <div
                     key={`segunda-meio-slide-${index}`}
