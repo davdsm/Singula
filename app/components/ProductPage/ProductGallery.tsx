@@ -1,9 +1,28 @@
 import { motion } from "framer-motion";
 import { parseTextWithMainColor } from "../utils";
 import { Image } from "../Elements/Image";
-import { CarouselComponent } from "../Elements/Carousel";
 import { Product } from "~/hooks/interfaces";
 import { Trans } from "react-i18next";
+import Slider, { type CustomArrowProps, type Settings } from "react-slick";
+import "slick-carousel/slick/slick.css";
+
+const SlickArrow = ({
+  direction,
+  onClick,
+}: CustomArrowProps & { direction: "prev" | "next" }) => (
+  <button
+    type="button"
+    onClick={onClick}
+    aria-label={direction === "prev" ? "Previous slide" : "Next slide"}
+    className={`absolute top-1/2 z-30 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full border border-black bg-white text-black shadow-md hover:bg-black/5 ${
+      direction === "prev" ? "left-2 sm:left-4" : "right-2 sm:right-4"
+    }`}
+  >
+    <span className="-mt-0.5 block text-lg leading-none">
+      {direction === "prev" ? "‹" : "›"}
+    </span>
+  </button>
+);
 
 export const ProductGallery = ({ product }: { product: Product }) => {
   const firstRefs: string[] | undefined =
@@ -12,12 +31,31 @@ export const ProductGallery = ({ product }: { product: Product }) => {
     product.RefImagemMeio?.trim().split(",");
   const thirdRefs: string[] | undefined =
     product.RefSegundaMeio?.trim().split(",");
-  const segundaMeioPairs: string[][] = product.SegundaMeio
-    ? product.SegundaMeio.map((_img: string, idx: number) => {
-        const nextIdx = (idx + 1) % product.SegundaMeio!.length;
-        return [product.SegundaMeio![idx], product.SegundaMeio![nextIdx]];
-      })
-    : [];
+
+  const segundaMeioSettings: Settings = {
+    dots: false,
+    arrows: true,
+    infinite: true,
+    autoplay: true,
+    autoplaySpeed: 5000,
+    speed: 500,
+    centerMode: true,
+    centerPadding: "12vw",
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    swipeToSlide: true,
+    prevArrow: <SlickArrow direction="prev" />,
+    nextArrow: <SlickArrow direction="next" />,
+    responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1,
+          centerPadding: "12vw",
+        },
+      },
+    ],
+  };
 
   return (
     <section className="relative bg-white pt-8 md:pt-12 px-4 md:px-20 overflow-x-visible overflow-y-visible">
@@ -116,52 +154,24 @@ export const ProductGallery = ({ product }: { product: Product }) => {
               className="relative w-screen overflow-hidden"
               style={{ left: "50%", marginLeft: "-50vw" }}
             >
-              <CarouselComponent
-                loop
-                autoplay
-                autoplayInterval={5}
-                arrows
-                arrowsInset
-                viewportClassName="overflow-hidden"
-                className="w-full min-w-0"
-                emblaOpts={{
-                  align: "center",
-                  loop: true,
-                  containScroll: false,
-                  slidesToScroll: 1,
-                  skipSnaps: false,
-                }}
-                itemClassName="min-w-0 shrink-0 grow-0 pl-2 md:pl-3 basis-[90%] md:basis-[82%] lg:basis-[76%]"
-                items={segundaMeioPairs.map((pair: string[], slideIdx: number) => (
-                  <div
-                    key={`segunda-meio-slide-${slideIdx}`}
-                    className="relative w-full h-[40vh] flex flex-col items-center pr-2 md:pr-3"
-                  >
-                    <div className="min-h-0 flex-1 w-full grid grid-cols-2 gap-3">
-                      {pair.map((imagem: string, offset: number) => {
-                        const imageIdx = (slideIdx + offset) % product.SegundaMeio!.length;
-                        return (
-                          <div
-                            key={`segunda-meio-img-${slideIdx}-${offset}`}
-                            className="min-h-0 h-full flex flex-col"
-                          >
-                            <div className="min-h-0 flex-1 w-full relative">
-                              <Image
-                                className="rounded-2xl border border-[#d9d9d9] absolute inset-0 h-full w-full object-cover"
-                                src={imagem || ""}
-                                alt={`${product.name} — ${imageIdx + 1}`}
-                              />
-                            </div>
-                            <span className="shrink-0 block pt-2 w-full text-center text-black font-bold text-lg opacity-25">
-                              {thirdRefs?.[imageIdx] ?? ""}
-                            </span>
-                          </div>
-                        );
-                      })}
+              <Slider {...segundaMeioSettings}>
+                {product.SegundaMeio.map((imagem: string, index: number) => (
+                  <div key={`segunda-meio-slide-${index}`} className="px-2 md:px-3">
+                    <div className="relative flex h-[40vh] w-full flex-col items-center">
+                      <div className="relative min-h-0 w-full flex-1">
+                        <Image
+                          className="absolute inset-0 h-full w-full rounded-2xl border border-[#d9d9d9] object-cover"
+                          src={imagem || ""}
+                          alt={`${product.name} — ${index + 1}`}
+                        />
+                      </div>
+                      <span className="block w-full shrink-0 pt-2 text-center text-lg font-bold text-black opacity-25">
+                        {thirdRefs?.[index] ?? ""}
+                      </span>
                     </div>
                   </div>
                 ))}
-              />
+              </Slider>
             </motion.div>
           )}
         </div>
