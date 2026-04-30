@@ -54,9 +54,9 @@ export const CarouselComponent = ({
     intervalRef.current = setInterval(() => {
       if (!api) return;
 
-      if (api.canScrollNext()) {
+      if (loop || api.canScrollNext()) {
         api.scrollNext();
-      } else if (loop) {
+      } else {
         api.scrollTo(0);
       }
     }, autoplayInterval * 1000);
