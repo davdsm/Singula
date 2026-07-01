@@ -53,16 +53,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
             async
             src="https://www.googletagmanager.com/gtag/js?id=G-B178JV87VV"
           />
-          <script
-            dangerouslySetInnerHTML={{
-              __html: [
-                "window.dataLayer = window.dataLayer || [];",
-                "function gtag(){dataLayer.push(arguments);}",
-                "gtag(js, new Date());",
-                "gtag(config, G-B178JV87VV);",
-              ].join("\n"),
-            }}
-          />
+          <script src="/gtag-init.js" />
           <Meta />
           <meta charSet="utf-8" />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
