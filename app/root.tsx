@@ -49,22 +49,36 @@ export function Layout({ children }: { children: React.ReactNode }) {
     <I18nextProvider i18n={i18next}>
       <html lang={i18next.language}>
         <head>
+          <script
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=G-B178JV87VV"
+          />
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag(js, new Date());
+                gtag(config, G-B178JV87VV);
+              `,
+            }}
+          />
           <Meta />
           <meta charSet="utf-8" />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <meta name="theme-color" content="#000000" />
-          <title>Singula - Think Metal</title>
-          <meta name="title" content="Singula - Think Metal" />
+          <title>Singula | Mobiliário Urbano, Jardim e Decoração</title>
+          <meta name="title" content="Singula | Mobiliário Urbano, Jardim e Decoração" />
           <meta
             name="description"
-            content="A SINGULA cria peças de mobiliário urbano, para jardim e para casa com design arrojado que elevam cada espaço ao nível da elegância."
+            content="Singula | Mobiliário Urbano, Jardim e Decoração"
           />
           <meta property="og:type" content="website" />
           <meta property="og:url" content="https://singula.pt/" />
-          <meta property="og:title" content="Singula - Think Metal" />
+          <meta property="og:title" content="Singula | Mobiliário Urbano, Jardim e Decoração" />
           <meta
             property="og:description"
-            content="A SINGULA cria peças de mobiliário urbano, para jardim e para casa com design arrojado que elevam cada espaço ao nível da elegância."
+            content="Singula | Mobiliário Urbano, Jardim e Decoração"
           />
           <meta property="og:image" content="https://singula.pt/cover.jpeg" />
           <meta property="twitter:card" content="summary_large_image" />
@@ -72,10 +86,10 @@ export function Layout({ children }: { children: React.ReactNode }) {
             property="twitter:url"
             content="https://singula.pt/cover.jpeg"
           />
-          <meta property="twitter:title" content="Singula - Think Metal" />
+          <meta property="twitter:title" content="Singula | Mobiliário Urbano, Jardim e Decoração" />
           <meta
             property="twitter:description"
-            content="A SINGULA cria peças de mobiliário urbano, para jardim e para casa com design arrojado que elevam cada espaço ao nível da elegância."
+            content="Singula | Mobiliário Urbano, Jardim e Decoração"
           />
           <meta
             property="twitter:image"

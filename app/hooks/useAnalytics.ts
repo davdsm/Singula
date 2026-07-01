@@ -25,24 +25,11 @@ export const trackGoogleAdsConversion = (value?: number, currency?: string) => {
 
 export const useAnalytics = () => {
   useEffect(() => {
-    // Google Analytics (G-B178JV87VV) + Google Ads (AW-17669266850)
-    const gaId = "G-B178JV87VV";
+    // Google Ads (gtag loaded in root.tsx <head>)
     const gadsId = "AW-17669266850";
-    if (!document.getElementById("google-analytics")) {
-      const gaScript = document.createElement("script");
-      gaScript.id = "google-analytics";
-      gaScript.async = true;
-      gaScript.src = `https://www.googletagmanager.com/gtag/js?id=${gaId}`;
-      document.head.appendChild(gaScript);
+    if (typeof window.gtag === "function") {
+      window.gtag("config", gadsId);
     }
-
-    window.dataLayer = window.dataLayer || [];
-    window.gtag = function (...args: any[]) {
-      window.dataLayer.push(args);
-    };
-    window.gtag("js", new Date());
-    window.gtag("config", gaId);
-    window.gtag("config", gadsId);
 
     // Facebook Pixel
     const loadFB = (f: Window, b: Document, e: string, v: string) => {
